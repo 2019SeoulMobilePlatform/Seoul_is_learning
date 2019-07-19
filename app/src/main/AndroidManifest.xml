@@ -8,8 +8,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.DeviceDefault">
-        <activity android:name=".AddClubActivity"></activity>
+        android:theme="@android:style/Theme.NoTitleBar">
+        <activity
+            android:name=".AddClubActivity"
+            android:theme="@style/Theme.AppCompat"></activity>
 
         <activity
             android:name=".MainActivity"

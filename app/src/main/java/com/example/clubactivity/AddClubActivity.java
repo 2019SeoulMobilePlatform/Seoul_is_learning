@@ -13,13 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddClubActivity extends AppCompatActivity {
 
-    ImageView need_Photo;
-    Spinner camp_kind;
-    EditText need_thing;
-    EditText lettable_thing;
+   private SharedPreferences preferences;
 
-
-    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -49,7 +49,6 @@ public class Menu3Fragment extends Fragment {
                 "Ind", "Assignment Ind Black 36dp") ;
 
 
-
         //어뎁터 사용 전 코드
         /*
         view = inflater.inflate(R.layout.menu3, container, false);
@@ -66,7 +65,6 @@ public class Menu3Fragment extends Fragment {
 
             }
         });
-
 */
         //동호회 개설 버튼
         fab = (FloatingActionButton) view.findViewById(R.id.create_club_fab);
@@ -74,8 +72,7 @@ public class Menu3Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AddClubActivity.class);
-                startActivityForResult(intent, 3000); // 요청한 곳을 구분하기 위한 숫자, 의미없음
-
+                startActivityForResult(intent, 1); // 요청한 곳을 구분하기 위한 숫자, 의미없음
             }
         });
 
@@ -87,7 +84,7 @@ public class Menu3Fragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 3000) {
+        if (resultCode == 1) {
 
             //mainResultTv.setText(data.getStringExtra("result"));
 
