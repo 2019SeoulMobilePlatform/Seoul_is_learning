@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
 
-public class Menu3Fragment extends Fragment {
+public class ClubFragment extends Fragment {
     private View view;
     static final String[] LIST_MENU = {"프랑스 자수 모임", "베이킹 모임", "기타 동호회"};
     FloatingActionButton fab;
@@ -33,7 +33,7 @@ public class Menu3Fragment extends Fragment {
         // Adapter 생성
         adapter = new ListViewAdapter() ;
 
-        view = inflater.inflate(R.layout.menu3, null) ;
+        view = inflater.inflate(R.layout.club, null) ;
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) view.findViewById(R.id.listview);
         listview.setAdapter(adapter);
