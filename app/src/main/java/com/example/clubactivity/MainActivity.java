@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView; //하단 네비 바
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
-    private Menu1Fragment menu1;
-    private Menu2Fragment menu2;
-    private Menu3Fragment menu3;
-    private Menu4Fragment menu4;
+    private HomeFragment homeFragment;
+    private ClassFragment classFragment;
+    private ClubFragment clubFragment;
+    private MyPageFragment myPageFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        menu1 = new Menu1Fragment();
-        menu2 = new Menu2Fragment();
-        menu3 = new Menu3Fragment();
-        menu4 = new Menu4Fragment();
+        homeFragment = new HomeFragment();
+        classFragment = new ClassFragment();
+        clubFragment = new ClubFragment();
+        myPageFragment = new MyPageFragment();
         setFragment(0); //홈화면으로 지정
 
     }
@@ -72,44 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
         switch (menu){
             case 0:
-                fragmentTransaction.replace(R.id.main_frame, menu1);
+                fragmentTransaction.replace(R.id.main_frame, homeFragment);
                 fragmentTransaction.commit();
                 break;
             case 1:
-                fragmentTransaction.replace(R.id.main_frame, menu2);
+                fragmentTransaction.replace(R.id.main_frame, classFragment);
                 fragmentTransaction.commit();
                 break;
             case 2:
-                fragmentTransaction.replace(R.id.main_frame, menu3);
+                fragmentTransaction.replace(R.id.main_frame, clubFragment);
                 fragmentTransaction.commit();
                 break;
             case 3:
-                fragmentTransaction.replace(R.id.main_frame, menu4);
+                fragmentTransaction.replace(R.id.main_frame, myPageFragment);
                 fragmentTransaction.commit();
                 break;
         }
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
