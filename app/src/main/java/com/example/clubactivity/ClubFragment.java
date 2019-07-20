@@ -23,12 +23,13 @@ public class ClubFragment extends Fragment {
     private View view;
     static final String[] LIST_MENU = {"프랑스 자수 모임", "베이킹 모임", "기타 동호회"};
     FloatingActionButton fab;
+    ListView listview ;
+    ListViewAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ListView listview ;
-        ListViewAdapter adapter;
+
 
         // Adapter 생성
         adapter = new ListViewAdapter() ;
@@ -84,13 +85,14 @@ public class ClubFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 1) {
+        if (requestCode == 1 ) {
+            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_class_black_24dp),
+                    (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription")) ;
 
             //mainResultTv.setText(data.getStringExtra("result"));
 
         }
     }
-
 
 
 
