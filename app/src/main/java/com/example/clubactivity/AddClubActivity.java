@@ -103,9 +103,10 @@ public class AddClubActivity extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent();
-                intent.putExtra("clubImage", userImage);
-                intent.putExtra("clubName", clubName.getText());
-                intent.putExtra("clubDescription", clubDescription.getText());
+                //이미지 넣으면 터짐
+                //intent.putExtra("clubImage", userImage);
+                intent.putExtra("clubName", clubName.getText().toString());
+                intent.putExtra("clubDescription", clubDescription.getText().toString());
 
                 setResult(RESULT_OK, intent);
                 AddClubActivity.this.finish();
@@ -135,7 +136,7 @@ public class AddClubActivity extends AppCompatActivity {
     //이 엑티비티에서 뒤로가기를 눌렀을 때
     @Override
     public void onBackPressed() {
-        //setResult(0);
+        setResult(RESULT_CANCELED);
         finish();
     }
 }

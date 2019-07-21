@@ -9,11 +9,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,19 +23,16 @@ import org.json.JSONObject;
 
 public class ClubFragment extends Fragment {
     private View view;
-    static final String[] LIST_MENU = {"프랑스 자수 모임", "베이킹 모임", "기타 동호회"};
     FloatingActionButton fab;
     ListView listview ;
-    ListViewAdapter adapter;
+    ChatViewAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         // Adapter 생성
-        adapter = new ListViewAdapter() ;
-
+        adapter = new ChatViewAdapter() ;
         view = inflater.inflate(R.layout.club, null) ;
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) view.findViewById(R.id.listview);
@@ -49,6 +48,15 @@ public class ClubFragment extends Fragment {
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_people_black_24dp),
                 "Ind", "Assignment Ind Black 36dp") ;
 
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity() , ((ChatViewItem)adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
+                startActivityForResult(intent, 1001);
+            }
+        });
 
         //어뎁터 사용 전 코드
         /*
@@ -81,16 +89,22 @@ public class ClubFragment extends Fragment {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 ) {
+            Toast.makeText(getActivity() , "액티비티종료",Toast.LENGTH_LONG).show();
+
+
             adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_class_black_24dp),
                     (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription")) ;
 
-            //mainResultTv.setText(data.getStringExtra("result"));
+            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_people_black_24dp),
+                    "Indx", "seljrqkwljwklfd Assignment Ind Black 36dp") ;
 
+
+            //갱신 코드 근데 작동안함
+            adapter.notifyDataSetChanged();
         }
     }
 
