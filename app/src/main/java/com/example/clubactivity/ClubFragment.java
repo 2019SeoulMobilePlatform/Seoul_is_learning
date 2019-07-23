@@ -24,7 +24,7 @@ import org.json.JSONObject;
 public class ClubFragment extends Fragment {
     private View view;
     FloatingActionButton fab;
-    ListView listview ;
+    ListView listview;
     ChatViewAdapter adapter;
 
     @Nullable
@@ -92,15 +92,12 @@ public class ClubFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 ) {
+        if (requestCode == 1 && resultCode == getActivity().RESULT_OK) {
             Toast.makeText(getActivity() , "액티비티종료",Toast.LENGTH_LONG).show();
 
 
             adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_class_black_24dp),
                     (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription")) ;
-
-            adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_people_black_24dp),
-                    "Indx", "seljrqkwljwklfd Assignment Ind Black 36dp") ;
 
 
             //갱신 코드 근데 작동안함

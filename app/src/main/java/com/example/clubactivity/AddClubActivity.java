@@ -70,7 +70,6 @@ public class AddClubActivity extends AppCompatActivity {
         arrayList.add("14");
         arrayList.add("15");
 
-
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
@@ -110,7 +109,6 @@ public class AddClubActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, intent);
                 AddClubActivity.this.finish();
-
             }
 
         });
@@ -133,10 +131,13 @@ public class AddClubActivity extends AppCompatActivity {
         }
     }
 
+
     //이 엑티비티에서 뒤로가기를 눌렀을 때
     @Override
     public void onBackPressed() {
         setResult(RESULT_CANCELED);
         finish();
     }
+
+
 }
