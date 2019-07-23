@@ -2,7 +2,7 @@ package com.example.clubactivity;
 
 import android.graphics.drawable.Drawable;
 
-public class ListViewItem {
+public class ChatViewItem {
     private Drawable iconDrawable ;
     private String titleStr ;
     private String descStr ;

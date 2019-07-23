@@ -11,23 +11,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter {
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+public class ChatViewAdapter extends BaseAdapter {
+    private ArrayList<ChatViewItem> chatViewItemList = new ArrayList<ChatViewItem>() ;
 
-    // ListViewAdapter의 생성자
-    public ListViewAdapter() {
+    // ChatViewAdapter의 생성자
+    public ChatViewAdapter() {
 
     }
 
-
     @Override
     public int getCount() {
-        return listViewItemList.size() ;
+        return chatViewItemList.size() ;
     }
 
     @Override
     public Object getItem(int i) {
-        return listViewItemList.get(i) ;
+        return chatViewItemList.get(i) ;
     }
 
     @Override
@@ -52,23 +51,23 @@ public class ListViewAdapter extends BaseAdapter {
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        ListViewItem listViewItem = listViewItemList.get(position);
+        ChatViewItem chatViewItem = chatViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        iconImageView.setImageDrawable(listViewItem.getIcon());
-        titleTextView.setText(listViewItem.getTitle());
-        descTextView.setText(listViewItem.getDesc());
+        iconImageView.setImageDrawable(chatViewItem.getIcon());
+        titleTextView.setText(chatViewItem.getTitle());
+        descTextView.setText(chatViewItem.getDesc());
 
         return convertView;
     }
 
     public void addItem(Drawable icon, String title, String desc){
-        ListViewItem item = new ListViewItem();
+        ChatViewItem item = new ChatViewItem();
 
         item.setIcon(icon);
         item.setTitle(title);
         item.setDesc(desc);
 
-        listViewItemList.add(item);
+        chatViewItemList.add(item);
     }
 }
