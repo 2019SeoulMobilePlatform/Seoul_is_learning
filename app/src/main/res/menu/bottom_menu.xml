@@ -4,25 +4,25 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="Home"/>
+        android:title="홈"/>
 
     <item
         android:id="@+id/action_class"
         android:enabled="true"
         android:icon="@drawable/ic_class_black_24dp"
-        android:title="Class"/>
+        android:title="클래스"/>
 
     <item
         android:id="@+id/action_people"
         android:enabled="true"
         android:icon="@drawable/ic_people_black_24dp"
-        android:title="People"/>
+        android:title="동호회"/>
 
     <item
         android:id="@+id/action_my"
         android:enabled="true"
         android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="My"/>
+        android:title="마이페이지"/>
 
 
 </menu>
