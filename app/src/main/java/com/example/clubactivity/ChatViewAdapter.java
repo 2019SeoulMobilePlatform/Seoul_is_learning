@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ChatViewAdapter extends BaseAdapter {
-    private ArrayList<ChatViewItem> chatViewItemList = new ArrayList<ChatViewItem>() ;
+    public ArrayList<ChatViewItem> chatViewItemList = new ArrayList<ChatViewItem>() ;
 
     // ChatViewAdapter의 생성자
     public ChatViewAdapter() {
@@ -33,6 +33,9 @@ public class ChatViewAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return 0;
     }
+
+
+    public void removeAllItem() {chatViewItemList.clear();}
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -68,6 +71,10 @@ public class ChatViewAdapter extends BaseAdapter {
         item.setTitle(title);
         item.setDesc(desc);
 
+        chatViewItemList.add(item);
+    }
+
+    public void addItem(ChatViewItem item){
         chatViewItemList.add(item);
     }
 }

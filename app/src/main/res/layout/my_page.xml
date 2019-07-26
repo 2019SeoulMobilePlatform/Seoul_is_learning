@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="마이페이지"/>
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="40dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_person_24dp"
+                android:foregroundGravity="center_vertical"/>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:text="nickname"
+                    android:gravity="center_vertical"/>
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:text="양천구"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#FFFFF"
+                android:layout_gravity=""
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFF"
+                android:src="@drawable/ic_mode_edit_20dp"
+                android:text="이미지 선택"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
