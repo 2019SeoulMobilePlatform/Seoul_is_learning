@@ -51,7 +51,6 @@ public class AddClubActivity extends AppCompatActivity {
                 intent.setType("image/*");
 
                 startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), 1000);
-
             }
         });
 
