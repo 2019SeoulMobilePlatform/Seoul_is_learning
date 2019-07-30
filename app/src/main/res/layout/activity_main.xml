@@ -34,6 +34,7 @@
             <!-- 하단 네비게이션 바 -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
+            android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemIconTint="#ff7e9d"
