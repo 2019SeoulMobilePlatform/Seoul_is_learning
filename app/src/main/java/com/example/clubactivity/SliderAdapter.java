@@ -34,7 +34,6 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     @Override
     public void onBindViewHolder(SliderAdapterVH viewHolder, final int position) {
 
-
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,12 +44,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
 
         switch (position) {
             case 0:
-                viewHolder.textViewDescription.setText("This is slider item " + position);
+                viewHolder.textViewDescription.setText("This is slider item " + position); //글쓰는곳
                 viewHolder.textViewDescription.setTextSize(16);
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
-                        .load("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
+                        .load(R.drawable.class1) //이미지 넣는곳
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
                 break;
@@ -60,7 +59,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
-                        .load("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260")
+                        .load(R.drawable.class2)
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
                 break;
@@ -70,17 +69,18 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
-                        .load("https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
+                        //.load("https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") //주소주기
+                        .load(R.drawable.class3)
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
                 break;
             default:
                 viewHolder.textViewDescription.setTextSize(29);
-                viewHolder.textViewDescription.setTextColor(Color.WHITE);
-                viewHolder.textViewDescription.setText("Ohhhh! look at this!");
+                viewHolder.textViewDescription.setTextColor(Color.parseColor("#ff7e9d"));
+                viewHolder.textViewDescription.setText("New Class!");
                 viewHolder.imageGifContainer.setVisibility(View.VISIBLE);
                 Glide.with(viewHolder.itemView)
-                        .load(R.drawable.puma_offer)
+                        .load(R.drawable.class4)
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
                 Glide.with(viewHolder.itemView)
@@ -88,7 +88,6 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                         .load(R.drawable.oh_look_at_this)
                         .into(viewHolder.imageGifContainer);
                 break;
-
         }
 
     }
@@ -114,6 +113,5 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
             this.itemView = itemView;
         }
     }
-
 
 }
