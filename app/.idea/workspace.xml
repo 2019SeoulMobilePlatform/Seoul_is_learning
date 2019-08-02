@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5236849-cc2d-459d-a8ef-372d263afa24" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_multidex_multidex_2_0_0_aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_multidex_multidex_instrumentation_2_0_0_aar.xml" afterDir="false" />
+=======
+>>>>>>> origin/develop
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_jhonnyx2012_horizontal_picker_1_0_6_aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vivekkaushik_datepicker_datePickerTimeline_0_0_3_aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__de_hdodenhof_circleimageview_2_2_0_aar.xml" afterDir="false" />
@@ -24,8 +27,13 @@
       <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_detail.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/res/layout/item.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/res/layout/my_class_item.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+>>>>>>> origin/develop
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
@@ -38,7 +46,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/club.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/club.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/home.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/my_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/my_page.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
+=======
+>>>>>>> origin/develop
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,10 +67,17 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyPageFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
               <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/RecyclerViewAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+>>>>>>> origin/develop
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,82 +86,155 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/local.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="128">
               <caret line="8" selection-start-line="8" selection-end-line="8" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/SliderAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-445">
+              <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> origin/develop
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ClubFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
               <caret line="107" column="11" selection-start-line="101" selection-start-column="8" selection-end-line="107" selection-end-column="11" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/club.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1081">
+              <caret line="135" selection-end-line="138" selection-end-column="15" />
+>>>>>>> origin/develop
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../settings.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="16">
               <caret line="1" selection-start-line="1" selection-end-line="1" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/my_page.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+>>>>>>> origin/develop
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/my_class_item.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="324">
               <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyPageFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="28" column="36" selection-end-line="106" />
+>>>>>>> origin/develop
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/my_page.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="372">
               <caret line="141" selection-start-line="141" selection-end-line="141" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyClassItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="19" column="17" selection-end-line="30" />
+>>>>>>> origin/develop
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
               <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+>>>>>>> origin/develop
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/classes.jar!/kr/go/seoul/culturalevents/CulturalEventDetail.class">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-624">
               <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+=======
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-81">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
+>>>>>>> origin/develop
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/../build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="212">
               <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/my_class_item.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="21" column="57" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="57" />
+>>>>>>> origin/develop
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
           <provider selected="true" editor-type-id="text-editor" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ClubFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="158">
+              <caret line="172" selection-start-line="172" selection-end-line="172" />
+            </state>
+          </provider>
+>>>>>>> origin/develop
         </entry>
       </file>
     </leaf>
@@ -188,6 +279,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/ChatRoomActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/MessageListAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/simple_list_item_1.xml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyClassItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/RecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/club.xml" />
@@ -198,6 +290,16 @@
         <option value="$PROJECT_DIR$/src/main/res/layout/my_page.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyPageFragment.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
+=======
+        <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyPageFragment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyClassItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/RecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/club.xml" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/my_page.xml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/my_class_item.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/clubactivity/ClubFragment.java" />
+>>>>>>> origin/develop
       </list>
     </option>
   </component>
@@ -213,6 +315,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,20 +359,36 @@
               <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+=======
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="e9137016:NonAndroidModuleNode" />
             </path>
             <path>
               <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="clubactivity" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="e9137016:NonAndroidModuleNode" />
+              <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
+>>>>>>> origin/develop
             </path>
             <path>
               <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="app" type="e9137016:NonAndroidModuleNode" />
+              <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
+              <item name="clubactivity" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="e9137016:NonAndroidModuleNode" />
+              <item name="java" type="f7eae187:NonAndroidSourceTypeNode" />
+              <item name="clubactivity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
+<<<<<<< HEAD
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
@@ -279,6 +398,16 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
+=======
+              <item name="app" type="e9137016:NonAndroidModuleNode" />
+              <item name="resources" type="f7eae187:NonAndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="e9137016:NonAndroidModuleNode" />
+              <item name="resources" type="f7eae187:NonAndroidSourceTypeNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+>>>>>>> origin/develop
             </path>
             <path>
               <item name="ClubActivity" type="1abcf292:AndroidViewProjectNode" />
@@ -289,13 +418,21 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+<<<<<<< HEAD
+=======
+      <pane id="ProjectPane" />
+>>>>>>> origin/develop
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="C:/Sdk" />
     <property name="device.picker.selection" value="Nexus_5X_API_24" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/res/drawable" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Android-Login-Screen-master/Android-Login-Screen-master/app" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../icampyou/app" />
+>>>>>>> origin/develop
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
   </component>
   <component name="RecentsManager">
@@ -414,10 +551,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+<<<<<<< HEAD
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.3342282" />
+=======
+    <layout>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.147651" />
+>>>>>>> origin/develop
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -432,14 +575,22 @@
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.49932885" weight="0.32765958" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5090618" side_tool="true" weight="0.19631237" />
       <window_info anchor="bottom" id="Version Control" order="6" sideWeight="0.4986577" weight="0.32907802" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Build" order="7" sideWeight="0.49093816" visible="true" weight="0.43829787" />
+=======
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.48456377" visible="true" weight="0.34042552" />
+>>>>>>> origin/develop
       <window_info anchor="bottom" id="Find" order="8" weight="0.32907802" />
       <window_info anchor="bottom" id="Android Profiler" order="9" sideWeight="0.49932885" weight="0.32907802" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
+<<<<<<< HEAD
       <window_info anchor="right" id="Preview" order="4" weight="0.27919462" />
+=======
+      <window_info anchor="right" id="Preview" order="4" weight="0.27985075" />
+>>>>>>> origin/develop
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout>
     <layout-to-restore>
@@ -471,7 +622,14 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/Menu4Fragment.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/Menu2Fragment.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/menu3.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/res/values/colors.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="50" />
@@ -479,13 +637,19 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer2" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/Menu3Fragment.java" />
+    <entry file="file://C:/Sdk/platforms/android-29/data/res/layout/simple_spinner_dropdown_item.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
           <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/chat_list.xml">
       <provider editor-type-id="android-designer2" />
@@ -502,6 +666,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginActivity.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginFormState.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoggedInUserView.java" />
@@ -511,6 +676,13 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/data/LoginDataSource.java" />
     <entry file="file://$PROJECT_DIR$/src/main/res/drawable/messagebox.png" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/AddClubActivity.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/border.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/chat_room.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="54" column="11" selection-start-line="45" selection-start-column="34" selection-end-line="54" selection-end-column="11" />
@@ -519,16 +691,26 @@
           </folding>
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/chat_message_box.xml">
       <provider editor-type-id="android-designer2" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ChatViewItem.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/chat_list.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
@@ -548,6 +730,7 @@
           </folding>
         </state>
       </provider>
+<<<<<<< HEAD
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_chat_room.xml">
       <provider editor-type-id="android-designer2" />
@@ -556,10 +739,14 @@
           <caret line="53" column="53" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="53" />
         </state>
       </provider>
+=======
+      <provider editor-type-id="android-designer2" />
+>>>>>>> origin/develop
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/class_.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="176">
           <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
         </state>
@@ -567,12 +754,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
       <provider editor-type-id="android-designer2" />
+=======
+        <state relative-caret-position="179">
+          <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Sdk/platforms/android-29/android.jar!/android/view/View.class">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ChatRoomActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -642,14 +838,45 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Seoul_is_learning/app/build.gradle">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginActivity.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginFormState.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoggedInUserView.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginResult.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginViewModel.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ui/login/LoginViewModelFactory.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/data/LoginDataSource.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/SliderAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-445">
+          <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/drawable/messagebox.png" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/AddClubActivity.java">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1168">
           <caret line="73" selection-start-line="73" selection-end-line="74" selection-end-column="62" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf701c15d0ccfb3ecd395bbc705779e3/res/values/values.xml">
       <provider selected="true" editor-type-id="text-editor" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/chat_message_box.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+>>>>>>> origin/develop
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/HomeFragment.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -661,6 +888,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -669,6 +897,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MessageListAdapter.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ChatViewItem.java">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
@@ -678,19 +909,29 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/Model.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_chat_room.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyClassItem.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/class_.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
+<<<<<<< HEAD
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/classes.jar!/kr/go/seoul/culturalevents/CulturalEventTypeMini.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -704,16 +945,33 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/classes.jar!/kr/go/seoul/culturalevents/CulturalEventSearchTypeA.class">
+=======
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/content_main.xml">
+>>>>>>> origin/develop
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
         </state>
       </provider>
+<<<<<<< HEAD
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/classes.jar!/kr/go/seoul/culturalevents/BuildConfig.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+=======
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MessageListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+>>>>>>> origin/develop
         </state>
       </provider>
     </entry>
@@ -723,14 +981,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/RecyclerViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="342">
           <caret line="43" column="28" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+=======
+        <state relative-caret-position="352">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+>>>>>>> origin/develop
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/SliderAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-488">
@@ -738,11 +1002,19 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="880">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+>>>>>>> origin/develop
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ClubFragment.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="288">
           <caret line="107" column="11" selection-start-line="101" selection-start-column="8" selection-end-line="107" selection-end-column="11" />
         </state>
@@ -759,18 +1031,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-624">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+=======
+        <state relative-caret-position="608">
+          <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2335#2336#0" expanded="true" />
+            <element signature="e#2377#2378#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="35" selection-start-line="35" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/simple_list_item_1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+>>>>>>> origin/develop
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+<<<<<<< HEAD
     <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/libs/glide-3.7.0.jar!/com/bumptech/glide/Glide.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-288">
           <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_add_club.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2032">
+          <caret line="127" column="19" selection-start-line="10" selection-start-column="4" selection-end-line="127" selection-end-column="19" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+>>>>>>> origin/develop
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../build.gradle">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="212">
           <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
         </state>
@@ -784,12 +1096,74 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+=======
+        <state relative-caret-position="240">
+          <caret line="28" column="36" selection-end-line="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/MyClassItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="19" column="17" selection-end-line="30" />
+>>>>>>> origin/develop
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/my_page.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/club.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1081">
+          <caret line="135" selection-end-line="138" selection-end-column="15" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../settings.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/RecyclerViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-81">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/my_class_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="21" column="57" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="57" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ClassFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/clubactivity/ClubFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="372">
           <caret line="141" selection-start-line="141" selection-end-line="141" />
         </state>
@@ -816,6 +1190,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+=======
+        <state relative-caret-position="158">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
+>>>>>>> origin/develop
         </state>
       </provider>
     </entry>

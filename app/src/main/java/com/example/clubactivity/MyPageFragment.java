@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
 import android.widget.TabHost;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 //import kr.go.seoul.culturalevents.CulturalEventTypeMini;
+
 
 public class MyPageFragment extends Fragment {
     private View view;
@@ -36,6 +38,7 @@ public class MyPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.my_page, container, false);
         EditInfoButton = (ImageButton) view.findViewById(R.id.edit_profile);
         EditInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +62,7 @@ public class MyPageFragment extends Fragment {
         ts1.setContent(R.id.content1_myclass) ;
         ts1.setIndicator("나의 클래스") ;
         tabHost1.addTab(ts1)  ;
+
 
         // 두 번째 Tab. (탭 표시 텍스트:"TAB 2"), (페이지 뷰:"content2")
         TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2") ;

@@ -1,16 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="클래스"/>
+        android:layout_height="35dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft= "20dp"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:layout_gravity="center"
+            android:hint="클래스 검색"
+            android:textSize="17dp"
+            android:textColor="#FFFFFF"
+            android:layout_weight="200"
+            android:textColorHint="#FFFFFF"
+            android:background="@null"/>
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_search_black_24dp"/>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/seoul_map">
 
 
 
+
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageButton
+                android:id="@+id/gs"
+                android:layout_width="66dp"
+                android:layout_height="84dp"
+                android:layout_marginLeft="76dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="128dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/young" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </RelativeLayout>

@@ -95,9 +95,15 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         adapter = new Adapter(models, getActivity());
 
+
+        int dpValue = 55;
+        float displaySize = getResources().getDisplayMetrics().density;
+        int margin = (int) (dpValue * displaySize);
+
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(130, 0, 130, 0);
+        viewPager.setPadding(margin, 0, margin, 0); // 미리보기정도
+        //viewPager.setPageMargin(margin/2); //서로 간격
 
      /*   Integer[] colors_temp = {
                 getResources().getColor(R.color.white),
