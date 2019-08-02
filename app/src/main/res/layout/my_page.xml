@@ -53,7 +53,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:background="#FFFFF"
+                android:background="#FFFFFF"
                 android:layout_gravity=""
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
