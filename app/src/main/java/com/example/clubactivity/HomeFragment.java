@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,9 +23,9 @@ import com.smarteist.autoimageslider.SliderView;
 
 import org.joda.time.DateTime;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements DatePickerListener {
@@ -148,11 +147,11 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         return view;
     }
 
-    private String getTime(){
+    /*private String getTime(){
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
         return mFormat.format(mDate);
-    }
+    }*/
 
     @Override
     public void onDestroy() {
