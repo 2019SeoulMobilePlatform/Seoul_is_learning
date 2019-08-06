@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         adapter = new Adapter(models, getActivity());
 
+
         int dpValue = 55;
         float displaySize = getResources().getDisplayMetrics().density;
         int margin = (int) (dpValue * displaySize);

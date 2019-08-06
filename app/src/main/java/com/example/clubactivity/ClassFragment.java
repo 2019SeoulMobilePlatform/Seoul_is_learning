@@ -44,10 +44,6 @@ public class ClassFragment extends Fragment {
         });
 
 
-
-
-
-
         return view;
     }
 

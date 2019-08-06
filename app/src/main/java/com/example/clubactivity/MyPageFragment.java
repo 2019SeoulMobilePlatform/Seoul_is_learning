@@ -1,10 +1,14 @@
 package com.example.clubactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+
 import android.widget.TabHost;
 
 import androidx.annotation.NonNull;
@@ -15,19 +19,40 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+//import kr.go.seoul.culturalevents.CulturalEventTypeMini;
+
+
 public class MyPageFragment extends Fragment {
     private View view;
 
+    ImageButton EditInfoButton;
     private static final String TAG = "MainActivity";
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mNames_favorite = new ArrayList<>();
     private ArrayList<String> mImageUrls_favorite = new ArrayList<>();
 
+    private String key = "454d786d61636d6539384a4c625954";
+   // private CulturalEventTypeMini typeMini;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.my_page, container, false);
+        EditInfoButton = (ImageButton) view.findViewById(R.id.edit_profile);
+        EditInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddClubActivity.class);
+                startActivityForResult(intent, 2); // 요청한 곳을 구분하기 위한 숫자, 의미없음
+            }
+        });
+
+
+        //API 안먹음
+        //typeMini = (CulturalEventTypeMini) view.findViewById(R.id.type_mini);
+        //typeMini.setOpenAPIKey(key);
 
         TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_myclasslist) ;
         tabHost1.setup() ;
@@ -37,6 +62,7 @@ public class MyPageFragment extends Fragment {
         ts1.setContent(R.id.content1_myclass) ;
         ts1.setIndicator("나의 클래스") ;
         tabHost1.addTab(ts1)  ;
+
 
         // 두 번째 Tab. (탭 표시 텍스트:"TAB 2"), (페이지 뷰:"content2")
         TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2") ;
