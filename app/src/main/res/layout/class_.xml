@@ -43,44 +43,5 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/seoul_map">
 
-
-
-
-    </ImageView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" >
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <ImageButton
-                android:id="@+id/gs"
-                android:layout_width="66dp"
-                android:layout_height="84dp"
-                android:layout_marginLeft="76dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="128dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/young" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
 </RelativeLayout>

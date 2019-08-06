@@ -14,9 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_seoul_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name=".Login.FindPasswordAcitvity"
+            android:theme="@style/NoTitleAppcompat"></activity>
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:name=".Login.SignUpActivity"
+            android:theme="@style/NoTitleAppcompat" />
+        <activity
+            android:name=".Login.LoginActivity"
+            android:theme="@style/NoTitleAppcompat">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ChatRoomActivity"
             android:theme="@style/Theme.AppCompat" />
@@ -25,14 +36,8 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".DetailActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DetailActivity" />
     </application>
 
 </manifest>

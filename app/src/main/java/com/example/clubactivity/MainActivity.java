@@ -1,7 +1,10 @@
 package com.example.clubactivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import com.example.clubactivity.Login.LoginActivity;
+import com.example.clubactivity.Login.LoginFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //로그인 액티비티 죽이기
+       Activity loginActivity = LoginActivity.loginActivity;
+        loginActivity.finish();
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
