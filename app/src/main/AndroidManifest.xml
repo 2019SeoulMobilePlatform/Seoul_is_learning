@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_seoul_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar">
+
         <activity android:name=".Login.FindPasswordAcitvity"
             android:theme="@style/NoTitleAppcompat"></activity>
         <activity
@@ -28,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ChatRoomActivity"
             android:theme="@style/Theme.AppCompat" />
@@ -36,8 +38,16 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".MainActivity"
+
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DetailActivity" />
+
+        <activity android:name=".ClassList">
+
+        </activity>
+
+
+
     </application>
 
 </manifest>

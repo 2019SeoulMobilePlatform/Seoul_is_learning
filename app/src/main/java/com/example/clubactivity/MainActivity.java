@@ -8,20 +8,14 @@ import com.example.clubactivity.Login.LoginFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         loginActivity.finish();
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView); // 애니메이션 삭제
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -70,10 +67,13 @@ public class MainActivity extends AppCompatActivity {
         myPageFragment = new MyPageFragment();
         setFragment(0); //홈화면으로 지정
 
+
+
     }
 
     //프래크먼트 교체가 일어나는 곳
     private void setFragment(int menu){
+
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
