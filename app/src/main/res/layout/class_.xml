@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
 
 
@@ -115,8 +116,7 @@
                                 app:layout_constraintRight_toRightOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/fl_mainfragment_jungnang">
 
-                                <!--광진만 잠시 이미지 버튼-->
-                                <ImageButton
+                                <ImageView
                                     android:id="@+id/imageView3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -387,6 +387,14 @@
 
                             </FrameLayout>
 
+                            <ImageView
+                                android:id="@+id/namsan"
+                                android:layout_width="33dp"
+                                android:layout_height="48dp"
+                                android:layout_marginTop="21dp"
+                                android:src="@drawable/namsantower"
+                                app:layout_constraintRight_toLeftOf="@+id/fl_mainfragment_seongdong"
+                                app:layout_constraintTop_toBottomOf="@+id/fl_mainfragment_seongbuk" />
 
                             <FrameLayout
                                 android:id="@+id/fl_mainfragment_jungnang"
@@ -504,6 +512,46 @@
                             </FrameLayout>
 
 
+                          <!--  <ImageView
+                                android:id="@+id/mountain"
+                                android:layout_width="100dp"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="24dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="0dp"
+                                android:src="@drawable/mountain"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />-->
+
+                            <ImageView
+                                android:id="@+id/gwanghwamun"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginBottom="70dp"
+                                android:layout_marginLeft="100dp"
+                                android:src="@drawable/palace_g"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent" />
+                            <ImageView
+                                android:id="@+id/sejong"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginBottom="75dp"
+                                android:layout_marginLeft="130dp"
+                                android:src="@drawable/sejong"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="55dp"
+                                android:layout_marginBottom="4dp"
+                                android:src="@drawable/girl"
+                                app:layout_constraintBottom_toTopOf="@+id/fl_mainfragment_seongbuk"
+                                app:layout_constraintStart_toStartOf="@+id/fl_mainfragment_gangbuk" />
+
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
@@ -527,6 +575,28 @@
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/cl_gangbuk">
+
+                            <ImageView
+                                android:id="@+id/boat"
+                                android:layout_width="43dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="right"
+                                android:layout_marginRight="45dp"
+                                android:layout_marginTop="30dp"
+                                android:src="@drawable/boat"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/boat2"
+                                android:layout_width="33dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="right"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:src="@drawable/boat2"
+                                app:layout_constraintBottom_toTopOf="@+id/fl_mainfragment_yeongdeungpo"
+                                app:layout_constraintStart_toEndOf="@+id/fl_mainfragment_gangseo" />
 
 
                             <FrameLayout
@@ -829,16 +899,58 @@
 
                             </FrameLayout>
 
+                            <ImageView
+                                android:id="@+id/lotte"
+                                android:layout_width="22dp"
+                                android:layout_height="24dp"
+                                android:layout_marginEnd="35dp"
+                                android:layout_marginBottom="30dp"
+                                android:src="@drawable/lottetower"
+                                app:layout_constraintBottom_toTopOf="@+id/i_seoul_u"
+                                app:layout_constraintEnd_toEndOf="@+id/fl_mainfragment_gangdong" />
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/peace_gate"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="28dp"
+                                android:layout_marginTop="35dp"
+                                android:src="@drawable/peace"
+                                app:layout_constraintStart_toStartOf="@+id/fl_mainfragment_songpa"
+                                app:layout_constraintTop_toTopOf="@+id/fl_mainfragment_songpa" />
 
-                </FrameLayout>
+                            <ImageView
+                                android:id="@+id/i_seoul_u"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                android:layout_marginRight="8dp"
+                                android:src="@drawable/i_seoul_u"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/fl_mainfragment_gangnam"
+                                app:layout_constraintVertical_bias="0.0" />
 
-            </FrameLayout>
+                            <ImageView
+                                android:id="@+id/capitol"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="0dp"
+                                android:src="@drawable/capitol"
+                                app:layout_constraintBottom_toTopOf="@+id/fl_mainfragment_guro"
+                                app:layout_constraintStart_toEndOf="@+id/fl_mainfragment_yangcheon" />
 
-        </FrameLayout>
-    </LinearLayout>
+
+
+                       </androidx.constraintlayout.widget.ConstraintLayout>
+                   </LinearLayout>
+
+               </FrameLayout>
+
+           </FrameLayout>
+
+       </FrameLayout>
+   </LinearLayout>
 
 
 

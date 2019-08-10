@@ -2,12 +2,6 @@ package com.example.clubactivity;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import com.example.clubactivity.Login.LoginActivity;
-import com.example.clubactivity.Login.LoginFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.clubactivity.Class.ClassFragment;
+import com.example.clubactivity.Home.HomeFragment;
+import com.example.clubactivity.Login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Home;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.example.clubactivity.Home.DetailActivity;
-import com.example.clubactivity.Home.Model;
+import com.example.clubactivity.R;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class Adapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("param", models.get(position).getTitle());
+                intent.putExtra("param", models.get(position).getTitle()); //제목 뿌려주기
                 context.startActivity(intent);
                 // finish();
             }

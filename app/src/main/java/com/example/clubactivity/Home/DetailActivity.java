@@ -1,10 +1,10 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Home;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.clubactivity.R;
 
 public class DetailActivity extends Activity {
     @Override

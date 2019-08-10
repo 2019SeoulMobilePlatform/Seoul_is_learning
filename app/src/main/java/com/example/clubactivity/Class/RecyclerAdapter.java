@@ -1,17 +1,19 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Class;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.clubactivity.R;
 
 import java.util.List;
 
@@ -41,7 +43,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ClassDetailActivity.class);
+
+                intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
+                intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기
+
+                context.startActivity(intent);
             }
         });
     }

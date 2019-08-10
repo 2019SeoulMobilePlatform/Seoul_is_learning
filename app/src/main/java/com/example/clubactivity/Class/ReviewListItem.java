@@ -1,4 +1,4 @@
-package endorphine.icampyou.GuideMenu.Review;
+package com.example.clubactivity.Class;
 
 import android.graphics.Bitmap;
 
@@ -10,20 +10,18 @@ public class ReviewListItem {
     private Bitmap profile_image;
     private String nickName;  // 유저 닉네임
     private float star;  // 별점
-    private Bitmap reviewImage;    //리뷰 이미지
     private String reviewContent;   // 리뷰 내용
-    private String campingPlace;    // 캠핑장 종류
+    private String classPlace;    // 캠핑장 종류
 
     //리뷰 이미지뷰
 
 
     // 생성자
-    public ReviewListItem(Bitmap profile_image,String campingPlace, String nickName, float star, Bitmap reviewImage, String reviewContent) {
+    public ReviewListItem(Bitmap profile_image, String campingPlace, String nickName, float star, Bitmap reviewImage, String reviewContent, String classPlace) {
         this.profile_image = profile_image;
-        this.campingPlace = campingPlace;
+        this.classPlace = classPlace;
         this.nickName = nickName;
         this.star = star;
-        this.reviewImage = reviewImage;
         this.reviewContent = reviewContent;
     }
 
@@ -36,13 +34,9 @@ public class ReviewListItem {
         return star;
     }
 
-    public Bitmap getReviewImage() {
-        return reviewImage;
-    }
-
     public String getReviewContent() {return reviewContent;}
 
-    public String getCampingPlace() {return campingPlace;}
+    public String getClassPlace() {return classPlace;}
 
     public Bitmap getProfile_image() { return profile_image;}
 }
