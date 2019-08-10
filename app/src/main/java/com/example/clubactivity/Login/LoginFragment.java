@@ -1,29 +1,21 @@
 package com.example.clubactivity.Login;
 
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManagerNonConfig;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.clubactivity.AddClubActivity;
-import com.example.clubactivity.ChatRoomActivity;
-import com.example.clubactivity.ChatViewItem;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
@@ -34,14 +26,12 @@ import java.net.MalformedURLException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 
-import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
-import cz.msebera.android.httpclient.impl.client.BasicResponseHandler;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
@@ -122,7 +112,7 @@ public class LoginFragment extends Fragment {
         }
 
         //서버에 로그인 정보 보내기
-        sendData( email, password ) ;
+        //sendData( email, password ) ;
 
 
         //서버와 로그인 정보 비교
