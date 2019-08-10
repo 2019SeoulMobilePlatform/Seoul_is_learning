@@ -1,4 +1,4 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Home;
 
 public class Model {
 

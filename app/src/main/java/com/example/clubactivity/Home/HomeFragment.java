@@ -1,4 +1,4 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Home;
 
 import android.animation.ArgbEvaluator;
 import android.graphics.Color;
@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.clubactivity.R;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
 import com.smarteist.autoimageslider.IndicatorAnimations;

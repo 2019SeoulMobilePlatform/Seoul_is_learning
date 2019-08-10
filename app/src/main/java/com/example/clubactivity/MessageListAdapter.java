@@ -85,12 +85,12 @@ public class MessageListAdapter extends BaseAdapter {
         text.setText(messages.get(i).msg);
 
         if( messages.get(i).type == 0 ) {
-            text.setBackgroundResource(R.drawable.chat_message_box);
+            text.setBackgroundResource(R.drawable.chat_message_box_i);
             text.setTextColor(Color.BLACK);
             layout.setGravity(Gravity.RIGHT);
         }
         if(messages.get(i).type == 1){
-            text.setBackgroundResource(R.drawable.chat_message_box);
+            text.setBackgroundResource(R.drawable.chat_message_box_you);
             text.setTextColor(Color.BLACK);
             layout.setGravity(Gravity.LEFT);
         }

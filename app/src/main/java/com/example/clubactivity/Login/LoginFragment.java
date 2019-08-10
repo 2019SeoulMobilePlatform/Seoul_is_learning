@@ -137,16 +137,16 @@ public class LoginFragment extends Fragment {
     private void sendData(String userId, String userPassword ) {
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://106.10.35.170/");
+        HttpPost post = new HttpPost("http://106.10.35.170/CheckSignIn.php");
         ArrayList<NameValuePair> nameValues =
                 new ArrayList<NameValuePair>();
 
         try {
             //Post방식으로 넘길 값들을 각각 지정을 해주어야 한다.
             nameValues.add(new BasicNameValuePair(
-                    "userId", URLDecoder.decode(userId, "UTF-8")));
+                    "email", URLDecoder.decode(userId, "UTF-8")));
             nameValues.add(new BasicNameValuePair(
-                    "userPassword", URLDecoder.decode(userPassword, "UTF-8")));
+                    "password", URLDecoder.decode(userPassword, "UTF-8")));
 
             //HttpPost에 넘길 값을들 Set해주기
             post.setEntity(

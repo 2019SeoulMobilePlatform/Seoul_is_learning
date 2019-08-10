@@ -1,4 +1,4 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Class;
 
 public class Item {
     int image;
@@ -15,4 +15,5 @@ public class Item {
         this.image = image;
         this.title = title;
     }
+
 }

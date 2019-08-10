@@ -68,6 +68,18 @@
         android:background="@drawable/border"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/send_image_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:background="#F0FFFF"
+            android:gravity="center"
+            android:text="이미지"
+            android:textColor="#ffff"
+            android:layout_marginRight="10dp"/>
+
         <EditText
             android:id="@+id/editText"
             android:layout_width="0dp"
@@ -82,18 +94,6 @@
             android:padding="5dp"
             android:textColor="#000000"
             android:textCursorDrawable="@null" />
-
-        <Button
-            android:id="@+id/send_image_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="2"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:text="이미지"
-            android:textColor="#ffff"
-            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/send_text_btn"

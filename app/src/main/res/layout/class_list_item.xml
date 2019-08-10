@@ -3,22 +3,76 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:id="@+id/class_list_cardview">
+
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginBottom="5dp">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/class_list_image"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
+
+            <!--별점
+            android:backgroundTint="@color/your_color"
+                android:secondaryProgressTint="@color/your_color"-->
+            <RatingBar
+                android:id="@+id/review_star"
+                style="?android:attr/ratingBarStyleSmall"
+                android:progressTint="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:layout_gravity="left|top"
+                android:rating="5"
+                android:stepSize="0.5"
+                android:layout_marginTop="2dp"/>
+
+            <!-- 이벤트 알려주기 -->
+            <TextView
+                android:id="@+id/closed_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 동네 배움터 "
+                android:textSize="11dp"
+                android:textColor="#FFFFFF"
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="left|top"
+                />
+
+        </FrameLayout>
+
         <TextView
             android:id="@+id/class_list_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="test" />
+            android:layout_marginLeft="10dp"
+            android:text="클래스 제목 부분"
+            android:textColor="#747474"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/class_list_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="2019.09.01 ~ 2019.09.30"
+            android:textColor="#8C8C8C"
+            android:textSize="13dp"
+            android:layout_marginBottom="5dp"/>
+
+
     </LinearLayout>
+
+
 </androidx.cardview.widget.CardView>
