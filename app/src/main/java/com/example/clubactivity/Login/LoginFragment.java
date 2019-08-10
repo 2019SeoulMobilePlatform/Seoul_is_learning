@@ -122,7 +122,7 @@ public class LoginFragment extends Fragment {
         }
 
         //서버에 로그인 정보 보내기
-        sendData( email, password ) ;
+        //sendData( email, password ) ;
 
 
         //서버와 로그인 정보 비교
@@ -146,7 +146,7 @@ public class LoginFragment extends Fragment {
             nameValues.add(new BasicNameValuePair(
                     "userId", URLDecoder.decode(userId, "UTF-8")));
             nameValues.add(new BasicNameValuePair(
-                    "userName", URLDecoder.decode(userPassword, "UTF-8")));
+                    "userPassword", URLDecoder.decode(userPassword, "UTF-8")));
 
             //HttpPost에 넘길 값을들 Set해주기
             post.setEntity(

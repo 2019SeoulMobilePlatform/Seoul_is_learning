@@ -44,8 +44,8 @@ public class MyPageFragment extends Fragment {
         EditInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddClubActivity.class);
-                startActivityForResult(intent, 2); // 요청한 곳을 구분하기 위한 숫자, 의미없음
+                Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
+                startActivityForResult(intent, Constants.REQUEST_EDIT_INFO); // 요청한 곳을 구분하기 위한 숫자, 의미없음
             }
         });
 
