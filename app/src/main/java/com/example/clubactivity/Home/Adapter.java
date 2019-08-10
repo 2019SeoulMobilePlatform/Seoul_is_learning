@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.clubactivity.Home.DetailActivity;
+import com.example.clubactivity.Home.Model;
+
 import java.util.List;
 
 public class Adapter extends PagerAdapter {
