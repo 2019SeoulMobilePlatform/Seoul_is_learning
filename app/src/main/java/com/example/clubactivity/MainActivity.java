@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         myPageFragment = new MyPageFragment();
         setFragment(0); //홈화면으로 지정
 
-
-
     }
 
     //프래크먼트 교체가 일어나는 곳
@@ -94,5 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+  /*  public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_frame, fragment).commit();
+    }*/
+
 
 }

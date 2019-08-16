@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.R;
 
 import java.util.List;
@@ -56,10 +57,17 @@ public class Adapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailActivity.class);
+                /*Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("param", models.get(position).getTitle()); //제목 뿌려주기
                 context.startActivity(intent);
-                // finish();
+                // finish();*/
+
+                Intent intent = new Intent(context, ClassDetailActivity.class);
+
+                intent.putExtra("param", models.get(position).getTitle()); //클래스 제목을 뿌려준다.
+                intent.putExtra("image",models.get(position).getImage()); //클래스 이미지 뿌리기
+
+                context.startActivity(intent);
             }
         });
 

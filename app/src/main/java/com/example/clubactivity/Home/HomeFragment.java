@@ -88,10 +88,10 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         //밑에 뷰페이저 영역
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.seoul_is_learning, "Brochure", "Brochure is an informative paper document (often also used for advertising) that can be folded into a template"));
-        models.add(new Model(R.drawable.cat_dog, "Sticker", "Sticker is a type of label: a piece of printed paper, plastic, vinyl, or other material with pressure sensitive adhesive on one side"));
-        models.add(new Model(R.drawable.seoul_is_learning, "Poster", "Poster is any piece of printed paper designed to be attached to a wall or vertical surface."));
-        models.add(new Model(R.drawable.seoul_is_learning, "Namecard", "Business cards are cards bearing business information about a company or individual."));
+        models.add(new Model(R.drawable.seoul_is_learning, "냥냥", "Brochure is an informative paper document (often also used for advertising) that can be folded into a template"));
+        models.add(new Model(R.drawable.cat_dog, "냠냠", "Sticker is a type of label: a piece of printed paper, plastic, vinyl, or other material with pressure sensitive adhesive on one side"));
+        models.add(new Model(R.drawable.seoul_is_learning, "헤헿", "Poster is any piece of printed paper designed to be attached to a wall or vertical surface."));
+        models.add(new Model(R.drawable.seoul_is_learning, "너무졸린데", "Business cards are cards bearing business information about a company or individual."));
 
         adapter = new Adapter(models, getActivity());
 

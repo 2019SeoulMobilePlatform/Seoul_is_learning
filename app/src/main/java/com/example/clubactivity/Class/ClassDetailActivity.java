@@ -1,6 +1,5 @@
 package com.example.clubactivity.Class;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,22 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.example.clubactivity.R;
+import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
+public class ClassDetailActivity extends AppCompatActivity {
 
-public class ClassDetailActivity extends Activity {
 
-    private ReviewListViewAdapter adapter;  //후기 리스트뷰 어댑터
-    private ListView reviewList;         // 후기 리스트
-    private ArrayList<ReviewListItem> reviewData;   // 후기 데이터
     private ViewGroup viewLayout;         // 레이아웃
     private LayoutInflater inflater;
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
 
     @Override
@@ -44,39 +44,37 @@ public class ClassDetailActivity extends Activity {
         imageView.setImageResource(getIntent().getIntExtra("image",2)); // 이 숫자는 뭘까..? 어쨌든 이렇게 하니 바뀌었다
 
 
-        //탭뷰
-        TabHost tabHost = (TabHost) findViewById(R.id.tapHost_class_detail) ;
-        tabHost.setup() ;
-
-        // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
-        TabHost.TabSpec ts1 = tabHost.newTabSpec("Tab Spec 1") ;
-        ts1.setContent(R.id.content1_class_detail) ;
-        ts1.setIndicator("소개") ;
-        tabHost.addTab(ts1)  ;
+        //탭
 
 
-        // 두 번째 Tab. (탭 표시 텍스트:"TAB 2"), (페이지 뷰:"content2")
-        TabHost.TabSpec ts2 = tabHost.newTabSpec("Tab Spec 2") ;
-        ts2.setContent(R.id.content2_class_review) ;
-        ts2.setIndicator("후기") ;
-        tabHost.addTab(ts2) ;
+        tabLayout = findViewById(R.id.class_tabs);
+       // tabLayout.addTab(tabLayout.newTab().setText("Tab one"));
+       // tabLayout.addTab(tabLayout.newTab().setText("Tab two"));
 
+        viewPager = findViewById(R.id.container_class);
 
-        setReviewPage();
+        TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(tabPagerAdapter);
 
-        adapter = new ReviewListViewAdapter(inflater, R.layout.class_list_item, reviewData);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        reviewData.clear();
-
-        reviewList.setAdapter(adapter);
-
-        /*Button reviewButton = (Button)findViewById(R.id.class_review_button);
-        reviewButton.setOnClickListener(new Button.OnClickListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"클래스를 들은 회원만 작성 가능합니다", Toast.LENGTH_LONG).show();
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
-        });*/
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
 
     }
 
@@ -88,19 +86,7 @@ public class ClassDetailActivity extends Activity {
     }
 
 
-    // 리뷰페이지 설정하는 메소드
-    public void setReviewPage() {
-        // 후기 리스트 설정
-        reviewList = (ListView) findViewById(R.id.class_review_listView);
 
-        // 후기 데이터 설정
-        reviewData = new ArrayList<>();
-
-        // 어댑터로 후기 리스트에 아이템 뿌려주기
-        adapter = new ReviewListViewAdapter(inflater, R.layout.class_list_item, reviewData);
-        reviewList.setAdapter(adapter);
-
-    }
 
     //클래스 예약 버튼 클릭
     public void ClassReservationButtonClicked(View view){
@@ -125,6 +111,8 @@ public class ClassDetailActivity extends Activity {
         }
 
     }
+
+
 
 
 }

@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@drawable/rounded_edittext"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:orientation="horizontal"
         >
 
         <EditText
-            android:id="@+id/search"
+            android:id="@+id/class_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft= "20dp"
@@ -45,15 +45,11 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp">
+            android:layout_marginTop="43dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -901,9 +897,9 @@
 
                             <ImageView
                                 android:id="@+id/lotte"
-                                android:layout_width="22dp"
-                                android:layout_height="24dp"
-                                android:layout_marginEnd="35dp"
+                                android:layout_width="30dp"
+                                android:layout_height="35dp"
+                                android:layout_marginEnd="25dp"
                                 android:layout_marginBottom="30dp"
                                 android:src="@drawable/lottetower"
                                 app:layout_constraintBottom_toTopOf="@+id/i_seoul_u"
@@ -950,7 +946,117 @@
            </FrameLayout>
 
        </FrameLayout>
-   </LinearLayout>
+
+
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나의 지역구"
+            android:textSize="40dp"/>
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="470dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="40dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView102"
+                    android:layout_width="75dp"
+                    android:layout_height="3dp"
+                    android:paddingBottom="6dp"
+                    android:background="@color/colorPrimary"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/my_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="광진구"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="나의 지역구"
+                android:textColor="#9E9E9E"
+                android:textSize="13dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView922"
+                    android:layout_width="75dp"
+                    android:layout_height="3dp"
+                    android:paddingTop="12dp"
+                    android:background="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="40dp"
+            android:paddingTop="15dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="18dp"
+                android:text="검색이나 원하는 지역을 선택 후 배우고 싶은 클래스를 볼 수 있습니다."
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                tools:ignore="RtlCompat" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
 
 
 
