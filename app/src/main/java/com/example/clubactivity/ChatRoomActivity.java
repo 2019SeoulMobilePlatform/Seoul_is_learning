@@ -35,10 +35,11 @@ public class ChatRoomActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                adapter.addItem(messageTextView.getText().toString());
+                //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
                 Toast.makeText(ChatRoomActivity.this, messageTextView.getText(),Toast.LENGTH_LONG).show();
 
+                adapter.addItem(messageTextView.getText().toString(), 1);
                 messageTextView.setText("");
                 adapter.notifyDataSetChanged();
             }

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class MessageListAdapter extends BaseAdapter {
 
-    //메세지 내용 클래스
     public class MessageContents{
         String msg;
         int type;
@@ -52,7 +51,7 @@ public class MessageListAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void addItem(String text) { messages.add(new MessageContents(text, 0, "0", "0", "0"));}
+    public void addItem(String text, int type) { messages.add(new MessageContents(text, type, "0", "0", "0"));}
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -66,36 +65,34 @@ public class MessageListAdapter extends BaseAdapter {
         View viewLeft = null;
 
         if(view == null){
-            //view가 null 일 경우 custom layout을 얻어옴
-
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.chat_message_box, viewGroup, false);
 
             layout = (LinearLayout)view.findViewById(R.id.chat_message_layout);
             text = (TextView)view.findViewById(R.id.message_text);
 
-            //홀더 생성 및 Tag로 등록
             holder = new CustomHolder();
             holder.m_TextView = text;
             holder.layout = layout;
-            holder.viewLeft = viewLeft;
-            holder.viewRight = viewRight;
             view.setTag(holder);
 
         } else{
             holder = (CustomHolder) view.getTag();
             text = holder.m_TextView;
             layout = holder.layout;
-            viewRight = holder.viewRight;
-            viewLeft = holder.viewLeft;
         }
 
         text.setText(messages.get(i).msg);
 
         if( messages.get(i).type == 0 ) {
-            text.setBackgroundResource(R.drawable.chat_message_box);
+            text.setBackgroundResource(R.drawable.chat_message_box_i);
             text.setTextColor(Color.BLACK);
             layout.setGravity(Gravity.RIGHT);
+        }
+        if(messages.get(i).type == 1){
+            text.setBackgroundResource(R.drawable.chat_message_box_you);
+            text.setTextColor(Color.BLACK);
+            layout.setGravity(Gravity.LEFT);
         }
 
         return view;
@@ -104,8 +101,6 @@ public class MessageListAdapter extends BaseAdapter {
     private class CustomHolder {
         TextView    m_TextView;
         LinearLayout layout;
-        View viewRight;
-        View viewLeft;
     }
 
 }

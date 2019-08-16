@@ -70,4 +70,10 @@
         <item name="colorAccent">@android:color/white</item>                    <!-- 하단 움직이는 바 색-->
     </style>
 
+    <style name="EditInfo" parent="Widget.AppCompat.EditText">
+        <item name="android:colorControlNormal">#EAE8E9</item>
+        <item name="android:textColor">#707070</item>
+        <item name="android:colorControlActivated">#EAE8E9</item>
+    </style>
+
 </resources>
