@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.clubactivity.Class.ClassFragment;
 import com.example.clubactivity.Home.HomeFragment;
 import com.example.clubactivity.Login.LoginActivity;
+import com.example.clubactivity.Club.ClubFragment;
+import com.example.clubactivity.MyPage.MyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
