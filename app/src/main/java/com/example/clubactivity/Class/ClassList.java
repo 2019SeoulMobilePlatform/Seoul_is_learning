@@ -1,9 +1,15 @@
 package com.example.clubactivity.Class;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.widget.EditText;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,20 +18,20 @@ import com.example.clubactivity.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassList extends Activity {
+public class ClassList extends Fragment {
     final int ITEM_SIZE = 5;
+    private View view;
 
+
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.class_list);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //클래스 지역구 바꿔준다
-        EditText editText = findViewById(R.id.class_searching);
-        editText.setHint(getIntent().getStringExtra("param"));
+        view = inflater.inflate(R.layout.class_list, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.class_list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.class_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -41,6 +47,27 @@ public class ClassList extends Activity {
             items.add(item[i]);
         }
 
-        recyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), items, R.layout.class_list));
+        recyclerView.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.class_list));
+
+
+
+        //뒤로가기
+        ImageView classBack = view.findViewById(R.id.class_list_back_button);
+        classBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().remove(ClassList.this).commit();
+                fragmentManager.popBackStack();
+            }
+        });
+
+
+        return view;
     }
+
+
+
+
 }
+

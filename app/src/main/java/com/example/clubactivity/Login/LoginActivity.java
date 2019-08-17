@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         loginActivity = this;
 
         loginFragment = new LoginFragment(this);
-        loginInstructorFragment = new LoginInstructorFragment();
+        loginInstructorFragment = new LoginInstructorFragment(this);
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();

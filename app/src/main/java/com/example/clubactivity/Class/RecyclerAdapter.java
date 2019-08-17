@@ -45,6 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
                 //Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ClassDetailActivity.class);
+                //Intent intent = new Intent(context, TabTest.class);
 
                 intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
                 intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기

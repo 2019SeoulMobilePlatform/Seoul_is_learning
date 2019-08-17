@@ -49,9 +49,19 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Home.DetailActivity" />
+
         <activity android:name=".Class.ClassList" />
-        <activity android:name=".Class.ClassDetailActivity" />
-        <activity android:name=".Class.ClassReservation" />
+
+
+        <activity android:name=".Class.ClassDetailActivity"
+            android:theme="@style/NoTitleAppcompat">
+        </activity>
+
+        <activity android:name=".Class.ClassReservation">
+
+        </activity>
+
+
     </application>
 
 </manifest>

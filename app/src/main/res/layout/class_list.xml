@@ -7,40 +7,34 @@
     tools:context=".Class.ClassList"
     android:background="@color/white">
 
-    <LinearLayout
+    <!-- 상단 타이틀바 -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@drawable/rounded_edittext"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        >
-
-        <EditText
-            android:id="@+id/class_searching"
+        android:layout_height="55dp"
+        android:background="@color/colorPrimary">
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="100dp" />
+        <ImageView
+            android:id="@+id/class_list_back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"/>
+        <TextView
+            android:id="@+id/class_list_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft= "20dp"
-            android:maxLines="1"
-            android:maxLength="20"
-            android:layout_gravity="center"
-            android:hint="클래스 검색"
-            android:textSize="17dp"
-            android:textColor="#FFFFFF"
-            android:layout_weight="200"
-            android:textColorHint="#FFFFFF"
-            android:background="@null"/>
-
-        <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="15dp"
-            android:padding="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/ic_search_black_24dp"/>
-
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="광진구"
+            android:textStyle="bold"
+            android:textSize="21dp"
+            android:textColor="#FFFFFF"/>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

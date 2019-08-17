@@ -1,20 +1,27 @@
 package com.example.clubactivity.Class;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clubactivity.R;
 
+import java.util.Locale;
+
 
 public class ClassFragment extends Fragment implements View.OnClickListener {
+
     private View view;
 
     @Nullable
@@ -99,6 +106,31 @@ public class ClassFragment extends Fragment implements View.OnClickListener {
         songpa_button.setOnClickListener(this);
 
 
+
+
+       //RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.class_list);
+
+
+
+        //검색 텍스트 검색
+        ImageButton searchButton = (ImageButton) view.findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EditText searchBar = (EditText) view.findViewById(R.id.class_search);
+                String searchText = searchBar.getText().toString().toLowerCase(Locale.getDefault());
+
+                if(searchText.length() == 0) {
+                    Toast.makeText(getContext(), "검색어를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    ShowClassList();
+                }
+
+            }
+        });
+
         return view;
     }
 
@@ -135,14 +167,30 @@ public class ClassFragment extends Fragment implements View.OnClickListener {
             case R.id.fl_mainfragment_gangdong  :
             case R.id.fl_mainfragment_songpa  :
 
+                //((MainActivity)getActivity()).replaceFragment(ClassFragment.newInstance());
 
-                Intent intent = new Intent(getActivity(), ClassList.class);
-                intent.putExtra("param", v.getId()); //지역구 명을 뿌려준다. 수정중중
-               startActivity(intent);
+
+                ShowClassList();
+
                 break;
         }
     }
 
+    public void ShowClassList(){
+        ClassList classList = new ClassList();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.main_frame, classList).commit();
+    }
+
+    /*public static ClassList newInstance() {
+        return new ClassList();
+    }*/
+
+    public void ClassSearchingButton(View view){
+        Toast.makeText(getContext(), "찜한 클래스에 해제되었습니다!", Toast.LENGTH_SHORT).show();
+    }
 
 
 }
