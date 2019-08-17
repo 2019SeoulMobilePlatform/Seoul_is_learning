@@ -52,11 +52,11 @@ public class ChatRoomActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
-                Toast.makeText(ChatRoomActivity.this, messageTextView.getText(),Toast.LENGTH_LONG).show();
-
-                adapter.addItem(messageTextView.getText().toString(), 1);
-                messageTextView.setText("");
-                adapter.notifyDataSetChanged();
+                if(!messageTextView.getText().toString().isEmpty()){
+                    adapter.addItem(messageTextView.getText().toString(), 0, "id");
+                    messageTextView.setText("");
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -96,7 +96,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 matrix.postRotate(90);
                 originalImage = BitmapFactory.decodeStream(inputStream);
                 //Bitmap originalBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-                //image = Bitmap.createBitmap(originalImage, 0, 0, originalImage.getWidth(), originalImage.getHeight(), matrix, true);
+                image = Bitmap.createBitmap(originalImage, 0, 0, originalImage.getWidth(), originalImage.getHeight(), matrix, true);
 
             }
             catch(FileNotFoundException e){
@@ -104,7 +104,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
-            adapter.addItem(1, image);
+            adapter.addItem(1, image, "id");
             adapter.notifyDataSetChanged();
 
         }

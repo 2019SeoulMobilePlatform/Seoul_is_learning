@@ -2,6 +2,7 @@ package com.example.clubactivity.Club;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
@@ -20,6 +21,8 @@ import com.example.clubactivity.R;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MessageListAdapter extends BaseAdapter {
 
     Context context;
@@ -28,28 +31,56 @@ public class MessageListAdapter extends BaseAdapter {
         String msg;
         int type;
         private String from_id;
-        private String to_id;
-        private String datetime;
-        private String path;
+        //private String path;
+        private Bitmap profileImage;
         Bitmap image;
+        private String nickName;
 
-
-        public MessageContents(String _msg,int _type, String _from_id, String _to_id, String _dateTime, Bitmap image){
+        public MessageContents(String _msg,int _type, String _from_id){
             this.msg = _msg;
             this.type = _type;
-            this.datetime = _dateTime;
             this.from_id = _from_id;
-            this.to_id = _to_id;
-            this.path = null;
+            //this.path = null;
+            this.image = null;
+            this.profileImage = null;
+        }
+
+        public MessageContents(String _msg, int _type, String _from_id, String nickName, Bitmap profileImage){
+            this.msg = _msg;
+            this.type = _type;
+            this.from_id = _from_id;
+            //this.path = null;
+            this.image = null;
+            this.nickName = nickName;
+            this.profileImage = profileImage;
+        }
+
+        public MessageContents(int _type, String _from_id, Bitmap image){
+            this.msg = "";
+            this.type = _type;
+            this.from_id = _from_id;
+            //this.path = null;
+            this.profileImage = null;
             this.image = image;
         }
 
+        public MessageContents(int _type, String _from_id, String nickName, Bitmap profileImage, Bitmap image){
+            this.msg = "";
+            this.type = _type;
+            this.from_id = _from_id;
+            //this.path = null;
+            this.nickName = nickName;
+            this.profileImage = profileImage;
+            this.image = image;
+        }
+
+        /*
         public MessageContents(int type, String _from_id, String imagePath, Bitmap image){
             this.type = type;
             this.from_id = _from_id;
-            this.path = imagePath;
+            //this.path = imagePath;
             this.image = image;
-        }
+        }*/
     }
 
     ArrayList<MessageContents> messages;
@@ -74,11 +105,32 @@ public class MessageListAdapter extends BaseAdapter {
         return 0;
     }
 
-    public void addItem(String text, int type) { messages.add(new MessageContents(text, type, "0", "0", "0", null));}
+    //텍스트 전송
+    public void addItem(String text, int type, String from_id) {
+        if(type == 0) {
+            messages.add(new MessageContents(text, type, from_id));
+        }
+        else if(type == 1){
+            //TODO
+            //서버에서 id에 해당하는 닉네임, 프로필 이미지 가져와서 넣어야됨
+            messages.add(new MessageContents(text, type, from_id,"nickname", (BitmapFactory.decodeResource(context.getResources(), R.drawable.class1) )));
+        }
+    }
 
-    public void addItem(int type, String imagePath) { messages.add(new MessageContents(type, "0", imagePath, null));}
+    //이미지 전송시 url로 받을 경우
+    //public void addItem(int type, String imagePath, String from_id) { messages.add(new MessageContents(type, from_id, imagePath, null));}
 
-    public void addItem(int type, Bitmap image) { messages.add(new MessageContents(type, "0", "", image));}
+    //이미지 Bitmap으로 받을 경우
+    public void addItem(int type, Bitmap image, String from_id) {
+        if(type == 0) {
+            messages.add(new MessageContents(type, from_id, image));
+        }
+        else if(type == 1){
+            //TODO
+            //서버에서 id에 해당하는 닉네임, 프로필 이미지 가져와서 넣어야됨
+            messages.add(new MessageContents(type, from_id, "nickname", (BitmapFactory.decodeResource(context.getResources(), R.drawable.class_paint)), image));
+        }
+    }
 
 
 
@@ -92,6 +144,9 @@ public class MessageListAdapter extends BaseAdapter {
         LinearLayout layout = null;
         FrameLayout frameLayout = null;
         ImageView imageView = null;
+        CircleImageView circleImageView = null;
+        TextView nickTextView = null;
+
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -101,6 +156,8 @@ public class MessageListAdapter extends BaseAdapter {
             text = (TextView)view.findViewById(R.id.message_text);
             frameLayout = (FrameLayout) view.findViewById(R.id.chat_message_box_layout);
             imageView = (ImageView) view.findViewById(R.id.chat_image);
+            circleImageView = (CircleImageView) view.findViewById(R.id.chat_user_circleimage);
+            nickTextView = (TextView) view.findViewById(R.id.chat_user_id);
 
 
             holder = new CustomHolder();
@@ -108,6 +165,8 @@ public class MessageListAdapter extends BaseAdapter {
             holder.layout = layout;
             holder.m_FrameLayout = frameLayout;
             holder.m_ImageView = imageView;
+            holder.m_nicknameTextView = nickTextView;
+            holder.m_profileImageView = circleImageView;
             view.setTag(holder);
 
         } else{
@@ -116,26 +175,37 @@ public class MessageListAdapter extends BaseAdapter {
             layout = holder.layout;
             frameLayout = holder.m_FrameLayout;
             imageView = holder.m_ImageView;
+            circleImageView = holder.m_profileImageView;
+            nickTextView = holder.m_nicknameTextView;
         }
 
 
         text.setText(messages.get(i).msg);
+
         //frameLayout.getLayoutParams().width = text.getWidth();
         imageView.setImageBitmap(messages.get(i).image);
         //Glide.with(context).asBitmap().load(messages.get(i).path).into(imageView);
 
+        //내가 보낸건지 남이 보낸건지에 따라 위치밑 상세 설정
         if( messages.get(i).type == 0 ) {
+            //내가보낸거
             frameLayout.setBackgroundResource(R.drawable.chat_message_box_i);
             text.setTextColor(Color.BLACK);
             layout.setGravity(Gravity.RIGHT);
+            nickTextView.setText("");
+            circleImageView.setImageBitmap(null);
         }
         if(messages.get(i).type == 1){
             frameLayout.setBackgroundResource(R.drawable.chat_message_box_you);
             text.setTextColor(Color.BLACK);
             layout.setGravity(Gravity.LEFT);
+            //from_id(보낸 사람 식별번호)에 따라 닉네임과 프로필 이미지를 서버에서 가져와 넣어줘야함
+            nickTextView.setText(messages.get(i).nickName);
+            circleImageView.setImageBitmap(messages.get(i).profileImage);
         }
 
-        if(messages.get(i).path != null){
+        //텍스트 전송시
+        if(messages.get(i).image != null){
             imageView.getLayoutParams().height = 300;
             imageView.getLayoutParams().width = 300;
             frameLayout.setBackgroundResource(0);
@@ -153,6 +223,8 @@ public class MessageListAdapter extends BaseAdapter {
         FrameLayout m_FrameLayout;
         LinearLayout layout;
         ImageView m_ImageView;
+        CircleImageView m_profileImageView;
+        TextView m_nicknameTextView;
     }
 
 }

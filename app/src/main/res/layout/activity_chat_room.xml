@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Club.ChatRoomActivity"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="#FFFAEA">
 
     <RelativeLayout
         android:layout_width="match_parent"

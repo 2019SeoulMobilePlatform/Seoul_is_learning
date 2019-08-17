@@ -1,5 +1,6 @@
 package com.example.clubactivity.Login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 public class LoginInstructorFragment extends Fragment {
@@ -25,6 +27,11 @@ public class LoginInstructorFragment extends Fragment {
     String password;
     EditText _email;
     EditText _password;
+    Context context;
+
+    public LoginInstructorFragment(Context _context){
+        this.context = _context;
+    }
 
     @Nullable
     @Override
@@ -77,21 +84,31 @@ public class LoginInstructorFragment extends Fragment {
 
         email = _email.getText().toString();
         password = _password.getText().toString();
+        String url = "http://106.10.35.170/CheckSignIn.php";
+
         if(email.isEmpty() || password.isEmpty()){
             Toast.makeText(getActivity(),"이메일, 비밀번호를 입력해 주세요",Toast.LENGTH_LONG).show();
             return;
         }
 
         //서버에 로그인 정보 보내기
-        //sendData( email, password ) ;
+        String data = sendData(email, password);
 
+        NetworkTask networkTask = new NetworkTask(this.context, url, data);
 
+        networkTask.execute();
         //서버와 로그인 정보 비교
 
-
-        //로그인 성공
+        // 로그인 성공
         Intent intent = new Intent(getActivity(), InstructorMainActivity.class);
         startActivity(intent);
+    }
+
+    private String sendData(String email, String password ) {
+
+        String data = "email="+ email + "&password=" + password;
+
+        return data;
     }
 }
 

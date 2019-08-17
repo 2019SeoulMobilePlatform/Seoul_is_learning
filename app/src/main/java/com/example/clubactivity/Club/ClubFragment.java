@@ -2,9 +2,13 @@ package com.example.clubactivity.Club;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,7 @@ import com.example.clubactivity.Constants;
 import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Locale;
 
 public class ClubFragment extends Fragment {
@@ -70,25 +75,34 @@ public class ClubFragment extends Fragment {
 
         // 임시 아이템 추가.
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.cat_dog),
-                "일러스트 동호회 모집", "일러스트에 관심 있으신 분들 환영합니다~~") ;
+                "일러스트 동호회 모집", "일러스트에 관심 있으신 분들 환영합니다~~", 10, 1) ;
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
-                "Circle", "Account Circle Black 36dp") ;
+                "Circle", "Account Circle Black 36dp", 10, 1) ;
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class2),
-                "Ind", "Assignment Ind Black 36dp");
+                "Ind", "Assignment Ind Black 36dp", 10, 1);
         myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class3),
-                "Ind", "Assignment Ind Black 36dp") ;
+                "Ind", "Assignment Ind Black 36dp", 10, 1) ;
         myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
-                "Circle", "Account Circle Black 36dp") ;
+                "Circle", "Account Circle Black 36dp", 10, 1) ;
 
 
         wholeClub_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bitmap bitmap;
                 Intent intent = new Intent(getActivity(), ClubEnterActivity.class);
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] bytes = stream.toByteArray();
+
+
+                //intent.putExtra("clubImage",bytes);
                 intent.putExtra("clubName", ((ChatViewItem)wholeClub_adapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)wholeClub_adapter.getItem(i)).getDesc());
-
+                intent.putExtra("clubNowMember", ((ChatViewItem)wholeClub_adapter.getItem(i)).getNowMemberNum());
+                intent.putExtra("clubMaxMember", ((ChatViewItem)wholeClub_adapter.getItem(i)).getMaxMemberNum());
+                //Log.e( Integer.toString(((ChatViewItem)wholeClub_adapter.getItem(i)).getMaxMemberNum()) , Integer.toString(((ChatViewItem)wholeClub_adapter.getItem(i)).getMaxMemberNum()));
                 startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);
             }
         });
@@ -178,11 +192,18 @@ public class ClubFragment extends Fragment {
         if (requestCode == 1 && resultCode == getActivity().RESULT_OK) {
             Toast.makeText(getActivity() , "액티비티종료",Toast.LENGTH_LONG).show();
 
-            myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_class_black_24dp),
-                    (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription")) ;
+            byte[] bytes = data.getByteArrayExtra("BMP");
+            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            Drawable drawable = new BitmapDrawable(bmp);
+            myClub_adapter.addItem(drawable,
+                    (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription"), (int)data.getExtras().get("clubMaxMember"), 1);
+
+            wholeClub_adapter.addItem(drawable,
+                    (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription"), (int)data.getExtras().get("clubMaxMember"), 1);
 
             //갱신
             myClub_adapter.notifyDataSetChanged();
+            wholeClub_adapter.notifyDataSetChanged();
         }
     }
 

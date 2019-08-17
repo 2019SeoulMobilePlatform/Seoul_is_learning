@@ -38,15 +38,14 @@ public class InstructorMainActivity extends AppCompatActivity {
                 intent.putExtra("clubDescription", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDesc());
 
                 //startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);
-
             }
         });
 
 
         instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.cat_dog),
-                "일러스트 원데이 클래스", "성수역 부근 원데이 일러스트 클래스입니다") ;
+                "일러스트 원데이 클래스", "성수역 부근 원데이 일러스트 클래스입니다", 10, 1) ;
         instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class_paint),
-                "유화 그리기", "50,000") ;
+                "유화 그리기", "50,000",10,1) ;
 
 
     }

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clubactivity.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -96,10 +97,17 @@ public class AddClubActivity extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent();
-                //이미지 넣으면 터짐
+
+                //바이트 어레이로 이미지 전송
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                userImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] bytes = stream.toByteArray();
+                intent.putExtra("BMP",bytes);
+
                 //intent.putExtra("clubImage", userImage);
                 intent.putExtra("clubName", clubName.getText().toString());
                 intent.putExtra("clubDescription", clubDescription.getText().toString());
+                intent.putExtra("clubMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
 
                 setResult(RESULT_OK, intent);
                 AddClubActivity.this.finish();
