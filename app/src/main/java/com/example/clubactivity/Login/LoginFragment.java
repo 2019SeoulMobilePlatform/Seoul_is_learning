@@ -84,6 +84,14 @@ public class LoginFragment extends Fragment {
                 startActivityForResult(intent, Constants.REQUEST_FIND_PASSWORD);
             }
         });
+
+        view.findViewById(R.id.btn_no_login).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -100,6 +108,7 @@ public class LoginFragment extends Fragment {
                         .setCustomAnimations(R.anim.enter_right_to_left, R.anim.exit_right_to_left,
                                 R.anim.enter_left_to_right, R.anim.exit_left_to_right)
                         .replace(R.id.login_frame,  LoginActivity.loginInstructorFragment)
+                        //.addToBackStack(null)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
             }

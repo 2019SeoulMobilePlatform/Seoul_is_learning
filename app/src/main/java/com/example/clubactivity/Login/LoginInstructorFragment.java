@@ -51,12 +51,22 @@ public class LoginInstructorFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.link_find_password_instructor).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindPasswordAcitvity.class);
+                startActivityForResult(intent, Constants.REQUEST_FIND_PASSWORD);
+            }
+        });
+
         view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
+
+
 
         return view;
     }

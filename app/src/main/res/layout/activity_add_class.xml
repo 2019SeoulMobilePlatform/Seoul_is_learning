@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Club.AddClubActivity"
-    android:background="#FFFFFF">
+    tools:context=".AddClassActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center_vertical">
 
             <ImageView
@@ -53,13 +52,13 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center_vertical"
-            android:text="동호회 이름"
+            android:text="클래스 이름"
             android:textSize="17dp"
             android:textStyle="bold"
             android:textColor="#000000"/>
 
         <EditText
-            android:id="@+id/club_name"
+            android:id="@+id/class_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -75,13 +74,13 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center_vertical"
-            android:text="동호회 설명"
+            android:text="클래스 설명"
             android:textSize="17dp"
             android:textStyle="bold"
             android:textColor="#000000"/>
 
         <EditText
-            android:id="@+id/description"
+            android:id="@+id/class_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -90,9 +89,36 @@
             android:background="@drawable/border"
             android:gravity="top"
             android:padding="5dp"
-            android:hint="개설하고자 하는 모임에 대한 간단한 설명을 적어주세요."
+            android:hint="개설하고자 하는 클래스에 대한 간단한 설명을 적어주세요."
             android:textSize="15dp"
             android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:text="클래스 가격"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/class_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:gravity="top"
+            android:padding="5dp"
+            android:hint="금액을 입력해 주세요."
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -115,7 +141,7 @@
 
 
         <Button
-            android:id="@+id/save_club_content"
+            android:id="@+id/save_class_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
@@ -125,7 +151,5 @@
             android:textColor="#FFFFFF" />
 
     </LinearLayout>
-
-
 
 </LinearLayout>
