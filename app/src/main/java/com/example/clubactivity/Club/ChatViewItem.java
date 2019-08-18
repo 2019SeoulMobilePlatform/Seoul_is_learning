@@ -1,13 +1,37 @@
 package com.example.clubactivity.Club;
 
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class ChatViewItem {
+public class ChatViewItem implements Parcelable {
     private Drawable iconDrawable ;
     private String titleStr ;
     private String descStr ;
     private int maxMemberNum;
     private int nowMemberNum;
+
+    protected ChatViewItem(Parcel in) {
+        titleStr = in.readString();
+        descStr = in.readString();
+        maxMemberNum = in.readInt();
+        nowMemberNum = in.readInt();
+    }
+
+    public static final Creator<ChatViewItem> CREATOR = new Creator<ChatViewItem>() {
+        @Override
+        public ChatViewItem createFromParcel(Parcel in) {
+            return new ChatViewItem(in);
+        }
+
+        @Override
+        public ChatViewItem[] newArray(int size) {
+            return new ChatViewItem[size];
+        }
+    };
+
+    public ChatViewItem() {
+    }
 
     public void setIcon(Drawable icon) {
         iconDrawable = icon ;
@@ -34,4 +58,16 @@ public class ChatViewItem {
     public int getMaxMemberNum() {return maxMemberNum;}
     public int getNowMemberNum() {return nowMemberNum;}
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(titleStr);
+        parcel.writeString(descStr);
+        parcel.writeInt(maxMemberNum);
+        parcel.writeInt(nowMemberNum);
+    }
 }

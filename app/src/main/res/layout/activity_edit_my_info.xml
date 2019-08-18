@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:paddingBottom="30dp"
+        android:paddingBottom="20dp"
         android:layout_marginBottom="20dp">
 
         <Button
@@ -27,15 +27,15 @@
             android:textColor="@color/white"
             android:id="@+id/edit_info_btn"/>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/user_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_account_circle_gray_24dp"
-            android:foregroundGravity="center_vertical"
-            android:layout_centerInParent="true" />
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/ic_account_circle_white_24dp"
+            android:onClick="SetProfileImage"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"/>
 
     </RelativeLayout>
 
@@ -178,6 +178,7 @@
                 android:layout_marginBottom="5dp"
                 android:autofillHints="지역구를 선택해 주세요"
                 android:entries="@array/Area_Spinner_Items"/>
+
         </LinearLayout>
 
 

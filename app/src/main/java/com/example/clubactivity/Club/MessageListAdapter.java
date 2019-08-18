@@ -206,8 +206,8 @@ public class MessageListAdapter extends BaseAdapter {
 
         //텍스트 전송시
         if(messages.get(i).image != null){
-            imageView.getLayoutParams().height = 300;
-            imageView.getLayoutParams().width = 300;
+            imageView.getLayoutParams().height = 500;
+            imageView.getLayoutParams().width = 500;
             frameLayout.setBackgroundResource(0);
         }
         else{

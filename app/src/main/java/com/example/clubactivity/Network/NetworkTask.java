@@ -12,7 +12,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
     private Context context;
     private String url;
-    ArrayList<NameValuePair> nameValues;
     private String data;
 
     public NetworkTask(Context _context, String url, String data){

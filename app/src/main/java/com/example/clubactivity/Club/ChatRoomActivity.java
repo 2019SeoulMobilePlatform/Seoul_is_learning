@@ -37,8 +37,13 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
+        Intent intent = getIntent();
+        TextView title = findViewById(R.id.club_chatting_title);
+        title.setText(intent.getExtras().get("clubName").toString());
+
         adapter = new MessageListAdapter(this);
         messageTextView = findViewById(R.id.editText);
+
 
 
         listview = (ListView) findViewById(R.id.chatmessage_listView);
@@ -93,7 +98,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             try{
                 InputStream inputStream = getContentResolver().openInputStream(data.getData());
                 Matrix matrix = new Matrix();
-                matrix.postRotate(90);
+                matrix.postRotate(0);
                 originalImage = BitmapFactory.decodeStream(inputStream);
                 //Bitmap originalBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
                 image = Bitmap.createBitmap(originalImage, 0, 0, originalImage.getWidth(), originalImage.getHeight(), matrix, true);
