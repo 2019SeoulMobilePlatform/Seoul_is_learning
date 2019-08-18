@@ -83,7 +83,7 @@ public class MyPageFragment extends Fragment {
         mNames.add("명화 그리기");
 
         mImageUrls_favorite.add("http://image.chosun.com/sitedata/image/201905/21/2019052101147_0.jpg");
-        mNames_favorite.add("명화 그리기");
+        mNames_favorite.add("축구 소모임");
 
         mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
         mNames.add("프랑스 자수");
@@ -94,22 +94,6 @@ public class MyPageFragment extends Fragment {
         mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
         mNames.add("Rocky Mountain National Park");
 
-
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
-
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-
-
-        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
-
-        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
-
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
 
         initRecyclerView();
 

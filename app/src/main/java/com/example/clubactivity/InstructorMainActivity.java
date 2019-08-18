@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.clubactivity.Class.ClassDetailActivity;
+import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Club.ClubEnterActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class InstructorMainActivity extends AppCompatActivity {
 
@@ -33,20 +35,36 @@ public class InstructorMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bitmap bitmap;
+
                 Intent intent = new Intent(InstructorMainActivity.this, ClassDetailActivity.class);
+                //Intent intent = new Intent(context, TabTest.class);
+
                 intent.putExtra("param", ((ChatViewItem)instructorClassAdapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDesc());
+
+                //intent.putExtra("image",((ChatViewItem)instructorClassAdapter.getItem(i)).getIcon()); //클래스 이미지 뿌리기
+
+                //InstructorMainActivity.this.startActivity(intent);
 
                 //startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);
             }
         });
 
 
-        instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.cat_dog),
-                "일러스트 원데이 클래스", "성수역 부근 원데이 일러스트 클래스입니다", 10, 1) ;
+        instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class1),
+                "원데이 클래스", "20,000", 10, 1) ;
         instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class_paint),
                 "유화 그리기", "50,000",10,1) ;
 
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_class_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InstructorMainActivity.this, AddClassActivity.class);
+                startActivityForResult(intent, Constants.REQUSET_ADD_CLASS); // 요청한 곳을 구분하기 위한 숫자, 의미없음
+            }
+        });
 
     }
 

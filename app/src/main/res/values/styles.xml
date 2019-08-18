@@ -106,5 +106,8 @@
         <item name="android:fontFamily">@font/nanumgodic</item>
     </style>
 
+    <style name="SpinnerEditInfoStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/black</item>
+    </style>
 
 </resources>

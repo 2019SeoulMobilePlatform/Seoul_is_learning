@@ -65,6 +65,15 @@
             android:background="@color/colorPrimary"
             android:text="Login"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_no_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:background="@color/grey"
+            android:text="둘러보기"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
