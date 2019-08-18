@@ -67,15 +67,16 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         //슬라이드영역
         sliderView = view.findViewById(R.id.imageSlider);
         final SliderAdapter sliderAdapter = new SliderAdapter(getActivity());
-        sliderAdapter.setCount(5); //카드뷰 개수 정해주기
+        sliderAdapter.setCount(3); //카드뷰 개수 정해주기
 
         sliderView.setSliderAdapter(sliderAdapter);
 
         sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
-        sliderView.setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
         sliderView.setIndicatorSelectedColor(Color.WHITE);
         sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(4);
         sliderView.startAutoCycle();
 
         sliderView.setOnIndicatorClickListener(new DrawController.ClickListener() {
@@ -105,10 +106,10 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         //밑에 뷰페이저 영역
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.seoul_is_learning, "냥냥", "Brochure is an informative paper document (often also used for advertising) that can be folded into a template"));
-        models.add(new Model(R.drawable.cat_dog, "냠냠", "Sticker is a type of label: a piece of printed paper, plastic, vinyl, or other material with pressure sensitive adhesive on one side"));
-        models.add(new Model(R.drawable.seoul_is_learning, "헤헿", "Poster is any piece of printed paper designed to be attached to a wall or vertical surface."));
-        models.add(new Model(R.drawable.seoul_is_learning, "너무졸린데", "Business cards are cards bearing business information about a company or individual."));
+        models.add(new Model(R.drawable.seoul_is_learning, "냥냥", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
+        models.add(new Model(R.drawable.cat_dog, "냠냠", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
+        models.add(new Model(R.drawable.seoul_is_learning, "헤헿", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
+        models.add(new Model(R.drawable.seoul_is_learning, "너무졸린데", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
 
         adapter = new Adapter(models, getActivity());
 

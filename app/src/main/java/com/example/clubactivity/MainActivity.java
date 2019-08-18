@@ -10,9 +10,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clubactivity.Class.ClassFragment;
+import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.Home.HomeFragment;
 import com.example.clubactivity.Login.LoginActivity;
-import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.MyPage.MyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -100,6 +100,53 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
     }*/
+
+
+  // 뒤로가기 버튼 입력시간이 담길 long 객체
+    private long pressedTime = 0;
+
+    // 리스너 생성
+    public interface OnBackPressedListener {
+        public void onBack();
+    }
+
+    // 리스너 객체 생성
+    private OnBackPressedListener mBackListener;
+
+    // 리스너 설정 메소드
+    public void setOnBackPressedListener(OnBackPressedListener listener) {
+        mBackListener = listener;
+    }
+
+    // 뒤로가기 버튼을 눌렀을 때의 오버라이드 메소드
+    @Override
+    public void onBackPressed() {
+
+        /*// 다른 Fragment 에서 리스너를 설정했을 때 처리됩니다.
+        if(mBackListener != null) {
+            mBackListener.onBack();
+        } else {
+            if ( pressedTime == 0 ) {
+                Snackbar.make(findViewById(R.id.main_frame),
+                        " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                pressedTime = System.currentTimeMillis();
+            }
+            else {
+                int seconds = (int) (System.currentTimeMillis() - pressedTime);
+                if ( seconds > 2000 ) {
+                    Snackbar.make(findViewById(R.id.main_frame),
+                            " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                    pressedTime = 0 ;
+                }
+                else {
+                    super.onBackPressed();
+                    finish();
+                }
+            }
+        }*/
+        finish();
+    }
+
 
 
 }
