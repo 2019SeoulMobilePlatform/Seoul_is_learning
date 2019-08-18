@@ -7,13 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.clubactivity.Class.ClassFragment;
+import com.example.clubactivity.Class.ClassList;
 import com.example.clubactivity.R;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
@@ -81,6 +86,21 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         });
 
 
+
+        //전체보기
+        ClassFragment.classmenuTitle = "인기 클래스";
+        Button allViewButton = (Button)view.findViewById(R.id.class_all_button);
+
+        allViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClassList classList = new ClassList();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.main_frame, classList).commit();
+            }
+        });
 
 
         //밑에 뷰페이저 영역

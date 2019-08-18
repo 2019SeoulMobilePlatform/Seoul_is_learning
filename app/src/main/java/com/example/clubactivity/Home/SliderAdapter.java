@@ -39,6 +39,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
+                /*
+                ClassList classList = new ClassList();
+                FragmentManager fragmentManager = context.getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.main_frame, classList).commit();*/
             }
         });
 

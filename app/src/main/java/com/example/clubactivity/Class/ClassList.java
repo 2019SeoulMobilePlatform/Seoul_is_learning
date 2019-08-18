@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,6 @@ import java.util.List;
 public class ClassList extends Fragment {
     final int ITEM_SIZE = 5;
     private View view;
-
 
 
     @Nullable
@@ -50,6 +50,9 @@ public class ClassList extends Fragment {
         recyclerView.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.class_list));
 
 
+        //위에 제목 지정
+        TextView classListTitle = view.findViewById(R.id.class_list_area_or_title);
+        classListTitle.setText(ClassFragment.classmenuTitle);
 
         //뒤로가기
         ImageView classBack = view.findViewById(R.id.class_list_back_button);

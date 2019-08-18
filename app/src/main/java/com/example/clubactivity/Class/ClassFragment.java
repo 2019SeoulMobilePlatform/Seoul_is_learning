@@ -23,6 +23,7 @@ import java.util.Locale;
 public class ClassFragment extends Fragment implements View.OnClickListener {
 
     private View view;
+    public static String classmenuTitle;
 
     @Nullable
     @Override
@@ -125,6 +126,7 @@ public class ClassFragment extends Fragment implements View.OnClickListener {
                     Toast.makeText(getContext(), "검색어를 입력해주세요!", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    classmenuTitle = searchText;
                     ShowClassList();
                 }
 
@@ -141,31 +143,104 @@ public class ClassFragment extends Fragment implements View.OnClickListener {
 
         switch(id){
             case R.id.fl_mainfragment_eunpyung :
+                classmenuTitle = "은평구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_gangbuk :
+                classmenuTitle = "강북구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_dobong :
+                classmenuTitle = "도봉구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_nowon :
+                classmenuTitle = "노원구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_seodaemun :
+                classmenuTitle = "서대문구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_jongro :
+                classmenuTitle = "종로구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_seongbuk :
+                classmenuTitle = "성북구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_mapo :
+                classmenuTitle = "마보구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_junggu :
+                classmenuTitle = "중구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_dongdaemun :
+                classmenuTitle = "동대문구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_yongsan :
+                classmenuTitle = "용산구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_seongdong :
+                classmenuTitle = "성동구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_jungnang :
+                classmenuTitle = "중랑구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_gwangjin :
+                classmenuTitle = "광진구";
+                ShowClassList();
+                break;
 
             case R.id.fl_mainfragment_gangseo  :
+                classmenuTitle = "강서구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_yangcheon  :
+                classmenuTitle = "양천구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_guro  :
+                classmenuTitle = "구로구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_yeongdeungpo  :
+                classmenuTitle = "영등포구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_dongjak  :
+                classmenuTitle = "동작구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_gwanak  :
+                classmenuTitle = "관악구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_geumcheon  :
+                classmenuTitle = "금천구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_seocho  :
+                classmenuTitle = "서초구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_gangnam  :
+                classmenuTitle = "강남구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_gangdong  :
+                classmenuTitle = "강동구";
+                ShowClassList();
+                break;
             case R.id.fl_mainfragment_songpa  :
+                classmenuTitle = "송파구";
 
                 //((MainActivity)getActivity()).replaceFragment(ClassFragment.newInstance());
 

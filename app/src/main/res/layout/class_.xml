@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft= "20dp"
             android:maxLines="1"
-            android:maxLength="20"
+            android:maxLength="10"
             android:layout_gravity="center"
             android:hint="클래스 검색"
             android:textSize="17dp"
