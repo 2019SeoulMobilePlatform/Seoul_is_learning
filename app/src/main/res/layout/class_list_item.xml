@@ -29,6 +29,7 @@
                 android:id="@+id/review_star"
                 style="?android:attr/ratingBarStyleSmall"
                 android:progressTint="@color/colorPrimary"
+                android:progressBackgroundTint="@color/grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
@@ -39,14 +40,14 @@
 
             <!-- 이벤트 알려주기 -->
             <TextView
-                android:id="@+id/closed_event"
+                android:id="@+id/class_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 동네 배움터 "
                 android:textSize="11dp"
                 android:textColor="#FFFFFF"
                 android:background="@color/colorPrimary"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="23dp"
                 android:layout_gravity="left|top"
                 />
 
@@ -54,6 +55,7 @@
 
         <TextView
             android:id="@+id/class_list_title"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -62,11 +64,12 @@
             android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/class_list_date"
+            android:id="@+id/class_list_sogae"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="2019.09.01 ~ 2019.09.30"
+            android:text="이거 그냥 소개로 바꾸자"
             android:textColor="#8C8C8C"
             android:textSize="13dp"
             android:layout_marginBottom="5dp"/>

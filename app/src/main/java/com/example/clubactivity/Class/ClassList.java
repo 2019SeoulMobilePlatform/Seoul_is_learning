@@ -59,6 +59,7 @@ public class ClassList extends Fragment {
         classBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(ClassList.this).commit();
                 fragmentManager.popBackStack();

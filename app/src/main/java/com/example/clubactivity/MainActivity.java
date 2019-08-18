@@ -1,6 +1,8 @@
 package com.example.clubactivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,9 +12,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clubactivity.Class.ClassFragment;
+import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.Home.HomeFragment;
 import com.example.clubactivity.Login.LoginActivity;
-import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.MyPage.MyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -100,6 +102,74 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
     }*/
+
+
+  // 뒤로가기 버튼 입력시간이 담길 long 객체
+    private long pressedTime = 0;
+
+    // 리스너 생성
+    public interface OnBackPressedListener {
+        public void onBack();
+    }
+
+    // 리스너 객체 생성
+    private OnBackPressedListener mBackListener;
+
+    // 리스너 설정 메소드
+    public void setOnBackPressedListener(OnBackPressedListener listener) {
+        mBackListener = listener;
+    }
+
+    // 뒤로가기 버튼을 눌렀을 때의 오버라이드 메소드
+    @Override
+    public void onBackPressed() {
+
+        /*// 다른 Fragment 에서 리스너를 설정했을 때 처리됩니다.
+        if(mBackListener != null) {
+            mBackListener.onBack();
+        } else {
+            if ( pressedTime == 0 ) {
+                Snackbar.make(findViewById(R.id.main_frame),
+                        " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                pressedTime = System.currentTimeMillis();
+            }
+            else {
+                int seconds = (int) (System.currentTimeMillis() - pressedTime);
+                if ( seconds > 2000 ) {
+                    Snackbar.make(findViewById(R.id.main_frame),
+                            " 한 번 더 누르면 종료됩니다." , Snackbar.LENGTH_LONG).show();
+                    pressedTime = 0 ;
+                }
+                else {
+                    super.onBackPressed();
+                    finish();
+                }
+            }
+        }*/
+        // AlertDialog 빌더를 이용해 종료시 발생시킬 창을 띄운다
+        AlertDialog.Builder alBuilder = new AlertDialog.Builder(this);
+        alBuilder.setMessage("종료하시겠습니까?");
+
+        // "예" 버튼을 누르면 실행되는 리스너
+        alBuilder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish(); // 현재 액티비티를 종료한다. (MainActivity에서 작동하기 때문에 애플리케이션을 종료한다.)
+            }
+        });
+        // "아니오" 버튼을 누르면 실행되는 리스너
+        alBuilder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return; // 아무런 작업도 하지 않고 돌아간다
+            }
+        });
+        alBuilder.setTitle("서울은 배우는중");
+        alBuilder.show(); // AlertDialog.Bulider로 만든 AlertDialog를 보여준다.
+
+
+    }
+
 
 
 }

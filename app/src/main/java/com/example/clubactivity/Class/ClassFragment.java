@@ -20,15 +20,17 @@ import com.example.clubactivity.R;
 import java.util.Locale;
 
 
-public class ClassFragment extends Fragment implements View.OnClickListener {
+public class ClassFragment extends Fragment implements View.OnClickListener{
 
     private View view;
     public static String classmenuTitle;
+    private ClassList classList = new ClassList();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.class_, container, false);
+
 
        /* ImageButton gwangjin_button = (ImageButton)view.findViewById(R.id.imageView3);
 
@@ -171,7 +173,7 @@ public class ClassFragment extends Fragment implements View.OnClickListener {
                 ShowClassList();
                 break;
             case R.id.fl_mainfragment_mapo :
-                classmenuTitle = "마보구";
+                classmenuTitle = "마포구";
                 ShowClassList();
                 break;
             case R.id.fl_mainfragment_junggu :
@@ -252,20 +254,19 @@ public class ClassFragment extends Fragment implements View.OnClickListener {
     }
 
     public void ShowClassList(){
-        ClassList classList = new ClassList();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.main_frame, classList).commit();
+        fragmentTransaction.addToBackStack(null);
+        if(ClassFragment.this.isAdded())
+        {
+            return; //or return false/true, based on where you are calling from
+        }
     }
 
     /*public static ClassList newInstance() {
         return new ClassList();
     }*/
-
-    public void ClassSearchingButton(View view){
-        Toast.makeText(getContext(), "찜한 클래스에 해제되었습니다!", Toast.LENGTH_SHORT).show();
-    }
 
 
 }

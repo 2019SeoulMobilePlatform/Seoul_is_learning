@@ -14,7 +14,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String url;
     private String data;
 
-    public NetworkTask(Context _context, String url, String data){
+    public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
         this.url = url;
         this.data = data;
