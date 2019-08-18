@@ -80,7 +80,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="3dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="10dp">
                             <!-- 맵 아이콘 -->
                             <ImageView
                                 android:layout_width="20dp"
@@ -94,8 +95,7 @@
                                 android:background="#FFFFFF"
                                 android:text="마포구"
                                 android:textColor="#B9B9B9"
-                                android:textSize="14dp"
-                                android:layout_marginBottom="5dp"/>
+                                android:textSize="14dp"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -105,6 +105,7 @@
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_marginRight="10dp"
                         android:progressTint="@color/colorPrimary"
+                        android:progressBackgroundTint="@color/grey"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"

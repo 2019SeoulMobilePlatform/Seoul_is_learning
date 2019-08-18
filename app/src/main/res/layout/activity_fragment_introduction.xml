@@ -71,7 +71,7 @@
                 android:layout_marginLeft="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="강사 소개" />
+                android:text="수강 대상" />
 
             <ImageView
                 android:id="@+id/directionLineColor1"
@@ -87,7 +87,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textAddress"
+            android:id="@+id/class_member_intent"
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:textColor="@color/grey"
-            android:text="강사를 소개해보자" />
+            android:text="수강대상을 소개해보자" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
                 android:layout_marginLeft="30dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="수강 대상" />
+                android:text="수업 장소" />
 
             <ImageView
                 android:id="@+id/directionLineColor2"
@@ -128,7 +128,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textBus"
+            android:id="@+id/class_location_intent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -136,7 +136,7 @@
             android:layout_marginLeft="30dp"
             android:gravity="left"
             android:textColor="@color/grey"
-            android:text="수강대상에 대해 써보자" />
+            android:text="수강장소에 대해 써보자" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="장소 시간" />
+                android:text="수업 시간" />
 
             <ImageView
                 android:id="@+id/directionLineColor3"
@@ -169,7 +169,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textSubway"
+            android:id="@+id/class_time_intent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -177,7 +177,7 @@
             android:layout_marginRight="30dp"
             android:gravity="left"
             android:textColor="@color/grey"
-            android:text="장소와 시간에 대해 써보자" />
+            android:text="시간에 대해 써보자" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -210,7 +210,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textCar"
+            android:id="@+id/class_people_number_intent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -221,13 +221,13 @@
             android:text="수강 인원에 대해 써보자" />
 
         <ImageView
-            android:id="@+id/imageViewDirection"
+            android:id="@+id/class_image_intent"
             android:layout_marginTop="35dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="45dp"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/class3"/>
+            android:src="@drawable/class3" />
 
     </LinearLayout>
 
