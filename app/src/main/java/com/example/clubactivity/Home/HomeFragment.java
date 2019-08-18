@@ -41,15 +41,12 @@ public class HomeFragment extends Fragment implements DatePickerListener {
     ViewPager viewPager;
     Adapter adapter;
     List<Model> models;
-    //Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home, container, false);
-
-
 
         //데이트영역
         // find the picker
@@ -105,33 +102,11 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         viewPager.setPadding(margin, 0, margin, 0); // 미리보기정도
         //viewPager.setPageMargin(margin/2); //서로 간격
 
-     /*   Integer[] colors_temp = {
-                getResources().getColor(R.color.white),
-                getResources().getColor(R.color.black),
-                getResources().getColor(R.color.white),
-                getResources().getColor(R.color.black)
-        };
-
-        colors = colors_temp;*/
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                /*if (position < (adapter.getCount() -1) && position < (colors.length - 1)) {
-                    viewPager.setBackgroundColor(
-
-                            (Integer) argbEvaluator.evaluate(
-                                    positionOffset,
-                                    colors[position],
-                                    colors[position + 1]
-                            )
-                    );
-                }
-
-                else {
-                    viewPager.setBackgroundColor(colors[colors.length - 1]);
-                }*/
             }
 
             @Override
@@ -149,11 +124,6 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         return view;
     }
 
-    /*private String getTime(){
-        mNow = System.currentTimeMillis();
-        mDate = new Date(mNow);
-        return mFormat.format(mDate);
-    }*/
 
     @Override
     public void onDestroy() {
@@ -165,4 +135,9 @@ public class HomeFragment extends Fragment implements DatePickerListener {
     public void onDateSelected(DateTime dateSelected) {
         Log.i("HorizontalPicker", "Selected date is " + dateSelected.toString());
     }
+
+
+
+
+
 }
