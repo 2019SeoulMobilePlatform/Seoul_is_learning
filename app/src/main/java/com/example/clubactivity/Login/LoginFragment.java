@@ -130,7 +130,7 @@ public class LoginFragment extends Fragment {
         //서버에 로그인 정보 보내기
         String data = sendData(email, password);
 
-        NetworkTask networkTask = new NetworkTask(this.context, url, data);
+        NetworkTask networkTask = new NetworkTask(this.context, url, data, 1);
 
         networkTask.execute();
         //서버와 로그인 정보 비교

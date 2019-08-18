@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.jhonnyx2012:horizontal-picker:1.0.6@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fcf14d9783497ad3d11c11b269c648d0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fcf14d9783497ad3d11c11b269c648d0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4b7224730ffee32532b278e1fac58e21/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4b7224730ffee32532b278e1fac58e21/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
