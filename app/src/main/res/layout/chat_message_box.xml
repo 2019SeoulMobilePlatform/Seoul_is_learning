@@ -7,31 +7,50 @@
     android:id="@+id/chat_message_layout">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/chat_user_image"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/chat_user_circleimage"
+        android:src="@drawable/class_paint"
+        android:layout_marginRight="5dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chat_user_id"/>
+            android:id="@+id/chat_user_id"
+            android:text="id"
+            android:textColor="@color/grey"/>
 
-        <TextView
-            android:id="@+id/message_text"
-            android:layout_width="wrap_content"
+        <FrameLayout
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:gravity="center_vertical"
-            android:textSize="14dp"
-            android:padding="10dp"
-            android:layout_margin="5dp"
-            android:text ="text" />
+            android:layout_width="wrap_content"
+            android:id="@+id/chat_message_box_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chat_image"/>
+
+            <TextView
+                android:id="@+id/message_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:gravity="center_vertical"
+                android:textSize="14dp"
+                android:layout_marginTop="5dp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:maxWidth="200dp"
+                android:text ="text" />
+
+        </FrameLayout>
+
 
     </LinearLayout>
 

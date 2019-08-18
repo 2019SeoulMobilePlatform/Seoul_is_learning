@@ -85,6 +85,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:29.+'
     implementation 'com.android.support:design:29.*'
 
-    implementation group: 'cz.msebera.android' , name: 'httpclient' , version: '4.4.1.2'
+    implementation group: 'cz.msebera.android', name: 'httpclient', version: '4.4.1.2'
 
 }
