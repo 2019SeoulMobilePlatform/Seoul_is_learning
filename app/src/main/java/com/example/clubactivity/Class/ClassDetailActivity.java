@@ -79,13 +79,6 @@ public class ClassDetailActivity extends AppCompatActivity {
     }
 
 
-    //후기 작성 버튼
-    public void ReviewButtonClicked(View view){
-        Toast.makeText(getApplicationContext(), "버튼이 눌렸습니다!", Toast.LENGTH_SHORT).show();
-
-    }
-
-
 
 
     //클래스 예약 버튼 클릭
