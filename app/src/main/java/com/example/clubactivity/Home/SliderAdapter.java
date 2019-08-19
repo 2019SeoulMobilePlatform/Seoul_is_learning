@@ -39,38 +39,42 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
-                /*
-                ClassList classList = new ClassList();
-                FragmentManager fragmentManager = context.getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.main_frame, classList).commit();*/
+                if(position==0)
+                {
+
+                }
+                if (position==1){
+
+                }
+                if (position==2){
+
+                }
             }
         });
 
 
         switch (position) {
             case 0:
-                viewHolder.textViewDescription.setText("This is slider item " + position); //글쓰는곳
+                viewHolder.textViewDescription.setText("동네배움터란?"); //글쓰는곳
                 viewHolder.textViewDescription.setTextSize(16);
-                viewHolder.textViewDescription.setTextColor(Color.WHITE);
+                viewHolder.textViewDescription.setTextColor(Color.BLACK);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
-                        .load(R.drawable.class1) //이미지 넣는곳
+                        .load(R.drawable.dongnaebaeumteoimage) //이미지 넣는곳
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
                 break;
             case 2:
-                viewHolder.textViewDescription.setText("This is slider item " + position);
+                viewHolder.textViewDescription.setText("개발을 위한 클래스들!");
                 viewHolder.textViewDescription.setTextSize(16);
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
                 viewHolder.imageGifContainer.setVisibility(View.GONE);
                 Glide.with(viewHolder.itemView)
-                        .load(R.drawable.class2)
+                        .load(R.drawable.gaebalja)
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
                 break;
-            case 4:
+            /*case 4:
                 viewHolder.textViewDescription.setText("This is slider item " + position);
                 viewHolder.textViewDescription.setTextSize(16);
                 viewHolder.textViewDescription.setTextColor(Color.WHITE);
@@ -80,20 +84,20 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                         .load(R.drawable.class3)
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
-                break;
+                break;*/
             default:
-                viewHolder.textViewDescription.setTextSize(29);
-                viewHolder.textViewDescription.setTextColor(Color.parseColor("#ff7e9d"));
-                viewHolder.textViewDescription.setText("New Class!");
-                viewHolder.imageGifContainer.setVisibility(View.VISIBLE);
+                viewHolder.textViewDescription.setTextSize(16);
+                viewHolder.textViewDescription.setTextColor(Color.WHITE);
+                viewHolder.textViewDescription.setText("하루면 충분한 원데이!");
+                //viewHolder.imageGifContainer.setVisibility(View.VISIBLE);
                 Glide.with(viewHolder.itemView)
-                        .load(R.drawable.class4)
+                        .load(R.drawable.onedaychimimoeum)
                         .fitCenter()
                         .into(viewHolder.imageViewBackground);
-                Glide.with(viewHolder.itemView)
+                /*Glide.with(viewHolder.itemView)
                         .asGif()
                         .load(R.drawable.oh_look_at_this)
-                        .into(viewHolder.imageGifContainer);
+                        .into(viewHolder.imageGifContainer);*/
                 break;
         }
 

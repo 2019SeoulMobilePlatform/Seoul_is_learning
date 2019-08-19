@@ -63,7 +63,6 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         picker.setBackgroundColor(Color.WHITE);
         picker.setDate(new DateTime());
 
-
         //슬라이드영역
         sliderView = view.findViewById(R.id.imageSlider);
         final SliderAdapter sliderAdapter = new SliderAdapter(getActivity());
@@ -73,11 +72,11 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        //sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(R.color.colorPrimary);
         sliderView.setIndicatorUnselectedColor(Color.GRAY);
-        sliderView.setScrollTimeInSec(4);
-        sliderView.startAutoCycle();
+        //sliderView.setScrollTimeInSec(50);
+        //sliderView.startAutoCycle();
 
         sliderView.setOnIndicatorClickListener(new DrawController.ClickListener() {
             @Override
