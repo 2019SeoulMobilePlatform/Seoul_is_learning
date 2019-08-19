@@ -53,14 +53,12 @@ public class RequestHttpURLConnection {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             reader = new BufferedReader(inputStreamReader);
 
-            StringBuilder buffer = new StringBuilder();
-            String line = "null";
+            StringBuffer buffer = new StringBuffer();
+            String line = null;
 
             while((line = reader.readLine()) != null){
                 buffer.append(line);
             }
-
-
             if(reader != null)
                 reader.close();
 

@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     String checkingPassword;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +89,15 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                String url = "http://106.10.35.170/StoreUser.php";
-                String data = getData(email, password,name, residence, birth, phone_number, nickname);
-
+                // 강사와 유저가 같은 회원가입 Activity를 사용하기 때문에 intent 의 mode 값을 통해 나눠서 저장함
+                String url =null;
+                String getMode = getIntent().getStringExtra("Mode");
+                if(getMode.equals("User")) {
+                    url = "http://106.10.35.170/StoreUser.php";
+                }else{
+                    url = "http://106.10.35.170/StoreInstructor.php";
+                }
+                String data = getData(email, password, name, residence, birth, phone_number, nickname);
                 NetworkTask networkTask = new NetworkTask(SignUpActivity.this, url, data, 2);
                 networkTask.execute();
 

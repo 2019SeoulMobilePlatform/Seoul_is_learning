@@ -10,4 +10,7 @@ public class Constants {
     public static int REQUEST_CLUB_ENTER = 1003;
     public static int REQUSET_ADD_CLASS = 1004;
     public static int REQUEST_PICK_IMAGE = 1005;
+    public static int USER_LOGIN= 1;
+    public static int INSTRUCTOR_LOGIN = 3;
+    public static int SIGNUPs = 2;
 }

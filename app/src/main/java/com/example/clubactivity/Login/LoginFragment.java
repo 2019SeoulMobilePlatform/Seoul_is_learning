@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.login, container, false);
 
-        _email = (EditText) (view.findViewById(R.id.input_email));
+        _email = (EditText)(view.findViewById(R.id.input_email));
         email = _email.getText().toString();
         _password = (EditText) (view.findViewById(R.id.input_password));
         password = _password.getText().toString();
@@ -72,6 +72,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                // Activity를 바꿀때 Mode 값을 같이 넘김
+                intent.putExtra("Mode", "User");
                 startActivityForResult(intent, Constants.REQUEST_SIGN_UP);
             }
         });
@@ -135,9 +137,11 @@ public class LoginFragment extends Fragment {
         networkTask.execute();
         //서버와 로그인 정보 비교
 
+        /*
         // 로그인 성공
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+        */
     }
 
     private String sendData(String email, String password ) {

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //로그인 액티비티 죽이기
-       Activity loginActivity = LoginActivity.loginActivity;
+        Activity loginActivity = LoginActivity.loginActivity;
         loginActivity.finish();
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);

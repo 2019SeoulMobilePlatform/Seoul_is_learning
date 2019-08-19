@@ -2,6 +2,7 @@ package com.example.clubactivity.MyPage;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,12 +26,26 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditMyInfoActivity extends AppCompatActivity {
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_my_info);
 
         Button editButton = (Button) findViewById(R.id.edit_info_btn);
+        EditText _nickname = (EditText) findViewById(R.id.edit_nickname);
+        EditText _phonenumber = (EditText)findViewById(R.id.edit_phone);
+        EditText _email = (EditText)findViewById(R.id.edit_email);
+
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        _nickname.setText(preferences.getString("nickname", ""));
+        _phonenumber.setText(preferences.getString("phone_number", ""));
+        _email.setText(preferences.getString("email",""));
+
         final EditText password = (EditText) findViewById(R.id.edit_password);
         final EditText passwordCheck = (EditText) findViewById(R.id.edit_password_check);
 
