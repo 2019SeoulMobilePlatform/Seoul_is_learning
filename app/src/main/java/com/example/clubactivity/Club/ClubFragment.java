@@ -1,11 +1,15 @@
 package com.example.clubactivity.Club;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,6 +33,7 @@ import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.Locale;
 
 public class ClubFragment extends Fragment {
@@ -91,12 +96,15 @@ public class ClubFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ClubEnterActivity.class);
 
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] bytes = stream.toByteArray();
+                //ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                //Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap();
+                //bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                //byte[] bytes = stream.toByteArray();
 
+                //Uri clubImageUri = getImageUri(getActivity(), ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap());
 
+                //intent.putExtra("imageUri", clubImageUri);
+                intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
                 //intent.putExtra("clubImage",bytes);
                 intent.putExtra("clubName", ((ChatViewItem)wholeClub_adapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)wholeClub_adapter.getItem(i)).getDesc());
@@ -114,6 +122,7 @@ public class ClubFragment extends Fragment {
                 Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
+                intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
             }
         });
@@ -205,6 +214,14 @@ public class ClubFragment extends Fragment {
             myClub_adapter.notifyDataSetChanged();
             wholeClub_adapter.notifyDataSetChanged();
         }
+    }
+
+
+    private Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
 

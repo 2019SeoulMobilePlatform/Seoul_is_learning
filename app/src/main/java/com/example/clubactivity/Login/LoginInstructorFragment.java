@@ -20,6 +20,7 @@ import com.example.clubactivity.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
+import com.smarteist.autoimageslider.IndicatorView.animation.data.Value;
 
 public class LoginInstructorFragment extends Fragment {
     private View view;
@@ -47,6 +48,8 @@ public class LoginInstructorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignUpActivity.class);
+                // Activity를 바꿀때 Mode 값도 같이 넘김
+                intent.putExtra("Mode", "Instructor");
                 startActivityForResult(intent, Constants.REQUEST_SIGN_UP);
             }
         });
@@ -65,8 +68,6 @@ public class LoginInstructorFragment extends Fragment {
                 login();
             }
         });
-
-
 
         return view;
     }
@@ -94,7 +95,7 @@ public class LoginInstructorFragment extends Fragment {
 
         email = _email.getText().toString();
         password = _password.getText().toString();
-        String url = "http://106.10.35.170/CheckSignIn.php";
+        String url = "http://106.10.35.170/InstructorLogin.php";
 
         if(email.isEmpty() || password.isEmpty()){
             Toast.makeText(getActivity(),"이메일, 비밀번호를 입력해 주세요",Toast.LENGTH_LONG).show();
@@ -104,14 +105,15 @@ public class LoginInstructorFragment extends Fragment {
         //서버에 로그인 정보 보내기
         String data = sendData(email, password);
 
-        NetworkTask networkTask = new NetworkTask(this.context, url, data, 1);
-
+        NetworkTask networkTask = new NetworkTask(this.context, url, data, 3);
         networkTask.execute();
         //서버와 로그인 정보 비교
 
+        /*
         // 로그인 성공
         Intent intent = new Intent(getActivity(), InstructorMainActivity.class);
         startActivity(intent);
+        */
     }
 
     private String sendData(String email, String password ) {
