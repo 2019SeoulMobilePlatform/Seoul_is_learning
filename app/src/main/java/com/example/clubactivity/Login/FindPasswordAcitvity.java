@@ -1,6 +1,7 @@
 package com.example.clubactivity.Login;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +15,12 @@ public class FindPasswordAcitvity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_password);
+
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .permitDiskReads()
+                .permitDiskWrites()
+                .permitNetwork().build());
+
 
         Button backButton = (Button) findViewById(R.id.btn_back);
         backButton.setOnClickListener(new View.OnClickListener() {

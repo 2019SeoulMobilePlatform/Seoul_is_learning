@@ -1,6 +1,8 @@
 package com.example.clubactivity.Club;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,8 +20,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.ImageProcessing;
 import com.example.clubactivity.R;
 
 import java.io.FileNotFoundException;
@@ -70,21 +74,37 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 
     public void SendImage(View view) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        try {
+            if (ActivityCompat.checkSelfPermission(ChatRoomActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ChatRoomActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.REQUEST_PICK_IMAGE);
+            } else {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, Constants.REQUEST_PICK_IMAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        //intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         //Intent intent = new Intent(Intent.ACTION_PICK);
         //intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
+        //intent.setType("image/*");
 
-        startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), Constants.REQUEST_GET_IMAGE);
+        //startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), Constants.REQUEST_GET_IMAGE);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_GET_IMAGE){
+        if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_PICK_IMAGE){
 
+            Uri imgUri = data.getData() ;
+            ImageProcessing imageProcessing = new ImageProcessing(ChatRoomActivity.this);
+            Bitmap image = imageProcessing.ConvertRareUriToBitmap(imgUri);
+
+/*
             Bitmap image = null;
             Bitmap originalImage = null;
             //String imagePath = getRealPathFromURI(data.getData());
@@ -109,6 +129,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
+*/
             adapter.addItem(1, image, "id");
             adapter.notifyDataSetChanged();
 
