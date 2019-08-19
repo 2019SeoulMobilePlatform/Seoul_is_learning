@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.login, container, false);
 
-        _email = (EditText) (view.findViewById(R.id.input_email));
+        _email = (EditText)(view.findViewById(R.id.input_email));
         email = _email.getText().toString();
         _password = (EditText) (view.findViewById(R.id.input_password));
         password = _password.getText().toString();

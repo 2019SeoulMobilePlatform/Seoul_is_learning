@@ -88,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:text="email@gmail.com"
                 android:inputType="text"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:id="@+id/edit_email"/>
         </LinearLayout>
 
         <LinearLayout
