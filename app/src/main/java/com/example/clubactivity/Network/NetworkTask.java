@@ -72,9 +72,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_nickname = jsonObject.getString("nickname");
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
-                            //String user_profile = jsonObject.getString("image");
+                            String user_profile = jsonObject.getString("image");
+                            Log.e("getdata",jsonObject.getString("image"));
                             String user_birth = jsonObject.getString("birth");
-
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
                             SharedPreferences.Editor user_editor = preferences.edit();
@@ -89,7 +89,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             user_editor.putString("phone_number", user_phonenumber);
                             user_editor.putString("residence", user_residence);
                             user_editor.putString("birth", user_birth);
-                            //user_editor.putString("profile", user_profile);
+                            user_editor.putString("profileImage", user_profile);
+                            Log.e("user_editor", preferences.getString("profileImage", ""));
+
                             user_editor.commit();
 
                             this.context.startActivity(new Intent(this.context, MainActivity.class));
@@ -113,7 +115,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             Toast.makeText(this.context, "회원가입에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     }catch(Exception e){
-
+                        e.printStackTrace();
                     }
                     break;
 
@@ -130,7 +132,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_nickname = jsonObject.getString("nickname");
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
-                            //String user_profile = jsonObject.getString("image");
+                            String user_profile = jsonObject.getString("image");
                             String user_birth = jsonObject.getString("birth");
 
 
@@ -147,7 +149,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             instructor_editor.putString("phone_number", user_phonenumber);
                             instructor_editor.putString("residence", user_residence);
                             instructor_editor.putString("birth", user_birth);
-                            //instructor_editor.putString("profile", user_profile);
+                            instructor_editor.putString("profileImage", user_profile);
 
                             instructor_editor.commit();
                             this.context.startActivity(new Intent(this.context, InstructorMainActivity.class));
@@ -159,6 +161,22 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                    break;
+
+                case 4:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if(real_result.equals("success")){
+                            Toast.makeText(this.context, "성공적으로 변경했습니다.", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(this.context, "변경에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
                     break;
 
             }

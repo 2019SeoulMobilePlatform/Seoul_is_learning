@@ -135,8 +135,6 @@ public class LoginFragment extends Fragment {
         NetworkTask networkTask = new NetworkTask(this.context, url, data, 1);
 
         networkTask.execute();
-        //서버와 로그인 정보 비교
-
         /*
         // 로그인 성공
         Intent intent = new Intent(getActivity(), MainActivity.class);
