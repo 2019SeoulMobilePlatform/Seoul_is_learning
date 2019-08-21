@@ -11,6 +11,9 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 
+import com.example.clubactivity.Club.AddClubActivity;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class ImageProcessing {
@@ -52,5 +55,44 @@ public class ImageProcessing {
         } return 0;
     }
 
+    public Bitmap ConvertUriToBitmap(Uri uri){
+        Bitmap bitmap = null;
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public Bitmap ConvertRareUriToBitmap(Uri uri){
+        String[] filePath = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(uri, filePath, null, null, null);
+        cursor.moveToFirst();
+        String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+        Bitmap image = BitmapFactory.decodeFile(imagePath);
+
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        int exifDegree = ExifOrientationToDegrees(exifOrientation);
+        Matrix matrix = new Matrix();
+        matrix.postRotate(exifDegree);
+        image = Bitmap.createBitmap(image, 0, 0, image.getWidth(), image.getHeight(), matrix, true);
+        return image;
+    }
+
+
+    public byte[] ConvertBitmapToByteArray(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] bytes = stream.toByteArray();
+
+        return bytes;
+    }
 
 }

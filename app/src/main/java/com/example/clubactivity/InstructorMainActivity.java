@@ -43,8 +43,10 @@ public class InstructorMainActivity extends AppCompatActivity {
                 intent.putExtra("clubDescription", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDesc());
 
                 //intent.putExtra("image",((ChatViewItem)instructorClassAdapter.getItem(i)).getIcon()); //클래스 이미지 뿌리기
+                //디테일 비트맵으로 받으면 수정할것. 임시로 넣어놓겠다.
+                intent.putExtra("image", R.drawable.class1);
 
-                //InstructorMainActivity.this.startActivity(intent);
+                InstructorMainActivity.this.startActivity(intent);
 
                 //startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);
             }

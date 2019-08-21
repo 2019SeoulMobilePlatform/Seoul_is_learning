@@ -44,7 +44,8 @@ public class AddClubActivity extends AppCompatActivity {
     Bitmap userImage;
     EditText clubName;
     EditText clubDescription;
-
+    Uri imgUri;
+    ImageProcessing imageProcessing = new ImageProcessing(AddClubActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +72,8 @@ public class AddClubActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
-
                 //Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 //startActivityForResult(gallery, Constants.REQUEST_PICK_IMAGE);
-
             }
         });
 
@@ -108,11 +106,13 @@ public class AddClubActivity extends AppCompatActivity {
         clubName = (EditText) findViewById(R.id.club_name);
         clubDescription = (EditText) findViewById(R.id.description);
 
+
+
         save_club_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(userImage == null ){
+                if(imgUri == null ){
                     Toast.makeText(AddClubActivity.this, "이미지를 선택해 주세요", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -128,12 +128,11 @@ public class AddClubActivity extends AppCompatActivity {
                 Intent intent = new Intent();
 
                 //바이트 어레이로 이미지 전송
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                userImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] bytes = stream.toByteArray();
-                intent.putExtra("BMP",bytes);
+                userImage = imageProcessing.ConvertUriToBitmap(imgUri);
 
-                //intent.putExtra("clubImage", userImage);
+                byte[] bytes = imageProcessing.ConvertBitmapToByteArray(userImage);
+
+                intent.putExtra("BMP",bytes);
                 intent.putExtra("clubName", clubName.getText().toString());
                 intent.putExtra("clubDescription", clubDescription.getText().toString());
                 intent.putExtra("clubMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
@@ -162,8 +161,7 @@ public class AddClubActivity extends AppCompatActivity {
             }
             */
 
-            Uri imgUri = data.getData();
-            ImageProcessing imageProcessing = new ImageProcessing(AddClubActivity.this);
+            imgUri = data.getData();
             imageProcessing.SetImage(imageView, imgUri);
         }
     }
