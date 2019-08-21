@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -26,7 +25,6 @@ public class ReviewListViewAdapter extends BaseAdapter {
     private CircleImageView profileImage;
     private TextView nickName;
     private RatingBar star;
-    private ImageView reviewImage;
     private TextView reviewContent;
 
     // 생성자
@@ -60,6 +58,7 @@ public class ReviewListViewAdapter extends BaseAdapter {
         ReviewListItem reviewListItem= reviewData.get(position);
 
         profileImage= (CircleImageView)convertView.findViewById(R.id.review_profile_image);
+        profileImage.setImageResource(reviewListItem.getProfile_image());
        /* GlideApp.with(convertView).load(reviewListItem.getProfile_image()).into(profileImage);*/
 
         nickName=(TextView)convertView.findViewById(R.id.review_nickname);

@@ -45,7 +45,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:src="@drawable/class1"
-
                     />
 
                 <LinearLayout
@@ -89,7 +88,7 @@
                                 android:src="@drawable/ic_edit_location_black_24dp" />
                             <!-- 주소 -->
                             <TextView
-                                android:id="@+id/class_address"
+                                android:id="@+id/class_area_intent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="#FFFFFF"

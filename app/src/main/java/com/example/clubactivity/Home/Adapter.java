@@ -2,6 +2,7 @@ package com.example.clubactivity.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.clubactivity.Class.ClassDetailActivity;
+import com.example.clubactivity.Class.ClassDetailIntroduction;
 import com.example.clubactivity.R;
 
 import java.util.List;
@@ -39,7 +41,7 @@ public class Adapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
+    public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item, container, false);
 
@@ -64,8 +66,20 @@ public class Adapter extends PagerAdapter {
 
                 Intent intent = new Intent(context, ClassDetailActivity.class);
 
+                ClassDetailIntroduction classDetailIntroduction = new ClassDetailIntroduction();
+                Bundle bundle = new Bundle();
+
                 intent.putExtra("param", models.get(position).getTitle()); //클래스 제목을 뿌려준다.
                 intent.putExtra("image",models.get(position).getImage()); //클래스 이미지 뿌리기
+                intent.putExtra("area",models.get(position).getArea()); //클래스 지역구
+
+                bundle.putString("desc",models.get(position).getDesc()); //클래스 설명
+                bundle.putString("people",models.get(position).getPeople()); //클래스 대상
+                bundle.putString("location",models.get(position).getLocation()); //클래스 정확한 장소
+                bundle.putString("date",models.get(position).getDate()); //클래스 시간
+                bundle.putString("number",models.get(position).getPeopleNumber()); //클래스 인원수
+
+                classDetailIntroduction.setArguments(bundle);
 
                 context.startActivity(intent);
             }

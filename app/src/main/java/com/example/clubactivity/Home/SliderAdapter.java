@@ -1,6 +1,7 @@
 package com.example.clubactivity.Home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +10,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.Class.ClassFragment;
+import com.example.clubactivity.Class.ClassList;
 import com.example.clubactivity.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterVH> {
+public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterVH>{
+
+
 
     private Context context;
     private int mCount;
-
+    ClassList classList;
     public SliderAdapter(Context context) {
         this.context = context;
     }
@@ -29,6 +38,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     @Override
     public SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_layout_item, null);
+        classList = new ClassList();
         return new SliderAdapterVH(inflate);
     }
 
@@ -38,16 +48,28 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
                 if(position==0)
                 {
-
+                    Toast.makeText(context, "네트워크 연결 후 축소해 봐주세요!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, WebViewActivity.class);
+                    context.startActivity(intent);
                 }
                 if (position==1){
-
+                    ClassFragment.classmenuTitle = "원데이 클래스";
+                    FragmentActivity activity = (FragmentActivity) context;
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.main_frame, classList).commit();
                 }
                 if (position==2){
-
+                    ClassFragment.classmenuTitle = "개발 클래스";
+                    FragmentActivity activity = (FragmentActivity) context;
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.main_frame, classList).commit();
                 }
             }
         });

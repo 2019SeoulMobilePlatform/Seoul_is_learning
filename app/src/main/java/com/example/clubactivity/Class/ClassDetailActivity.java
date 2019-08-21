@@ -43,6 +43,10 @@ public class ClassDetailActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.class_main_image);
         imageView.setImageResource(getIntent().getIntExtra("image",2)); // 이 숫자는 뭘까..? 어쨌든 이렇게 하니 바뀌었다
 
+        //지역구
+        TextView textView1 = findViewById(R.id.class_area_intent);
+        textView1.setText(getIntent().getStringExtra("area"));
+
 
         //탭
 

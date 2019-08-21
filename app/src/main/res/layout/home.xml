@@ -10,7 +10,7 @@
     <!-- 툴바 -->
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -26,8 +26,9 @@
         <ImageView
             android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="fill_parent"
             android:foregroundGravity="center"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/seoul_banner_white"
             />
     </androidx.appcompat.widget.Toolbar>
@@ -108,7 +109,8 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:foregroundGravity="center"
-        android:overScrollMode="never"></androidx.viewpager.widget.ViewPager>
+        android:overScrollMode="never">
+    </androidx.viewpager.widget.ViewPager>
 
 
 
