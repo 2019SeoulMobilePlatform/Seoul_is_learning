@@ -38,7 +38,6 @@
                 android:layout_marginRight="25dp"
                 android:background="@color/colorPrimary"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
                 android:text="이미지 선택"
                 android:textSize="15dp"/>

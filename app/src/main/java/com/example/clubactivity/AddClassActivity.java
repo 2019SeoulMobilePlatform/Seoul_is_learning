@@ -1,8 +1,11 @@
 package com.example.clubactivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,13 +17,17 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.clubactivity.Club.AddClubActivity;
+import com.example.clubactivity.MyPage.EditMyInfoActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddClassActivity extends AppCompatActivity {
 
@@ -42,10 +49,16 @@ public class AddClassActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-
-                startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), 1000);
+                try {
+                    if (ActivityCompat.checkSelfPermission(AddClassActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(AddClassActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.REQUEST_PICK_IMAGE);
+                    } else {
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(galleryIntent, Constants.REQUEST_PICK_IMAGE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -121,16 +134,12 @@ public class AddClassActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == RESULT_OK && requestCode == 1000){
+        if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_PICK_IMAGE){
             ImageView imageView = findViewById(R.id.user_image);
-            try{
-                InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                classImage = BitmapFactory.decodeStream(inputStream);
-                imageView.setImageBitmap(classImage);
-            }
-            catch(FileNotFoundException e){
-                e.printStackTrace();
-            }
+
+            ImageProcessing imageProcessing = new ImageProcessing(AddClassActivity.this);
+            Uri imgUri = data.getData();
+            imageProcessing.SetImage(imageView, imgUri);
         }
     }
 

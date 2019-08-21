@@ -1,12 +1,15 @@
 package com.example.clubactivity.MyPage;
 
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +19,11 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.example.clubactivity.Club.AddClubActivity;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.ImageProcessing;
 import com.example.clubactivity.R;
 
 import java.io.FileNotFoundException;
@@ -72,25 +79,28 @@ public class EditMyInfoActivity extends AppCompatActivity {
     }
 
     public void SetProfileImage(View view) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-
-        startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요"), 1007);
+        try {
+            if (ActivityCompat.checkSelfPermission(EditMyInfoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(EditMyInfoActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.REQUEST_PICK_IMAGE);
+            } else {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, Constants.REQUEST_PICK_IMAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == RESULT_OK && requestCode == 1007){
+        if(resultCode == RESULT_OK && requestCode == Constants.REQUEST_PICK_IMAGE){
             CircleImageView imageView = findViewById(R.id.user_image);
-            try{
-                InputStream inputStream = getContentResolver().openInputStream(data.getData());
-                Bitmap userImage = BitmapFactory.decodeStream(inputStream);
-                imageView.setImageBitmap(userImage);
-            }
-            catch(FileNotFoundException e){
-                e.printStackTrace();
-            }
+
+            ImageProcessing imageProcessing = new ImageProcessing(EditMyInfoActivity.this);
+            Uri imgUri = data.getData();
+            imageProcessing.SetImage(imageView, imgUri);
+
         }
     }
 }
