@@ -16,7 +16,7 @@ public class RequestHttpURLConnection {
         String result = null;
         BufferedReader reader = null;
         String postParameters = data;
-        Log.e("data",data);
+        Log.e("data", data);
         Log.e("URL", _url);
 
         try{
@@ -26,6 +26,10 @@ public class RequestHttpURLConnection {
             httpURLConnection.setReadTimeout(10000); // 10초동안 서버로 부터반응 없으면 에러
             httpURLConnection.setConnectTimeout(10000); // 접속하는 커넥션 타임 10초 동안 접속 안되면 접속안되는 것으로 간주
             httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setRequestProperty("Cache-Control", "no-cache");
+            httpURLConnection.setRequestProperty("Accept", "text/html");
+            httpURLConnection.setFixedLengthStreamingMode(data.getBytes().length);
+
             httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
             httpURLConnection.connect();
@@ -42,12 +46,13 @@ public class RequestHttpURLConnection {
             Log.e("RequestHttp","Post response code - " + responseStatusCode);
 
             InputStream inputStream;
-            // 서버와 연결이 에러면 에러 코드를 저장 아니면 제대로a 된 코드 저장.
+            // 서버와 연결이 에러면 에러 코드를 저장 아니면 제대로 된 코드 저장.
             if(responseStatusCode == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream();
             }
             else{
                 inputStream = httpURLConnection.getErrorStream();
+                Log.e("Connect", "error");
             }
 
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");

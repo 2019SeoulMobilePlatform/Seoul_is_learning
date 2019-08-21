@@ -20,6 +20,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ArrayAdapter<String> arrayAdapter;
     ArrayList<String> arrayList;
+
     String name;
     String email;
     String password;
@@ -35,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
 
         final Spinner areaSpinner = (Spinner) findViewById(R.id.area_spinner);
 
