@@ -99,6 +99,10 @@ public class ClassDetailActivity extends AppCompatActivity {
     //클래스 예약 버튼 클릭
     public void ClassReservationButtonClicked(View view){
         Intent intent = new Intent(getApplicationContext(), ClassReservation.class);
+
+        intent.putExtra("param", getIntent().getStringExtra("param")); //클래스 제목을 뿌려준다.
+        intent.putExtra("image",getIntent().getIntExtra("image",2)); //클래스 이미지 뿌리기
+
         startActivity(intent);
     }
 
