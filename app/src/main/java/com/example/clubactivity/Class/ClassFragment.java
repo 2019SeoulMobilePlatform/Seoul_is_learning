@@ -32,7 +32,8 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
         view = inflater.inflate(R.layout.class_, container, false);
 
 
-       /* ImageButton gwangjin_button = (ImageButton)view.findViewById(R.id.imageView3);
+       /*
+       ImageButton gwangjin_button = (ImageButton)view.findViewById(R.id.imageView3);
 
         gwangjin_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +52,8 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                 Intent intent = new Intent(getActivity(), ClassList.class);
                 startActivity(intent);
             }
-        });*/
+        });
+        */
 
         FrameLayout eunpyung_button = view.findViewById(R.id.fl_mainfragment_eunpyung);
         FrameLayout gangbuk_button = view.findViewById(R.id.fl_mainfragment_gangbuk);
