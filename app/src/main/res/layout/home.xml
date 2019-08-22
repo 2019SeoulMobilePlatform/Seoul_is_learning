@@ -14,15 +14,6 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/AppTheme.PopupOverlay">
-       <!-- <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="서울은 배우는중"
-            android:textColor="#FFFFFF"
-            android:gravity = "center"
-            android:id="@+id/toolbar_title"
-            android:textSize="21dp"
-            android:textStyle="bold"/>-->
         <ImageView
             android:id="@+id/toolbar_title"
             android:layout_width="match_parent"

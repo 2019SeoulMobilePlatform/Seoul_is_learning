@@ -25,6 +25,11 @@ public class ClassDetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    static public String desc; //잠깐만 이러면 안되는데..
+    static public String people;
+    static public String location;
+    static public String date;
+    static public String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,12 @@ public class ClassDetailActivity extends AppCompatActivity {
         TextView textView1 = findViewById(R.id.class_area_intent);
         textView1.setText(getIntent().getStringExtra("area"));
 
+
+        desc = getIntent().getStringExtra("desc");
+        people=getIntent().getStringExtra("people");
+        location=getIntent().getStringExtra("location");
+        date=getIntent().getStringExtra("date");
+        number=getIntent().getStringExtra("number");
 
         //탭
 

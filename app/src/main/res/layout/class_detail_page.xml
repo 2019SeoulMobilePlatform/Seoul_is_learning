@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:src="@drawable/class1"
+                    android:scaleType="fitXY"
                     />
 
                 <LinearLayout
@@ -179,12 +180,15 @@
             android:onClick="ClassReservationButtonClicked"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/class_res_button"
             android:text="클래스 예약"
             android:textColor="#FFFFFF"
             android:textSize="16dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="0.1"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
         <ImageButton
+            android:layout_marginRight="2dp"
             android:onClick="ClassHeartButtonClicked"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
@@ -192,7 +196,7 @@
             android:id="@+id/heart"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@null"
+            android:background="@drawable/review_button_style"
             android:layout_weight="0.9"/>
     </LinearLayout>
 

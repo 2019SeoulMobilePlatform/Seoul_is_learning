@@ -66,12 +66,20 @@ public class Adapter extends PagerAdapter {
 
                 Intent intent = new Intent(context, ClassDetailActivity.class);
 
-                ClassDetailIntroduction classDetailIntroduction = new ClassDetailIntroduction();
-                Bundle bundle = new Bundle();
+
 
                 intent.putExtra("param", models.get(position).getTitle()); //클래스 제목을 뿌려준다.
                 intent.putExtra("image",models.get(position).getImage()); //클래스 이미지 뿌리기
                 intent.putExtra("area",models.get(position).getArea()); //클래스 지역구
+
+                intent.putExtra("desc",models.get(position).getDesc()); //클래스 설명
+                intent.putExtra("people",models.get(position).getPeople()); //클래스 대상
+                intent.putExtra("location",models.get(position).getLocation()); //클래스 정확한 장소
+                intent.putExtra("date",models.get(position).getDate()); //클래스 시간
+                intent.putExtra("number",models.get(position).getPeopleNumber()); //클래스 인원수
+
+                ClassDetailIntroduction classDetailIntroduction = new ClassDetailIntroduction();
+                Bundle bundle = new Bundle();
 
                 bundle.putString("desc",models.get(position).getDesc()); //클래스 설명
                 bundle.putString("people",models.get(position).getPeople()); //클래스 대상
@@ -80,6 +88,7 @@ public class Adapter extends PagerAdapter {
                 bundle.putString("number",models.get(position).getPeopleNumber()); //클래스 인원수
 
                 classDetailIntroduction.setArguments(bundle);
+
 
                 context.startActivity(intent);
             }
