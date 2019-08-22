@@ -22,6 +22,9 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
         {
             case 0:
                 ClassDetailIntroduction classDetailIntroduction = new ClassDetailIntroduction();
+              /*  Bundle bundle = new Bundle();
+                bundle.putString("desc",);
+                classDetailIntroduction.setArguments(bundle);*/
                 return classDetailIntroduction;
             case 1:
                 ClassDetailReview classDetailReview = new ClassDetailReview();

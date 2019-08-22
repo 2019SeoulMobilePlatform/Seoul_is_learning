@@ -49,6 +49,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
                 intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
                 intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기
+                intent.putExtra("area",item.getArea()); //클래스 지역구
+
+                intent.putExtra("desc",item.getDesc()); //클래스 설명
+                intent.putExtra("people",item.getPeople()); //클래스 대상
+                intent.putExtra("location",item.getLocation()); //클래스 정확한 장소
+                intent.putExtra("date",item.getDate()); //클래스 시간
+                intent.putExtra("number",item.getPeopleNumber()); //클래스 인원수
 
                 context.startActivity(intent);
             }

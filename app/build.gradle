@@ -71,6 +71,11 @@ dependencies {
     }
 */
 
+    /*implementation(name: 'mail', ext: 'jar')
+    implementation(name: 'activation', ext: 'jar')
+    implementation(name: 'additionnal', ext: 'jar')*/
+
+
     implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.3'
 
     implementation 'com.github.jhonnyx2012:horizontal-picker:1.0.6'

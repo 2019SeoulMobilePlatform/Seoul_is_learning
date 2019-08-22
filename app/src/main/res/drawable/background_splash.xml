@@ -2,13 +2,15 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 배경 -->
     <item
-        android:drawable="@color/colorPrimary"/>
+        android:drawable="@drawable/splash_seoul"
+        android:scaleType="fitXY"/>
     <!-- 로고 -->
-    <item>
+    <!--<item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/heart_empty"/>
-    </item>
+            android:src="@drawable/heart_empty"
+            android:scaleType="fitXY"/>
+    </item>-->
 
 
 </layer-list>

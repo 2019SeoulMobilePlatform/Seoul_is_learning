@@ -40,9 +40,9 @@ public class ClubEnterActivity extends AppCompatActivity {
 
 
         //이미지안넘어감 왜터지는지안나옴
-        //byte[] bytes = intent.getByteArrayExtra("clubImage");
-        //Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        //clubImage.setImageBitmap(bmp);
+        byte[] bytes = intent.getByteArrayExtra("clubImage");
+        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        clubImage.setImageBitmap(bmp);
 /*
         Bitmap bitmap = null;
         try {

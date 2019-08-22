@@ -96,16 +96,18 @@ public class ClubFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ClubEnterActivity.class);
 
-                //ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                //Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap();
-                //bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                //byte[] bytes = stream.toByteArray();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap();
+                Bitmap dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
+
+                dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] bytes = stream.toByteArray();
 
                 //Uri clubImageUri = getImageUri(getActivity(), ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap());
-
                 //intent.putExtra("imageUri", clubImageUri);
-                intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
-                //intent.putExtra("clubImage",bytes);
+
+                //intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
+                intent.putExtra("clubImage",bytes);
                 intent.putExtra("clubName", ((ChatViewItem)wholeClub_adapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)wholeClub_adapter.getItem(i)).getDesc());
                 intent.putExtra("clubNowMember", ((ChatViewItem)wholeClub_adapter.getItem(i)).getNowMemberNum());

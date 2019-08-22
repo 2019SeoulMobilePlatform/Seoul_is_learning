@@ -134,6 +134,8 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                     ShowClassList();
                 }
 
+                searchBar.setText("");
+
             }
         });
 
