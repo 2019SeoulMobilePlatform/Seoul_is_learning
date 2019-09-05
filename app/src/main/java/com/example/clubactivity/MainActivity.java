@@ -164,7 +164,9 @@ public class MainActivity extends AppCompatActivity {
                 return; // 아무런 작업도 하지 않고 돌아간다
             }
         });
+
         alBuilder.setTitle("서울은 배우는중");
+        alBuilder.setIcon(R.drawable.seoul_is_learning); //아이콘 설정
         alBuilder.show(); // AlertDialog.Bulider로 만든 AlertDialog를 보여준다.
 
 

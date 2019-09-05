@@ -25,6 +25,11 @@ public class ClassDetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    static public String desc; //잠깐만 이러면 안되는데..
+    static public String people;
+    static public String location;
+    static public String date;
+    static public String number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,16 @@ public class ClassDetailActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.class_main_image);
         imageView.setImageResource(getIntent().getIntExtra("image",2)); // 이 숫자는 뭘까..? 어쨌든 이렇게 하니 바뀌었다
 
+        //지역구
+        TextView textView1 = findViewById(R.id.class_area_intent);
+        textView1.setText(getIntent().getStringExtra("area"));
+
+
+        desc = getIntent().getStringExtra("desc");
+        people=getIntent().getStringExtra("people");
+        location=getIntent().getStringExtra("location");
+        date=getIntent().getStringExtra("date");
+        number=getIntent().getStringExtra("number");
 
         //탭
 
@@ -84,6 +99,10 @@ public class ClassDetailActivity extends AppCompatActivity {
     //클래스 예약 버튼 클릭
     public void ClassReservationButtonClicked(View view){
         Intent intent = new Intent(getApplicationContext(), ClassReservation.class);
+
+        intent.putExtra("param", getIntent().getStringExtra("param")); //클래스 제목을 뿌려준다.
+        intent.putExtra("image",getIntent().getIntExtra("image",2)); //클래스 이미지 뿌리기
+
         startActivity(intent);
     }
 

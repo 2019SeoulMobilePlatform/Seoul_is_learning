@@ -216,18 +216,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_marginBottom="45dp"
             android:gravity="left"
             android:textColor="@color/grey"
             android:text="수강 인원에 대해 써보자" />
-
-        <ImageView
-            android:id="@+id/class_image_intent"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="45dp"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/class3" />
 
     </LinearLayout>
 

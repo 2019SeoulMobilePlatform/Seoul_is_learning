@@ -70,10 +70,11 @@ dependencies {
         //exclude group: 'glide-3.7.0.jar'
     }
 
-    implementation(name: 'mail', ext: 'jar')
+    /*implementation(name: 'mail', ext: 'jar')
     implementation(name: 'activation', ext: 'jar')
-    implementation(name: 'additionnal', ext: 'jar')
-*/
+
+    implementation(name: 'additionnal', ext: 'jar')*/
+
 
     implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.3'
 

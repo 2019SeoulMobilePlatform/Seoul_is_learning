@@ -37,6 +37,8 @@ public class ClassDetailReview extends Fragment {
             }
         });
 
+        setReviewPage();
+
         return view;
     }
 
@@ -49,9 +51,16 @@ public class ClassDetailReview extends Fragment {
         // 후기 데이터 설정
         reviewData = new ArrayList<>();
 
+        ReviewListItem[] item = new ReviewListItem[2];
+        item[0] = new ReviewListItem(R.drawable.chimi_image,"엽",1,"진짜드럽게싫다");
+        item[1] = new ReviewListItem(R.drawable.cat_dog,"뭐",1,"하");
+        reviewData.add(item[0]);
+        reviewData.add(item[1]);
+
+
         // 어댑터로 후기 리스트에 아이템 뿌려주기
-        //adapter = new ReviewListViewAdapter(inflater, R.layout.class_list_item, reviewData);
-        //reviewList.setAdapter(adapter);
+        adapter = new ReviewListViewAdapter(getLayoutInflater(), R.layout.class_review_listview_item, reviewData);
+        reviewList.setAdapter(adapter);
 
     }
 

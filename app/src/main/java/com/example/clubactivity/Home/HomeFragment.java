@@ -48,10 +48,14 @@ public class HomeFragment extends Fragment implements DatePickerListener {
     List<Model> models;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
+
+    ClassList classList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home, container, false);
+        classList = new ClassList();
 
         //데이트영역
         // find the picker
@@ -73,11 +77,11 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         sliderView.setIndicatorAnimation(IndicatorAnimations.SLIDE);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        //sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(R.color.colorPrimary);
         sliderView.setIndicatorUnselectedColor(Color.GRAY);
-        sliderView.setScrollTimeInSec(4);
-        sliderView.startAutoCycle();
+        //sliderView.setScrollTimeInSec(50);
+        //sliderView.startAutoCycle();
 
         sliderView.setOnIndicatorClickListener(new DrawController.ClickListener() {
             @Override
@@ -87,7 +91,6 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         });
 
 
-
         //전체보기
         ClassFragment.classmenuTitle = "인기 클래스";
         Button allViewButton = (Button)view.findViewById(R.id.class_all_button);
@@ -95,21 +98,16 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         allViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClassList classList = new ClassList();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.main_frame, classList).commit();
+                ClassListCall();
             }
         });
 
 
         //밑에 뷰페이저 영역
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.seoul_is_learning, "냥냥", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
-        models.add(new Model(R.drawable.cat_dog, "냠냠", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
-        models.add(new Model(R.drawable.seoul_is_learning, "헤헿", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
-        models.add(new Model(R.drawable.seoul_is_learning, "너무졸린데", "으아아아앙아앙랑 ㄹ알알아랑라말ㅇ라알아라아아아앙아ㅏ아아"));
+        models.add(new Model(R.drawable.cooking_class, "하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","15명"));
+        models.add(new Model(R.drawable.gaebal_class, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수","20명"));
+        models.add(new Model(R.drawable.draw_class, "그림 어렵지 않습니다.", "당신의 머리속 그림을 그려봅시다.","송파구","그림을 쉽게 그리고 싶은 사람들을 구합니다.","서울시 송파구 잠실 롯데타워 1층 클래스 열람실","2019년 12월 7일","10명"));
 
         adapter = new Adapter(models, getActivity());
 
@@ -121,6 +119,7 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(margin, 0, margin, 0); // 미리보기정도
+        viewPager.setCurrentItem(1);
         //viewPager.setPageMargin(margin/2); //서로 간격
 
 
@@ -157,6 +156,13 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         Log.i("HorizontalPicker", "Selected date is " + dateSelected.toString());
     }
 
+    public void ClassListCall()
+    {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.main_frame, classList).commit();
+    }
 
 
 
