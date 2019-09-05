@@ -67,7 +67,6 @@ public class ReviewListViewAdapter extends BaseAdapter {
         star = (RatingBar)convertView.findViewById(R.id.review_star);
         star.setRating(reviewListItem.getStar());
 
-
         reviewContent = convertView.findViewById(R.id.review_content);
         reviewContent.setText(reviewListItem.getReviewContent());
 

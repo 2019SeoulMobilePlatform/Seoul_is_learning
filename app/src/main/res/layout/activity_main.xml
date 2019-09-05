@@ -16,9 +16,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
-
             <!-- 프래그먼트 영역-->
     <FrameLayout
         android:id="@+id/main_frame"
