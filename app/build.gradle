@@ -69,12 +69,11 @@ dependencies {
 
         //exclude group: 'glide-3.7.0.jar'
     }
-*/
 
     implementation(name: 'mail', ext: 'jar')
     implementation(name: 'activation', ext: 'jar')
     implementation(name: 'additionnal', ext: 'jar')
-
+*/
 
     implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.3'
 
@@ -91,5 +90,5 @@ dependencies {
     implementation 'com.android.support:design:29.*'
 
     implementation group: 'cz.msebera.android', name: 'httpclient', version: '4.4.1.2'
-
+    //implementation 'com.baoyz.swipemenulistview:library:1.3.0'
 }

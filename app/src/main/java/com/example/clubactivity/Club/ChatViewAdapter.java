@@ -66,7 +66,7 @@ public class ChatViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(Drawable icon, String title, String desc, int maxMem, int nowMem){
+    public void addItem(Drawable icon, String title, String desc, int maxMem, int nowMem, int index){
         ChatViewItem item = new ChatViewItem();
 
         item.setIcon(icon);
@@ -74,6 +74,7 @@ public class ChatViewAdapter extends BaseAdapter {
         item.setDesc(desc);
         item.setMaxMemberNum(maxMem);
         item.setNowMemberNum(nowMem);
+        item.setItemIndex(index);
         chatViewItemList.add(item);
     }
 

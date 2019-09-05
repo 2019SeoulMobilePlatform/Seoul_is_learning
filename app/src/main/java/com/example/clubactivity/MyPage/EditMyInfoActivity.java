@@ -71,6 +71,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         areaSpinner = (Spinner)findViewById(R.id.area_spinner);
         profileImage = (CircleImageView)findViewById(R.id.user_image) ;
 
+
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
 

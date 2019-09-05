@@ -29,7 +29,7 @@
                     android:layout_height="70dp"
                     android:layout_marginLeft="40dp"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/ic_account_circle_gray_24dp"
+                    android:src="@drawable/ic_account_circle_white_24dp"
                     android:foregroundGravity="center_vertical"/>
 
                 <LinearLayout
@@ -62,9 +62,10 @@
                     android:layout_gravity=""
                     android:layout_marginTop="10dp"
                     android:textColor="#FFFFFF"
-                    android:src="@drawable/ic_mode_edit_20dp"
+                    android:src="@drawable/ic_edit_white_24dp"
                     android:text="이미지 선택"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:onClick="EditInfo"/>
 
             </RelativeLayout>
 
