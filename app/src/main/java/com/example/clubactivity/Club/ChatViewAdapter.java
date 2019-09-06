@@ -23,12 +23,12 @@ public class ChatViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return chatViewItemList.size() ;
+        return chatViewItemList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return chatViewItemList.get(i) ;
+        return chatViewItemList.get(i);
     }
 
     @Override
@@ -37,7 +37,9 @@ public class ChatViewAdapter extends BaseAdapter {
     }
 
 
-    public void removeAllItem() {chatViewItemList.clear();}
+    public void removeAllItem() { chatViewItemList.clear(); }
+
+    public void removeItem(int i) { chatViewItemList.remove(i); }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -66,7 +68,7 @@ public class ChatViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void addItem(Drawable icon, String title, String desc, int maxMem, int nowMem){
+    public void addItem(Drawable icon, String title, String desc, int maxMem, int nowMem, int index){
         ChatViewItem item = new ChatViewItem();
 
         item.setIcon(icon);
@@ -74,6 +76,7 @@ public class ChatViewAdapter extends BaseAdapter {
         item.setDesc(desc);
         item.setMaxMemberNum(maxMem);
         item.setNowMemberNum(nowMem);
+        item.setItemIndex(index);
         chatViewItemList.add(item);
     }
 

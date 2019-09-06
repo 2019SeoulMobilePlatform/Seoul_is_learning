@@ -32,8 +32,8 @@
             android:id="@+id/user_image"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:src="@drawable/ic_account_circle_white_24dp"
             android:onClick="SetProfileImage"
+            android:src="@drawable/ic_account_circle_white_24dp"
             android:layout_centerInParent="true"
             android:layout_marginBottom="20dp"/>
 
@@ -131,7 +131,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="email@gmail.com"
                 android:inputType="textPassword"
                 android:id="@+id/edit_password_check"/>
         </LinearLayout>
@@ -165,23 +164,26 @@
             android:layout_marginBottom="20dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="80dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="지역구"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="3"/>
 
             <Spinner
                 android:id="@+id/area_spinner"
                 style="@style/SpinnerEditInfoStyle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:autofillHints="지역구를 선택해 주세요"
-                android:entries="@array/Area_Spinner_Items"/>
+                android:entries="@array/Area_Spinner_Items"
+                android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"
+                android:layout_weight="10"/>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

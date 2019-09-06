@@ -64,6 +64,7 @@ public class ClubEnterActivity extends AppCompatActivity {
 
     public void JoinClub(View view) {
         //서버 유저 동호회 목록에 추가, 내 동호회 목록은 서버에서 받아서 업데이트 해야할듯
+        //TODO: 인텐트에서 넘어온 clubIndex 사용해서 서버 업데이트 할 것
         Intent intent = new Intent(ClubEnterActivity.this, ChatRoomActivity.class);
         intent.putExtra("clubName", title.getText());
         startActivityForResult(intent, Constants.REQUEST_CLUB_ENTER);

@@ -48,6 +48,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     EditText _phonenumber;
     EditText _email;
     EditText _password;
+    EditText _password_check;
     Spinner areaSpinner;
 
     CircleImageView profileImage;
@@ -55,6 +56,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     String nickname;
     String phonenumber;
     String password;
+    String password_check;
     String residence;
     String email;
 
@@ -69,8 +71,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _phonenumber = (EditText)findViewById(R.id.edit_phone);
         _email = (EditText)findViewById(R.id.edit_email);
         _password = (EditText)findViewById(R.id.edit_password);
+        _password_check = (EditText)findViewById(R.id.edit_password_check);
         areaSpinner = (Spinner)findViewById(R.id.area_spinner);
         profileImage = (CircleImageView)findViewById(R.id.user_image) ;
+
 
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
@@ -80,6 +84,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _phonenumber.setText(preferences.getString("phone_number", ""));
         _email.setText(preferences.getString("email",""));
         _password.setText(preferences.getString("password",""));
+        _password_check.setText(preferences.getString("password", ""));
 
         //기본스피너 지정
         residence = preferences.getString("residence","");

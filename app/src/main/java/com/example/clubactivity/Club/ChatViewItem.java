@@ -10,6 +10,7 @@ public class ChatViewItem implements Parcelable {
     private String descStr ;
     private int maxMemberNum;
     private int nowMemberNum;
+    private int itemIndex;
 
     protected ChatViewItem(Parcel in) {
         titleStr = in.readString();
@@ -44,6 +45,7 @@ public class ChatViewItem implements Parcelable {
     }
     public void setMaxMemberNum(int num) {maxMemberNum = num;}
     public void setNowMemberNum(int num) {nowMemberNum = num;}
+    public void setItemIndex(int num) {itemIndex = num;}
 
 
     public Drawable getIcon() {
@@ -57,6 +59,7 @@ public class ChatViewItem implements Parcelable {
     }
     public int getMaxMemberNum() {return maxMemberNum;}
     public int getNowMemberNum() {return nowMemberNum;}
+    public int getItemIndex() {return itemIndex;}
 
     @Override
     public int describeContents() {

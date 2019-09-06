@@ -16,6 +16,7 @@ import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Club.ClubEnterActivity;
+import com.example.clubactivity.MyPage.EditMyInfoActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class InstructorMainActivity extends AppCompatActivity {
@@ -54,9 +55,9 @@ public class InstructorMainActivity extends AppCompatActivity {
 
 
         instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class1),
-                "원데이 클래스", "20,000", 10, 1) ;
+                "원데이 클래스", "20,000", 10, 1, 0) ;
         instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class_paint),
-                "유화 그리기", "50,000",10,1) ;
+                "유화 그리기", "50,000",10,1, 0) ;
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_class_fab);
@@ -71,6 +72,9 @@ public class InstructorMainActivity extends AppCompatActivity {
     }
 
 
+    public void EditInfo(View view) {
+        Intent intent = new Intent(InstructorMainActivity.this, EditMyInfoActivity.class);
 
-
+        InstructorMainActivity.this.startActivity(intent);
+    }
 }
