@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
@@ -47,6 +48,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     EditText _phonenumber;
     EditText _email;
     EditText _password;
+    EditText _password_check;
     Spinner areaSpinner;
 
     CircleImageView profileImage;
@@ -54,6 +56,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     String nickname;
     String phonenumber;
     String password;
+    String password_check;
     String residence;
     String email;
 
@@ -68,8 +71,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _phonenumber = (EditText)findViewById(R.id.edit_phone);
         _email = (EditText)findViewById(R.id.edit_email);
         _password = (EditText)findViewById(R.id.edit_password);
+        _password_check = (EditText)findViewById(R.id.edit_password_check);
         areaSpinner = (Spinner)findViewById(R.id.area_spinner);
         profileImage = (CircleImageView)findViewById(R.id.user_image) ;
+
 
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
@@ -79,6 +84,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _phonenumber.setText(preferences.getString("phone_number", ""));
         _email.setText(preferences.getString("email",""));
         _password.setText(preferences.getString("password",""));
+        _password_check.setText(preferences.getString("password", ""));
 
         //기본스피너 지정
         residence = preferences.getString("residence","");
@@ -86,7 +92,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
         //기본이미지 지정
         if(!preferences.getString("profileImage","").equals(""))
-            profileImage.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+            profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
         else{
             profileImage.setImageResource(R.drawable.ic_account_circle_white_24dp);
         }
@@ -113,7 +119,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
                 // 이미지 수정
                 editor.remove("profileImage");
-                editor.putString("profileImage", getImageToString(_userImage));
+                editor.putString("profileImage", ImageConverter.getImageToString(_userImage));
 
                 // 닉네임 수정
                 editor.remove("nickname");
@@ -178,25 +184,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         return data;
     }
 
-    public String getImageToString(Bitmap userImage){
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-        userImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] imageBytes = stream.toByteArray();
-
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        Log.e("EncodeToString", encodedImage);
-
-        return  encodedImage;
-    }
-
-    public Bitmap getImageToBitmap(String encodedImage){
-
-        byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
-
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
 
     private void setArrayList(){
 
