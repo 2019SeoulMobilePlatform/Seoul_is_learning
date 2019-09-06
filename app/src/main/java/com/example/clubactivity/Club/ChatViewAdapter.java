@@ -23,12 +23,12 @@ public class ChatViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return chatViewItemList.size() ;
+        return chatViewItemList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return chatViewItemList.get(i) ;
+        return chatViewItemList.get(i);
     }
 
     @Override
@@ -37,7 +37,9 @@ public class ChatViewAdapter extends BaseAdapter {
     }
 
 
-    public void removeAllItem() {chatViewItemList.clear();}
+    public void removeAllItem() { chatViewItemList.clear(); }
+
+    public void removeItem(int i) { chatViewItemList.remove(i); }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -41,7 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Locale;
 
-public class ClubFragment extends Fragment {
+public class  ClubFragment extends Fragment {
     private View view;
     FloatingActionButton fab;
     ListView myClub_Listview;
@@ -87,11 +87,11 @@ public class ClubFragment extends Fragment {
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.cat_dog),
                 "일러스트 동호회 모집", "일러스트에 관심 있으신 분들 환영합니다~~", 10, 1, 1) ;
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
-                "Circle", "Account Circle Black 36dp", 10, 1, 2) ;
+                "Circle", "Account Circle Black 36dp", 10, 3, 2) ;
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class2),
-                "Ind", "Assignment Ind Black 36dp", 10, 1, 3);
+                "Ind", "Assignment Ind Black 36dp", 10, 3, 3);
         myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class3),
-                "Ind", "Assignment Ind Black 36dp", 10, 1, 4) ;
+                "Ind", "Assignment Ind Black 36dp", 10, 3, 4) ;
         myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
                 "Circle", "Account Circle Black 36dp", 10, 1, 5) ;
 
@@ -199,9 +199,8 @@ public class ClubFragment extends Fragment {
                 searchBar.setText("");
             }
         });
-        return view;
 
-/*
+
         myClub_Listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int position, long arg3) {
@@ -211,46 +210,36 @@ public class ClubFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (preferences.getString("nickname", "").equals(
-                                ((ChatViewItem) myClub_adapter.getItem(position)).getNickname().toString())) {
-                            String url = "http://ec2-18-188-238-220.us-east-2.compute.amazonaws.com:8000/chatroom/remove";
-                            JSONObject data = removeJSONDate(((Chat_Item) campList_adapter.getItem(position)).getNumber());
-                            NetworkTask networkTask = new NetworkTask(getActivity(), url, data, Constant.REMOVE_CHATTINGLIST);
-                            networkTask.execute();
-                            copy.remove(position);
-                            myList_adapter.removeObject(((Chat_Item)campList_adapter.getItem(position)));
-                            campList_adapter.removeItem(position);
-                            campList_adapter.notifyDataSetChanged();
-                            myList_adapter.notifyDataSetChanged();
-                        } else {
-                            Toast toast = Toast.makeText(getActivity(),
-                                    "사용자가 생성한 채팅방만 삭제할 수 있습니다", Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
+                        ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
+                        myClub_adapter.removeItem(position);
+                        if( wholeClubItem.getNowMemberNum() <= 1 )
+                            wholeClub_adapter.removeItem(position);
+                        else
+                            wholeClubItem.setNowMemberNum(wholeClubItem.getNowMemberNum()-1);
 
+                        myClub_adapter.notifyDataSetChanged();
+                        wholeClub_adapter.notifyDataSetChanged();
                     }
                 };
-
                 DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 };
 
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
-                        .setTitle("s")
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("채팅 목록을 삭제하시겠습니까?")
                         .setPositiveButton("예", positiveListener)
-                        .setNegativeButton("취소", cancelListener)
-
+                        .setNegativeButton("취소", cancelListener).show();
 
                 return true;
-
             }
 
         });
-        */
+
+
+        return view;
 
     }
 
