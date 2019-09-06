@@ -37,11 +37,11 @@ public class ClassList extends Fragment {
 
         List<Item> items = new ArrayList<>();
         Item[] item = new Item[ITEM_SIZE];
-        item[0] = new Item(R.drawable.class1, "창업 클래스","창업설명","송파구","창업하쉴?","송파구11번가","2020년","1명");
-        item[1] = new Item(R.drawable.class2, "개발자 클래스","","","","","","");
-        item[2] = new Item(R.drawable.class3, "인프라 클래스","","","","","","");
-        item[3] = new Item(R.drawable.class4, "취업 크래스","","","","","","");
-        item[4] = new Item(R.drawable.class1, "헤헿","","","","","","");
+        item[0] = new Item(R.drawable.class1, 4,"창업 클래스","창업설명","송파구","창업하쉴?","송파구11번가","2020년","1명");
+        item[1] = new Item(R.drawable.class2,3, "개발자 클래스","","","","","","");
+        item[2] = new Item(R.drawable.class3, 2,"인프라 클래스","","","","","","");
+        item[3] = new Item(R.drawable.class4,1, "취업 크래스","","","","","","");
+        item[4] = new Item(R.drawable.class1, 0,"헤헿","","","","","","");
 
         for (int i = 0; i < ITEM_SIZE; i++) {
             items.add(item[i]);

@@ -4,6 +4,7 @@ public class Item {
     private int image;
     private String title;
     private String area;
+    private float star;
 
     private String desc;
     private String people;
@@ -20,6 +21,7 @@ public class Item {
     public String getArea() {
         return area;
     }
+    public float getStar(){return this.star;}
 
     public String getDesc() { return desc; }
     public String getPeople() {
@@ -35,10 +37,11 @@ public class Item {
         return peopleNumber;
     }
 
-    Item(int image, String title, String desc ,String area, String people, String location, String date, String peopleNumber) {
+    Item(int image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber) {
         this.image = image;
         this.title = title;
         this.desc = desc;
+        this.star = star;
 
         this.area = area;
         this.people = people;
