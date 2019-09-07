@@ -27,6 +27,7 @@ import androidx.core.app.ActivityCompat;
 import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
@@ -91,7 +92,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
         //기본이미지 지정
         if(!preferences.getString("profileImage","").equals(""))
-            profileImage.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+            profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
         else{
             profileImage.setImageResource(R.drawable.ic_account_circle_white_24dp);
         }
@@ -118,7 +119,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
                 // 이미지 수정
                 editor.remove("profileImage");
-                editor.putString("profileImage", getImageToString(_userImage));
+                editor.putString("profileImage", ImageConverter.getImageToString(_userImage));
 
                 // 닉네임 수정
                 editor.remove("nickname");
@@ -183,25 +184,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         return data;
     }
 
-    public String getImageToString(Bitmap userImage){
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-        userImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] imageBytes = stream.toByteArray();
-
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        Log.e("EncodeToString", encodedImage);
-
-        return  encodedImage;
-    }
-
-    public Bitmap getImageToBitmap(String encodedImage){
-
-        byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
-
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
 
     private void setArrayList(){
 

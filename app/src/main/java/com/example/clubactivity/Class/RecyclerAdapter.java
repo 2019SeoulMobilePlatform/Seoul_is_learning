@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -40,6 +41,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
         holder.image.setBackground(drawable);
         holder.title.setText(item.getTitle());
+        holder.desc.setText(item.getDesc());
+        holder.ratingBar.setRating(item.getStar());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
                 intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기
                 intent.putExtra("area",item.getArea()); //클래스 지역구
+                intent.putExtra("star",item.getStar()); //평점 뿌리기
 
                 intent.putExtra("desc",item.getDesc()); //클래스 설명
                 intent.putExtra("people",item.getPeople()); //클래스 대상
@@ -70,12 +74,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title;
+        TextView desc;
+        RatingBar ratingBar;
         CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.class_list_image);
             title = (TextView) itemView.findViewById(R.id.class_list_title);
+            desc = (TextView) itemView.findViewById(R.id.class_list_sogae);
+            ratingBar = (RatingBar) itemView.findViewById(R.id.review_star);
             cardview = (CardView) itemView.findViewById(R.id.class_list_cardview);
         }
     }

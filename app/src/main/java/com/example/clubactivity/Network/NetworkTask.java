@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.example.clubactivity.Constants;
 import com.example.clubactivity.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -73,7 +75,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
                             String user_profile = jsonObject.getString("image");
-                            Log.e("getdata",jsonObject.getString("image"));
+                            Log.e("getdata",user_profile);
                             String user_birth = jsonObject.getString("birth");
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
@@ -90,7 +92,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             user_editor.putString("residence", user_residence);
                             user_editor.putString("birth", user_birth);
                             user_editor.putString("profileImage", user_profile);
-                            Log.e("user_editor", preferences.getString("profileImage", ""));
+
 
                             user_editor.commit();
 
@@ -133,6 +135,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
                             String user_profile = jsonObject.getString("image");
+                            Log.e("login image", user_profile);
                             String user_birth = jsonObject.getString("birth");
 
 
@@ -177,6 +180,37 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
 
+                    break;
+
+                case 5:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        if(!real_result.equals("fail")) {
+                            JSONObject resultObject;
+                           if(resultObjectArray.length() != 0) {
+                               for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                   resultObject = resultObjectArray.getJSONObject(i);
+                                   Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   String name = resultObject.getString("name");
+                                   String target_user = resultObject.getString("target_user");
+                                   String address = resultObject.getString("address");
+                                   String information = resultObject.getString("information");
+                                   String local = resultObject.getString("local");
+                                   int count_max = resultObject.getInt("count_max");
+                                   int count = resultObject.getInt("count");
+                                   double star = resultObject.getDouble("star");
+                                   int price = resultObject.getInt("price");
+                               }
+                           }
+                        }
+                        else{
+                            Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                     break;
 
             }

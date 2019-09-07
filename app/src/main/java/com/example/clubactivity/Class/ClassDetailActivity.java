@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,10 @@ public class ClassDetailActivity extends AppCompatActivity {
         //지역구
         TextView textView1 = findViewById(R.id.class_area_intent);
         textView1.setText(getIntent().getStringExtra("area"));
+
+        //별점
+        RatingBar ratingBar = findViewById(R.id.review_total_star);
+        ratingBar.setRating(getIntent().getFloatExtra("star", 5));
 
 
         desc = getIntent().getStringExtra("desc");

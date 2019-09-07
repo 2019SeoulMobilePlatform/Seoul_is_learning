@@ -28,8 +28,8 @@
             <RatingBar
                 android:id="@+id/review_star"
                 style="?android:attr/ratingBarStyleSmall"
-                android:progressTint="@color/colorPrimary"
-                android:progressBackgroundTint="@color/grey"
+                android:progressTint="#80F78181"
+                android:progressBackgroundTint="#80000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
@@ -46,7 +46,7 @@
                 android:text=" 동네 배움터 "
                 android:textSize="11dp"
                 android:textColor="#FFFFFF"
-                android:background="@color/colorPrimary"
+                android:background="#80F78181"
                 android:layout_marginTop="23dp"
                 android:layout_gravity="left|top"
                 />
