@@ -2,6 +2,8 @@ package com.example.clubactivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +13,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
@@ -21,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class InstructorMainActivity extends AppCompatActivity {
 
-    ListView instructorClassList;
+    SwipeMenuListView instructorClassList;
     ChatViewAdapter instructorClassAdapter;
 
     @Override
@@ -31,6 +37,7 @@ public class InstructorMainActivity extends AppCompatActivity {
         instructorClassList = findViewById(R.id.instructor_class_listview);
         instructorClassAdapter = new ChatViewAdapter() ;
         instructorClassList.setAdapter(instructorClassAdapter);
+        SetListViewCreator(instructorClassList);
 
         instructorClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,5 +83,46 @@ public class InstructorMainActivity extends AppCompatActivity {
         Intent intent = new Intent(InstructorMainActivity.this, EditMyInfoActivity.class);
 
         InstructorMainActivity.this.startActivity(intent);
+    }
+
+    public void SetListViewCreator(SwipeMenuListView listView){
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(200);
+                // set a icon
+                deleteItem.setIcon(R.drawable.ic_delete_white_24dp);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+        // set creator
+        listView.setMenuCreator(creator);
+
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        //예약자가 없을때/ 날짜가 지난 클래스일 때만 지우기 가능하게 // 어뎁터 새로만들어서 연결
+                        ChatViewItem wholeClubItem = ((ChatViewItem)instructorClassAdapter.getItem(position));
+                        instructorClassAdapter.removeItem(position);
+
+                        instructorClassAdapter.notifyDataSetChanged();
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
     }
 }
