@@ -188,7 +188,6 @@
             android:hint=""
             android:textSize="15dp"
             android:textColor="#000000"
-            android:inputType="number"
             android:layout_marginBottom="20dp"/>
 
         <TextView
@@ -214,7 +213,6 @@
             android:textColorHint="@color/grey"
             android:textSize="15dp"
             android:textColor="#000000"
-            android:inputType="number"
             android:layout_marginBottom="20dp"/>
 
         <TextView

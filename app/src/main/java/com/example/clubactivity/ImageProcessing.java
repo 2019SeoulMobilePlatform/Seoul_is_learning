@@ -45,6 +45,7 @@ public class ImageProcessing {
         imageView.setImageBitmap(image);
     }
 
+
     public int ExifOrientationToDegrees(int exifOrientation){
         if(exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) {
             return 90;
