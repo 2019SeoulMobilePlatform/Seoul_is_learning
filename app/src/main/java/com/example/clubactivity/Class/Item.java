@@ -1,7 +1,9 @@
 package com.example.clubactivity.Class;
 
+import android.graphics.Bitmap;
+
 public class Item {
-    private int image;
+    private Bitmap image;
     private String title;
     private String area;
     private float star;
@@ -12,7 +14,7 @@ public class Item {
     private String date;
     private String peopleNumber;
 
-    public int getImage() {
+    public Bitmap getImage() {
         return this.image;
     }
     public String getTitle() {
@@ -37,7 +39,7 @@ public class Item {
         return peopleNumber;
     }
 
-    public Item(int image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber) {
+    public Item(Bitmap image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber) {
         this.image = image;
         this.title = title;
         this.desc = desc;

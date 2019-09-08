@@ -207,7 +207,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    float star = (float)resultObject.getDouble("star");
                                    //int price = resultObject.getInt("price");
 
-                                   Item item = new Item(R.drawable.cooking_class, star,name,information,local,target_user,address,time,count);
+                                   Item item = new Item(image, star,name,information,local,target_user,address,time,count);
                                    items.add(item);
                                }
 

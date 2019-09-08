@@ -2,7 +2,6 @@ package com.example.clubactivity.Class;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.R;
@@ -38,8 +36,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Item item = items.get(position);
-        Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
-        holder.image.setBackground(drawable);
+        /*Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
+        holder.image.setBackground(drawable);*/
+        holder.image.setImageBitmap(item.getImage());
         holder.title.setText(item.getTitle());
         holder.desc.setText(item.getDesc());
         holder.ratingBar.setRating(item.getStar());
