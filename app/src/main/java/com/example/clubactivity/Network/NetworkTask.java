@@ -9,16 +9,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.clubactivity.Constants;
-import com.example.clubactivity.InstructorMainActivity;
+import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.NameValuePair;
 
 public class NetworkTask extends AsyncTask<Void, Void, String> {
 

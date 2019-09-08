@@ -1,10 +1,9 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Instructor;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -19,15 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.clubactivity.Club.AddClubActivity;
-import com.example.clubactivity.MyPage.EditMyInfoActivity;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddClassActivity extends AppCompatActivity {
 
