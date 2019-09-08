@@ -37,7 +37,7 @@ public class Item {
         return peopleNumber;
     }
 
-    Item(int image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber) {
+    public Item(int image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber) {
         this.image = image;
         this.title = title;
         this.desc = desc;

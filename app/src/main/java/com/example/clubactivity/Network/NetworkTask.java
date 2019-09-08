@@ -9,16 +9,19 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.clubactivity.Constants;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.clubactivity.Class.Item;
+import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.NameValuePair;
+import java.util.List;
 
 public class NetworkTask extends AsyncTask<Void, Void, String> {
 
@@ -26,6 +29,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String url;
     private String data;
     private int selection;
+    public List<Item> items = new ArrayList<>();
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
@@ -93,7 +97,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             user_editor.putString("birth", user_birth);
                             user_editor.putString("profileImage", user_profile);
 
-
                             user_editor.commit();
 
                             this.context.startActivity(new Intent(this.context, MainActivity.class));
@@ -137,7 +140,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_profile = jsonObject.getString("image");
                             Log.e("login image", user_profile);
                             String user_birth = jsonObject.getString("birth");
-
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
                             SharedPreferences.Editor instructor_editor = preferences.edit();
@@ -190,6 +192,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         if(!real_result.equals("fail")) {
                             JSONObject resultObject;
                            if(resultObjectArray.length() != 0) {
+
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
                                    Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
@@ -197,12 +200,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String target_user = resultObject.getString("target_user");
                                    String address = resultObject.getString("address");
                                    String information = resultObject.getString("information");
+                                   String time = resultObject.getString("time");
                                    String local = resultObject.getString("local");
                                    int count_max = resultObject.getInt("count_max");
-                                   int count = resultObject.getInt("count");
-                                   double star = resultObject.getDouble("star");
-                                   int price = resultObject.getInt("price");
+                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                   float star = (float)resultObject.getDouble("star");
+                                   //int price = resultObject.getInt("price");
+
+                                   Item item = new Item(R.drawable.cooking_class, star,name,information,local,target_user,address,time,count);
+                                   items.add(item);
                                }
+
+                               RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
+                               recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
                            }
                         }
                         else{
@@ -216,9 +226,14 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             }
 
         }catch(Exception e){
+            Log.d("설마","여긴아니지");
             e.printStackTrace();
         }
 
+    }
+
+    public List<Item> ServerClassList(){
+        return items;
     }
 
 }

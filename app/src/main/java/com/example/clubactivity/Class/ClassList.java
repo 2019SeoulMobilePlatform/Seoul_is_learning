@@ -14,14 +14,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClassList extends Fragment {
     final int ITEM_SIZE = 5;
     private View view;
+    NetworkTask networkTask;
 
 
     @Nullable
@@ -30,12 +29,18 @@ public class ClassList extends Fragment {
 
         view = inflater.inflate(R.layout.class_list, container, false);
 
+      /*  String data = "local=" + ClassFragment.classmenuTitle;
+        String url = "http://106.10.35.170/ImportClassList.php";
+        networkTask = new NetworkTask(getContext(), url, data, 5);
+        networkTask.execute();
+        networkTask.ServerClassList();*/
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.class_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<Item> items = new ArrayList<>();
+     /*   List<Item> items = networkTask.ServerClassList();
         Item[] item = new Item[ITEM_SIZE];
         item[0] = new Item(R.drawable.class1, 4,"창업 클래스","창업설명","송파구","창업하쉴?","송파구11번가","2020년","1명");
         item[1] = new Item(R.drawable.class2,3, "개발자 클래스","","","","","","");
@@ -47,7 +52,7 @@ public class ClassList extends Fragment {
             items.add(item[i]);
         }
 
-        recyclerView.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.class_list));
+        recyclerView.setAdapter(new RecyclerAdapter(getContext(), items, R.layout.class_list));*/
 
 
         //위에 제목 지정

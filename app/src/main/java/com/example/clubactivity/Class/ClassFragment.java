@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.util.Locale;
@@ -248,7 +249,10 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
             case R.id.fl_mainfragment_songpa  :
                 classmenuTitle = "송파구";
 
-                //((MainActivity)getActivity()).replaceFragment(ClassFragment.newInstance());
+                String data = "local=" + classmenuTitle;
+                String url = "http://106.10.35.170/ImportClassList.php";
+                NetworkTask networkTask = new NetworkTask(getContext(), url, data, 5);
+                networkTask.execute();
 
 
                 ShowClassList();
