@@ -39,7 +39,6 @@ public class ClubEnterActivity extends AppCompatActivity {
         ChatViewItem item = (ChatViewItem)intent.getExtras().get("item");
 
 
-        //이미지안넘어감 왜터지는지안나옴
         byte[] bytes = intent.getByteArrayExtra("clubImage");
         Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         clubImage.setImageBitmap(bmp);

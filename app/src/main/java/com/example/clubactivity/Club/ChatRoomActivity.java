@@ -7,11 +7,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +28,7 @@ import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
 import com.example.clubactivity.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -65,6 +68,25 @@ public class ChatRoomActivity extends AppCompatActivity {
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bitmap image = adapter.getImage(i);
+                if(image != null){
+                    Intent intent = new Intent(ChatRoomActivity.this, FullScreenImageActivity.class);
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    Bitmap dstBitmap = Bitmap.createScaledBitmap(image, Constants.IMAGE_SIZE, image.getHeight()/(image.getWidth()/Constants.IMAGE_SIZE), true);
+
+                    dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] bytes = stream.toByteArray();
+                    intent.putExtra("chatImage",bytes);
+
+                    startActivity(intent);
                 }
             }
         });
