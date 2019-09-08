@@ -123,20 +123,20 @@ public class AddClubActivity extends AppCompatActivity {
 
                 String url = "http://106.10.35.170/StoreClub.php";
                 String data = getData(userImage, clubName.getText().toString(), clubDescription.getText().toString(), limitSpinner.getSelectedItem().toString());
-                
+
                 NetworkTask networkTask = new NetworkTask(AddClubActivity.this, url, data, 6);
                 networkTask.execute();
 
-                /*
+
                 byte[] bytes = imageProcessing.ConvertBitmapToByteArray(userImage);
 
                 intent.putExtra("BMP",bytes);
                 intent.putExtra("clubName", clubName.getText().toString());
                 intent.putExtra("clubDescription", clubDescription.getText().toString());
                 intent.putExtra("clubMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
-                */
 
-                //setResult(RESULT_OK, intent);
+
+                setResult(RESULT_OK, intent);
                 AddClubActivity.this.finish();
             }
 

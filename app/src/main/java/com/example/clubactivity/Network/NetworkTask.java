@@ -5,12 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
+import com.example.clubactivity.Club.ChatViewAdapter;
+import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,11 +28,17 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String url;
     private String data;
     private int selection;
+    ChatViewAdapter wholeClub_Adapter;
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
         this.url = url;
         this.data = data;
+        this.selection = action;
+    }
+    public NetworkTask(Context _context, String url, int action){
+        this.context = _context;
+        this.url = url;
         this.selection = action;
     }
 
@@ -216,6 +229,37 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         }
                         else{
                             Toast.makeText(this.context, "추가에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 7:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        if(!real_result.equals("fail")) {
+                            JSONObject resultObject;
+
+                            if(resultObjectArray.length() != 0) {
+                                for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                    resultObject = resultObjectArray.getJSONObject(i);
+                                    Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image"));
+                                    Drawable drawable = new BitmapDrawable(image);
+                                    String name = resultObject.getString("name");
+                                    String information = resultObject.getString("information");
+                                    int count_max = resultObject.getInt("count_max");
+                                    int count = resultObject.getInt("count");
+                                    int room_index = resultObject.getInt("room_index");
+
+                                    wholeClub_Adapter = new ChatViewAdapter();
+                                    wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index) ;
+                                }
+                            }
+                        }
+                        else{
+                            Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
                     }catch(Exception e){
                         e.printStackTrace();

@@ -92,7 +92,13 @@ public class  ClubFragment extends Fragment {
         //리스트뷰 스와이프로 지우기
         SetListViewCreator(myClub_Listview);
 
+        String url = "http://106.10.35.170/ImportClubList.php";
+
+        NetworkTask networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask.execute();
+
         // 임시 아이템 추가.
+        /*
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.cat_dog),
                 "일러스트 동호회 모집", "일러스트에 관심 있으신 분들 환영합니다~~", 10, 1, 1) ;
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
@@ -103,7 +109,7 @@ public class  ClubFragment extends Fragment {
                 "Ind", "Assignment Ind Black 36dp", 10, 3, 4) ;
         myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
                 "Circle", "Account Circle Black 36dp", 10, 1, 5) ;
-
+        */
 
         wholeClub_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
