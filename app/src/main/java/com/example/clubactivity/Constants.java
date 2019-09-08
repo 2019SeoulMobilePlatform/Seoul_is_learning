@@ -14,4 +14,5 @@ public class Constants {
     public static int INSTRUCTOR_LOGIN = 3;
     public static int SIGNUPs = 2;
     public static int IMAGE_SIZE = 300;
+    public static Boolean isLogined = null;
 }

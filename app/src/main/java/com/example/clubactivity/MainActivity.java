@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //비로그인으로 접속했는지 서버에서 확인?
-
         //로그인 액티비티 죽이기
         Activity loginActivity = LoginActivity.loginActivity;
         loginActivity.finish();
@@ -55,10 +53,16 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(1);
                         break;
                     case R.id.action_people:
-                        setFragment(4);
+                        if(Constants.isLogined)
+                            setFragment(2);
+                        else
+                            setFragment(4);
                         break;
                     case R.id.action_my:
-                        setFragment(3);
+                        if(Constants.isLogined)
+                            setFragment(3);
+                        else
+                            setFragment(4);
                         break;
                 }
                 return true;
