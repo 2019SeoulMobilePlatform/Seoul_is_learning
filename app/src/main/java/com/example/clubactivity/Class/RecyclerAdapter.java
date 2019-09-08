@@ -2,6 +2,7 @@ package com.example.clubactivity.Class;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -36,8 +38,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Item item = items.get(position);
-        /*Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
+       /* Drawable drawable = new BitmapDrawable(item.getImage());
         holder.image.setBackground(drawable);*/
+
+       //이미지 이렇게 넘겨줘야해 bytes
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        item.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
+        final byte[] bytes = stream.toByteArray();
+
         holder.image.setImageBitmap(item.getImage());
         holder.title.setText(item.getTitle());
         holder.desc.setText(item.getDesc());
@@ -50,7 +58,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 //Intent intent = new Intent(context, TabTest.class);
 
                 intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
-                intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기
+                intent.putExtra("image",bytes); //클래스 이미지 뿌리기
                 intent.putExtra("area",item.getArea()); //클래스 지역구
                 intent.putExtra("star",item.getStar()); //평점 뿌리기
 

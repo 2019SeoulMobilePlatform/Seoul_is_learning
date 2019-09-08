@@ -1,6 +1,8 @@
 package com.example.clubactivity.Class;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,8 +48,11 @@ public class ClassDetailActivity extends AppCompatActivity {
         textView.setText(getIntent().getStringExtra("param"));
 
         //이미지를 바꿔준다
+        byte[] byteArray = getIntent().getByteArrayExtra("image");
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         ImageView imageView = findViewById(R.id.class_main_image);
-        imageView.setImageResource(getIntent().getIntExtra("image",2)); // 이 숫자는 뭘까..? 어쨌든 이렇게 하니 바뀌었다
+        imageView.setImageBitmap(bitmap);
+
 
         //지역구
         TextView textView1 = findViewById(R.id.class_area_intent);
@@ -106,7 +111,10 @@ public class ClassDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), ClassReservation.class);
 
         intent.putExtra("param", getIntent().getStringExtra("param")); //클래스 제목을 뿌려준다.
-        intent.putExtra("image",getIntent().getIntExtra("image",2)); //클래스 이미지 뿌리기
+        //intent.putExtra("image",getIntent().getIntExtra("image",2)); //클래스 이미지 뿌리기
+
+        byte[] byteArray = getIntent().getByteArrayExtra("image");
+        intent.putExtra("image",byteArray); //클래스 이미지 뿌리기
 
         startActivity(intent);
     }
