@@ -1,7 +1,11 @@
 package com.example.clubactivity.MyPage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,15 +22,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.R;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 //import kr.go.seoul.culturalevents.CulturalEventTypeMini;
 
 
 public class MyPageFragment extends Fragment {
     private View view;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    CircleImageView user_image;
+    TextView user_nickname;
+    TextView user_residence;
 
     ImageButton EditInfoButton;
     private static final String TAG = "MainActivity";
@@ -40,17 +53,32 @@ public class MyPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.my_page, container, false);
+
         EditInfoButton = (ImageButton) view.findViewById(R.id.edit_profile);
         EditInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
+                intent.putExtra("isInstructor", false );
                 startActivityForResult(intent, Constants.REQUEST_EDIT_INFO); // 요청한 곳을 구분하기 위한 숫자, 의미없음
             }
         });
 
+        preferences = getContext().getSharedPreferences("preferences", getContext().MODE_PRIVATE);
+        editor = preferences.edit();
+
+        user_image = (CircleImageView)view.findViewById(R.id.user_image);
+        user_nickname = view.findViewById(R.id.user_nickname);
+        user_residence = view.findViewById(R.id.user_residence);
+
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+            user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+        else{
+            user_image.setImageResource(R.drawable.ic_person_24dp);
+        }
+        user_nickname.setText(preferences.getString("nickname", ""));
+        user_residence.setText(preferences.getString("residence",""));
 
         //API 안먹음
         //typeMini = (CulturalEventTypeMini) view.findViewById(R.id.type_mini);
@@ -99,6 +127,13 @@ public class MyPageFragment extends Fragment {
 
     }
 
+    public Bitmap getImageToBitmap(String encodedImage){
+
+        byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
+
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
@@ -114,5 +149,19 @@ public class MyPageFragment extends Fragment {
         recyclerView_favorite.setLayoutManager(layoutManager_favorite);
         RecyclerViewAdapter adapter_favorite = new RecyclerViewAdapter(getActivity(), mNames_favorite, mImageUrls_favorite  );
         recyclerView_favorite.setAdapter(adapter_favorite);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Constants.REQUEST_EDIT_INFO){
+            if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+            else{
+                user_image.setImageResource(R.drawable.ic_person_24dp);
+            }
+            user_nickname.setText(preferences.getString("nickname", ""));
+            user_residence.setText(preferences.getString("residence",""));
+        }
+
     }
 }

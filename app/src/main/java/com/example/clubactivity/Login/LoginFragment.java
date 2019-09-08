@@ -92,6 +92,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+                Constants.isLogined = false;
             }
         });
         return view;
@@ -135,6 +136,8 @@ public class LoginFragment extends Fragment {
         NetworkTask networkTask = new NetworkTask(this.context, url, data, 1);
 
         networkTask.execute();
+
+        Constants.isLogined = true;
         /*
         // 로그인 성공
         Intent intent = new Intent(getActivity(), MainActivity.class);

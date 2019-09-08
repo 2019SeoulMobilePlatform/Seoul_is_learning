@@ -1,37 +1,48 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Instructor;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.clubactivity.Club.AddClubActivity;
-import com.example.clubactivity.MyPage.EditMyInfoActivity;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.Calendar;
 
 public class AddClassActivity extends AppCompatActivity {
 
     private Spinner limitSpinner;
+    private TextView mDisplayDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TextView mDisplayTime;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
+
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     Bitmap classImage;
@@ -43,6 +54,59 @@ public class AddClassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
+
+        mDisplayDate = (TextView) findViewById(R.id.date);
+        mDisplayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        AddClassActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+
+                String date = year + "/" + month + "/" + day;
+                mDisplayDate.setText(date);
+            }
+        };
+
+        mDisplayTime = (TextView) findViewById(R.id.time);
+        mDisplayTime.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int hour = cal.get(Calendar.HOUR_OF_DAY);
+                int minute = cal.get(Calendar.MINUTE);
+
+                TimePickerDialog dialog = new TimePickerDialog(AddClassActivity.this, mTimeSetListener, hour,
+                        minute, false);
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                String time = String.valueOf(hour) + ":" + String.valueOf(minute);
+                mDisplayTime.setText(time);
+            }
+        };
 
         Button button = findViewById(R.id.select_img_btn);
         button.setOnClickListener(new View.OnClickListener(){
@@ -131,6 +195,7 @@ public class AddClassActivity extends AppCompatActivity {
 
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

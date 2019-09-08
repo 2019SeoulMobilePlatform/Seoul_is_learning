@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_seoul"
@@ -17,12 +16,16 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddClassActivity"
+        <activity android:name=".Club.FullScreenImageActivity"
             android:theme="@style/NoTitleAppcompat"></activity>
-        <activity android:name=".EditClassActivity"
-            android:theme="@style/NoTitleAppcompat"/>
         <activity
-            android:name=".InstructorMainActivity"
+            android:name=".Instructor.AddClassActivity"
+            android:theme="@style/NoTitleAppcompat" />
+        <activity
+            android:name=".EditClassActivity"
+            android:theme="@style/NoTitleAppcompat" />
+        <activity
+            android:name=".Instructor.InstructorMainActivity"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.ClubEnterActivity"
@@ -38,9 +41,7 @@
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Login.LoginActivity"
-            android:theme="@style/NoTitleAppcompat">
-
-        </activity>
+            android:theme="@style/NoTitleAppcompat"></activity>
         <activity
             android:name=".Club.ChatRoomActivity"
             android:theme="@style/NoTitleAppcompat" />
@@ -55,17 +56,16 @@
             android:name=".Class.ClassDetailActivity"
             android:theme="@style/NoTitleAppcompat" />
         <activity android:name=".Class.ClassReservation" />
-
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Home.WebViewActivity" />
-
     </application>
 
 </manifest>

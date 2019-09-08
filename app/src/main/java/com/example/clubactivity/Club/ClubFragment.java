@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,6 +32,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -44,7 +50,7 @@ import java.util.Locale;
 public class  ClubFragment extends Fragment {
     private View view;
     FloatingActionButton fab;
-    ListView myClub_Listview;
+    SwipeMenuListView myClub_Listview;
     ListView wholeClub_ListView;
     ChatViewAdapter myClub_adapter;
     ChatViewAdapter searchClub_adapter;
@@ -78,12 +84,21 @@ public class  ClubFragment extends Fragment {
         wholeClub_adapter = new ChatViewAdapter();
 
         // 리스트뷰 참조 및 Adapter달기
-        myClub_Listview = (ListView) view.findViewById(R.id.myclub_listview);
+        myClub_Listview = (SwipeMenuListView) view.findViewById(R.id.myclub_listview);
         myClub_Listview.setAdapter(myClub_adapter);
         wholeClub_ListView = (ListView) view.findViewById(R.id.wholeclub_listview);
         wholeClub_ListView.setAdapter(wholeClub_adapter);
 
+        //리스트뷰 스와이프로 지우기
+        SetListViewCreator(myClub_Listview);
+
+        String url = "http://106.10.35.170/ImportClubList.php";
+
+        NetworkTask networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask.execute();
+
         // 임시 아이템 추가.
+        /*
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.cat_dog),
                 "일러스트 동호회 모집", "일러스트에 관심 있으신 분들 환영합니다~~", 10, 1, 1) ;
         wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
@@ -94,7 +109,7 @@ public class  ClubFragment extends Fragment {
                 "Ind", "Assignment Ind Black 36dp", 10, 3, 4) ;
         myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
                 "Circle", "Account Circle Black 36dp", 10, 1, 5) ;
-
+        */
 
         wholeClub_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -190,7 +205,6 @@ public class  ClubFragment extends Fragment {
             }
         });
 
-
         //검색 텍스트 모두 지우기
         ImageButton remove_allText_btn = (ImageButton) view.findViewById(R.id.remove_allText_button);
         remove_allText_btn.setOnClickListener(new View.OnClickListener() {
@@ -272,6 +286,52 @@ public class  ClubFragment extends Fragment {
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
+
+    public void SetListViewCreator(SwipeMenuListView listView){
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                         getContext().getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(200);
+                // set a icon
+                deleteItem.setIcon(R.drawable.ic_delete_white_24dp);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+        // set creator
+        listView.setMenuCreator(creator);
+
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
+                        myClub_adapter.removeItem(position);
+                        if( wholeClubItem.getNowMemberNum() <= 1 )
+                            wholeClub_adapter.removeItem(position);
+                        else
+                            wholeClubItem.setNowMemberNum(wholeClubItem.getNowMemberNum()-1);
+
+                        myClub_adapter.notifyDataSetChanged();
+                        wholeClub_adapter.notifyDataSetChanged();
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
+    }
+
 
 
 }

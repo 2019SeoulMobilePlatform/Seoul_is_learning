@@ -90,11 +90,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
         residence = preferences.getString("residence","");
         areaSpinner.setSelection(getPosition(residence));
 
-        //기본이미지 지정
-        if(!preferences.getString("profileImage","").equals(""))
+
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+
             profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
         else{
-            profileImage.setImageResource(R.drawable.ic_account_circle_white_24dp);
+            profileImage.setImageResource(R.drawable.ic_account_circle_white_60dp);
         }
 
         final EditText passwordCheck = (EditText) findViewById(R.id.edit_password_check);
@@ -108,8 +109,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 password = _password.getText().toString();
                 email = _email.getText().toString();
                 residence = areaSpinner.getSelectedItem().toString();
-                _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
-
+                if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                    _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
+                else
+                    _userImage = null;
                 /*
                 if(!_password.getText().toString().equals(passwordCheck.getText().toString())){
                     Toast.makeText(EditMyInfoActivity.this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_LONG);
@@ -119,7 +122,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
                 // 이미지 수정
                 editor.remove("profileImage");
-                editor.putString("profileImage", ImageConverter.getImageToString(_userImage));
+                if(_userImage != null)
+                    editor.putString("profileImage", ImageConverter.getImageToString(_userImage));
+                else
+                    editor.putString("profileImage", null);
 
                 // 닉네임 수정
                 editor.remove("nickname");
@@ -137,7 +143,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 editor.commit();
 
                 String data = getData(nickname, password, preferences.getString("profileImage",""), phonenumber, residence);
-                String url = "http://106.10.35.170/EditUser.php";
+                String url;
+                Intent intent = getIntent();
+                if( (Boolean)intent.getExtras().get("isInstructor") )
+                    url = "http://106.10.35.170/EditInstructor.php";
+                else
+                    url = "http://106.10.35.170/EditUser.php";
 
                 NetworkTask networkTask = new NetworkTask(EditMyInfoActivity.this, url, data, 4);
                 networkTask.execute();

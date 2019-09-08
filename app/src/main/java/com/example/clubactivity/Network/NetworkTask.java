@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
-import com.example.clubactivity.InstructorMainActivity;
+import androidx.core.content.ContextCompat;
+
+import com.example.clubactivity.Club.ChatViewAdapter;
+import com.example.clubactivity.Club.ClubFragment;
+import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
 
@@ -29,12 +35,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String url;
     private String data;
     private int selection;
+
     public List<Item> items = new ArrayList<>();
+    ChatViewAdapter wholeClub_Adapter;
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
         this.url = url;
         this.data = data;
+        this.selection = action;
+    }
+    public NetworkTask(Context _context, String url, int action){
+        this.context = _context;
+        this.url = url;
         this.selection = action;
     }
 
@@ -138,25 +151,24 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
                             String user_profile = jsonObject.getString("image");
-                            Log.e("login image", user_profile);
                             String user_birth = jsonObject.getString("birth");
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor instructor_editor = preferences.edit();
+                            SharedPreferences.Editor editor = preferences.edit();
 
-                            instructor_editor.clear();
-                            instructor_editor.commit();
+                            editor.clear();
+                            editor.commit();
 
-                            instructor_editor.putString("email", user_email);
-                            instructor_editor.putString("name", user_name);
-                            instructor_editor.putString("password", user_password);
-                            instructor_editor.putString("nickname", user_nickname);
-                            instructor_editor.putString("phone_number", user_phonenumber);
-                            instructor_editor.putString("residence", user_residence);
-                            instructor_editor.putString("birth", user_birth);
-                            instructor_editor.putString("profileImage", user_profile);
+                            editor.putString("email", user_email);
+                            editor.putString("name", user_name);
+                            editor.putString("password", user_password);
+                            editor.putString("nickname", user_nickname);
+                            editor.putString("phone_number", user_phonenumber);
+                            editor.putString("residence", user_residence);
+                            editor.putString("birth", user_birth);
+                            editor.putString("profileImage", user_profile);
 
-                            instructor_editor.commit();
+                            editor.commit();
                             this.context.startActivity(new Intent(this.context, InstructorMainActivity.class));
                             ((Activity) this.context).finish();
 
@@ -191,6 +203,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         if(!real_result.equals("fail")) {
                             JSONObject resultObject;
+
                            if(resultObjectArray.length() != 0) {
 
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
@@ -217,6 +230,51 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         }
                         else{
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 6:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if(real_result.equals("success")){
+                            Toast.makeText(this.context, "성공적으로 추가하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(this.context, "추가에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 7:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        if(!real_result.equals("fail")) {
+                            JSONObject resultObject;
+
+                            if(resultObjectArray.length() != 0) {
+                                for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                    resultObject = resultObjectArray.getJSONObject(i);
+                                    Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image"));
+                                    Drawable drawable = new BitmapDrawable(image);
+                                    String name = resultObject.getString("name");
+                                    String information = resultObject.getString("information");
+                                    int count_max = resultObject.getInt("count_max");
+                                    int count = resultObject.getInt("count");
+                                    int room_index = resultObject.getInt("room_index");
+
+                                    wholeClub_Adapter = new ChatViewAdapter();
+                                    wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index) ;
+                                }
+                            }
+                        }
+                        else{
+                            Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
                     }catch(Exception e){
                         e.printStackTrace();

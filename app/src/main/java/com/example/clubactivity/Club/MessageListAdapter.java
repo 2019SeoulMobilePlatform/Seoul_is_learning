@@ -1,6 +1,7 @@
 package com.example.clubactivity.Club;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -99,6 +100,8 @@ public class MessageListAdapter extends BaseAdapter {
     public Object getItem(int i) {
         return messages.get(i);
     }
+
+    public Bitmap getImage(int i) {return messages.get(i).image; }
 
     @Override
     public long getItemId(int i) {
@@ -204,7 +207,7 @@ public class MessageListAdapter extends BaseAdapter {
             circleImageView.setImageBitmap(messages.get(i).profileImage);
         }
 
-        //텍스트 전송시
+        //이미지뷰 크기 설정
         if(messages.get(i).image != null){
             imageView.getLayoutParams().height = 500;
             imageView.getLayoutParams().width = 500;

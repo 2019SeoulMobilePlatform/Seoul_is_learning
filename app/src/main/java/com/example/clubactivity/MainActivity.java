@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ClassFragment classFragment;
     private ClubFragment clubFragment;
     private MyPageFragment myPageFragment;
+    private NonLoginFragment nonLoginFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,16 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(1);
                         break;
                     case R.id.action_people:
-                        setFragment(2);
+                        if(Constants.isLogined)
+                            setFragment(2);
+                        else
+                            setFragment(4);
                         break;
                     case R.id.action_my:
-                        setFragment(3);
+                        if(Constants.isLogined)
+                            setFragment(3);
+                        else
+                            setFragment(4);
                         break;
                 }
                 return true;
@@ -66,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         classFragment = new ClassFragment();
         clubFragment = new ClubFragment();
         myPageFragment = new MyPageFragment();
+        nonLoginFragment = new NonLoginFragment();
         setFragment(0); //홈화면으로 지정
 
     }
@@ -93,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.main_frame, myPageFragment);
                 fragmentTransaction.commit();
                 break;
+            case 4:
+                fragmentTransaction.replace(R.id.main_frame, nonLoginFragment);
+                fragmentTransaction.commit();
         }
 
     }
