@@ -49,6 +49,10 @@ public class AddClassActivity extends AppCompatActivity {
     EditText className;
     EditText classDescription;
     EditText classPrice;
+    EditText classAddress;
+    EditText classTarget;
+    Spinner classLimit;
+    Spinner classResidence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +159,13 @@ public class AddClassActivity extends AppCompatActivity {
         className = (EditText) findViewById(R.id.class_name);
         classDescription = (EditText) findViewById(R.id.class_description);
         classPrice = (EditText) findViewById(R.id.class_price);
-        
+        classAddress = findViewById(R.id.class_address);
+        final EditText classTarget = findViewById(R.id.class_target_user);
+        Spinner classLimit = findViewById(R.id.limit_spinner);
+        Spinner classResidence = findViewById(R.id.area_spinner);
+
+
+
         save_club_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,8 +184,20 @@ public class AddClassActivity extends AppCompatActivity {
                 }
                 if (classPrice.length() == 0){
                     Toast.makeText(AddClassActivity.this, "클래스 금액을 입력해 주세요", Toast.LENGTH_LONG).show();
+                    return;
                 }
-
+                if (classAddress.length() == 0){
+                    Toast.makeText(AddClassActivity.this, "상세주소를 입력해 주세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (classTarget.length() == 0){
+                    Toast.makeText(AddClassActivity.this, "수강 대상을 입력해 주세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (mDisplayDate.getText().toString().equals("날짜") || mDisplayTime.getText().toString().equals("시간")){
+                    Toast.makeText(AddClassActivity.this, "클래스 일정을 설정해 주세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent();
 
                 //바이트 어레이로 이미지 전송
@@ -190,6 +212,9 @@ public class AddClassActivity extends AppCompatActivity {
                 intent.putExtra("classMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
 
                 setResult(RESULT_OK, intent);
+
+                ///요 근처에서 서버 보내면 될거같아요
+
                 AddClassActivity.this.finish();
             }
 
@@ -205,6 +230,7 @@ public class AddClassActivity extends AppCompatActivity {
             ImageProcessing imageProcessing = new ImageProcessing(AddClassActivity.this);
             Uri imgUri = data.getData();
             imageProcessing.SetImage(imageView, imgUri);
+            classImage = imageProcessing.ConvertUriToBitmap(imgUri);
         }
     }
 
