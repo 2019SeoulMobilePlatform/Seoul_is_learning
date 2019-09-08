@@ -95,6 +95,7 @@ public class  ClubFragment extends Fragment {
         String url = "http://106.10.35.170/ImportClubList.php";
 
         NetworkTask networkTask = new NetworkTask(this.getContext(), url, 7);
+        Log.e("clubserver connet", "성공");
         networkTask.execute();
 
         // 임시 아이템 추가.

@@ -40,6 +40,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.context = _context;
         this.url = url;
         this.selection = action;
+        this.data = " ";
     }
 
     @Override
@@ -241,7 +242,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         if(!real_result.equals("fail")) {
                             JSONObject resultObject;
-
                             if(resultObjectArray.length() != 0) {
                                 for(int i = 0 ; i < resultObjectArray.length(); i++){
                                     resultObject = resultObjectArray.getJSONObject(i);
@@ -257,6 +257,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index) ;
                                 }
                             }
+                            wholeClub_Adapter.notifyDataSetChanged();
                         }
                         else{
                             Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
@@ -271,7 +272,12 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
 
+
+    public ChatViewAdapter WholeClubList(){
+
+        return wholeClub_Adapter;
     }
 
 }
