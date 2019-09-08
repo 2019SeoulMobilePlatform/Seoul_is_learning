@@ -95,10 +95,7 @@ public class ClassDetailActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
 
 
     //클래스 예약 버튼 클릭
