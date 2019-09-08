@@ -135,26 +135,25 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
                             String user_profile = jsonObject.getString("image");
-                            Log.e("login image", user_profile);
                             String user_birth = jsonObject.getString("birth");
 
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor instructor_editor = preferences.edit();
+                            SharedPreferences.Editor editor = preferences.edit();
 
-                            instructor_editor.clear();
-                            instructor_editor.commit();
+                            editor.clear();
+                            editor.commit();
 
-                            instructor_editor.putString("email", user_email);
-                            instructor_editor.putString("name", user_name);
-                            instructor_editor.putString("password", user_password);
-                            instructor_editor.putString("nickname", user_nickname);
-                            instructor_editor.putString("phone_number", user_phonenumber);
-                            instructor_editor.putString("residence", user_residence);
-                            instructor_editor.putString("birth", user_birth);
-                            instructor_editor.putString("profileImage", user_profile);
+                            editor.putString("email", user_email);
+                            editor.putString("name", user_name);
+                            editor.putString("password", user_password);
+                            editor.putString("nickname", user_nickname);
+                            editor.putString("phone_number", user_phonenumber);
+                            editor.putString("residence", user_residence);
+                            editor.putString("birth", user_birth);
+                            editor.putString("profileImage", user_profile);
 
-                            instructor_editor.commit();
+                            editor.commit();
                             this.context.startActivity(new Intent(this.context, InstructorMainActivity.class));
                             ((Activity) this.context).finish();
 
@@ -189,6 +188,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         if(!real_result.equals("fail")) {
                             JSONObject resultObject;
+
                            if(resultObjectArray.length() != 0) {
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);

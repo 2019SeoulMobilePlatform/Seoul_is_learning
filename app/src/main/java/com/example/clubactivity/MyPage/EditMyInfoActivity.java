@@ -91,7 +91,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         areaSpinner.setSelection(getPosition(residence));
 
         //기본이미지 지정
-        if(!preferences.getString("profileImage","").equals(""))
+        if(preferences.getString("profileImage","") != null)
             profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
         else{
             profileImage.setImageResource(R.drawable.ic_account_circle_white_24dp);
