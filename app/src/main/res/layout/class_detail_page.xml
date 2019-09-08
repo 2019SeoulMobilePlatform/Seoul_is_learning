@@ -43,9 +43,10 @@
                 <ImageView
                     android:id="@+id/class_main_image"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/class1"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerInside"
+                    android:background="@color/white"
                     />
 
                 <LinearLayout

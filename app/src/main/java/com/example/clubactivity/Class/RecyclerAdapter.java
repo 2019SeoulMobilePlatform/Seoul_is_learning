@@ -3,6 +3,7 @@ package com.example.clubactivity.Class;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
@@ -31,7 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_list_item, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_list_item, parent, false);
         return new ViewHolder(v);
     }
 
@@ -42,11 +44,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.image.setBackground(drawable);*/
 
        //이미지 이렇게 넘겨줘야해 bytes
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        item.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
-        final byte[] bytes = stream.toByteArray();
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        item.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
+//        final byte[] bytes = stream.toByteArray();
 
-        holder.image.setImageBitmap(item.getImage());
+        Glide.with(context)
+                .load(item.getImage())
+                .into(holder.image);
+
+        //holder.image.setImageBitmap(item.getImage());
         holder.title.setText(item.getTitle());
         holder.desc.setText(item.getDesc());
         holder.ratingBar.setRating(item.getStar());
@@ -58,7 +64,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 //Intent intent = new Intent(context, TabTest.class);
 
                 intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
-                intent.putExtra("image",bytes); //클래스 이미지 뿌리기
+                intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기
                 intent.putExtra("area",item.getArea()); //클래스 지역구
                 intent.putExtra("star",item.getStar()); //평점 뿌리기
 
@@ -88,6 +94,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.class_list_image);
+            Log.d(""+image.getWidth(),"");
+            Log.d(""+image.getHeight(),"");
+
             title = (TextView) itemView.findViewById(R.id.class_list_title);
             desc = (TextView) itemView.findViewById(R.id.class_list_sogae);
             ratingBar = (RatingBar) itemView.findViewById(R.id.review_star);
