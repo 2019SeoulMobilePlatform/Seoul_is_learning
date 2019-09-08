@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -49,9 +52,14 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         //이미지를 바꿔준다
         byte[] byteArray = getIntent().getByteArrayExtra("image");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         ImageView imageView = findViewById(R.id.class_main_image);
-        imageView.setImageBitmap(bitmap);
+
+        //글라이드처리
+        Glide.with(ClassDetailActivity.this)
+                .load(byteArray)
+                .into(imageView);
+//        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+//        imageView.setImageBitmap(bitmap);
 
 
         //지역구
