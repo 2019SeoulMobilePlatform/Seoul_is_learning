@@ -1,6 +1,8 @@
 package com.example.clubactivity.Class;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,8 +20,11 @@ public class ClassReservation extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_reservation_pop);
 
+        byte[] byteArray = getIntent().getByteArrayExtra("image");
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         ImageView imageView = (ImageView)findViewById(R.id.res_class_image);
-        imageView.setImageResource(getIntent().getIntExtra("image",2));
+        imageView.setImageBitmap(bitmap);
+
 
         TextView title = (TextView)findViewById(R.id.res_class_title);
         title.setText(getIntent().getStringExtra("param"));
