@@ -16,6 +16,7 @@ public class ImageConverter {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         userImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
         byte[] imageBytes = stream.toByteArray();
 
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
