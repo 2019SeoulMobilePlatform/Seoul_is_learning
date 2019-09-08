@@ -109,7 +109,7 @@ public class InstructorMainActivity extends AppCompatActivity {
     public void EditInfo(View view) {
         Intent intent = new Intent(InstructorMainActivity.this, EditMyInfoActivity.class);
         intent.putExtra("isInstructor", true);
-        InstructorMainActivity.this.startActivity(intent);
+        startActivityForResult(intent, Constants.REQUEST_EDIT_INFO_INS);
     }
 
     public void SetListViewCreator(SwipeMenuListView listView){
@@ -158,5 +158,19 @@ public class InstructorMainActivity extends AppCompatActivity {
         byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
 
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Constants.REQUEST_EDIT_INFO_INS){
+            if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+            else{
+                user_image.setImageResource(R.drawable.ic_account_circle_white_60dp);
+            }
+            user_nickname.setText(preferences.getString("nickname", ""));
+            user_residence.setText(preferences.getString("residence",""));
+        }
+
     }
 }

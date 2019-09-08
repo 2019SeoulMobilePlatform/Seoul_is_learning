@@ -150,4 +150,18 @@ public class MyPageFragment extends Fragment {
         RecyclerViewAdapter adapter_favorite = new RecyclerViewAdapter(getActivity(), mNames_favorite, mImageUrls_favorite  );
         recyclerView_favorite.setAdapter(adapter_favorite);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Constants.REQUEST_EDIT_INFO){
+            if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+            else{
+                user_image.setImageResource(R.drawable.ic_person_24dp);
+            }
+            user_nickname.setText(preferences.getString("nickname", ""));
+            user_residence.setText(preferences.getString("residence",""));
+        }
+
+    }
 }

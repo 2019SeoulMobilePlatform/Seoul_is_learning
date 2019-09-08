@@ -109,8 +109,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 password = _password.getText().toString();
                 email = _email.getText().toString();
                 residence = areaSpinner.getSelectedItem().toString();
-                _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
-
+                if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                    _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
+                else
+                    _userImage = null;
                 /*
                 if(!_password.getText().toString().equals(passwordCheck.getText().toString())){
                     Toast.makeText(EditMyInfoActivity.this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_LONG);
@@ -120,7 +122,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
                 // 이미지 수정
                 editor.remove("profileImage");
-                editor.putString("profileImage", ImageConverter.getImageToString(_userImage));
+                if(_userImage != null)
+                    editor.putString("profileImage", ImageConverter.getImageToString(_userImage));
+                else
+                    editor.putString("profileImage", null);
 
                 // 닉네임 수정
                 editor.remove("nickname");
