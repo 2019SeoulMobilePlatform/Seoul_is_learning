@@ -1,14 +1,16 @@
-package com.example.clubactivity;
+package com.example.clubactivity.Instructor;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -18,17 +20,25 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.Class.ClassDetailActivity;
-import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
-import com.example.clubactivity.Club.ClubEnterActivity;
+import com.example.clubactivity.Constants;
 import com.example.clubactivity.MyPage.EditMyInfoActivity;
+import com.example.clubactivity.Network.ImageConverter;
+import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class InstructorMainActivity extends AppCompatActivity {
 
     SwipeMenuListView instructorClassList;
     ChatViewAdapter instructorClassAdapter;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+    CircleImageView user_image;
+    TextView user_nickname;
+    TextView user_residence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,23 @@ public class InstructorMainActivity extends AppCompatActivity {
         instructorClassAdapter = new ChatViewAdapter() ;
         instructorClassList.setAdapter(instructorClassAdapter);
         SetListViewCreator(instructorClassList);
+
+
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        user_image = (CircleImageView)findViewById(R.id.user_image);
+        user_nickname = findViewById(R.id.user_nickname);
+        user_residence = findViewById(R.id.user_residence);
+
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+            user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
+        else{
+            user_image.setImageResource(R.drawable.ic_account_circle_white_60dp);
+        }
+        user_nickname.setText(preferences.getString("nickname", ""));
+        user_residence.setText(preferences.getString("residence",""));
+
 
         instructorClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,7 +108,7 @@ public class InstructorMainActivity extends AppCompatActivity {
 
     public void EditInfo(View view) {
         Intent intent = new Intent(InstructorMainActivity.this, EditMyInfoActivity.class);
-
+        intent.putExtra("isInstructor", true);
         InstructorMainActivity.this.startActivity(intent);
     }
 
@@ -124,5 +151,12 @@ public class InstructorMainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public Bitmap getImageToBitmap(String encodedImage){
+
+        byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
+
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

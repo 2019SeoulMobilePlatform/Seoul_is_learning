@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.R;
 
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ public class MyPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
+                intent.putExtra("isInstructor", false );
                 startActivityForResult(intent, Constants.REQUEST_EDIT_INFO); // 요청한 곳을 구분하기 위한 숫자, 의미없음
             }
         });
@@ -70,10 +72,10 @@ public class MyPageFragment extends Fragment {
         user_nickname = view.findViewById(R.id.user_nickname);
         user_residence = view.findViewById(R.id.user_residence);
 
-        if(!preferences.getString("profileImage","").equals(""))
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
             user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
         else{
-            user_image.setImageResource(R.drawable.ic_account_circle_white_24dp);
+            user_image.setImageResource(R.drawable.ic_person_24dp);
         }
         user_nickname.setText(preferences.getString("nickname", ""));
         user_residence.setText(preferences.getString("residence",""));

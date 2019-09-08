@@ -16,11 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.clubactivity.Constants;
-import com.example.clubactivity.InstructorMainActivity;
-import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
-import com.smarteist.autoimageslider.IndicatorView.animation.data.Value;
 
 public class LoginInstructorFragment extends Fragment {
     private View view;

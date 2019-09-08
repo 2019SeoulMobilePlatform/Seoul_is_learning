@@ -90,11 +90,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
         residence = preferences.getString("residence","");
         areaSpinner.setSelection(getPosition(residence));
 
-        //기본이미지 지정
-        if(preferences.getString("profileImage","") != null)
+
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+
             profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
         else{
-            profileImage.setImageResource(R.drawable.ic_account_circle_white_24dp);
+            profileImage.setImageResource(R.drawable.ic_account_circle_white_60dp);
         }
 
         final EditText passwordCheck = (EditText) findViewById(R.id.edit_password_check);
@@ -137,7 +138,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 editor.commit();
 
                 String data = getData(nickname, password, preferences.getString("profileImage",""), phonenumber, residence);
-                String url = "http://106.10.35.170/EditUser.php";
+                String url;
+                Intent intent = getIntent();
+                if( (Boolean)intent.getExtras().get("isInstructor") )
+                    url = "http://106.10.35.170/EditInstructor.php";
+                else
+                    url = "http://106.10.35.170/EditUser.php";
 
                 NetworkTask networkTask = new NetworkTask(EditMyInfoActivity.this, url, data, 4);
                 networkTask.execute();

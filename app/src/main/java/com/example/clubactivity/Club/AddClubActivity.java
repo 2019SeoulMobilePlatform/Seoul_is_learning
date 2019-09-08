@@ -4,15 +4,9 @@ package com.example.clubactivity.Club;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,15 +19,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.clubactivity.AddClassActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.Network.ImageConverter;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AddClubActivity extends AppCompatActivity {
@@ -130,19 +121,36 @@ public class AddClubActivity extends AppCompatActivity {
                 //바이트 어레이로 이미지 전송
                 userImage = imageProcessing.ConvertUriToBitmap(imgUri);
 
+                String url = "http://106.10.35.170/StoreClub.php";
+                String data = getData(userImage, clubName.getText().toString(), clubDescription.getText().toString(), limitSpinner.getSelectedItem().toString());
+                
+                NetworkTask networkTask = new NetworkTask(AddClubActivity.this, url, data, 6);
+                networkTask.execute();
+
+                /*
                 byte[] bytes = imageProcessing.ConvertBitmapToByteArray(userImage);
 
                 intent.putExtra("BMP",bytes);
                 intent.putExtra("clubName", clubName.getText().toString());
                 intent.putExtra("clubDescription", clubDescription.getText().toString());
                 intent.putExtra("clubMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
+                */
 
-                setResult(RESULT_OK, intent);
+                //setResult(RESULT_OK, intent);
                 AddClubActivity.this.finish();
             }
 
         });
 
+    }
+
+    public String getData(Bitmap _image, String name, String description, String maxCount){
+
+        String image = ImageConverter.getImageToString(_image);
+
+        String data = "image=" + image + "&name=" + name + "&information=" + description + "&count_max=" + maxCount;
+
+        return data;
     }
 
 

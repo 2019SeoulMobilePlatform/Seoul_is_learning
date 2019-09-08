@@ -17,12 +17,12 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddClassActivity"
+        <activity android:name=".Instructor.AddClassActivity"
             android:theme="@style/NoTitleAppcompat"></activity>
         <activity android:name=".EditClassActivity"
             android:theme="@style/NoTitleAppcompat"/>
         <activity
-            android:name=".InstructorMainActivity"
+            android:name=".Instructor.InstructorMainActivity"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.ClubEnterActivity"
