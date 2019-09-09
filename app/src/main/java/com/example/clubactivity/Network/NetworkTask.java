@@ -9,15 +9,18 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
 import androidx.core.content.ContextCompat;
 
 import com.example.clubactivity.Club.ChatViewAdapter;
+import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
@@ -37,7 +40,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private int selection;
 
     public List<Item> items = new ArrayList<>();
-    ChatViewAdapter wholeClub_Adapter;
+    ChatViewAdapter wholeClub_Adapter = null;
+    ChatViewAdapter myClub_Adapter = null;
+
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
@@ -93,8 +98,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
                             String user_profile = jsonObject.getString("image");
-                            Log.e("getdata",user_profile);
                             String user_birth = jsonObject.getString("birth");
+                            AppManager.getInstance().setEmail(user_email);
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
                             SharedPreferences.Editor user_editor = preferences.edit();
@@ -116,7 +121,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             this.context.startActivity(new Intent(this.context, MainActivity.class));
                             ((Activity) this.context).finish();
                             Toast.makeText(this.context, "로그인성공", Toast.LENGTH_LONG).show();
-
+                            Log.e("Login","성공");
                         }
                     }catch (Exception e){
                         e.printStackTrace();
@@ -255,6 +260,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
+                        wholeClub_Adapter = new ChatViewAdapter();
                         if(!real_result.equals("fail")) {
                             JSONObject resultObject;
                             if(resultObjectArray.length() != 0) {
@@ -267,12 +273,40 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     int count_max = resultObject.getInt("count_max");
                                     int count = resultObject.getInt("count");
                                     int room_index = resultObject.getInt("room_index");
-
-                                    wholeClub_Adapter = new ChatViewAdapter();
-                                    wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index) ;
+                                    wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index);
                                 }
                             }
-                            wholeClub_Adapter.notifyDataSetChanged();
+                            AppManager.getInstance().setWholeClub_Adapter(wholeClub_Adapter.getChatViewItemList());
+                        }
+                        else{
+                            Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 8:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        myClub_Adapter = new ChatViewAdapter();
+                        if(!real_result.equals("fail")) {
+                            JSONObject resultObject;
+                            if(resultObjectArray.length() != 0) {
+                                for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                    resultObject = resultObjectArray.getJSONObject(i);
+                                    Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image"));
+                                    Drawable drawable = new BitmapDrawable(image);
+                                    String name = resultObject.getString("name");
+                                    String information = resultObject.getString("information");
+                                    int count_max = resultObject.getInt("count_max");
+                                    int count = resultObject.getInt("count");
+                                    int room_index = resultObject.getInt("room_index");
+                                    myClub_Adapter.addItem(drawable, name, information, count_max, count, room_index);
+                                }
+                            }
+                            AppManager.getInstance().setMyClub_Adapter(myClub_Adapter.getChatViewItemList());
                         }
                         else{
                             Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
@@ -288,16 +322,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             Log.d("설마","여긴아니지");
             e.printStackTrace();
         }
-    }
-
-
-    public ChatViewAdapter WholeClubList(){
-
-        return wholeClub_Adapter;
-    }
-
-    public List<Item> ServerClassList(){
-        return items;
     }
 
 }
