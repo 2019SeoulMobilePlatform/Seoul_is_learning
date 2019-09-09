@@ -16,4 +16,5 @@ public class Constants {
     public static int IMAGE_SIZE = 300;
     public static int REQUEST_EDIT_INFO_INS = 4;
     public static Boolean isLogined = null;
+    public static int SERVER_CLASS_LIST_GET = 5;
 }

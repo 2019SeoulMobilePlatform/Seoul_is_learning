@@ -8,20 +8,23 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
-import androidx.core.content.ContextCompat;
-
 import com.example.clubactivity.Club.ChatViewAdapter;
+<<<<<<< HEAD
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Club.ClubFragment;
+=======
+>>>>>>> origin/develop
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
@@ -202,6 +205,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                     break;
 
+                    // 클래스 리스트 받아오기
                 case 5:
                     try{
                         JSONObject jsonObject = new JSONObject(result);
@@ -214,7 +218,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
-                                   Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
                                    String name = resultObject.getString("name");
                                    String target_user = resultObject.getString("target_user");
                                    String address = resultObject.getString("address");
@@ -226,12 +231,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    float star = (float)resultObject.getDouble("star");
                                    //int price = resultObject.getInt("price");
 
-                                   Item item = new Item(image, star,name,information,local,target_user,address,time,count);
+                                   Item item = new Item(decodedByte, star,name,information,local,target_user,address,time,count);
                                    items.add(item);
                                }
 
+                               //클래스 리스트 설정 Recyclerview
                                RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
                                recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
+                               LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+                               recyclerView.setHasFixedSize(true);
+                               recyclerView.setLayoutManager(layoutManager);
                            }
                         }
                         else{

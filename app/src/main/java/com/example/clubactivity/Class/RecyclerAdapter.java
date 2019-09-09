@@ -2,6 +2,8 @@ package com.example.clubactivity.Class;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -29,16 +33,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_list_item, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_list_item, parent,false);
+
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Item item = items.get(position);
-        /*Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
+       /* Drawable drawable = new BitmapDrawable(item.getImage());
         holder.image.setBackground(drawable);*/
-        holder.image.setImageBitmap(item.getImage());
+
+       //이미지 이렇게 넘겨줘야해 bytes
+//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//        item.getImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
+//        final byte[] bytes = stream.toByteArray();
+
+        Glide.with(context)
+                .load(item.getImage())
+                .into(holder.image);
+
+        //holder.image.setImageBitmap(item.getImage());
         holder.title.setText(item.getTitle());
         holder.desc.setText(item.getDesc());
         holder.ratingBar.setRating(item.getStar());
@@ -80,6 +95,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.class_list_image);
+            Log.d(""+image.getWidth(),"");
+            Log.d(""+image.getHeight(),"");
+
             title = (TextView) itemView.findViewById(R.id.class_list_title);
             desc = (TextView) itemView.findViewById(R.id.class_list_sogae);
             ratingBar = (RatingBar) itemView.findViewById(R.id.review_star);

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
@@ -151,114 +152,88 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
         switch(id){
             case R.id.fl_mainfragment_eunpyung :
                 classmenuTitle = "은평구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_gangbuk :
                 classmenuTitle = "강북구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_dobong :
                 classmenuTitle = "도봉구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_nowon :
                 classmenuTitle = "노원구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_seodaemun :
                 classmenuTitle = "서대문구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_jongro :
                 classmenuTitle = "종로구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_seongbuk :
                 classmenuTitle = "성북구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_mapo :
                 classmenuTitle = "마포구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_junggu :
                 classmenuTitle = "중구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_dongdaemun :
                 classmenuTitle = "동대문구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_yongsan :
                 classmenuTitle = "용산구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_seongdong :
                 classmenuTitle = "성동구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_jungnang :
                 classmenuTitle = "중랑구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_gwangjin :
                 classmenuTitle = "광진구";
-                ShowClassList();
                 break;
 
             case R.id.fl_mainfragment_gangseo  :
                 classmenuTitle = "강서구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_yangcheon  :
                 classmenuTitle = "양천구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_guro  :
                 classmenuTitle = "구로구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_yeongdeungpo  :
                 classmenuTitle = "영등포구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_dongjak  :
                 classmenuTitle = "동작구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_gwanak  :
                 classmenuTitle = "관악구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_geumcheon  :
                 classmenuTitle = "금천구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_seocho  :
                 classmenuTitle = "서초구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_gangnam  :
                 classmenuTitle = "강남구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_gangdong  :
                 classmenuTitle = "강동구";
-                ShowClassList();
                 break;
             case R.id.fl_mainfragment_songpa  :
                 classmenuTitle = "송파구";
-
-                String data = "local=" + classmenuTitle;
-                String url = "http://106.10.35.170/ImportClassList.php";
-                NetworkTask networkTask = new NetworkTask(getContext(), url, data, 5);
-                networkTask.execute();
-
-
-                ShowClassList();
-
                 break;
         }
+
+        String data = "local=" + classmenuTitle;
+        String url = "http://106.10.35.170/ImportClassList.php";
+        NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
+        networkTask.execute();
+
+        ShowClassList();
     }
 
     public void ShowClassList(){

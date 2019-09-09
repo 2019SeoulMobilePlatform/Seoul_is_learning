@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -35,10 +33,12 @@ public class ClassList extends Fragment {
         networkTask.execute();
         networkTask.ServerClassList();*/
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.class_list);
+        /*RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.class_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);*/
+
 
      /*   List<Item> items = networkTask.ServerClassList();
         Item[] item = new Item[ITEM_SIZE];

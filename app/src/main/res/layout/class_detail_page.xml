@@ -35,7 +35,7 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_collapseMode="parallax">
@@ -43,9 +43,12 @@
                 <ImageView
                     android:id="@+id/class_main_image"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/class1"
                     android:scaleType="fitXY"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
                     />
 
                 <LinearLayout
