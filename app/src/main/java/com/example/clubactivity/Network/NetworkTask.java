@@ -219,7 +219,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    int count_max = resultObject.getInt("count_max");
                                    String count = String.valueOf(resultObject.getInt("count")); //바꾸자
                                    float star = (float)resultObject.getDouble("star");
-                                   int price = resultObject.getInt("price");
+                                   //int price = resultObject.getInt("price");
 
                                    Item item = new Item(decodedByte, star,name,information,local,target_user,address,time,count);
                                    items.add(item);
