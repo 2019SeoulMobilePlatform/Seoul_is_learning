@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
 public class FullScreenImageActivity extends AppCompatActivity {
@@ -25,8 +26,11 @@ public class FullScreenImageActivity extends AppCompatActivity {
         ChatViewItem item = (ChatViewItem)intent.getExtras().get("item");
 
         byte[] bytes = intent.getByteArrayExtra("chatImage");
-        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        imageView.setImageBitmap(bmp);
+        Glide.with(FullScreenImageActivity.this)
+                .load(bytes)
+                .into(imageView);
+//        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//        imageView.setImageBitmap(bmp);
 
     }
 }

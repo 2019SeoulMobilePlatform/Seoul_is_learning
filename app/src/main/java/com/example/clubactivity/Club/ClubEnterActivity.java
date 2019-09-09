@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.R;
 
@@ -40,8 +42,11 @@ public class ClubEnterActivity extends AppCompatActivity {
 
 
         byte[] bytes = intent.getByteArrayExtra("clubImage");
-        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        clubImage.setImageBitmap(bmp);
+        Glide.with(ClubEnterActivity.this)
+                .load(bytes)
+                .into(clubImage);
+//        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//        clubImage.setImageBitmap(bmp);
 /*
         Bitmap bitmap = null;
         try {

@@ -288,11 +288,11 @@ public class  ClubFragment extends Fragment {
     }
 
     public void SetListViewCreator(SwipeMenuListView listView){
+        //슬라이드로 삭제
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
-
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
                          getContext().getApplicationContext());
@@ -310,6 +310,7 @@ public class  ClubFragment extends Fragment {
         // set creator
         listView.setMenuCreator(creator);
 
+        //꾹 눌러서 삭제
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {

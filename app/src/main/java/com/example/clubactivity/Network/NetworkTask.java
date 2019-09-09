@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -207,7 +208,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
-                                   Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
                                    String name = resultObject.getString("name");
                                    String target_user = resultObject.getString("target_user");
                                    String address = resultObject.getString("address");
@@ -219,7 +221,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    float star = (float)resultObject.getDouble("star");
                                    int price = resultObject.getInt("price");
 
-                                   Item item = new Item(image, star,name,information,local,target_user,address,time,count);
+                                   Item item = new Item(decodedByte, star,name,information,local,target_user,address,time,count);
                                    items.add(item);
                                }
 

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
@@ -27,6 +28,8 @@ import com.example.clubactivity.MyPage.EditMyInfoActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.ByteArrayOutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -69,17 +72,21 @@ public class InstructorMainActivity extends AppCompatActivity {
         instructorClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bitmap bitmap;
-
                 Intent intent = new Intent(InstructorMainActivity.this, ClassDetailActivity.class);
                 //Intent intent = new Intent(context, TabTest.class);
 
                 intent.putExtra("param", ((ChatViewItem)instructorClassAdapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDesc());
 
-                //intent.putExtra("image",((ChatViewItem)instructorClassAdapter.getItem(i)).getIcon()); //클래스 이미지 뿌리기
-                //디테일 비트맵으로 받으면 수정할것. 임시로 넣어놓겠다.
-                intent.putExtra("image", R.drawable.class1);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)instructorClassAdapter.getItem(i)).getIcon()).getBitmap();
+
+                Bitmap dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
+
+                dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] bytes = stream.toByteArray();
+
+                intent.putExtra("image",bytes);
 
                 InstructorMainActivity.this.startActivity(intent);
 
