@@ -210,36 +210,36 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         if (!real_result.equals("fail")) {
                             JSONObject resultObject;
 
-                            if (resultObjectArray.length() != 0) {
+                           if(resultObjectArray.length() != 0) {
 
-                                for (int i = 0; i < resultObjectArray.length(); i++) {
-                                    resultObject = resultObjectArray.getJSONObject(i);
-                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
-                                    byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
-                                    String index = resultObject.getString("class_index");
-                                    String name = resultObject.getString("name");
-                                    String target_user = resultObject.getString("target_user");
-                                    String address = resultObject.getString("address");
-                                    String information = resultObject.getString("information");
-                                    String time = resultObject.getString("time");
-                                    String local = resultObject.getString("local");
-                                    int count_max = resultObject.getInt("count_max");
-                                    String count = String.valueOf(resultObject.getInt("count")); //바꾸자
-                                    float star = (float) resultObject.getDouble("star");
-                                    int price = resultObject.getInt("price");
+                               for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                   resultObject = resultObjectArray.getJSONObject(i);
+                                   //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
+                                   String name = resultObject.getString("name");
+                                   String target_user = resultObject.getString("target_user");
+                                   String address = resultObject.getString("address");
+                                   String information = resultObject.getString("information");
+                                   String time = resultObject.getString("time");
+                                   String local = resultObject.getString("local");
+                                   int count_max = resultObject.getInt("count_max");
+                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                   float star = (float)resultObject.getDouble("star");
+                                   String price = String.valueOf(resultObject.getInt("price"));
 
-                                    Item item = new Item(decodedByte, star, name, information, local, target_user, address, time, count);
-                                    items.add(item);
-                                }
+                                   Item item = new Item(decodedByte, star,name,information,local,target_user,address,time,count,price);
+                                   items.add(item);
+                               }
 
-                                //클래스 리스트 설정 Recyclerview
-                                RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
-                                recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
-                                LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                                recyclerView.setHasFixedSize(true);
-                                recyclerView.setLayoutManager(layoutManager);
-                            }
-                        } else {
+                               //클래스 리스트 설정 Recyclerview
+                               RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
+                               recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
+                               LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+                               recyclerView.setHasFixedSize(true);
+                               recyclerView.setLayoutManager(layoutManager);
+                           }
+                        }
+                        else{
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
@@ -337,6 +337,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             Log.d("설마","여긴아니지");
             e.printStackTrace();
         }
+
     }
+
 
 }

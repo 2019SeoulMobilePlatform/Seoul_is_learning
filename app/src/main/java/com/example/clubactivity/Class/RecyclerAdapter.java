@@ -2,7 +2,6 @@ package com.example.clubactivity.Class;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -74,6 +72,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("location",item.getLocation()); //클래스 정확한 장소
                 intent.putExtra("date",item.getDate()); //클래스 시간
                 intent.putExtra("number",item.getPeopleNumber()); //클래스 인원수
+                intent.putExtra("price",item.getPrice()); //가격
 
                 context.startActivity(intent);
             }

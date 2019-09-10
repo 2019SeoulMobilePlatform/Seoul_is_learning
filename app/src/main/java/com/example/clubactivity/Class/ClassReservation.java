@@ -40,8 +40,9 @@ public class ClassReservation extends Activity {
         date.setText(ClassDetailActivity.date);
         TextView time = (TextView)findViewById(R.id.res_class_time);
         //time.setText(ClassDetailActivity.date);
+
         TextView price = (TextView)findViewById(R.id.res_class_price);
-        price.setText("50,000원");
+        price.setText(ClassDetailActivity.price+"원");
     }
 
 
