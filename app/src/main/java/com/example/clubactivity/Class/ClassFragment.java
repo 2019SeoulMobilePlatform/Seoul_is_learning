@@ -38,8 +38,6 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
         classList = new ClassList();
         searchBar = (EditText) view.findViewById(R.id.class_search);
 
-
-
         FrameLayout eunpyung_button = view.findViewById(R.id.fl_mainfragment_eunpyung);
         FrameLayout gangbuk_button = view.findViewById(R.id.fl_mainfragment_gangbuk);
         FrameLayout dobong_button = view.findViewById(R.id.fl_mainfragment_dobong);
@@ -120,11 +118,12 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
             }
         });
 
+        //엔터
         searchBar.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-
+                    searchButton.performClick();
                 }
                 return false;
             }
