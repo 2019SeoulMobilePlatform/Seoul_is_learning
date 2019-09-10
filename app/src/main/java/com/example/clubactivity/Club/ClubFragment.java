@@ -1,6 +1,5 @@
 package com.example.clubactivity.Club;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,7 +16,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +28,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -40,15 +36,11 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
-import com.example.clubactivity.Login.LoginActivity;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.Locale;
 
 public class  ClubFragment extends Fragment {
@@ -70,7 +62,7 @@ public class  ClubFragment extends Fragment {
         networkTask.execute();
 
         String email = AppManager.getInstance().getEmail();
-        Log.e("email", email);
+        //Log.e("email", email);
         url = "http://106.10.35.170/ImportMyClubList.php";
         String data = "email=" + email;
         networkTask = new NetworkTask(this.getContext(), url, data, 8);

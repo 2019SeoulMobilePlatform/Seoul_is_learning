@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,8 +20,6 @@ import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
-import com.example.clubactivity.Club.ChatViewItem;
-import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
@@ -226,8 +223,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String count = String.valueOf(resultObject.getInt("count")); //바꾸자
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
+                                   int class_index = resultObject.getInt("class_index");
 
-                                   Item item = new Item(decodedByte, star,name,information,local,target_user,address,time,count,price);
+                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price);
                                    items.add(item);
                                }
 

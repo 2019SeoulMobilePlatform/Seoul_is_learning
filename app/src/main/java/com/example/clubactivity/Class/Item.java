@@ -13,6 +13,8 @@ public class Item {
     private String peopleNumber;
     private String price;
 
+    private int class_index;
+
     public byte[] getImage() {
         return this.image;
     }
@@ -40,9 +42,12 @@ public class Item {
     public String getPrice() {
         return price;
     }
+    public int getClass_index() {return class_index;}
 
 
-    public Item(byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price) {
+    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price) {
+
+        this.class_index = class_index;
         this.image = image;
         this.title = title;
         this.desc = desc;

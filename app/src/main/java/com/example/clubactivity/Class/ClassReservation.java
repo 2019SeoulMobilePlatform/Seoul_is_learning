@@ -14,6 +14,7 @@ import com.example.clubactivity.R;
 
 public class ClassReservation extends Activity {
 
+    public int class_index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class ClassReservation extends Activity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         ImageView imageView = (ImageView)findViewById(R.id.res_class_image);
         imageView.setImageBitmap(bitmap);
+
+        class_index = getIntent().getIntExtra("class_index",0);
 
 
         TextView title = (TextView)findViewById(R.id.res_class_title);
