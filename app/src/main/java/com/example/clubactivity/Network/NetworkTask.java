@@ -216,6 +216,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     resultObject = resultObjectArray.getJSONObject(i);
                                     //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
                                     byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
+                                    String index = resultObject.getString("class_index");
                                     String name = resultObject.getString("name");
                                     String target_user = resultObject.getString("target_user");
                                     String address = resultObject.getString("address");
@@ -225,7 +226,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     int count_max = resultObject.getInt("count_max");
                                     String count = String.valueOf(resultObject.getInt("count")); //바꾸자
                                     float star = (float) resultObject.getDouble("star");
-                                    //int price = resultObject.getInt("price");
+                                    int price = resultObject.getInt("price");
 
                                     Item item = new Item(decodedByte, star, name, information, local, target_user, address, time, count);
                                     items.add(item);
@@ -318,6 +319,18 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
+                case Constants.SERVER_CLASS_RESERVATION:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "예약되었습니다.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "예약 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
             }
 
         }catch(Exception e){

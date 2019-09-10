@@ -70,7 +70,7 @@ public class  ClubFragment extends Fragment {
         networkTask.execute();
 
         String email = AppManager.getInstance().getEmail();
-        Log.e("email", email);
+        //Log.e("email", email);
         url = "http://106.10.35.170/ImportMyClubList.php";
         String data = "email=" + email;
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
