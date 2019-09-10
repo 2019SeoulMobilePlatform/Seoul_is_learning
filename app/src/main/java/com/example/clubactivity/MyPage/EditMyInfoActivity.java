@@ -91,8 +91,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
         areaSpinner.setSelection(getPosition(residence));
 
 
-        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
 
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
             profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
         else{
             profileImage.setImageResource(R.drawable.ic_account_circle_white_60dp);

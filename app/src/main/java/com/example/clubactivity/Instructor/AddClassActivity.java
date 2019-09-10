@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -26,9 +27,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.Network.ImageConverter;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
@@ -37,7 +41,9 @@ import java.util.Calendar;
 
 public class AddClassActivity extends AppCompatActivity {
 
-    private Spinner limitSpinner;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mDisplayTime;
@@ -58,6 +64,9 @@ public class AddClassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
+
+        preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        editor = preferences.edit();
 
         mDisplayDate = (TextView) findViewById(R.id.date);
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +158,8 @@ public class AddClassActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
 
-        limitSpinner = (Spinner)findViewById(R.id.limit_spinner);
-        limitSpinner.setAdapter(arrayAdapter);
+        classLimit = (Spinner)findViewById(R.id.limit_spinner);
+        classLimit.setAdapter(arrayAdapter);
 
         //저장 버튼
         Button save_club_content = (Button) findViewById(R.id.save_class_content);
@@ -160,9 +169,9 @@ public class AddClassActivity extends AppCompatActivity {
         classDescription = (EditText) findViewById(R.id.class_description);
         classPrice = (EditText) findViewById(R.id.class_price);
         classAddress = findViewById(R.id.class_address);
-        final EditText classTarget = findViewById(R.id.class_target_user);
-        Spinner classLimit = findViewById(R.id.limit_spinner);
-        Spinner classResidence = findViewById(R.id.area_spinner);
+        classTarget = findViewById(R.id.class_target_user);
+        classLimit = findViewById(R.id.limit_spinner);
+        classResidence = findViewById(R.id.area_spinner);
 
 
 
@@ -209,16 +218,34 @@ public class AddClassActivity extends AppCompatActivity {
                 //intent.putExtra("clubImage", userImage);
                 intent.putExtra("className", className.getText().toString());
                 intent.putExtra("classDescription", classDescription.getText().toString());
-                intent.putExtra("classMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
+                intent.putExtra("classMaxMember", Integer.parseInt(classLimit.getSelectedItem().toString()));
 
                 setResult(RESULT_OK, intent);
 
-                ///요 근처에서 서버 보내면 될거같아요
+
+                String url = "http://106.10.35.170/StoreClass.php";
+                String data = getData(classImage, className.getText().toString(), classDescription.getText().toString(), classPrice.getText().toString(),
+                        classLimit.getSelectedItem().toString(), classResidence.getSelectedItem().toString(), classAddress.getText().toString(), classTarget.getText().toString(),
+                        mDisplayDate.getText().toString()+" "+mDisplayTime.getText().toString());
+
+                NetworkTask networkTask = new NetworkTask(AddClassActivity.this, url, data, Constants.SERVER_CLASS_ADD_CLASS);
+                networkTask.execute();
 
                 AddClassActivity.this.finish();
             }
 
         });
+    }
+
+    public String getData(Bitmap _image, String name, String description, String price, String maxCount, String residence,
+                          String address, String targetUser, String time){
+
+        String image = ImageConverter.getImageToString(_image);
+
+        String data = "image=" + image + "&name=" + name + "&information=" + description + "&count_max=" + maxCount + "&price=" + price + "&local=" + residence +
+                "&address=" + address + "&target_user=" + targetUser + "&time=" + time + "&instructor_email=" + preferences.getString("email","");
+        Log.d(data.toString(), data);
+        return data;
     }
 
 

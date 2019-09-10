@@ -47,7 +47,8 @@
                 android:layout_margin="5dp"
                 android:padding="5dp"
                 android:maxWidth="200dp"
-                android:text ="text" />
+                android:text ="text"
+                android:autoSizeTextType="uniform"/>
 
         </FrameLayout>
 

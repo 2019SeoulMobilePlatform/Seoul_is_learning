@@ -28,7 +28,6 @@ public class ClassDetailReview extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_fragment_review, container, false);
 
-
         Button reviewButton = (Button)view.findViewById(R.id.class_review_button);
         reviewButton.setOnClickListener(new Button.OnClickListener() {
             @Override
