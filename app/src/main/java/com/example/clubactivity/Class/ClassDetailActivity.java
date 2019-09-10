@@ -128,6 +128,7 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         intent.putExtra("class_index", getIntent().getIntExtra("class_index",0)); //클래스인덱스뿌리기
 
+
         startActivity(intent);
     }
 
