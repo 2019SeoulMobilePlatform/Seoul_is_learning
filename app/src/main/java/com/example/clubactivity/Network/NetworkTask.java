@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.Club.ChatViewAdapter;
+import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
@@ -240,7 +241,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
-                case 6:
+                case 6: case Constants
+                        .SERVER_CLASS_ADD_CLASS:
                     try{
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
