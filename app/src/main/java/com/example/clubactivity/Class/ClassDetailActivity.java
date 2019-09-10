@@ -2,10 +2,9 @@ package com.example.clubactivity.Class;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +30,12 @@ public class ClassDetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    static public String desc; //잠깐만 이러면 안되는데..
+    static public String desc;
     static public String people;
     static public String location;
     static public String date;
     static public String number;
+    static public String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +72,11 @@ public class ClassDetailActivity extends AppCompatActivity {
 
 
         desc = getIntent().getStringExtra("desc");
-        people=getIntent().getStringExtra("people");
-        location=getIntent().getStringExtra("location");
-        date=getIntent().getStringExtra("date");
-        number=getIntent().getStringExtra("number");
+        people = getIntent().getStringExtra("people");
+        location = getIntent().getStringExtra("location");
+        date = getIntent().getStringExtra("date");
+        number = getIntent().getStringExtra("number");
+        price = getIntent().getStringExtra("price");
 
         //탭
 
@@ -120,6 +121,8 @@ public class ClassDetailActivity extends AppCompatActivity {
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         intent.putExtra("image",byteArray); //클래스 이미지 뿌리기
 
+        intent.putExtra("price", getIntent().getStringExtra("price")); //가격뿌리기
+
         startActivity(intent);
     }
 
@@ -128,7 +131,13 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         ImageButton heartImage = (ImageButton)findViewById(R.id.heart);
 
-        if(true)
+        Drawable temp1 = heartImage.getDrawable();
+        Drawable temp2 = view.getResources().getDrawable(R.drawable.heart_empty);
+
+        Bitmap tmp1Bitmap1 = ((BitmapDrawable)temp1).getBitmap();
+        Bitmap tmp1Bitmap2 = ((BitmapDrawable)temp2).getBitmap();
+
+        if(tmp1Bitmap1.equals(tmp1Bitmap2))
         {
             heartImage.setImageResource(R.drawable.heart_red);
             Toast.makeText(getApplicationContext(), "찜한 클래스에 추가되었습니다!", Toast.LENGTH_SHORT).show();
