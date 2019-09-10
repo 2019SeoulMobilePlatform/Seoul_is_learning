@@ -123,7 +123,7 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         intent.putExtra("price", getIntent().getStringExtra("price")); //가격뿌리기
 
-        intent.putExtra("class_index", getIntent().getIntExtra("price",0)); //가격뿌리기
+        intent.putExtra("class_index", getIntent().getIntExtra("class_index",0)); //가격뿌리기
 
         startActivity(intent);
     }

@@ -62,7 +62,7 @@ public class ClassReservation extends Activity {
         }
 
         String url = "http://106.10.35.170/ReservateClass.php";
-        String data = getData(1 ,AppManager.getInstance().getEmail());
+        String data = getData(class_index ,AppManager.getInstance().getEmail());
 
         NetworkTask networkTask = new NetworkTask(ClassReservation.this, url, data, Constants.SERVER_CLASS_RESERVATION);
         networkTask.execute();
