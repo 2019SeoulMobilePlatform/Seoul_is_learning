@@ -238,7 +238,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                            }
                         }
                         else{
-
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
@@ -318,6 +317,18 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
+                case Constants.SERVER_CLASS_RESERVATION:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "예약되었습니다.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "예약 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
             }
 
         }catch(Exception e){

@@ -18,4 +18,5 @@ public class Constants {
     public static Boolean isLogined = null;
     public static final int SERVER_CLASS_LIST_GET = 5;
     public static final int SERVER_CLASS_ADD_CLASS = 18;
+    public static final int SERVER_CLASS_RESERVATION = 20;
 }
