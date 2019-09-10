@@ -1,9 +1,11 @@
 package com.example.clubactivity.Club;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -36,7 +38,9 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Login.LoginActivity;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,15 +60,34 @@ public class  ClubFragment extends Fragment {
     ChatViewAdapter searchClub_adapter;
     ChatViewAdapter wholeClub_adapter;
     private EditText searchBar;
+    NetworkTask networkTask;
+    SharedPreferences preferences;
 
+    public ClubFragment(){
+
+        String url = "http://106.10.35.170/ImportClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask.execute();
+
+        String email = AppManager.getInstance().getEmail();
+        Log.e("email", email);
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data, 8);
+        networkTask.execute();
+
+
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.club, null);
 
-        TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
+        final TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
         tabHost1.setup() ;
+
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
@@ -89,27 +112,13 @@ public class  ClubFragment extends Fragment {
         wholeClub_ListView = (ListView) view.findViewById(R.id.wholeclub_listview);
         wholeClub_ListView.setAdapter(wholeClub_adapter);
 
+
+        wholeClub_adapter.setChatViewItemList(AppManager.getInstance().getWholeClub_Adapter());
+        myClub_adapter.setChatViewItemList(AppManager.getInstance().getMyClub_Adapter());
+
+
         //리스트뷰 스와이프로 지우기
         SetListViewCreator(myClub_Listview);
-
-        String url = "http://106.10.35.170/ImportClubList.php";
-
-        NetworkTask networkTask = new NetworkTask(this.getContext(), url, 7);
-        networkTask.execute();
-
-        // 임시 아이템 추가.
-        /*
-        wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.cat_dog),
-                "일러스트 동호회 모집", "일러스트에 관심 있으신 분들 환영합니다~~", 10, 1, 1) ;
-        wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
-                "Circle", "Account Circle Black 36dp", 10, 3, 2) ;
-        wholeClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class2),
-                "Ind", "Assignment Ind Black 36dp", 10, 3, 3);
-        myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class3),
-                "Ind", "Assignment Ind Black 36dp", 10, 3, 4) ;
-        myClub_adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.class1),
-                "Circle", "Account Circle Black 36dp", 10, 1, 5) ;
-        */
 
         wholeClub_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -251,10 +260,7 @@ public class  ClubFragment extends Fragment {
             }
 
         });
-
-
         return view;
-
     }
 
 

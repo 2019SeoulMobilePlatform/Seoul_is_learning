@@ -20,7 +20,6 @@ public class ImageConverter {
         byte[] imageBytes = stream.toByteArray();
 
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        Log.e("EncodeToString", encodedImage);
 
         return  encodedImage;
     }

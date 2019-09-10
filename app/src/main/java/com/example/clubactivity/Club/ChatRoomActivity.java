@@ -2,6 +2,7 @@ package com.example.clubactivity.Club;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -38,6 +39,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     MessageListAdapter adapter;
     TextView messageTextView;
     ListView listview;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,6 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         adapter = new MessageListAdapter(this);
         messageTextView = findViewById(R.id.editText);
-
-
 
         listview = (ListView) findViewById(R.id.chatmessage_listView);
         listview.setAdapter(adapter);

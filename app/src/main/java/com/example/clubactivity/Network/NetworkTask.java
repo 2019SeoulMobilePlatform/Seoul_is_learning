@@ -10,15 +10,19 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Club.ClubFragment;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
@@ -37,7 +41,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private int selection;
 
     public List<Item> items = new ArrayList<>();
-    ChatViewAdapter wholeClub_Adapter;
+    ChatViewAdapter wholeClub_Adapter = null;
+    ChatViewAdapter myClub_Adapter = null;
+
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
@@ -49,6 +55,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.context = _context;
         this.url = url;
         this.selection = action;
+        this.data = " ";
     }
 
     @Override
@@ -77,7 +84,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
         try{
             //경우에 따라 결과 값을 받아 일어났으면 하는 작업
-            switch(this.selection){
+            switch(this.selection) {
                 case 1:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
@@ -92,8 +99,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             String user_phonenumber = jsonObject.getString("phone_number");
                             String user_residence = jsonObject.getString("residence");
                             String user_profile = jsonObject.getString("image");
-                            Log.e("getdata",user_profile);
                             String user_birth = jsonObject.getString("birth");
+                            AppManager.getInstance().setEmail(user_email);
 
                             SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
                             SharedPreferences.Editor user_editor = preferences.edit();
@@ -115,24 +122,23 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             this.context.startActivity(new Intent(this.context, MainActivity.class));
                             ((Activity) this.context).finish();
                             Toast.makeText(this.context, "로그인성공", Toast.LENGTH_LONG).show();
-
+                            Log.e("Login", "성공");
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
 
                 case 2:
-                    try{
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        if(real_result.equals("success")){
+                        if (real_result.equals("success")) {
                             Toast.makeText(this.context, "성공적으로 회원가입 되었습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.context, "회원가입에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
@@ -175,97 +181,95 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             Toast.makeText(this.context, "로그인성공", Toast.LENGTH_LONG).show();
 
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
 
                 case 4:
-                    try{
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        if(real_result.equals("success")){
+                        if (real_result.equals("success")) {
                             Toast.makeText(this.context, "성공적으로 변경했습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.context, "변경에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                     break;
 
-                    // 클래스 리스트 받아오기
+                // 클래스 리스트 받아오기
                 case 5:
-                    try{
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
-                        if(!real_result.equals("fail")) {
+                        if (!real_result.equals("fail")) {
                             JSONObject resultObject;
 
-                           if(resultObjectArray.length() != 0) {
+                            if (resultObjectArray.length() != 0) {
 
-                               for(int i = 0 ; i < resultObjectArray.length(); i++){
-                                   resultObject = resultObjectArray.getJSONObject(i);
-                                   //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
-                                   byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
-                                   String name = resultObject.getString("name");
-                                   String target_user = resultObject.getString("target_user");
-                                   String address = resultObject.getString("address");
-                                   String information = resultObject.getString("information");
-                                   String time = resultObject.getString("time");
-                                   String local = resultObject.getString("local");
-                                   int count_max = resultObject.getInt("count_max");
-                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
-                                   float star = (float)resultObject.getDouble("star");
-                                   //int price = resultObject.getInt("price");
+                                for (int i = 0; i < resultObjectArray.length(); i++) {
+                                    resultObject = resultObjectArray.getJSONObject(i);
+                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                    byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
+                                    String name = resultObject.getString("name");
+                                    String target_user = resultObject.getString("target_user");
+                                    String address = resultObject.getString("address");
+                                    String information = resultObject.getString("information");
+                                    String time = resultObject.getString("time");
+                                    String local = resultObject.getString("local");
+                                    int count_max = resultObject.getInt("count_max");
+                                    String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                    float star = (float) resultObject.getDouble("star");
+                                    //int price = resultObject.getInt("price");
 
-                                   Item item = new Item(decodedByte, star,name,information,local,target_user,address,time,count);
-                                   items.add(item);
-                               }
+                                    Item item = new Item(decodedByte, star, name, information, local, target_user, address, time, count);
+                                    items.add(item);
+                                }
 
-                               //클래스 리스트 설정 Recyclerview
-                               RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
-                               recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
-                               LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                               recyclerView.setHasFixedSize(true);
-                               recyclerView.setLayoutManager(layoutManager);
-                           }
-                        }
-                        else{
+                                //클래스 리스트 설정 Recyclerview
+                                RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
+                                recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setLayoutManager(layoutManager);
+                            }
+                        } else {
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
-                case 6: case Constants
+                case 6:
+                case Constants
                         .SERVER_CLASS_ADD_CLASS:
-                    try{
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        if(real_result.equals("success")){
+                        if (real_result.equals("success")) {
                             Toast.makeText(this.context, "성공적으로 추가하였습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.context, "추가에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
                 case 7:
-                    try{
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
-                        if(!real_result.equals("fail")) {
+                        wholeClub_Adapter = new ChatViewAdapter();
+                        if (!real_result.equals("fail")) {
                             JSONObject resultObject;
-
-                            if(resultObjectArray.length() != 0) {
-                                for(int i = 0 ; i < resultObjectArray.length(); i++){
+                            if (resultObjectArray.length() != 0) {
+                                for (int i = 0; i < resultObjectArray.length(); i++) {
                                     resultObject = resultObjectArray.getJSONObject(i);
                                     Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image"));
                                     Drawable drawable = new BitmapDrawable(image);
@@ -274,31 +278,52 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     int count_max = resultObject.getInt("count_max");
                                     int count = resultObject.getInt("count");
                                     int room_index = resultObject.getInt("room_index");
-
-                                    wholeClub_Adapter = new ChatViewAdapter();
-                                    wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index) ;
+                                    wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index);
                                 }
                             }
-                        }
-                        else{
+                            AppManager.getInstance().setWholeClub_Adapter(wholeClub_Adapter.getChatViewItemList());
+                        } else {
                             Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
-
+                case 8:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        myClub_Adapter = new ChatViewAdapter();
+                        if (!real_result.equals("fail")) {
+                            JSONObject resultObject;
+                            if (resultObjectArray.length() != 0) {
+                                for (int i = 0; i < resultObjectArray.length(); i++) {
+                                    resultObject = resultObjectArray.getJSONObject(i);
+                                    Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image"));
+                                    Drawable drawable = new BitmapDrawable(image);
+                                    String name = resultObject.getString("name");
+                                    String information = resultObject.getString("information");
+                                    int count_max = resultObject.getInt("count_max");
+                                    int count = resultObject.getInt("count");
+                                    int room_index = resultObject.getInt("room_index");
+                                    myClub_Adapter.addItem(drawable, name, information, count_max, count, room_index);
+                                }
+                            }
+                            AppManager.getInstance().setMyClub_Adapter(myClub_Adapter.getChatViewItemList());
+                        } else {
+                            Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
 
         }catch(Exception e){
             Log.d("설마","여긴아니지");
             e.printStackTrace();
         }
-
-    }
-
-    public List<Item> ServerClassList(){
-        return items;
     }
 
 }

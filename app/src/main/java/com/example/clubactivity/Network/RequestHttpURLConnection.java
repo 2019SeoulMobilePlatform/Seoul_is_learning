@@ -16,8 +16,6 @@ public class RequestHttpURLConnection {
         String result = null;
         BufferedReader reader = null;
         String postParameters = data;
-        Log.e("data", data);
-        Log.e("URL", _url);
 
         try{
             URL url = new URL(_url);
