@@ -46,6 +46,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
+
         Intent intent = getIntent();
         TextView title = findViewById(R.id.club_chatting_title);
         title.setText(intent.getExtras().get("clubName").toString());

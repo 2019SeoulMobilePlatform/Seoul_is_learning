@@ -20,11 +20,8 @@ import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.Club.ChatViewAdapter;
-<<<<<<< HEAD
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Club.ClubFragment;
-=======
->>>>>>> origin/develop
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.R;
@@ -257,7 +254,12 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         if(real_result.equals("success")){
                             Toast.makeText(this.context, "성공적으로 추가하였습니다.", Toast.LENGTH_LONG).show();
                         }
-                        else{
+                        else if(real_result.equals("fail1")){
+                            Toast.makeText(this.context, "룸유저에 추가 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                        else if(real_result.equals("fail2")){
+                            Toast.makeText(this.context, "찾기에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }else{
                             Toast.makeText(this.context, "추가에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     }catch(Exception e){
@@ -319,6 +321,20 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         }
                         else{
                             Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                case 9:
+                    try{
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if(real_result.equals("success")){
+                            Toast.makeText(this.context, "동호회방 입장에 성공하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(this.context, "동호회방 입장에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     }catch(Exception e){
                         e.printStackTrace();

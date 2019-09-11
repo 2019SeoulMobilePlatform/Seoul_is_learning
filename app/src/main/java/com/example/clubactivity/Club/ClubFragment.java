@@ -65,6 +65,7 @@ public class  ClubFragment extends Fragment {
 
     public ClubFragment(){
 
+        
         String url = "http://106.10.35.170/ImportClubList.php";
         networkTask = new NetworkTask(this.getContext(), url, 7);
         networkTask.execute();
@@ -76,8 +77,6 @@ public class  ClubFragment extends Fragment {
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
         networkTask.execute();
 
-
-
     }
 
     @Nullable
@@ -88,6 +87,16 @@ public class  ClubFragment extends Fragment {
         final TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
         tabHost1.setup() ;
 
+        String url = "http://106.10.35.170/ImportClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask.execute();
+
+        String email = AppManager.getInstance().getEmail();
+        Log.e("email", email);
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data, 8);
+        networkTask.execute();
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
@@ -115,7 +124,7 @@ public class  ClubFragment extends Fragment {
 
         wholeClub_adapter.setChatViewItemList(AppManager.getInstance().getWholeClub_Adapter());
         myClub_adapter.setChatViewItemList(AppManager.getInstance().getMyClub_Adapter());
-
+        Log.e("ClubFragment", "업뎃");
 
         //리스트뷰 스와이프로 지우기
         SetListViewCreator(myClub_Listview);
@@ -134,8 +143,8 @@ public class  ClubFragment extends Fragment {
 
                 //Uri clubImageUri = getImageUri(getActivity(), ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap());
                 //intent.putExtra("imageUri", clubImageUri);
+                intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
 
-                //intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
                 intent.putExtra("clubImage",bytes);
                 intent.putExtra("clubName", ((ChatViewItem)wholeClub_adapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)wholeClub_adapter.getItem(i)).getDesc());

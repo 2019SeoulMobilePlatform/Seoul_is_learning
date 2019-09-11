@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
 import com.example.clubactivity.Network.ImageConverter;
@@ -122,7 +123,8 @@ public class AddClubActivity extends AppCompatActivity {
                 userImage = imageProcessing.ConvertUriToBitmap(imgUri);
 
                 String url = "http://106.10.35.170/StoreClub.php";
-                String data = getData(userImage, clubName.getText().toString(), clubDescription.getText().toString(), limitSpinner.getSelectedItem().toString());
+                String data = getData(userImage, clubName.getText().toString(), clubDescription.getText().toString(), limitSpinner.getSelectedItem().toString(),
+                                        AppManager.getInstance().getEmail());
 
                 NetworkTask networkTask = new NetworkTask(AddClubActivity.this, url, data, 6);
                 networkTask.execute();
@@ -135,7 +137,6 @@ public class AddClubActivity extends AppCompatActivity {
                 intent.putExtra("clubDescription", clubDescription.getText().toString());
                 intent.putExtra("clubMaxMember", Integer.parseInt(limitSpinner.getSelectedItem().toString()));
 
-
                 setResult(RESULT_OK, intent);
                 AddClubActivity.this.finish();
             }
@@ -144,11 +145,11 @@ public class AddClubActivity extends AppCompatActivity {
 
     }
 
-    public String getData(Bitmap _image, String name, String description, String maxCount){
+    public String getData(Bitmap _image, String name, String description, String maxCount, String email){
 
         String image = ImageConverter.getImageToString(_image);
 
-        String data = "image=" + image + "&name=" + name + "&information=" + description + "&count_max=" + maxCount;
+        String data = "image=" + image + "&name=" + name + "&information=" + description + "&count_max=" + maxCount + "&email=" +email;
 
         return data;
     }
