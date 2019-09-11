@@ -222,8 +222,6 @@ public class AddClassActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, intent);
 
-                Log.d("asdfljk", "왜??ㅁㅇㄻㄴㄻㄴ리먼ㄹ:");
-
                 String url = "http://106.10.35.170/StoreClass.php";
                 String data = getData(classImage, className.getText().toString(), classDescription.getText().toString(), classPrice.getText().toString(),
                         classLimit.getSelectedItem().toString(), classResidence.getSelectedItem().toString(), classAddress.getText().toString(), classTarget.getText().toString(),

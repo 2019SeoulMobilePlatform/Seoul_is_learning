@@ -18,12 +18,13 @@ import java.util.ArrayList;
 
 public class ChatViewAdapter extends BaseAdapter {
     public ArrayList<ChatViewItem> chatViewItemList;
-    public ArrayList<Item> items;
 
     // ChatViewAdapter의 생성자
     public ChatViewAdapter() {
         chatViewItemList = new ArrayList<ChatViewItem>();
     }
+
+    public ChatViewAdapter(ArrayList<ChatViewItem> chatViewItemList) {this.chatViewItemList = chatViewItemList;}
 
     public ArrayList<ChatViewItem> getChatViewItemList(){ return chatViewItemList; }
     public void setChatViewItemList( ArrayList<ChatViewItem> list){ this.chatViewItemList = list;}

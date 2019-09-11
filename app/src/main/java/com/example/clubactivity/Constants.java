@@ -23,4 +23,5 @@ public class Constants {
     public static final int SERVER_CLASS_ADD_FAVORITE = 21;
     public static final int SERVER_CLASS_DELETE_FAVORITE = 22;
     public static final int SERVER_CHECK_DUPLICATE_EMAIL = 23;
+    public static final int SERVER_CLASS_LIST_GET_INSTRUCTOR = 24;
 }
