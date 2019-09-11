@@ -12,6 +12,18 @@ public class ChatViewItem implements Parcelable {
     private int nowMemberNum;
     private int itemIndex;
 
+    private byte[] image;
+    private String area;
+    private float star;
+
+    private String location;
+    private String date;
+    private String price;
+    private Boolean favorite;
+
+    private int flag_dongnae;
+    
+
     protected ChatViewItem(Parcel in) {
         titleStr = in.readString();
         descStr = in.readString();

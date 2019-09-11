@@ -56,6 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
         checkEmailbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if(inputEmail.getText().toString().isEmpty())
+                    return;
                 String url = "http://106.10.35.170/CheckId.php";
                 String data = "email=" + inputEmail.getText().toString();
 

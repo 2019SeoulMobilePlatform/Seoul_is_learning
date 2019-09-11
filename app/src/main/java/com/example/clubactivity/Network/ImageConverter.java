@@ -2,8 +2,12 @@ package com.example.clubactivity.Network;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Base64;
 import android.util.Log;
+
+import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Constants;
 
 import java.io.ByteArrayOutputStream;
 
@@ -14,8 +18,9 @@ public class ImageConverter {
     public static String getImageToString(Bitmap userImage){
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        Bitmap dstBitmap = Bitmap.createScaledBitmap(userImage, Constants.IMAGE_SIZE, userImage.getHeight()/(userImage.getWidth()/Constants.IMAGE_SIZE), true);
 
-        userImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        dstBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
         byte[] imageBytes = stream.toByteArray();
 

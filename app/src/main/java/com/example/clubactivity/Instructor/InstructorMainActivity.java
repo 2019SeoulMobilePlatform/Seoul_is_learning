@@ -161,9 +161,7 @@ public class InstructorMainActivity extends AppCompatActivity {
     }
 
     public Bitmap getImageToBitmap(String encodedImage){
-
         byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
-
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 

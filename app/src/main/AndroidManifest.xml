@@ -47,7 +47,8 @@
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.AddClubActivity"
-            android:theme="@style/NoTitleAppcompat" />
+            android:theme="@style/NoTitleAppcompat"
+            android:hardwareAccelerated="false" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
