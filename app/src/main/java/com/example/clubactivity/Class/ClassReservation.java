@@ -10,9 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.clubactivity.AppManager;
-import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Constants;
-import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 

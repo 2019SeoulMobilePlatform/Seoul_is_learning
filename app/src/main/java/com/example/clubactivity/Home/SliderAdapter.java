@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.clubactivity.Class.ClassFragment;
 import com.example.clubactivity.Class.ClassList;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
@@ -57,6 +59,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 }
                 if (position==1){
                     ClassFragment.classmenuTitle = "원데이 클래스";
+                    //원데이 클래스 영역
+                    String data = "";
+                    String url = "";
+                    NetworkTask networkTask = new NetworkTask(context, url, data, Constants.SERVER_CLASS_LIST_GET);
+                    networkTask.execute();
+
                     FragmentActivity activity = (FragmentActivity) context;
                     FragmentManager fragmentManager = activity.getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -65,6 +73,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 }
                 if (position==2){
                     ClassFragment.classmenuTitle = "개발 클래스";
+                    //개발 클래스 영역
+                    String data = "";
+                    String url = "";
+                    NetworkTask networkTask = new NetworkTask(context, url, data, Constants.SERVER_CLASS_LIST_GET);
+                    networkTask.execute();
+
                     FragmentActivity activity = (FragmentActivity) context;
                     FragmentManager fragmentManager = activity.getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

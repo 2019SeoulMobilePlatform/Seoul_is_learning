@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
+import com.example.clubactivity.Class.ReviewListItem;
+import com.example.clubactivity.Class.ReviewListViewAdapter;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
@@ -40,6 +43,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private Button btn;
 
     public List<Item> items = new ArrayList<>();
+    public ArrayList<ReviewListItem> reviewListItems = new ArrayList<>();
     ChatViewAdapter wholeClub_Adapter = null;
     ChatViewAdapter myClub_Adapter = null;
 
@@ -208,8 +212,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                     break;
 
-                // 클래스 리스트 받아오기
-                case 5:
+                // 클래스 리스트 받아오기 5
+                case Constants.SERVER_CLASS_LIST_GET:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -247,9 +251,50 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                recyclerView.setHasFixedSize(true);
                                recyclerView.setLayoutManager(layoutManager);
                            }
+                           else
+                           {
+                               Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
+                           }
                         }
                         else{
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                    //서버에서 클래스 리뷰 가져오기
+                case Constants.SERVER_CLASS_REVIEW_GET:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        if (!real_result.equals("fail")) {
+                            JSONObject resultObject;
+                            if(resultObjectArray.length() != 0) {
+                                for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                    resultObject = resultObjectArray.getJSONObject(i);
+
+                                    byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
+                                    String nickname = resultObject.getString("nickname");
+                                    String review = resultObject.getString("review");
+                                    float star = (float)resultObject.getDouble("star");
+
+                                    ReviewListItem item = new ReviewListItem(decodedByte ,nickname,star,review);
+                                    reviewListItems.add(item);
+                                }
+
+                                //후기 설정
+                                ReviewListViewAdapter adapter;  //후기 리스트뷰 어댑터
+                                ListView reviewList;         // 후기 리스트
+                                reviewList = (ListView) ((Activity) context).findViewById(R.id.class_review_listView);
+                                adapter = new ReviewListViewAdapter(((Activity) context).getLayoutInflater(), R.layout.class_review_listview_item, reviewListItems);
+                                reviewList.setAdapter(adapter);
+                            }
+                        }
+                        else{
+                            Toast.makeText(this.context, "클래스 리뷰가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -384,7 +429,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             }
 
         }catch(Exception e){
-            Log.d("설마","여긴아니지");
             e.printStackTrace();
         }
 

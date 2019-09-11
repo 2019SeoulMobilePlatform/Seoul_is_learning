@@ -23,6 +23,7 @@ import com.example.clubactivity.Class.ClassFragment;
 import com.example.clubactivity.Class.ClassList;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
@@ -97,12 +98,19 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
 
         //전체보기
-        ClassFragment.classmenuTitle = "인기 클래스";
+        ClassFragment.classmenuTitle = "추천 클래스";
         Button allViewButton = (Button)view.findViewById(R.id.class_all_button);
 
         allViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //추천 클래스 영역
+                String data = "";
+                String url = "";
+                NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
+                networkTask.execute();
+
                 ClassListCall();
             }
         });
@@ -110,19 +118,6 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
         //밑에 뷰페이저 영역
         List<Item> items = new ArrayList<>();
-        //models = new ArrayList<>();
-        /*R.drawable.cooking_class
-        R.drawable.gaebal_class
-        R.drawable.draw_class*/
-
-
-
-/*        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cooking_class);
-        Bitmap dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
-
-        dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] bytes = stream.toByteArray();*/
 
         items.add(new Item(9700,ImageSending(R.drawable.cooking_class),5 ,"하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","15명","50000", false));
         items.add(new Item(9701,ImageSending(R.drawable.gaebal_class),5, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수","20명","50000", false));

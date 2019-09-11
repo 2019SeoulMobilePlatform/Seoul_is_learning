@@ -39,6 +39,7 @@ public class ClassDetailActivity extends AppCompatActivity {
     static public String date;
     static public String number;
     static public String price;
+    static public String class_index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class ClassDetailActivity extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         number = getIntent().getStringExtra("number");
         price = getIntent().getStringExtra("price");
+
+        class_index = String.valueOf(getIntent().getIntExtra("class_index",0));
 
         //탭
 
@@ -126,7 +129,8 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         intent.putExtra("price", getIntent().getStringExtra("price")); //가격뿌리기
 
-        intent.putExtra("class_index", getIntent().getIntExtra("class_index",0)); //가격뿌리기
+        intent.putExtra("class_index", getIntent().getIntExtra("class_index",0)); //클래스인덱스뿌리기
+
 
         startActivity(intent);
     }
