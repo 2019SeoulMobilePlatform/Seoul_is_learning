@@ -14,6 +14,7 @@ public class Item {
     private String price;
 
     private int class_index;
+    private int flag_dongnae;
 
     public byte[] getImage() {
         return this.image;
@@ -43,9 +44,10 @@ public class Item {
         return price;
     }
     public int getClass_index() {return class_index;}
+    public int getFlag_dongnae() {return flag_dongnae;}
 
 
-    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price) {
+    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price,int flag_dongnae) {
 
         this.class_index = class_index;
         this.image = image;
@@ -59,6 +61,7 @@ public class Item {
         this.date = date;
         this.peopleNumber = peopleNumber;
         this.price = price;
+        this.flag_dongnae = flag_dongnae;
     }
 
 }

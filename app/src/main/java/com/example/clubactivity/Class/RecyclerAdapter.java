@@ -2,6 +2,7 @@ package com.example.clubactivity.Class;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 .into(holder.image);
 
         //holder.image.setImageBitmap(item.getImage());
+        if(item.getFlag_dongnae() == 0) {
+            holder.dongnae.setText(" 개인 클래스 ");
+            holder.dongnae.setBackgroundColor(Color.parseColor("#8013B9A5"));
+        }
+        else {
+            holder.dongnae.setText(" 동네 배움터 ");
+            holder.dongnae.setBackgroundColor(Color.parseColor("#80F78181"));
+        }
         holder.title.setText(item.getTitle());
         holder.desc.setText(item.getDesc());
         holder.ratingBar.setRating(item.getStar());
@@ -93,6 +102,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView desc;
         RatingBar ratingBar;
         CardView cardview;
+        TextView dongnae;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -104,6 +114,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             desc = (TextView) itemView.findViewById(R.id.class_list_sogae);
             ratingBar = (RatingBar) itemView.findViewById(R.id.review_star);
             cardview = (CardView) itemView.findViewById(R.id.class_list_cardview);
+            dongnae = (TextView) itemView.findViewById(R.id.class_event);
         }
     }
 }

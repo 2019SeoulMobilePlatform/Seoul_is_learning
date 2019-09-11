@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.ClassFragment;
 import com.example.clubactivity.Class.ClassList;
 import com.example.clubactivity.Class.Item;
@@ -106,8 +107,8 @@ public class HomeFragment extends Fragment implements DatePickerListener {
             public void onClick(View view) {
 
                 //추천 클래스 영역
-                String data = "";
-                String url = "";
+                String data = "email=" + AppManager.getInstance().getEmail();
+                String url = "http://106.10.35.170/ImportRecommandClassList.php";
                 NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
                 networkTask.execute();
 
@@ -119,12 +120,11 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         //밑에 뷰페이저 영역
         List<Item> items = new ArrayList<>();
 
-        items.add(new Item(9700,ImageSending(R.drawable.cooking_class),5 ,"하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","15명","50000"));
-        items.add(new Item(9701,ImageSending(R.drawable.gaebal_class),5, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수","20명","50000"));
-        items.add(new Item(9702,ImageSending(R.drawable.draw_class),5, "그림 어렵지 않습니다.", "당신의 머리속 그림을 그려봅시다.","송파구","그림을 쉽게 그리고 싶은 사람들을 구합니다.","서울시 송파구 잠실 롯데타워 1층 클래스 열람실","2019년 12월 7일","10명","50000"));
+        items.add(new Item(9700,ImageSending(R.drawable.cooking_class),5 ,"하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","15명","50000",0));
+        items.add(new Item(9701,ImageSending(R.drawable.gaebal_class),5, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수","20명","50000",0));
+        items.add(new Item(9702,ImageSending(R.drawable.draw_class),5, "그림 어렵지 않습니다.", "당신의 머리속 그림을 그려봅시다.","송파구","그림을 쉽게 그리고 싶은 사람들을 구합니다.","서울시 송파구 잠실 롯데타워 1층 클래스 열람실","2019년 12월 7일","10명","50000",0));
 
         adapter = new Adapter(items, getActivity());
-
 
         int dpValue = 55;
         float displaySize = getResources().getDisplayMetrics().density;
@@ -165,9 +165,11 @@ public class HomeFragment extends Fragment implements DatePickerListener {
     }
 
 
+    // 달력 누르는곳
     @Override
     public void onDateSelected(DateTime dateSelected) {
         Log.i("HorizontalPicker", "Selected date is " + dateSelected.toString());
+
     }
 
     public void ClassListCall()

@@ -228,8 +228,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
                                    int class_index = resultObject.getInt("class_index");
+                                   int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price);
+                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price,flag_dongnae);
                                    items.add(item);
                                }
 
