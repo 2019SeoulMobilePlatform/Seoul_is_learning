@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -108,7 +109,8 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                 }
                 else {
                     classmenuTitle = searchText;
-                    String data = "word=" + classmenuTitle;
+
+                    String data = "word=" + classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
                     String url = "http://106.10.35.170/SearchClassList.php";
                     NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
                     networkTask.execute();
@@ -220,7 +222,9 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                 break;
         }
 
-        String data = "local=" + classmenuTitle;
+
+        String data = "local=" + classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
+
         String url = "http://106.10.35.170/ImportClassList.php";
         NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
         networkTask.execute();

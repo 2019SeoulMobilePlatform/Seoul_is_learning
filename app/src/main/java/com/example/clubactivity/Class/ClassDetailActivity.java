@@ -18,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.AppManager;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -143,17 +146,38 @@ public class ClassDetailActivity extends AppCompatActivity {
         Bitmap tmp1Bitmap1 = ((BitmapDrawable)temp1).getBitmap();
         Bitmap tmp1Bitmap2 = ((BitmapDrawable)temp2).getBitmap();
 
+        if(!Constants.isLogined){
+            Toast.makeText(getApplicationContext(), "찜 기능은 로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if(tmp1Bitmap1.equals(tmp1Bitmap2))
         {
             heartImage.setImageResource(R.drawable.heart_red);
-            Toast.makeText(getApplicationContext(), "찜한 클래스에 추가되었습니다!", Toast.LENGTH_SHORT).show();
+
+            String url = "http://106.10.35.170/AddFavoriteClass.php";
+            String data = getData(getIntent().getIntExtra("class_index",0) , AppManager.getInstance().getEmail());
+
+            NetworkTask networkTask = new NetworkTask(ClassDetailActivity.this, url, data, Constants.SERVER_CLASS_ADD_FAVORITE);
+            networkTask.execute();
         }
         else
         {
             heartImage.setImageResource(R.drawable.heart_empty);
-            Toast.makeText(getApplicationContext(), "찜한 클래스에 해제되었습니다!", Toast.LENGTH_SHORT).show();
+            String url = "http://106.10.35.170/DeleteFavoriteClass.php";
+            String data = getData(getIntent().getIntExtra("class_index",0) , AppManager.getInstance().getEmail());
+
+            NetworkTask networkTask = new NetworkTask(ClassDetailActivity.this, url, data, Constants.SERVER_CLASS_DELETE_FAVORITE);
+            networkTask.execute();
         }
 
+    }
+
+    public String getData(int class_index, String email){
+
+        String data = "class_index=" + class_index + "&email=" + email;
+
+        return data;
     }
 
 

@@ -19,7 +19,7 @@ public class AppManager {
         return instance;
     }
 
-    String email = null;
+    String email = "";
 
     public void setEmail(String _email){this.email = _email;}
     public String getEmail(){return email;}

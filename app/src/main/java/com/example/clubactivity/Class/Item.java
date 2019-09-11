@@ -12,6 +12,7 @@ public class Item {
     private String date;
     private String peopleNumber;
     private String price;
+    private Boolean favorite;
 
     private int class_index;
     private int flag_dongnae;
@@ -44,10 +45,11 @@ public class Item {
         return price;
     }
     public int getClass_index() {return class_index;}
+
     public int getFlag_dongnae() {return flag_dongnae;}
+    public Boolean getFavorite() {return favorite;}
 
-
-    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price,int flag_dongnae) {
+    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price, boolean favorite, int flag_dongnae) {
 
         this.class_index = class_index;
         this.image = image;
@@ -62,6 +64,7 @@ public class Item {
         this.peopleNumber = peopleNumber;
         this.price = price;
         this.flag_dongnae = flag_dongnae;
+        this.favorite = favorite;
     }
 
 }

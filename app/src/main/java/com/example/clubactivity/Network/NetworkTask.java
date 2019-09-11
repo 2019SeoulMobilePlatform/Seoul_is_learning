@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,12 +40,21 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String url;
     private String data;
     private int selection;
+    private Button btn;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ReviewListItem> reviewListItems = new ArrayList<>();
     ChatViewAdapter wholeClub_Adapter = null;
     ChatViewAdapter myClub_Adapter = null;
 
+
+    public NetworkTask(Context _context, String url, String data, int action, Button btn){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.btn = btn;
+    }
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
@@ -228,9 +238,10 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
                                    int class_index = resultObject.getInt("class_index");
+                                   boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price,flag_dongnae);
+                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
                                    items.add(item);
                                }
 
@@ -375,6 +386,47 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    break;
+                case Constants.SERVER_CLASS_ADD_FAVORITE:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "찜 목록에 추가되었습니다.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "찜 목록 추가에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case Constants.SERVER_CLASS_DELETE_FAVORITE:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "찜 목록에서 삭제되었습니다.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "찜 목록에서 삭제하지 못했습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case Constants.SERVER_CHECK_DUPLICATE_EMAIL:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "사용 가능한 이메일입니다.", Toast.LENGTH_LONG).show();
+                            btn.setEnabled(false);
+                        } else {
+                            Toast.makeText(this.context, "이미 회원 가입 된 이메일입니다.", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
             }
 
         }catch(Exception e){

@@ -20,4 +20,7 @@ public class Constants {
     public static final int SERVER_CLASS_REVIEW_GET = 55;
     public static final int SERVER_CLASS_ADD_CLASS = 18;
     public static final int SERVER_CLASS_RESERVATION = 20;
+    public static final int SERVER_CLASS_ADD_FAVORITE = 21;
+    public static final int SERVER_CLASS_DELETE_FAVORITE = 22;
+    public static final int SERVER_CHECK_DUPLICATE_EMAIL = 23;
 }
