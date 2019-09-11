@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.Instructor.AddClassActivity;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
@@ -31,7 +33,6 @@ public class SignUpActivity extends AppCompatActivity {
     String checkingPassword;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +50,19 @@ public class SignUpActivity extends AppCompatActivity {
         final EditText inputNickName = (EditText)findViewById(R.id.input_nickname);
         final EditText inputPhone = (EditText)findViewById(R.id.input_phone);
         final EditText inputBirth = (EditText)findViewById(R.id.input_birth);
+        final Button checkEmailbtn = findViewById(R.id.check_duplicate_email);
 
 
+        checkEmailbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String url = "http://106.10.35.170/CheckId.php";
+                String data = "email=" + inputEmail.getText().toString();
+
+                NetworkTask networkTask = new NetworkTask(SignUpActivity.this, url, data, Constants.SERVER_CHECK_DUPLICATE_EMAIL, checkEmailbtn);
+                networkTask.execute();
+            }
+        });
 
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +76,6 @@ public class SignUpActivity extends AppCompatActivity {
                 birth = inputBirth.getText().toString();
                 residence = areaSpinner.getSelectedItem().toString();
                 nickname = inputNickName.getText().toString();
-
 
                 if(name.isEmpty()){
                     Toast.makeText(SignUpActivity.this, "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
@@ -88,6 +99,10 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if(nickname.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputName.getText().toString()).matches()){
                     Toast.makeText(SignUpActivity.this, "닉네임을 입력해 주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(checkEmailbtn.isEnabled()){
+                    Toast.makeText(SignUpActivity.this, "이메일 중복 검사를 진행해 주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
 

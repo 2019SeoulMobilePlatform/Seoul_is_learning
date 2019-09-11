@@ -12,6 +12,7 @@ public class Item {
     private String date;
     private String peopleNumber;
     private String price;
+    private Boolean favorite;
 
     private int class_index;
 
@@ -43,9 +44,11 @@ public class Item {
         return price;
     }
     public int getClass_index() {return class_index;}
+    public Boolean getFavorite() {return favorite;}
 
 
-    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price) {
+    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people,
+                String location, String date, String peopleNumber, String price, Boolean favorite) {
 
         this.class_index = class_index;
         this.image = image;
@@ -59,6 +62,7 @@ public class Item {
         this.date = date;
         this.peopleNumber = peopleNumber;
         this.price = price;
+        this.favorite = favorite;
     }
 
 }
