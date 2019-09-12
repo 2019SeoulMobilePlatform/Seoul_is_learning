@@ -120,9 +120,9 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         //밑에 뷰페이저 영역
         List<Item> items = new ArrayList<>();
 
-        items.add(new Item(9700,ImageSending(R.drawable.cooking_class),5 ,"하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","15명","50000",false,0));
-        items.add(new Item(9701,ImageSending(R.drawable.gaebal_class),5, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수","20명","50000",false,0));
-        items.add(new Item(9702,ImageSending(R.drawable.draw_class),5, "그림 어렵지 않습니다.", "당신의 머리속 그림을 그려봅시다.","송파구","그림을 쉽게 그리고 싶은 사람들을 구합니다.","서울시 송파구 잠실 롯데타워 1층 클래스 열람실","2019년 12월 7일","10명","50000",false,0));
+        items.add(new Item(9700,ImageSending(R.drawable.cooking_class),4.5f ,"하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","0","15","50000",false,0));
+        items.add(new Item(9701,ImageSending(R.drawable.gaebal_class),5, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수 오후 2시","0","20","50000",false,0));
+        items.add(new Item(9702,ImageSending(R.drawable.draw_class),4, "그림을 쉽게 해주는 클래스", "당신의 머리속 그림을 그려봅시다.","송파구","그림을 쉽게 그리고 싶은 사람들을 구합니다.","서울시 송파구 잠실 롯데타워 1층 클래스 열람실","2019년 12월 7일 오후 3시","0","10","50000",false,0));
 
         adapter = new Adapter(items, getActivity());
 

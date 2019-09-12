@@ -10,12 +10,16 @@ public class Item {
     private String people;
     private String location;
     private String date;
+    private String peopelNumberNow;
     private String peopleNumber;
     private String price;
     private Boolean favorite;
 
     private int class_index;
     private int flag_dongnae;
+
+    public Item(int class_index, byte[] decodedByte, float star, String name, String information, String local, String target_user, String address, String time, String count, String price, boolean favorite, int flag_dongnae) {
+    }
 
     public byte[] getImage() {
         return this.image;
@@ -38,6 +42,7 @@ public class Item {
     public String getDate() {
         return date;
     }
+    public String getPeopelNumberNow(){return peopelNumberNow;}
     public String getPeopleNumber() {
         return peopleNumber;
     }
@@ -49,7 +54,7 @@ public class Item {
     public int getFlag_dongnae() {return flag_dongnae;}
     public Boolean getFavorite() {return favorite;}
 
-    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date, String peopleNumber, String price, boolean favorite, int flag_dongnae) {
+    public Item(int class_index ,byte[] image,float star, String title, String desc ,String area, String people, String location, String date,String peopelNumberNow ,String peopleNumber, String price, boolean favorite, int flag_dongnae) {
 
         this.class_index = class_index;
         this.image = image;
@@ -61,6 +66,7 @@ public class Item {
         this.people = people;
         this.location = location;
         this.date = date;
+        this.peopelNumberNow = peopelNumberNow;
         this.peopleNumber = peopleNumber;
         this.price = price;
         this.flag_dongnae = flag_dongnae;
