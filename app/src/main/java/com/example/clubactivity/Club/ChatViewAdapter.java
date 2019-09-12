@@ -29,7 +29,6 @@ public class ChatViewAdapter extends BaseAdapter {
     public ArrayList<ChatViewItem> getChatViewItemList(){ return chatViewItemList; }
     public void setChatViewItemList( ArrayList<ChatViewItem> list){ this.chatViewItemList = list;}
 
-
     @Override
     public int getCount() {
         return chatViewItemList.size();
@@ -44,6 +43,8 @@ public class ChatViewAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return 0;
     }
+
+    public int getItemRoomIndex(int i){return chatViewItemList.get(i).getItemIndex();}
 
 
     public void removeAllItem() { chatViewItemList.clear(); }

@@ -27,10 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
-import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;

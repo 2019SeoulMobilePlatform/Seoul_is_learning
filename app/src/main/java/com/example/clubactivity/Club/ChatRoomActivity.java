@@ -13,6 +13,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -32,6 +33,7 @@ import com.example.clubactivity.R;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
@@ -45,12 +47,13 @@ public class ChatRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+        Log.e("chatroom","입장");
 
         Intent intent = getIntent();
         TextView title = findViewById(R.id.club_chatting_title);
         title.setText(intent.getExtras().get("clubName").toString());
 
-        adapter = new MessageListAdapter(this);
+        adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
         messageTextView = findViewById(R.id.editText);
 
         listview = (ListView) findViewById(R.id.chatmessage_listView);
@@ -65,7 +68,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
                 if(!messageTextView.getText().toString().isEmpty()){
-                    adapter.addItem(messageTextView.getText().toString(), 0, "id");
+                    //adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
                 }
@@ -151,7 +154,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
 */
-            adapter.addItem(1, image, "id");
+           // adapter.addItem(1, image, "id");
             adapter.notifyDataSetChanged();
 
         }

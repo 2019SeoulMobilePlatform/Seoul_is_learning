@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class  ClubFragment extends Fragment {
 
     public ClubFragment(){
 
+        
         String url = "http://106.10.35.170/ImportClubList.php";
         networkTask = new NetworkTask(this.getContext(), url, 7);
         networkTask.execute();
@@ -68,8 +70,6 @@ public class  ClubFragment extends Fragment {
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
         networkTask.execute();
 
-
-
     }
 
     @Nullable
@@ -80,6 +80,16 @@ public class  ClubFragment extends Fragment {
         final TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
         tabHost1.setup() ;
 
+        String url = "http://106.10.35.170/ImportClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask.execute();
+
+        String email = AppManager.getInstance().getEmail();
+        Log.e("email", email);
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data, 8);
+        networkTask.execute();
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
@@ -107,7 +117,7 @@ public class  ClubFragment extends Fragment {
 
         wholeClub_adapter.setChatViewItemList(AppManager.getInstance().getWholeClub_Adapter());
         myClub_adapter.setChatViewItemList(AppManager.getInstance().getMyClub_Adapter());
-
+        Log.e("ClubFragment", "업뎃");
 
         //리스트뷰 스와이프로 지우기
         SetListViewCreator(myClub_Listview);
@@ -126,8 +136,8 @@ public class  ClubFragment extends Fragment {
 
                 //Uri clubImageUri = getImageUri(getActivity(), ((BitmapDrawable)((ChatViewItem)wholeClub_adapter.getItem(i)).getIcon()).getBitmap());
                 //intent.putExtra("imageUri", clubImageUri);
+                intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
 
-                //intent.putExtra("item", (ChatViewItem)wholeClub_adapter.getItem(i));
                 intent.putExtra("clubImage",bytes);
                 intent.putExtra("clubName", ((ChatViewItem)wholeClub_adapter.getItem(i)).getTitle());
                 intent.putExtra("clubDescription", ((ChatViewItem)wholeClub_adapter.getItem(i)).getDesc());
@@ -143,11 +153,18 @@ public class  ClubFragment extends Fragment {
         myClub_Listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
 
+                String url = "http://106.10.35.170/ImportMessageList.php";
+                String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
+                NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle());
+                networkTask.execute();
+
+                /*
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
                 intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
+                */
             }
         });
 
@@ -227,6 +244,7 @@ public class  ClubFragment extends Fragment {
 
                         ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
                         myClub_adapter.removeItem(position);
+
                         if( wholeClubItem.getNowMemberNum() <= 1 )
                             wholeClub_adapter.removeItem(position);
                         else
@@ -285,6 +303,13 @@ public class  ClubFragment extends Fragment {
         return Uri.parse(path);
     }
 
+    public String getData(String email, int room_index){
+
+        String data = "email=" + email + "&room_index=" + room_index;
+
+        return data;
+    }
+
     public void SetListViewCreator(SwipeMenuListView listView){
         //슬라이드로 삭제
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -315,6 +340,12 @@ public class  ClubFragment extends Fragment {
                 switch (index) {
                     case 0:
                         ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
+
+                        String url = "http://106.10.35.170/RemoveClub.php";
+                        String data = getData(AppManager.getInstance().getEmail(), myClub_adapter.getItemRoomIndex(position));
+                        NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.REMOVE_CLUB );
+                        networkTask.execute();
+
                         myClub_adapter.removeItem(position);
                         if( wholeClubItem.getNowMemberNum() <= 1 )
                             wholeClub_adapter.removeItem(position);

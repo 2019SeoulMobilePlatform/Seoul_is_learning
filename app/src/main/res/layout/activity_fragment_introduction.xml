@@ -20,6 +20,7 @@
 
             <TextView
                 android:id="@+id/class_sogae"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -63,6 +64,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -104,6 +106,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -145,6 +148,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -186,6 +190,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -210,16 +215,26 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/class_people_number_intent"
+            android:id="@+id/class_people_number_intent_now"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:gravity="left"
+            android:textColor="@color/grey"
+            android:text="현재 인원 : " />
+        <TextView
+            android:layout_marginTop="3dp"
+            android:id="@+id/class_people_number_intent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="45dp"
             android:gravity="left"
             android:textColor="@color/grey"
-            android:text="수강 인원에 대해 써보자" />
+            android:text="모집 인원 : " />
 
     </LinearLayout>
 

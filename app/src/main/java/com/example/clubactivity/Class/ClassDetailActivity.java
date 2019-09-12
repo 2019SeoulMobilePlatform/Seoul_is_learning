@@ -37,6 +37,7 @@ public class ClassDetailActivity extends AppCompatActivity {
     static public String people;
     static public String location;
     static public String date;
+    static public String number_now;
     static public String number;
     static public String price;
     static public String class_index;
@@ -80,6 +81,7 @@ public class ClassDetailActivity extends AppCompatActivity {
         people = getIntent().getStringExtra("people");
         location = getIntent().getStringExtra("location");
         date = getIntent().getStringExtra("date");
+        number_now = getIntent().getStringExtra("number_now");
         number = getIntent().getStringExtra("number");
         price = getIntent().getStringExtra("price");
         favorite = getIntent().getBooleanExtra("favorite", false);
@@ -87,7 +89,6 @@ public class ClassDetailActivity extends AppCompatActivity {
         class_index = String.valueOf(getIntent().getIntExtra("class_index",0));
 
         //탭
-
 
         tabLayout = findViewById(R.id.class_tabs);
        // tabLayout.addTab(tabLayout.newTab().setText("Tab one"));
