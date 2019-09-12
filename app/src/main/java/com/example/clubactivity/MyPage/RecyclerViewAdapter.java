@@ -12,23 +12,31 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.Class.Item;
+import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
-
+    private ArrayList<Item> items = new ArrayList<Item>();
     //vars
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<String> mNames;
+    private ArrayList<String> mImageUrls;
     private Context mContext;
 
     public RecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
+    }
+
+    public RecyclerViewAdapter(Context context, ArrayList<Item> items) {
+        mContext = context;
+        this.items = items;
     }
 
     @Override
@@ -43,23 +51,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImageUrls.get(position))
+                .load(items.get(position).getImage())
                 .into(holder.image);
 
-        holder.name.setText(mNames.get(position));
+        holder.name.setText(items.get(position).getTitle());
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on an image: " + mNames.get(position));
-                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+                //detailpage 연결
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mImageUrls.size();
+        return items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

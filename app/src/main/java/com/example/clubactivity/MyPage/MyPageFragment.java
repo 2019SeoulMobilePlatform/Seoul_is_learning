@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.ImageConverter;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.util.ArrayList;
@@ -40,12 +41,14 @@ public class MyPageFragment extends Fragment {
     TextView user_nickname;
     TextView user_residence;
 
+    NetworkTask networkTask;
+
     ImageButton EditInfoButton;
-    private static final String TAG = "MainActivity";
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
-    private ArrayList<String> mNames_favorite = new ArrayList<>();
-    private ArrayList<String> mImageUrls_favorite = new ArrayList<>();
+//    private static final String TAG = "MainActivity";
+//    private ArrayList<String> mNames = new ArrayList<>();
+//    private ArrayList<String> mImageUrls = new ArrayList<>();
+//    private ArrayList<String> mNames_favorite = new ArrayList<>();
+//    private ArrayList<String> mImageUrls_favorite = new ArrayList<>();
 
     private String key = "454d786d61636d6539384a4c625954";
    // private CulturalEventTypeMini typeMini;
@@ -65,6 +68,8 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+
+        //마이페이지 내 정보 세팅
         preferences = getContext().getSharedPreferences("preferences", getContext().MODE_PRIVATE);
         editor = preferences.edit();
 
@@ -100,32 +105,32 @@ public class MyPageFragment extends Fragment {
         ts2.setIndicator("찜한 클래스") ;
         tabHost1.addTab(ts2) ;
 
-        getImages();
+        //getImages();
+        initRecyclerView();
         return view;
     }
 
-    private void getImages(){
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("명화 그리기");
-
-        mImageUrls_favorite.add("http://image.chosun.com/sitedata/image/201905/21/2019052101147_0.jpg");
-        mNames_favorite.add("축구 소모임");
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("프랑스 자수");
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("원데이 쿠킹");
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-
-
-        initRecyclerView();
-
-    }
+//    private void getImages(){
+//        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+//
+//        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+//        mNames.add("명화 그리기");
+//
+//        mImageUrls_favorite.add("http://image.chosun.com/sitedata/image/201905/21/2019052101147_0.jpg");
+//        mNames_favorite.add("축구 소모임");
+//
+//        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+//        mNames.add("프랑스 자수");
+//
+//        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+//        mNames.add("원데이 쿠킹");
+//
+//        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
+//        mNames.add("Rocky Mountain National Park");
+//
+//
+//        initRecyclerView();
+//    }
 
     public Bitmap getImageToBitmap(String encodedImage){
 
@@ -136,19 +141,31 @@ public class MyPageFragment extends Fragment {
 
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
+//        Log.d(TAG, "initRecyclerView: init recyclerview");
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = view.findViewById(R.id.myclass_recyclerView);
-        recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), mNames, mImageUrls);
-        recyclerView.setAdapter(adapter);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+//        RecyclerView recyclerView = view.findViewById(R.id.myclass_recyclerView);
+//        recyclerView.setLayoutManager(layoutManager);
+//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity());
+//        //RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), mNames, mImageUrls);
+//        recyclerView.setAdapter(adapter);
+//
+//        LinearLayoutManager layoutManager_favorite = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+//        RecyclerView recyclerView_favorite = view.findViewById(R.id.favorite_recyclerView);
+//        recyclerView_favorite.setLayoutManager(layoutManager_favorite);
+//        //RecyclerViewAdapter adapter_favorite = new RecyclerViewAdapter(getActivity(), mNames_favorite, mImageUrls_favorite);
+//        RecyclerViewAdapter adapter_favorite = new RecyclerViewAdapter(getActivity());
+//        recyclerView_favorite.setAdapter(adapter_favorite);
 
-        LinearLayoutManager layoutManager_favorite = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView_favorite = view.findViewById(R.id.favorite_recyclerView);
-        recyclerView_favorite.setLayoutManager(layoutManager_favorite);
-        RecyclerViewAdapter adapter_favorite = new RecyclerViewAdapter(getActivity(), mNames_favorite, mImageUrls_favorite  );
-        recyclerView_favorite.setAdapter(adapter_favorite);
+        String url = "http://106.10.35.170/ImportFavoriteClass.php";
+        String data = "email=" + preferences.getString("email", "");
+        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_FAVORITE_CLASS);
+        networkTask.execute();
+
+        url = "http://106.10.35.170/ImportMyClass.php";
+        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_MY_CLASS);
+        networkTask.execute();
+
     }
 
     @Override

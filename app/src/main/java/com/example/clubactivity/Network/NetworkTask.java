@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
@@ -27,6 +28,7 @@ import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.MyPage.RecyclerViewAdapter;
 import com.example.clubactivity.R;
 
 import org.json.JSONArray;
@@ -49,6 +51,15 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     ChatViewAdapter wholeClub_Adapter = null;
     ChatViewAdapter myClub_Adapter = null;
     ChatViewAdapter instructor_Adapter = null;
+    RecyclerViewAdapter myClass_Adapter = null;
+
+    public NetworkTask(Context _context, String url, String data, int action, RecyclerViewAdapter recyclerViewAdapter){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.myClass_Adapter = recyclerViewAdapter;
+    }
 
     public NetworkTask(Context _context, String url, String data, int action, ChatViewAdapter chatViewAdapter){
         this.context = _context;
@@ -225,6 +236,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 // 클래스 리스트 받아오기 5
                 case Constants.SERVER_CLASS_LIST_GET:
                 case Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR:
+                case Constants.SERVER_GET_MY_CLASS:
+                case Constants.SERVER_GET_FAVORITE_CLASS:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -252,16 +265,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   if(selection == Constants.SERVER_CLASS_LIST_GET){
+                                   if(selection == Constants.SERVER_CLASS_LIST_GET || selection == Constants.SERVER_GET_MY_CLASS || selection == Constants.SERVER_GET_FAVORITE_CLASS){
                                        Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
                                        items.add(item);
+                                       Log.d(items.size()+"", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
                                        ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
                                    }
                                }
-
                                if(selection == Constants.SERVER_CLASS_LIST_GET){
                                //클래스 리스트 설정 Recyclerview
                                    RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
@@ -270,8 +283,20 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    recyclerView.setHasFixedSize(true);
                                    recyclerView.setLayoutManager(layoutManager);
                                }
-                               else{
+                               else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
                                    instructor_Adapter.setChatViewItemList(chatViewItems);
+                               }
+                               else if(selection == Constants.SERVER_GET_MY_CLASS){
+                                   RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
+                                   recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                                   recyclerView.setLayoutManager(layoutManager);
+                               }
+                               else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                   RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
+                                   recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                                   recyclerView.setLayoutManager(layoutManager);
                                }
                            }
                            else
@@ -449,6 +474,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
+
             }
 
         }catch(Exception e){
