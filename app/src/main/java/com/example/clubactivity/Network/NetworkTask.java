@@ -23,7 +23,7 @@ import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.Class.ReviewListItem;
 import com.example.clubactivity.Class.ReviewListViewAdapter;
 import com.example.clubactivity.Club.ChatViewAdapter;
-
+import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
@@ -44,10 +44,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private Button btn;
 
     public List<Item> items = new ArrayList<>();
+    public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
     public ArrayList<ReviewListItem> reviewListItems = new ArrayList<>();
     ChatViewAdapter wholeClub_Adapter = null;
     ChatViewAdapter myClub_Adapter = null;
+    ChatViewAdapter instructor_Adapter = null;
 
+    public NetworkTask(Context _context, String url, String data, int action, ChatViewAdapter chatViewAdapter){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.instructor_Adapter = chatViewAdapter;
+    }
 
     public NetworkTask(Context _context, String url, String data, int action, Button btn){
         this.context = _context;
@@ -215,6 +224,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                 // 클래스 리스트 받아오기 5
                 case Constants.SERVER_CLASS_LIST_GET:
+                case Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -242,16 +252,27 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
-                                   items.add(item);
+                                   if(selection == Constants.SERVER_CLASS_LIST_GET){
+                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       items.add(item);
+                                   }
+                                   if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       chatViewItems.add(chatViewItem);
+                                   }
                                }
 
+                               if(selection == Constants.SERVER_CLASS_LIST_GET){
                                //클래스 리스트 설정 Recyclerview
-                               RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
-                               recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
-                               LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                               recyclerView.setHasFixedSize(true);
-                               recyclerView.setLayoutManager(layoutManager);
+                                   RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
+                                   recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+                                   recyclerView.setHasFixedSize(true);
+                                   recyclerView.setLayoutManager(layoutManager);
+                               }
+                               else{
+                                   instructor_Adapter.setChatViewItemList(chatViewItems);
+                               }
                            }
                            else
                            {

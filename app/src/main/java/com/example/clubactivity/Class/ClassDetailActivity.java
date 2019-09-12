@@ -40,6 +40,7 @@ public class ClassDetailActivity extends AppCompatActivity {
     static public String number;
     static public String price;
     static public String class_index;
+    static public boolean favorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class ClassDetailActivity extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         number = getIntent().getStringExtra("number");
         price = getIntent().getStringExtra("price");
+        favorite = getIntent().getBooleanExtra("favorite", false);
 
         class_index = String.valueOf(getIntent().getIntExtra("class_index",0));
 
@@ -115,6 +117,12 @@ public class ClassDetailActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton heartImage = (ImageButton)findViewById(R.id.heart);
+
+        if(favorite)
+            heartImage.setImageResource(R.drawable.heart_red);
+        else
+            heartImage.setImageResource(R.drawable.heart_empty);
     }
 
     //클래스 예약 버튼 클릭
