@@ -69,7 +69,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             public void onClick(View v) {
                 //Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ClassDetailActivity.class);
-                //Intent intent = new Intent(context, TabTest.class);
 
                 intent.putExtra("param", item.getTitle()); //클래스 제목을 뿌려준다.
                 intent.putExtra("image",item.getImage()); //클래스 이미지 뿌리기
@@ -80,6 +79,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("people",item.getPeople()); //클래스 대상
                 intent.putExtra("location",item.getLocation()); //클래스 정확한 장소
                 intent.putExtra("date",item.getDate()); //클래스 시간
+                intent.putExtra("number_now",item.getPeopelNumberNow()); //현재 인원수
                 intent.putExtra("number",item.getPeopleNumber()); //클래스 인원수
                 intent.putExtra("price",item.getPrice()); //가격
 

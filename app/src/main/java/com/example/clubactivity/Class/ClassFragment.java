@@ -1,5 +1,6 @@
 package com.example.clubactivity.Class;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,8 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
     public static String classmenuTitle;
     private ClassList classList;
     EditText searchBar;
+    TextView area;
+    SharedPreferences preferences;
 
     @Nullable
     @Override
@@ -38,6 +42,12 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
 
         classList = new ClassList();
         searchBar = (EditText) view.findViewById(R.id.class_search);
+        area = (TextView) view.findViewById(R.id.my_area);
+
+        if(Constants.isLogined) {
+            preferences = getContext().getSharedPreferences("preferences", getContext().MODE_PRIVATE);
+            area.setText(preferences.getString("residence", ""));
+        }
 
         FrameLayout eunpyung_button = view.findViewById(R.id.fl_mainfragment_eunpyung);
         FrameLayout gangbuk_button = view.findViewById(R.id.fl_mainfragment_gangbuk);

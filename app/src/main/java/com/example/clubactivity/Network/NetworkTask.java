@@ -233,15 +233,15 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String information = resultObject.getString("information");
                                    String time = resultObject.getString("time");
                                    String local = resultObject.getString("local");
-                                   int count_max = resultObject.getInt("count_max");
-                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                   String count_max = String.valueOf(resultObject.getInt("count_max"));
+                                   String count = String.valueOf(resultObject.getInt("count")); //현재수강인원
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
                                    int class_index = resultObject.getInt("class_index");
                                    boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                   Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, favorite,flag_dongnae);
                                    items.add(item);
                                }
 
