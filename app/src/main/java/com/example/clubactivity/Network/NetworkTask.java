@@ -46,6 +46,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private int selection;
     private Button btn;
     private String title;
+    private Activity activity;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
@@ -71,12 +72,13 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.btn = btn;
     }
 
-    public NetworkTask(Context _context, String url, String data, int action, String title){
+    public NetworkTask(Context _context, String url, String data, int action, String title, Activity activity){
         this.context = _context;
         this.url = url;
         this.data = data;
         this.selection = action;
         this.title = title;
+        this.activity = activity;
     }
 
     public NetworkTask(Context _context, String url, String data, int action){
@@ -548,7 +550,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             Toast.makeText(this.context, "연결 실패", Toast.LENGTH_LONG).show();
                         } else {
                             JSONObject resultObject;
-                            Log.e("대화창", "들어옴");
+
                             if (resultObjectArray.length() != 0) {
                                 for (int i = 0; i < resultObjectArray.length(); i++) {
                                     resultObject = resultObjectArray.getJSONObject(i);
@@ -567,16 +569,14 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             }
                         }
 
-                        Intent intent = new Intent(context, ChatRoomActivity.class);
+                        Intent intent = new Intent(activity, ChatRoomActivity.class);
                         intent.putExtra("clubName", title);
                         intent.putExtra("chatList", chatList.getMessages());
-                        context.startActivity(intent);
+                        activity.startActivity(intent);
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-
                     break;
 
             }

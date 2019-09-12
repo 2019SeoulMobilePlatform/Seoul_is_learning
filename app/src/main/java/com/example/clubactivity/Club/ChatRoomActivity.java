@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
 import com.example.clubactivity.R;
@@ -52,7 +53,6 @@ public class ChatRoomActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TextView title = findViewById(R.id.club_chatting_title);
         title.setText(intent.getExtras().get("clubName").toString());
-
         adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
         messageTextView = findViewById(R.id.editText);
 
@@ -68,7 +68,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
                 if(!messageTextView.getText().toString().isEmpty()){
-                    //adapter.addItem(messageTextView.getText().toString(), 0, "id");
+                    adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
                 }
@@ -154,7 +154,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
 */
-           // adapter.addItem(1, image, "id");
+            adapter.addItem(1, image, "id");
             adapter.notifyDataSetChanged();
 
         }

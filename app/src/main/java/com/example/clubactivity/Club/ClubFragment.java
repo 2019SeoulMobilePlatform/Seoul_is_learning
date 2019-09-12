@@ -157,7 +157,7 @@ public class  ClubFragment extends Fragment {
 
                 String url = "http://106.10.35.170/ImportMessageList.php";
                 String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
-                NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle());
+                NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle(), getActivity());
                 networkTask.execute();
 
                 /*
