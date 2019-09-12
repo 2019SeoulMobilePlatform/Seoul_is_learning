@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,8 +88,13 @@ public class MessageListAdapter extends BaseAdapter {
 
     ArrayList<MessageContents> messages;
 
+    public MessageListAdapter(Context context, ArrayList<MessageContents> messages){
+        this.messages = messages;
+        this.context = context;
+    }
+
     public MessageListAdapter(Context context){
-        messages = new ArrayList<MessageContents>();
+        this.messages = new ArrayList<>();
         this.context = context;
     }
 
@@ -103,35 +110,44 @@ public class MessageListAdapter extends BaseAdapter {
 
     public Bitmap getImage(int i) {return messages.get(i).image; }
 
+    public ArrayList<MessageContents> getMessages() {return messages;}
+
     @Override
     public long getItemId(int i) {
         return 0;
     }
 
     //텍스트 전송
-    public void addItem(String text, int type, String from_id){//, String profileimage) {
+    public void addItem(String text, int type, String from_id, String nickname, Bitmap profileImage) {
         if(type == 0) {
             messages.add(new MessageContents(text, type, from_id));
         }
         else if(type == 1){
             //TODO
             //서버에서 id에 해당하는 닉네임, 프로필 이미지 가져와서 넣어야됨
-            messages.add(new MessageContents(text, type, from_id,"nickname", (BitmapFactory.decodeResource(context.getResources(), R.drawable.class1) )));
+            messages.add(new MessageContents(text, type, from_id, nickname, profileImage));
         }
+    }
+    public void addItem(String text, int type,String from_id){
+        messages.add(new MessageContents(text, type, from_id));
+    }
+    public void addItem(int type,Bitmap image, String from_id){
+        messages.add(new MessageContents(type, from_id, image));
     }
 
     //이미지 전송시 url로 받을 경우
     //public void addItem(int type, String imagePath, String from_id) { messages.add(new MessageContents(type, from_id, imagePath, null));}
 
     //이미지 Bitmap으로 받을 경우
-    public void addItem(int type, Bitmap image, String from_id){//, String profileImage) {
+    public void addItem(int type, Bitmap image, String from_id, String nickname, Bitmap profileImage) {
         if(type == 0) {
             messages.add(new MessageContents(type, from_id, image));
         }
         else if(type == 1){
             //TODO
             //서버에서 id에 해당하는 닉네임, 프로필 이미지 가져와서 넣어야됨
-            messages.add(new MessageContents(type, from_id, "nickname", (BitmapFactory.decodeResource(context.getResources(), R.drawable.class_paint)), image));
+            Log.e("대화받는중", "이미지ing..");
+            messages.add(new MessageContents(type, from_id, nickname, profileImage, image));
         }
     }
 

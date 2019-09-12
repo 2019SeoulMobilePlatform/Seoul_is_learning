@@ -153,11 +153,18 @@ public class  ClubFragment extends Fragment {
         myClub_Listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
 
+                String url = "http://106.10.35.170/ImportMessageList.php";
+                String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
+                NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle());
+                networkTask.execute();
+
+                /*
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
                 intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
+                */
             }
         });
 
@@ -299,7 +306,7 @@ public class  ClubFragment extends Fragment {
     public String getData(String email, int room_index){
 
         String data = "email=" + email + "&room_index=" + room_index;
-        Log.e("room_index", data);
+
         return data;
     }
 
