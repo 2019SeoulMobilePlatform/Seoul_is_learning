@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
 import java.util.ArrayList;
@@ -58,8 +59,11 @@ public class ReviewListViewAdapter extends BaseAdapter {
         ReviewListItem reviewListItem= reviewData.get(position);
 
         profileImage= (CircleImageView)convertView.findViewById(R.id.review_profile_image);
-        profileImage.setImageResource(reviewListItem.getProfile_image());
+        //profileImage.setImageResource(reviewListItem.getProfile_image());
        /* GlideApp.with(convertView).load(reviewListItem.getProfile_image()).into(profileImage);*/
+        Glide.with(convertView)
+                .load(reviewListItem.getProfile_image())
+                .into(profileImage);
 
         nickName=(TextView)convertView.findViewById(R.id.review_nickname);
         nickName.setText(reviewListItem.getNickName());

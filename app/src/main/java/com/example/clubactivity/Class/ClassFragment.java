@@ -1,6 +1,7 @@
 package com.example.clubactivity.Class;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -26,36 +28,16 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
 
     private View view;
     public static String classmenuTitle;
-    private ClassList classList = new ClassList();
+    private ClassList classList;
+    EditText searchBar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.class_, container, false);
 
-
-       /*
-       ImageButton gwangjin_button = (ImageButton)view.findViewById(R.id.imageView3);
-
-        gwangjin_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ClassList.class);
-                startActivity(intent);
-            }
-        });
-
-
-        FrameLayout eunpyung_button = view.findViewById(R.id.fl_mainfragment_eunpyung);
-
-        eunpyung_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ClassList.class);
-                startActivity(intent);
-            }
-        });
-        */
+        classList = new ClassList();
+        searchBar = (EditText) view.findViewById(R.id.class_search);
 
         FrameLayout eunpyung_button = view.findViewById(R.id.fl_mainfragment_eunpyung);
         FrameLayout gangbuk_button = view.findViewById(R.id.fl_mainfragment_gangbuk);
@@ -114,32 +96,44 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
 
 
 
-
-       //RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.class_list);
-
-
-
         //검색 텍스트 검색
-        ImageButton searchButton = (ImageButton) view.findViewById(R.id.search_button);
+        final ImageButton searchButton = (ImageButton) view.findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                EditText searchBar = (EditText) view.findViewById(R.id.class_search);
-                String searchText = searchBar.getText().toString().toLowerCase(Locale.getDefault());
+                String searchText = searchBar.getText().toString().toLowerCase(Locale.getDefault()).trim();
 
-                if(searchText.length() == 0) {
+                if(searchText.length() == 0 || searchText.matches("\\s+")) {
                     Toast.makeText(getContext(), "검색어를 입력해주세요!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     classmenuTitle = searchText;
+
+                    String data = "word=" + classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
+                    String url = "http://106.10.35.170/SearchClassList.php";
+                    NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
+                    networkTask.execute();
                     ShowClassList();
                 }
-
                 searchBar.setText("");
-
             }
         });
+
+        //엔터
+        searchBar.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    searchButton.performClick();
+                }
+                return false;
+            }
+
+        });
+
+
+
 
         return view;
     }
@@ -228,7 +222,9 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                 break;
         }
 
-        String data = "local=" + classmenuTitle;
+
+        String data = "local=" + classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
+
         String url = "http://106.10.35.170/ImportClassList.php";
         NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
         networkTask.execute();

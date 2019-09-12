@@ -2,10 +2,9 @@ package com.example.clubactivity.Class;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.AppManager;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -31,11 +33,13 @@ public class ClassDetailActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    static public String desc; //잠깐만 이러면 안되는데..
+    static public String desc;
     static public String people;
     static public String location;
     static public String date;
     static public String number;
+    static public String price;
+    static public String class_index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +76,13 @@ public class ClassDetailActivity extends AppCompatActivity {
 
 
         desc = getIntent().getStringExtra("desc");
-        people=getIntent().getStringExtra("people");
-        location=getIntent().getStringExtra("location");
-        date=getIntent().getStringExtra("date");
-        number=getIntent().getStringExtra("number");
+        people = getIntent().getStringExtra("people");
+        location = getIntent().getStringExtra("location");
+        date = getIntent().getStringExtra("date");
+        number = getIntent().getStringExtra("number");
+        price = getIntent().getStringExtra("price");
+
+        class_index = String.valueOf(getIntent().getIntExtra("class_index",0));
 
         //탭
 
@@ -120,6 +127,11 @@ public class ClassDetailActivity extends AppCompatActivity {
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         intent.putExtra("image",byteArray); //클래스 이미지 뿌리기
 
+        intent.putExtra("price", getIntent().getStringExtra("price")); //가격뿌리기
+
+        intent.putExtra("class_index", getIntent().getIntExtra("class_index",0)); //클래스인덱스뿌리기
+
+
         startActivity(intent);
     }
 
@@ -128,17 +140,44 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         ImageButton heartImage = (ImageButton)findViewById(R.id.heart);
 
-        if(true)
+        Drawable temp1 = heartImage.getDrawable();
+        Drawable temp2 = view.getResources().getDrawable(R.drawable.heart_empty);
+
+        Bitmap tmp1Bitmap1 = ((BitmapDrawable)temp1).getBitmap();
+        Bitmap tmp1Bitmap2 = ((BitmapDrawable)temp2).getBitmap();
+
+        if(!Constants.isLogined){
+            Toast.makeText(getApplicationContext(), "찜 기능은 로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(tmp1Bitmap1.equals(tmp1Bitmap2))
         {
             heartImage.setImageResource(R.drawable.heart_red);
-            Toast.makeText(getApplicationContext(), "찜한 클래스에 추가되었습니다!", Toast.LENGTH_SHORT).show();
+
+            String url = "http://106.10.35.170/AddFavoriteClass.php";
+            String data = getData(getIntent().getIntExtra("class_index",0) , AppManager.getInstance().getEmail());
+
+            NetworkTask networkTask = new NetworkTask(ClassDetailActivity.this, url, data, Constants.SERVER_CLASS_ADD_FAVORITE);
+            networkTask.execute();
         }
         else
         {
             heartImage.setImageResource(R.drawable.heart_empty);
-            Toast.makeText(getApplicationContext(), "찜한 클래스에 해제되었습니다!", Toast.LENGTH_SHORT).show();
+            String url = "http://106.10.35.170/DeleteFavoriteClass.php";
+            String data = getData(getIntent().getIntExtra("class_index",0) , AppManager.getInstance().getEmail());
+
+            NetworkTask networkTask = new NetworkTask(ClassDetailActivity.this, url, data, Constants.SERVER_CLASS_DELETE_FAVORITE);
+            networkTask.execute();
         }
 
+    }
+
+    public String getData(int class_index, String email){
+
+        String data = "class_index=" + class_index + "&email=" + email;
+
+        return data;
     }
 
 

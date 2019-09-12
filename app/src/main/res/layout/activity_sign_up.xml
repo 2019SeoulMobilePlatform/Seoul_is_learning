@@ -35,18 +35,32 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Email Label -->
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:theme="@style/SignUpTextLabel">
-            <EditText android:id="@+id/input_email"
-                android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="이메일" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="5"
+                android:theme="@style/SignUpTextLabel">
+                <EditText android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="이메일" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="중복 확인"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:id="@+id/check_duplicate_email"/>
+        </LinearLayout>
 
         <!-- Password Label -->
         <com.google.android.material.textfield.TextInputLayout

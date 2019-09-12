@@ -5,16 +5,14 @@ package com.example.clubactivity.Class;
  */
 public class ReviewListItem {
 
-    private int profile_image;
+    private byte[] profile_image;
     private String nickName;  // 유저 닉네임
     private float star;  // 별점
     private String reviewContent;   // 리뷰 내용
 
-    //리뷰 이미지뷰
-
 
     // 생성자
-    public ReviewListItem(int profile_image, String nickName, float star, String reviewContent) {
+    public ReviewListItem(byte[] profile_image, String nickName, float star, String reviewContent) {
         this.profile_image = profile_image;
         this.nickName = nickName;
         this.star = star;
@@ -32,5 +30,5 @@ public class ReviewListItem {
 
     public String getReviewContent() {return reviewContent;}
 
-    public int getProfile_image() { return profile_image;}
+    public byte[] getProfile_image() { return profile_image;}
 }

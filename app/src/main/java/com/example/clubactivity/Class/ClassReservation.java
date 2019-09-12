@@ -9,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 public class ClassReservation extends Activity {
 
+    public int class_index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class ClassReservation extends Activity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         ImageView imageView = (ImageView)findViewById(R.id.res_class_image);
         imageView.setImageBitmap(bitmap);
+
+        class_index = getIntent().getIntExtra("class_index",0);
 
 
         TextView title = (TextView)findViewById(R.id.res_class_title);
@@ -36,8 +41,9 @@ public class ClassReservation extends Activity {
         date.setText(ClassDetailActivity.date);
         TextView time = (TextView)findViewById(R.id.res_class_time);
         //time.setText(ClassDetailActivity.date);
+
         TextView price = (TextView)findViewById(R.id.res_class_price);
-        price.setText("50,000원");
+        price.setText(ClassDetailActivity.price+"원");
     }
 
 
@@ -52,8 +58,22 @@ public class ClassReservation extends Activity {
             Toast.makeText(getApplicationContext(), "클래스 예약은 로그인 후 진행 가능합니다.", Toast.LENGTH_SHORT).show();
             return;
         }
-        Toast.makeText(getApplicationContext(), "클래스 예약이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+
+        String url = "http://106.10.35.170/ReservateClass.php";
+        String data = getData(class_index ,AppManager.getInstance().getEmail());
+
+        NetworkTask networkTask = new NetworkTask(ClassReservation.this, url, data, Constants.SERVER_CLASS_RESERVATION);
+        networkTask.execute();
+
         finish();
+    }
+
+
+    public String getData(int class_index, String email){
+
+        String data = "class_index=" + class_index + "&email=" + email;
+
+        return data;
     }
 
 }

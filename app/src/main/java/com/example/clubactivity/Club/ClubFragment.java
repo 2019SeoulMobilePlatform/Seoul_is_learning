@@ -1,6 +1,5 @@
 package com.example.clubactivity.Club;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +8,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -31,7 +29,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -40,15 +37,11 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
-import com.example.clubactivity.Login.LoginActivity;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.util.Locale;
 
 public class  ClubFragment extends Fragment {
@@ -71,7 +64,7 @@ public class  ClubFragment extends Fragment {
         networkTask.execute();
 
         String email = AppManager.getInstance().getEmail();
-        Log.e("email", email);
+        //Log.e("email", email);
         url = "http://106.10.35.170/ImportMyClubList.php";
         String data = "email=" + email;
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
@@ -244,6 +237,7 @@ public class  ClubFragment extends Fragment {
 
                         ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
                         myClub_adapter.removeItem(position);
+
                         if( wholeClubItem.getNowMemberNum() <= 1 )
                             wholeClub_adapter.removeItem(position);
                         else
@@ -302,6 +296,13 @@ public class  ClubFragment extends Fragment {
         return Uri.parse(path);
     }
 
+    public String getData(String email, int room_index){
+
+        String data = "email=" + email + "&room_index=" + room_index;
+        Log.e("room_index", data);
+        return data;
+    }
+
     public void SetListViewCreator(SwipeMenuListView listView){
         //슬라이드로 삭제
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -332,6 +333,12 @@ public class  ClubFragment extends Fragment {
                 switch (index) {
                     case 0:
                         ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
+
+                        String url = "http://106.10.35.170/RemoveClub.php";
+                        String data = getData(AppManager.getInstance().getEmail(), myClub_adapter.getItemRoomIndex(position));
+                        NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.REMOVE_CLUB );
+                        networkTask.execute();
+
                         myClub_adapter.removeItem(position);
                         if( wholeClubItem.getNowMemberNum() <= 1 )
                             wholeClub_adapter.removeItem(position);

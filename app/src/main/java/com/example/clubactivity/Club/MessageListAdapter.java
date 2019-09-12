@@ -109,7 +109,7 @@ public class MessageListAdapter extends BaseAdapter {
     }
 
     //텍스트 전송
-    public void addItem(String text, int type, String from_id) {
+    public void addItem(String text, int type, String from_id){//, String profileimage) {
         if(type == 0) {
             messages.add(new MessageContents(text, type, from_id));
         }
@@ -124,7 +124,7 @@ public class MessageListAdapter extends BaseAdapter {
     //public void addItem(int type, String imagePath, String from_id) { messages.add(new MessageContents(type, from_id, imagePath, null));}
 
     //이미지 Bitmap으로 받을 경우
-    public void addItem(int type, Bitmap image, String from_id) {
+    public void addItem(int type, Bitmap image, String from_id){//, String profileImage) {
         if(type == 0) {
             messages.add(new MessageContents(type, from_id, image));
         }

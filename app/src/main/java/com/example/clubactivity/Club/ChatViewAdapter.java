@@ -39,6 +39,8 @@ public class ChatViewAdapter extends BaseAdapter {
         return 0;
     }
 
+    public int getItemRoomIndex(int i){return chatViewItemList.get(i).getItemIndex();}
+
 
     public void removeAllItem() { chatViewItemList.clear(); }
 
