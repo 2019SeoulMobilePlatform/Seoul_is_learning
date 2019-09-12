@@ -220,7 +220,6 @@ public class AddClassActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, intent);
 
-
                 String url = "http://106.10.35.170/StoreClass.php";
                 String data = getData(classImage, className.getText().toString(), classDescription.getText().toString(), classPrice.getText().toString(),
                         classLimit.getSelectedItem().toString(), classResidence.getSelectedItem().toString(), classAddress.getText().toString(), classTarget.getText().toString(),
@@ -242,7 +241,7 @@ public class AddClassActivity extends AppCompatActivity {
 
         String data = "image=" + image + "&name=" + name + "&information=" + description + "&count_max=" + maxCount + "&price=" + price + "&local=" + residence +
                 "&address=" + address + "&target_user=" + targetUser + "&time=" + time + "&instructor_email=" + preferences.getString("email","");
-        Log.d(data.toString(), data);
+
         return data;
     }
 

@@ -10,7 +10,7 @@ public class Constants {
     public static final int REQUEST_CLUB_ENTER = 1003;
     public static final int REQUSET_ADD_CLASS = 1004;
     public static final int REQUEST_PICK_IMAGE = 1005;
-    public static final int USER_LOGIN= 1;
+    public static final int USER_LOGIN = 1;
     public static final int INSTRUCTOR_LOGIN = 3;
     public static final int SIGNUP = 2;
     public static final int IMAGE_SIZE = 300;
@@ -23,4 +23,11 @@ public class Constants {
     public static final int SERVER_CLASS_ADD_FAVORITE = 21;
     public static final int SERVER_CLASS_DELETE_FAVORITE = 22;
     public static final int SERVER_CHECK_DUPLICATE_EMAIL = 23;
+    public static final int EDIT_MYPAGE = 4;
+    public static final int GET_WHOLECLUBLIST = 7;
+    public static final int GET_MYCLUBLIST = 8;
+    public static final int ENTER_CLUB = 9;
+    public static final int REMOVE_CLUB = 10;
+    public static final int SERVER_CLASS_LIST_GET_INSTRUCTOR = 24;
+
 }

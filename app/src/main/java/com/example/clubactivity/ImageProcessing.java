@@ -58,12 +58,18 @@ public class ImageProcessing {
 
     public Bitmap ConvertUriToBitmap(Uri uri){
         Bitmap bitmap = null;
+        Bitmap dstBitmap = null;
         try {
             bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
+
+            dstBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return bitmap;
+        return dstBitmap;
     }
 
     public Bitmap ConvertRareUriToBitmap(Uri uri){

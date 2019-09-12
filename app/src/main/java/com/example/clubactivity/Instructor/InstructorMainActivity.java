@@ -21,11 +21,13 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.Class.ClassDetailActivity;
+import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.MyPage.EditMyInfoActivity;
 import com.example.clubactivity.Network.ImageConverter;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,17 +51,21 @@ public class InstructorMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructor_main);
         instructorClassList = findViewById(R.id.instructor_class_listview);
         instructorClassAdapter = new ChatViewAdapter() ;
-        instructorClassList.setAdapter(instructorClassAdapter);
-        SetListViewCreator(instructorClassList);
-
-
         preferences = getSharedPreferences("preferences", MODE_PRIVATE);
         editor = preferences.edit();
 
+        String url = "http://106.10.35.170/ImportInstructorClassList.php";
+        String data = "email=" + preferences.getString("email","");
+        NetworkTask networkTask = new NetworkTask(InstructorMainActivity.this, url, data, Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR, instructorClassAdapter);
+        networkTask.execute();
+
+        instructorClassList.setAdapter(instructorClassAdapter);
+        SetListViewCreator(instructorClassList);
+
+        //강사 정보 미리보기 세팅
         user_image = (CircleImageView)findViewById(R.id.user_image);
         user_nickname = findViewById(R.id.user_nickname);
         user_residence = findViewById(R.id.user_residence);
-
         if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
             user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
         else{
@@ -69,6 +75,7 @@ public class InstructorMainActivity extends AppCompatActivity {
         user_residence.setText(preferences.getString("residence",""));
 
 
+        //클래스 클릭해서 들어가기
         instructorClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -76,7 +83,7 @@ public class InstructorMainActivity extends AppCompatActivity {
                 //Intent intent = new Intent(context, TabTest.class);
 
                 intent.putExtra("param", ((ChatViewItem)instructorClassAdapter.getItem(i)).getTitle());
-                intent.putExtra("clubDescription", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDesc());
+                intent.putExtra("desc", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDesc());
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 Bitmap bitmap = ((BitmapDrawable)((ChatViewItem)instructorClassAdapter.getItem(i)).getIcon()).getBitmap();
@@ -88,18 +95,19 @@ public class InstructorMainActivity extends AppCompatActivity {
 
                 intent.putExtra("image",bytes);
 
+                intent.putExtra("people", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPeople());
+                intent.putExtra("location", ((ChatViewItem)instructorClassAdapter.getItem(i)).getLocation());
+                intent.putExtra("date", ((ChatViewItem)instructorClassAdapter.getItem(i)).getDate());
+                intent.putExtra("number", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPeopleNumber());
+                intent.putExtra("price", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPrice());
+                intent.putExtra("favorite", ((ChatViewItem)instructorClassAdapter.getItem(i)).getFavorite());
+                intent.putExtra("class_index", ((ChatViewItem)instructorClassAdapter.getItem(i)).getClass_index());
+
                 InstructorMainActivity.this.startActivity(intent);
 
                 //startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);
             }
         });
-
-
-        instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class1),
-                "원데이 클래스", "20,000", 10, 1, 0) ;
-        instructorClassAdapter.addItem(ContextCompat.getDrawable(InstructorMainActivity.this, R.drawable.class_paint),
-                "유화 그리기", "50,000",10,1, 0) ;
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_class_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -161,9 +169,7 @@ public class InstructorMainActivity extends AppCompatActivity {
     }
 
     public Bitmap getImageToBitmap(String encodedImage){
-
         byte[] decodedByte = Base64.decode(encodedImage, Base64.DEFAULT);
-
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
