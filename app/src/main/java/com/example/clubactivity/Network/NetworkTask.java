@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.example.clubactivity.AppManager;
@@ -30,6 +31,7 @@ import com.example.clubactivity.Club.MessageListAdapter;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.MyPage.RecyclerViewAdapter;
 import com.example.clubactivity.R;
 
 import org.json.JSONArray;
@@ -55,6 +57,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     ChatViewAdapter myClub_Adapter = null;
     ChatViewAdapter instructor_Adapter = null;
     MessageListAdapter chatList;
+
+    RecyclerViewAdapter myClass_Adapter = null;
+
+    public NetworkTask(Context _context, String url, String data, int action, RecyclerViewAdapter recyclerViewAdapter){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.myClass_Adapter = recyclerViewAdapter;
+    }
 
     public NetworkTask(Context _context, String url, String data, int action, ChatViewAdapter chatViewAdapter){
         this.context = _context;
@@ -241,98 +253,72 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 // 클래스 리스트 받아오기 5
                 case Constants.SERVER_CLASS_LIST_GET:
                 case Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR:
+                case Constants.SERVER_GET_MY_CLASS:
+                case Constants.SERVER_GET_FAVORITE_CLASS:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         if (!real_result.equals("fail")) {
                             JSONObject resultObject;
-                            if (resultObjectArray.length() != 0) {
-                                for (int i = 0; i < resultObjectArray.length(); i++) {
-                                    resultObject = resultObjectArray.getJSONObject(i);
-                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
-                                    byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
-                                    String name = resultObject.getString("name");
-                                    String target_user = resultObject.getString("target_user");
-                                    String address = resultObject.getString("address");
-                                    String information = resultObject.getString("information");
-                                    String time = resultObject.getString("time");
-                                    String local = resultObject.getString("local");
-                                    int count_max = resultObject.getInt("count_max");
-                                    String count = String.valueOf(resultObject.getInt("count")); //바꾸자
-                                    float star = (float) resultObject.getDouble("star");
-                                    String price = String.valueOf(resultObject.getInt("price"));
-                                    int class_index = resultObject.getInt("class_index");
-                                    boolean favorite = resultObject.getBoolean("favorite");
-                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
+                           if(resultObjectArray.length() != 0) {
 
-                                    if (selection == Constants.SERVER_CLASS_LIST_GET) {
-                                        Item item = new Item(class_index, decodedByte, star, name, information, local, target_user, address, time, count, price, favorite, flag_dongnae);
-                                        items.add(item);
-                                    }
-                                    if (selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR) {
-                                        ChatViewItem chatViewItem = new ChatViewItem(class_index, decodedByte, star, name, information, local, target_user, address, time, count, price, favorite, flag_dongnae);
-                                        chatViewItems.add(chatViewItem);
-                                    }
-                                }
+                               for(int i = 0 ; i < resultObjectArray.length(); i++){
+                                   resultObject = resultObjectArray.getJSONObject(i);
+                                   //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
+                                   byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
+                                   String name = resultObject.getString("name");
+                                   String target_user = resultObject.getString("target_user");
+                                   String address = resultObject.getString("address");
+                                   String information = resultObject.getString("information");
+                                   String time = resultObject.getString("time");
+                                   String local = resultObject.getString("local");
+                                   int count_max = resultObject.getInt("count_max");
+                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                   float star = (float)resultObject.getDouble("star");
+                                   String price = String.valueOf(resultObject.getInt("price"));
+                                   int class_index = resultObject.getInt("class_index");
+                                   boolean favorite = resultObject.getBoolean("favorite");
+                                   int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                if (selection == Constants.SERVER_CLASS_LIST_GET) {
-                                    //클래스 리스트 설정 Recyclerview
-                                    RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
-                                    recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
-                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                                    recyclerView.setHasFixedSize(true);
-                                    recyclerView.setLayoutManager(layoutManager);
-                                } else {
-                                    instructor_Adapter.setChatViewItemList(chatViewItems);
-                                }
-                            } else {
-                                Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            if (resultObjectArray.length() != 0) {
-                                JSONObject resultObject;
-                                for (int i = 0; i < resultObjectArray.length(); i++) {
-                                    resultObject = resultObjectArray.getJSONObject(i);
-                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
-                                    byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
-                                    String name = resultObject.getString("name");
-                                    String target_user = resultObject.getString("target_user");
-                                    String address = resultObject.getString("address");
-                                    String information = resultObject.getString("information");
-                                    String time = resultObject.getString("time");
-                                    String local = resultObject.getString("local");
-                                    String count_max = String.valueOf(resultObject.getInt("count_max"));
-                                    String count = String.valueOf(resultObject.getInt("count")); //현재수강인원
-                                    float star = (float) resultObject.getDouble("star");
-                                    String price = String.valueOf(resultObject.getInt("price"));
-                                    int class_index = resultObject.getInt("class_index");
-                                    boolean favorite = resultObject.getBoolean("favorite");
-                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
-
-                                    if (selection == Constants.SERVER_CLASS_LIST_GET) {
-                                        Item item = new Item(class_index, decodedByte, star, name, information, local, target_user, address, time, count, count_max, price, favorite, flag_dongnae);
-                                        items.add(item);
-                                    }
-                                    if (selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR) {
-                                        ChatViewItem chatViewItem = new ChatViewItem(class_index, decodedByte, star, name, information, local, target_user, address, time, count, price, favorite, flag_dongnae);
-                                        chatViewItems.add(chatViewItem);
-                                    }
-                                }
-
-                                if (selection == Constants.SERVER_CLASS_LIST_GET) {
-                                    //클래스 리스트 설정 Recyclerview
-                                    RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
-                                    recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
-                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                                    recyclerView.setHasFixedSize(true);
-                                    recyclerView.setLayoutManager(layoutManager);
-                                } else {
-                                    instructor_Adapter.setChatViewItemList(chatViewItems);
-                                }
-                            } else {
-                                Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
-                            }
+                                   if(selection == Constants.SERVER_CLASS_LIST_GET || selection == Constants.SERVER_GET_MY_CLASS || selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       items.add(item);
+                                       //Log.d(items.size()+"", item.getTitle());
+                                   }
+                                   if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       chatViewItems.add(chatViewItem);
+                                   }
+                               }
+                               if(selection == Constants.SERVER_CLASS_LIST_GET){
+                               //클래스 리스트 설정 Recyclerview
+                                   RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
+                                   recyclerView.setAdapter(new RecyclerAdapter(context, items, R.layout.class_list));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+                                   recyclerView.setHasFixedSize(true);
+                                   recyclerView.setLayoutManager(layoutManager);
+                               }
+                               else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
+                                   instructor_Adapter.setChatViewItemList(chatViewItems);
+                               }
+                               else if(selection == Constants.SERVER_GET_MY_CLASS){
+                                   RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
+                                   recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                                   recyclerView.setLayoutManager(layoutManager);
+                               }
+                               else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                   RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
+                                   recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                                   recyclerView.setLayoutManager(layoutManager);
+                               }
+                           }
+                           else
+                           {
+                               Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
+                           }
                         }
                         /*
                         else{
