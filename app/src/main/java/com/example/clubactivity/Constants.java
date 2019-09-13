@@ -29,5 +29,8 @@ public class Constants {
     public static final int ENTER_CLUB = 9;
     public static final int REMOVE_CLUB = 10;
     public static final int SERVER_CLASS_LIST_GET_INSTRUCTOR = 24;
-
+    public static final int SERVER_GET_MY_CLASS = 25;
+    public static final int SERVER_GET_FAVORITE_CLASS = 26;
+    public static final int IMPORT_MESSAGELIST = 11;
+    public static final int REQUEST_ENTER_CLASS_DETAIL = 27;
 }

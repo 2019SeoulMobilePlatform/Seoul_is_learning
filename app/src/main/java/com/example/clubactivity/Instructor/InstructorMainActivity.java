@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -58,7 +59,6 @@ public class InstructorMainActivity extends AppCompatActivity {
         String data = "email=" + preferences.getString("email","");
         NetworkTask networkTask = new NetworkTask(InstructorMainActivity.this, url, data, Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR, instructorClassAdapter);
         networkTask.execute();
-
         instructorClassList.setAdapter(instructorClassAdapter);
         SetListViewCreator(instructorClassList);
 
@@ -93,7 +93,10 @@ public class InstructorMainActivity extends AppCompatActivity {
                 dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] bytes = stream.toByteArray();
 
-                intent.putExtra("image",bytes);
+
+                intent.putExtra("area",((ChatViewItem)instructorClassAdapter.getItem(i)).getArea()); //클래스 지역구
+                intent.putExtra("star",((ChatViewItem)instructorClassAdapter.getItem(i)).getStar()); //평점 뿌리기
+intent.putExtra("image",bytes);
 
                 intent.putExtra("people", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPeople());
                 intent.putExtra("location", ((ChatViewItem)instructorClassAdapter.getItem(i)).getLocation());
@@ -102,7 +105,8 @@ public class InstructorMainActivity extends AppCompatActivity {
                 intent.putExtra("price", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPrice());
                 intent.putExtra("favorite", ((ChatViewItem)instructorClassAdapter.getItem(i)).getFavorite());
                 intent.putExtra("class_index", ((ChatViewItem)instructorClassAdapter.getItem(i)).getClass_index());
-
+                intent.putExtra("number_now",((ChatViewItem)instructorClassAdapter.getItem(i)).getPeopleNumberNow()); //현재 인원수
+                intent.putExtra("is_instructor", true);
                 InstructorMainActivity.this.startActivity(intent);
 
                 //startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);

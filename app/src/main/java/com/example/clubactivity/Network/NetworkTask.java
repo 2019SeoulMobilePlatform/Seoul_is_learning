@@ -10,23 +10,30 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
 import com.example.clubactivity.Class.ReviewListItem;
 import com.example.clubactivity.Class.ReviewListViewAdapter;
+import com.example.clubactivity.Club.ChatRoomActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Club.MessageListAdapter;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
+import com.example.clubactivity.MyPage.RecyclerViewAdapter;
 import com.example.clubactivity.R;
 
 import org.json.JSONArray;
@@ -42,6 +49,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String data;
     private int selection;
     private Button btn;
+    private String title;
+    private Activity activity;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
@@ -49,6 +58,17 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     ChatViewAdapter wholeClub_Adapter = null;
     ChatViewAdapter myClub_Adapter = null;
     ChatViewAdapter instructor_Adapter = null;
+    MessageListAdapter chatList;
+
+    RecyclerViewAdapter myClass_Adapter = null;
+
+    public NetworkTask(Context _context, String url, String data, int action, RecyclerViewAdapter recyclerViewAdapter){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.myClass_Adapter = recyclerViewAdapter;
+    }
 
     public NetworkTask(Context _context, String url, String data, int action, ChatViewAdapter chatViewAdapter){
         this.context = _context;
@@ -66,12 +86,22 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.btn = btn;
     }
 
+    public NetworkTask(Context _context, String url, String data, int action, String title, Activity activity){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.title = title;
+        this.activity = activity;
+    }
+
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
         this.url = url;
         this.data = data;
         this.selection = action;
     }
+
     public NetworkTask(Context _context, String url, int action){
         this.context = _context;
         this.url = url;
@@ -101,11 +131,11 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String result){
+    protected void onPostExecute(String result) {
 
-        try{
+        try {
             //경우에 따라 결과 값을 받아 일어났으면 하는 작업
-            switch(this.selection) {
+            switch (this.selection) {
                 case Constants.USER_LOGIN:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
@@ -164,7 +194,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     }
                     break;
 
-                case Constants.INSTRUCTOR_LOGIN :
+                case Constants.INSTRUCTOR_LOGIN:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String instructor_info = jsonObject.getString("result");
@@ -225,15 +255,15 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 // 클래스 리스트 받아오기 5
                 case Constants.SERVER_CLASS_LIST_GET:
                 case Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR:
+                case Constants.SERVER_GET_MY_CLASS:
+                case Constants.SERVER_GET_FAVORITE_CLASS:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         if (!real_result.equals("fail")) {
                             JSONObject resultObject;
-
                            if(resultObjectArray.length() != 0) {
-
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
@@ -244,24 +274,25 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String information = resultObject.getString("information");
                                    String time = resultObject.getString("time");
                                    String local = resultObject.getString("local");
-                                   String count_max = String.valueOf(resultObject.getInt("count_max"));
-                                   String count = String.valueOf(resultObject.getInt("count")); //현재수강인원
+                                   String  count_max = String.valueOf(resultObject.getInt("count_max"));
+                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
                                    int class_index = resultObject.getInt("class_index");
                                    boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   if(selection == Constants.SERVER_CLASS_LIST_GET){
-                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, favorite,flag_dongnae);
+                                   if(this.selection == Constants.SERVER_CLASS_LIST_GET || this.selection == Constants.SERVER_GET_MY_CLASS || this.selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count, count_max, price, favorite,flag_dongnae);
                                        items.add(item);
+                                       Log.d("ㅜㅜ", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, favorite,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
+                                       Log.d("ㅜㅅㅜ", chatViewItem.getTitle());
                                    }
                                }
-
                                if(selection == Constants.SERVER_CLASS_LIST_GET){
                                //클래스 리스트 설정 Recyclerview
                                    RecyclerView recyclerView = (RecyclerView) ((Activity) context).findViewById(R.id.class_list);
@@ -270,24 +301,49 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    recyclerView.setHasFixedSize(true);
                                    recyclerView.setLayoutManager(layoutManager);
                                }
-                               else{
+                               else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
                                    instructor_Adapter.setChatViewItemList(chatViewItems);
+                                   Log.d("살려줘", chatViewItems.get(0).getTitle());
+                               }
+                               else if(selection == Constants.SERVER_GET_MY_CLASS){
+                                   RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
+                                   recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                                   recyclerView.setLayoutManager(layoutManager);
+                                   TextView noClass;
+                                   if(items.size() != 0) {
+                                       noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_my_class));
+                                       noClass.setVisibility(View.GONE);
+                                   }
+                               }
+                               else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                   RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
+                                   recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                                   LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                                   recyclerView.setLayoutManager(layoutManager);
+                                   TextView noClass;
+                                   if(items.size() != 0) {
+                                       noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_favorite_class));
+                                       noClass.setVisibility(View.GONE);
+                                   }
                                }
                            }
                            else
                            {
                                Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
+
                            }
                         }
+                        /*
                         else{
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
-                        }
+                        }*/
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
 
-                    //서버에서 클래스 리뷰 가져오기
+                //서버에서 클래스 리뷰 가져오기
                 case Constants.SERVER_CLASS_REVIEW_GET:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
@@ -295,16 +351,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         if (!real_result.equals("fail")) {
                             JSONObject resultObject;
-                            if(resultObjectArray.length() != 0) {
-                                for(int i = 0 ; i < resultObjectArray.length(); i++){
+                            if (resultObjectArray.length() != 0) {
+                                for (int i = 0; i < resultObjectArray.length(); i++) {
                                     resultObject = resultObjectArray.getJSONObject(i);
 
                                     byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
                                     String nickname = resultObject.getString("nickname");
                                     String review = resultObject.getString("review");
-                                    float star = (float)resultObject.getDouble("star");
+                                    float star = (float) resultObject.getDouble("star");
 
-                                    ReviewListItem item = new ReviewListItem(decodedByte ,nickname,star,review);
+                                    ReviewListItem item = new ReviewListItem(decodedByte, nickname, star, review);
                                     reviewListItems.add(item);
                                 }
 
@@ -315,14 +371,11 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                 adapter = new ReviewListViewAdapter(((Activity) context).getLayoutInflater(), R.layout.class_review_listview_item, reviewListItems);
                                 reviewList.setAdapter(adapter);
                             }
-                        }
-                        else if(real_result.equals("fail1")){
+                        } else if (real_result.equals("fail1")) {
                             Toast.makeText(this.context, "룸유저에 추가 실패하였습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else if(real_result.equals("fail2")){
+                        } else if (real_result.equals("fail2")) {
                             Toast.makeText(this.context, "찾기에 실패하였습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.context, "클래스 리뷰가 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
@@ -373,7 +426,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
-                case Constants.GET_MYCLUBLIST :
+                case Constants.GET_MYCLUBLIST:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -455,42 +508,82 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
-                case Constants.ENTER_CLUB :
-                    try{
+                case Constants.ENTER_CLUB:
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        if(real_result.equals("success")){
+                        if (real_result.equals("success")) {
                             Toast.makeText(this.context, "동호회방 입장에 성공하였습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.context, "동호회방 입장에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
 
                 case Constants.REMOVE_CLUB:
-                    try{
+                    try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        if(real_result.equals("success")){
+                        if (real_result.equals("success")) {
                             Toast.makeText(this.context, "동호회방 지우기에 성공하였습니다.", Toast.LENGTH_LONG).show();
-                        }
-                        else{
+                        } else {
                             Toast.makeText(this.context, "동호회방 지우기에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case Constants.IMPORT_MESSAGELIST:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        JSONArray resultObjectArray = new JSONArray(real_result);
+                        chatList = new MessageListAdapter(context);
+
+                        if(real_result.equals("empty")){
+                            Toast.makeText(this.context, "대화 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+                        }
+                        else if (real_result.equals("fail")) {
+                            Toast.makeText(this.context, "연결 실패", Toast.LENGTH_LONG).show();
+                        } else {
+                            JSONObject resultObject;
+
+                            if (resultObjectArray.length() != 0) {
+                                for (int i = 0; i < resultObjectArray.length(); i++) {
+                                    resultObject = resultObjectArray.getJSONObject(i);
+                                    Bitmap profile = ImageConverter.getImageToBitmap(resultObject.getString("profile"));
+                                    String nickname = resultObject.getString("nickname");
+                                    int flag = resultObject.getInt("flag");
+                                    String user_id = resultObject.getString("email");
+                                    if (resultObject.isNull("image")) {
+                                        String message = resultObject.getString("message");
+                                        chatList.addItem(message, flag, user_id, nickname, profile);
+                                    } else {
+                                        Bitmap messageImage = ImageConverter.getImageToBitmap(resultObject.getString("image"));
+                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
+                                    }
+                                }
+                            }
+                        }
+
+                        Intent intent = new Intent(activity, ChatRoomActivity.class);
+                        intent.putExtra("clubName", title);
+                        intent.putExtra("chatList", chatList.getMessages());
+                        activity.startActivity(intent);
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-
 }

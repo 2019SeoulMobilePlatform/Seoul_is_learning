@@ -128,6 +128,12 @@ public class ClassDetailActivity extends AppCompatActivity {
 
     //클래스 예약 버튼 클릭
     public void ClassReservationButtonClicked(View view){
+        if(getIntent().getExtras().get("is_instructor") != null &&(boolean)getIntent().getExtras().get("is_instructor") == true){
+            Toast.makeText(ClassDetailActivity.this, "강사 계정의 클래스 예약은 불가능합니다.", Toast.LENGTH_SHORT);
+            return;
+       }
+
+
         Intent intent = new Intent(getApplicationContext(), ClassReservation.class);
 
         intent.putExtra("param", getIntent().getStringExtra("param")); //클래스 제목을 뿌려준다.
