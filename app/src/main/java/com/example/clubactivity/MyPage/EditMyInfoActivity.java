@@ -109,7 +109,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 password = _password.getText().toString();
                 email = _email.getText().toString();
                 residence = areaSpinner.getSelectedItem().toString();
-                if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                //if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
+                if(profileImage != null)
                     _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
                 else
                     _userImage = null;

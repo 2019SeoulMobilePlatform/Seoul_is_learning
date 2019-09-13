@@ -180,5 +180,16 @@ public class MyPageFragment extends Fragment {
             user_residence.setText(preferences.getString("residence",""));
         }
 
+        if(requestCode == Constants.REQUEST_ENTER_CLASS_DETAIL) {
+            String url = "http://106.10.35.170/ImportFavoriteClass.php";
+            String dataStr = "email=" + preferences.getString("email", "");
+            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
+            networkTask.execute();
+
+            url = "http://106.10.35.170/ImportMyClass.php";
+            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
+            networkTask.execute();
+        }
+
     }
 }

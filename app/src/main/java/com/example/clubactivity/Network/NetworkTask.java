@@ -274,7 +274,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String information = resultObject.getString("information");
                                    String time = resultObject.getString("time");
                                    String local = resultObject.getString("local");
-                                   int count_max = resultObject.getInt("count_max");
+                                   String  count_max = String.valueOf(resultObject.getInt("count_max"));
                                    String count = String.valueOf(resultObject.getInt("count")); //바꾸자
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
@@ -283,13 +283,14 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
                                    if(this.selection == Constants.SERVER_CLASS_LIST_GET || this.selection == Constants.SERVER_GET_MY_CLASS || this.selection == Constants.SERVER_GET_FAVORITE_CLASS){
-                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count, price, favorite,flag_dongnae);
+                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count, count_max, price, favorite,flag_dongnae);
                                        items.add(item);
                                        Log.d("ㅜㅜ", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, favorite,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
+                                       Log.d("ㅜㅅㅜ", chatViewItem.getTitle());
                                    }
                                }
                                if(selection == Constants.SERVER_CLASS_LIST_GET){
@@ -302,6 +303,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                }
                                else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
                                    instructor_Adapter.setChatViewItemList(chatViewItems);
+                                   Log.d("살려줘", chatViewItems.get(0).getTitle());
                                }
                                else if(selection == Constants.SERVER_GET_MY_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);

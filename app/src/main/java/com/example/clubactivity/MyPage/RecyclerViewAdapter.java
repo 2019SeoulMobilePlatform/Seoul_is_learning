@@ -1,5 +1,6 @@
 package com.example.clubactivity.MyPage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -80,7 +81,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("favorite", item.getFavorite());
                 intent.putExtra("class_index", item.getClass_index());
 
-                mContext.startActivity(intent);
+                ((Activity) mContext).startActivityForResult(intent, Constants.REQUEST_ENTER_CLASS_DETAIL);
             }
         });
     }
