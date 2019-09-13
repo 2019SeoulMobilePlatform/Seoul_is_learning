@@ -3,28 +3,21 @@ package com.example.clubactivity.MyPage;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Class.Item;
-import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Constants;
-import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.R;
 
-import java.io.ByteArrayOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -76,10 +69,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("people", item.getPeople());
                 intent.putExtra("location", item.getLocation());
                 intent.putExtra("date", item.getDate());
+                intent.putExtra("number_now",item.getPeopleNumberNow());
                 intent.putExtra("number", item.getPeopleNumber());
                 intent.putExtra("price", item.getPrice());
                 intent.putExtra("favorite", item.getFavorite());
                 intent.putExtra("class_index", item.getClass_index());
+                intent.putExtra("area",item.getArea());
 
                 ((Activity) mContext).startActivityForResult(intent, Constants.REQUEST_ENTER_CLASS_DETAIL);
             }

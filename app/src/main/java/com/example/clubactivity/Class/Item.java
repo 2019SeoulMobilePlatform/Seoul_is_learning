@@ -18,9 +18,6 @@ public class Item {
     private int class_index;
     private int flag_dongnae;
 
-    public Item(int class_index, byte[] decodedByte, float star, String name, String information, String local, String target_user, String address, String time, String count, String price, boolean favorite, int flag_dongnae) {
-    }
-
     public byte[] getImage() {
         return this.image;
     }
@@ -43,7 +40,6 @@ public class Item {
         return date;
     }
     public String getPeopleNumberNow(){return peopleNumberNow;}
-
     public String getPeopleNumber() {
         return peopleNumber;
     }
