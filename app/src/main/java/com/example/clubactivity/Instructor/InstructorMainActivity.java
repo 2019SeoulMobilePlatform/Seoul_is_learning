@@ -102,7 +102,7 @@ public class InstructorMainActivity extends AppCompatActivity {
                 intent.putExtra("price", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPrice());
                 intent.putExtra("favorite", ((ChatViewItem)instructorClassAdapter.getItem(i)).getFavorite());
                 intent.putExtra("class_index", ((ChatViewItem)instructorClassAdapter.getItem(i)).getClass_index());
-
+                intent.putExtra("is_instructor", true);
                 InstructorMainActivity.this.startActivity(intent);
 
                 //startActivityForResult(intent, Constants.REQUEST_CLUB_INTRO_ENTER);

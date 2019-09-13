@@ -10,8 +10,10 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -262,7 +264,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         if (!real_result.equals("fail")) {
                             JSONObject resultObject;
                            if(resultObjectArray.length() != 0) {
-
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
@@ -281,10 +282,10 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   if(selection == Constants.SERVER_CLASS_LIST_GET || selection == Constants.SERVER_GET_MY_CLASS || selection == Constants.SERVER_GET_FAVORITE_CLASS){
-                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                   if(this.selection == Constants.SERVER_CLASS_LIST_GET || this.selection == Constants.SERVER_GET_MY_CLASS || this.selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count, price, favorite,flag_dongnae);
                                        items.add(item);
-                                       //Log.d(items.size()+"", item.getTitle());
+                                       Log.d("ㅜㅜ", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
                                        ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
@@ -307,17 +308,28 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                                    recyclerView.setLayoutManager(layoutManager);
+                                   TextView noClass;
+                                   if(items.size() != 0) {
+                                       noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_my_class));
+                                       noClass.setVisibility(View.GONE);
+                                   }
                                }
                                else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
                                    recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                                    recyclerView.setLayoutManager(layoutManager);
+                                   TextView noClass;
+                                   if(items.size() != 0) {
+                                       noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_favorite_class));
+                                       noClass.setVisibility(View.GONE);
+                                   }
                                }
                            }
                            else
                            {
                                Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
+
                            }
                         }
                         /*

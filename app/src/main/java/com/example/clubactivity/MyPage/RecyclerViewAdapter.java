@@ -1,6 +1,9 @@
 package com.example.clubactivity.MyPage;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +15,14 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.R;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -48,9 +55,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
+        final Item item = items.get(position);
 
         Glide.with(mContext)
-                .asBitmap()
                 .load(items.get(position).getImage())
                 .into(holder.image);
 
@@ -59,7 +66,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //detailpage 연결
+                Intent intent = new Intent(mContext, ClassDetailActivity.class);
+                //Intent intent = new Intent(context, TabTest.class);
+
+                intent.putExtra("param", item.getTitle());
+                intent.putExtra("desc", item.getDesc());
+                intent.putExtra("image",item.getImage());
+                intent.putExtra("people", item.getPeople());
+                intent.putExtra("location", item.getLocation());
+                intent.putExtra("date", item.getDate());
+                intent.putExtra("number", item.getPeopleNumber());
+                intent.putExtra("price", item.getPrice());
+                intent.putExtra("favorite", item.getFavorite());
+                intent.putExtra("class_index", item.getClass_index());
+
+                mContext.startActivity(intent);
             }
         });
     }
