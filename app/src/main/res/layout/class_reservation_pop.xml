@@ -26,6 +26,8 @@
             android:layout_marginLeft="15dp"
             android:src="@drawable/ic_arrow_back_black_24dp"/>
         <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
             android:id="@+id/res_class_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -170,7 +172,7 @@
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="2.5"
-                        android:text="수업 시간" />
+                        android:text="수업 인원" />
 
                     <EditText
                         android:id="@+id/res_class_time"
@@ -178,7 +180,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="7.5"
                         android:editable="false"
-                        android:text="오후 2시 ~ 5시"
+                        android:text="강사 마음대로 받겠습니다."
                         android:background="@null"/>
                 </LinearLayout>
 
