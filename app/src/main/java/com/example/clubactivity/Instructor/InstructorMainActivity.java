@@ -96,7 +96,7 @@ public class InstructorMainActivity extends AppCompatActivity {
 
                 intent.putExtra("area",((ChatViewItem)instructorClassAdapter.getItem(i)).getArea()); //클래스 지역구
                 intent.putExtra("star",((ChatViewItem)instructorClassAdapter.getItem(i)).getStar()); //평점 뿌리기
-intent.putExtra("image",bytes);
+                intent.putExtra("image",bytes);
 
                 intent.putExtra("people", ((ChatViewItem)instructorClassAdapter.getItem(i)).getPeople());
                 intent.putExtra("location", ((ChatViewItem)instructorClassAdapter.getItem(i)).getLocation());

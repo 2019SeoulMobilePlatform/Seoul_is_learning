@@ -288,7 +288,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                        Log.d("ㅜㅜ", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, favorite,flag_dongnae);
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, false,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
                                        Log.d("ㅜㅅㅜ", chatViewItem.getTitle());
                                    }
