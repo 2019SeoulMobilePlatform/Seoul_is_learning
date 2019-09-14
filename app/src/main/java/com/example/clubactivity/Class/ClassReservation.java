@@ -39,8 +39,8 @@ public class ClassReservation extends Activity {
         location.setText(ClassDetailActivity.location);
         TextView date = (TextView)findViewById(R.id.res_class_date);
         date.setText(ClassDetailActivity.date);
-        TextView time = (TextView)findViewById(R.id.res_class_time);
-        //time.setText(ClassDetailActivity.date);
+        TextView people = (TextView)findViewById(R.id.res_class_time);
+        people.setText(ClassDetailActivity.number+"명");
 
         TextView price = (TextView)findViewById(R.id.res_class_price);
         price.setText(ClassDetailActivity.price+"원");

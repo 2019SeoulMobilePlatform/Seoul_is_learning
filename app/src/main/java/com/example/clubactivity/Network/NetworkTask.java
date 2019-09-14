@@ -18,9 +18,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
@@ -274,8 +272,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String information = resultObject.getString("information");
                                    String time = resultObject.getString("time");
                                    String local = resultObject.getString("local");
-                                   String  count_max = String.valueOf(resultObject.getInt("count_max"));
-                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                   String count_max = String.valueOf(resultObject.getInt("count_max"));
+                                   String count = String.valueOf(resultObject.getInt("count"));
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
                                    int class_index = resultObject.getInt("class_index");

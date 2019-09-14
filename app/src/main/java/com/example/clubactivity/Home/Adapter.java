@@ -80,6 +80,7 @@ public class Adapter extends PagerAdapter {
                 intent.putExtra("people",models.get(position).getPeople()); //클래스 대상
                 intent.putExtra("location",models.get(position).getLocation()); //클래스 정확한 장소
                 intent.putExtra("date",models.get(position).getDate()); //클래스 시간
+                intent.putExtra("number_now",models.get(position).getPeopleNumberNow()); //현재 인원수
                 intent.putExtra("number",models.get(position).getPeopleNumber()); //클래스 인원수
                 intent.putExtra("price",models.get(position).getPrice()); //가격
 
