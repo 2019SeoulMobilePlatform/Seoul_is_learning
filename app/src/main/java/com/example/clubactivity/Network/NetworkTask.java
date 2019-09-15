@@ -538,7 +538,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
-
+                case Constants.SERVER_DELETE_CLASS:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "클래스 삭제 성공", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "클래스 삭제 실패", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case Constants.IMPORT_MESSAGELIST:
                     try {
                         JSONObject jsonObject = new JSONObject(result);

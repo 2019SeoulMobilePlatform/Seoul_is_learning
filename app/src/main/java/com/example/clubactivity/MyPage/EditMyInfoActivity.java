@@ -35,6 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -83,8 +84,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _nickname.setText(preferences.getString("nickname", ""));
         _phonenumber.setText(preferences.getString("phone_number", ""));
         _email.setText(preferences.getString("email",""));
-        _password.setText(preferences.getString("password",""));
-        _password_check.setText(preferences.getString("password", ""));
+       // _password.setText(preferences.getString("password",""));
+        //_password_check.setText(preferences.getString("password", ""));
 
         //기본스피너 지정
         residence = preferences.getString("residence","");
@@ -121,7 +122,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
                 if(!_password.getText().toString().equals(passwordCheck.getText().toString())){
                     Toast.makeText(EditMyInfoActivity.this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                    Log.d("웅앵","비밀번호 불일치");
+                    Log.d("","비밀번호 불일치");
+                    return;
+                }
+
+                if(!Pattern.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,12}$", _password.getText().toString())){
+                    Toast.makeText(EditMyInfoActivity.this, "비밀번호는 8-12 자리의 영문자와 소문자의 조합이어야 합니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
 

@@ -145,7 +145,12 @@ public class InstructorMainActivity extends AppCompatActivity {
                         //instructorClassAdapter.removeItem(position);
 
                         if( item.getNowMemberNum() == 0 ) {
+                            String url = "http://106.10.35.170/DeleteClass.php";
+                            String dataStr = "email=" + preferences.getString("email", "") + "&class_index=" + item.getClass_index();
+                            NetworkTask networkTask = new NetworkTask(InstructorMainActivity.this, url, dataStr, Constants.SERVER_DELETE_CLASS);
+                            networkTask.execute();
                             instructorClassAdapter.removeItem(position);
+
                         }
                         else {
                             Toast.makeText(InstructorMainActivity.this, "예약자가 있는 클래스는 삭제할 수 없습니다.", Toast.LENGTH_SHORT);
@@ -161,7 +166,7 @@ public class InstructorMainActivity extends AppCompatActivity {
                 };
 
                 new AlertDialog.Builder(InstructorMainActivity.this)
-                        .setTitle("채팅 목록을 삭제하시겠습니까?")
+                        .setTitle("해당 클래스를 삭제하시겠습니까?")
                         .setPositiveButton("예", positiveListener)
                         .setNegativeButton("취소", cancelListener).show();
 
@@ -236,6 +241,14 @@ public class InstructorMainActivity extends AppCompatActivity {
             user_nickname.setText(preferences.getString("nickname", ""));
             user_residence.setText(preferences.getString("residence",""));
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String url = "http://106.10.35.170/ImportInstructorClassList.php";
+        String data = "email=" + preferences.getString("email","");
+        NetworkTask networkTask = new NetworkTask(InstructorMainActivity.this, url, data, Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR, instructorClassAdapter);
+        networkTask.execute();
     }
 }

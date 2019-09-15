@@ -194,4 +194,18 @@ public class MyPageFragment extends Fragment {
         }
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //찜 해결되고 다시해보기
+        String url = "http://106.10.35.170/ImportFavoriteClass.php";
+        String dataStr = "email=" + preferences.getString("email", "");
+        networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
+        networkTask.execute();
+
+        url = "http://106.10.35.170/ImportMyClass.php";
+        networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
+        networkTask.execute();
+    }
 }
