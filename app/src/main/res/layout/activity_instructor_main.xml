@@ -73,7 +73,7 @@
             </RelativeLayout>
 
 
-            <com.baoyz.swipemenulistview.SwipeMenuListView
+            <ListView
                 android:id="@+id/instructor_class_listview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

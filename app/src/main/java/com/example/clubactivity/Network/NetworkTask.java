@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
@@ -300,8 +301,12 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    recyclerView.setLayoutManager(layoutManager);
                                }
                                else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                   instructor_Adapter.setChatViewItemList(chatViewItems);
-                                   Log.d("살려줘", chatViewItems.get(0).getTitle());
+//                                   SwipeMenuListView instructorClassList = ((Activity) context).findViewById(R.id.instructor_class_listview);
+                                   ListView instructorClassList = ((Activity) context).findViewById(R.id.instructor_class_listview);
+//                                   instructor_Adapter.setChatViewItemList(chatViewItems);
+//                                   instructorClassList.setAdapter(instructor_Adapter);
+                                   instructorClassList.setAdapter(new ChatViewAdapter(chatViewItems));
+                                   Log.d("살려줘", instructor_Adapter.getChatViewItemList().get(0).getTitle());
                                }
                                else if(selection == Constants.SERVER_GET_MY_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
