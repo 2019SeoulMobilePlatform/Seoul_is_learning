@@ -28,7 +28,7 @@ public class ChatViewItem implements Parcelable {
     private int flag_dongnae;
 
 
-    public ChatViewItem(int class_index ,byte[] image,float star, String title, String desc ,String area, String targetUser, String location, String date, String peopleNumber, String peopleNumberNow, String price, boolean favorite, int flag_dongnae) {
+    public ChatViewItem(int class_index ,byte[] image,float star, String title, String desc ,String area, String targetUser, String location, String date, String peopleNumberNow, String peopleNumber, String price, boolean favorite, int flag_dongnae) {
 
         this.itemIndex = class_index;
         this.image = image;

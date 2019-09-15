@@ -22,7 +22,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.ClassFragment;
 import com.example.clubactivity.Class.ClassList;
-import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -37,7 +36,6 @@ import org.joda.time.DateTime;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -118,7 +116,13 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
 
         //밑에 뷰페이저 영역
-        List<Item> items = new ArrayList<>();
+
+        String data = "email=" + AppManager.getInstance().getEmail();
+        String url = "http://106.10.35.170/ImportRecommandClassList.php";
+        NetworkTask networkTask = new NetworkTask(getContext(), url, data, 960113);
+        networkTask.execute();
+
+       /* List<Item> items = new ArrayList<>();
 
         items.add(new Item(9700,ImageSending(R.drawable.cooking_class),4.5f ,"하루에 한가지 요리!", "요리를 간단하게! 단 하루에 하나씩만 배웁시다.","마포구","한개의 요리라도 완벽하게 하고싶은 사람들을 모집합니다.","서울시 마포구 테크노 건물 지하 1층","2019년 11월 30일 오후 2시","0","15","50000",false,0));
         items.add(new Item(9701,ImageSending(R.drawable.gaebal_class),5, "웹코딩을 배우자!", "나만의 사이트를 만들 수 있는 클래스","광진구","웹코딩을 쉽게 배우고 싶은 사람들","서울시 광진구 자양3동 스타시티 건물 7층","2019년 12월 매주 월, 수 오후 2시","0","20","50000",false,0));
@@ -136,7 +140,6 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         viewPager.setCurrentItem(1);
         //viewPager.setPageMargin(margin/2); //서로 간격
 
-
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -153,7 +156,7 @@ public class HomeFragment extends Fragment implements DatePickerListener {
 
             }
         });
-
+*/
 
         return view;
     }

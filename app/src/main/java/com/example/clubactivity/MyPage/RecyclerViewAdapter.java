@@ -70,6 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("location", item.getLocation());
                 intent.putExtra("date", item.getDate());
                 intent.putExtra("number_now",item.getPeopleNumberNow());
+                Log.d("시발",item.getPeopleNumberNow());
                 intent.putExtra("number", item.getPeopleNumber());
                 intent.putExtra("price", item.getPrice());
                 intent.putExtra("favorite", item.getFavorite());
