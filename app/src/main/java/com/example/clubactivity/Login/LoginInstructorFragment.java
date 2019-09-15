@@ -94,10 +94,10 @@ public class LoginInstructorFragment extends Fragment {
         password = _password.getText().toString();
         String url = "http://106.10.35.170/InstructorLogin.php";
 
-        if(email.isEmpty() || password.isEmpty()){
-            Toast.makeText(getActivity(),"이메일, 비밀번호를 입력해 주세요",Toast.LENGTH_LONG).show();
-            return;
-        }
+//        if(email.isEmpty() || password.isEmpty()){
+//            Toast.makeText(getActivity(),"이메일, 비밀번호를 입력해 주세요",Toast.LENGTH_LONG).show();
+//            return;
+//        }
 
         //서버에 로그인 정보 보내기
         String data = sendData(email, password);

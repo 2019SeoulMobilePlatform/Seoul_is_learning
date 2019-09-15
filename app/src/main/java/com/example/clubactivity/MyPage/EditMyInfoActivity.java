@@ -35,6 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -83,8 +84,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _nickname.setText(preferences.getString("nickname", ""));
         _phonenumber.setText(preferences.getString("phone_number", ""));
         _email.setText(preferences.getString("email",""));
-        _password.setText(preferences.getString("password",""));
-        _password_check.setText(preferences.getString("password", ""));
+       // _password.setText(preferences.getString("password",""));
+        //_password_check.setText(preferences.getString("password", ""));
 
         //기본스피너 지정
         residence = preferences.getString("residence","");
@@ -92,8 +93,11 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
 
 
-        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
-            profileImage.setImageBitmap(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")));
+        if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null) {
+            Bitmap image = ImageConverter.getImageToBitmap(preferences.getString("profileImage", ""));
+            profileImage.setImageBitmap(image);
+            _userImage = image;
+        }
         else{
             profileImage.setImageResource(R.drawable.ic_account_circle_white_60dp);
         }
@@ -110,16 +114,23 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 email = _email.getText().toString();
                 residence = areaSpinner.getSelectedItem().toString();
                 //if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
-                if(profileImage != null)
-                    _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
-                else
-                    _userImage = null;
-                /*
+                //프로필이미지가 기본이미지이냐
+//                if(profileImage.getDrawable() != getResources().getDrawable(R.drawable.ic_account_circle_white_60dp))
+//                    _userImage = ((BitmapDrawable)profileImage.getDrawable()).getBitmap();
+//                else
+//                    _userImage = null;
+
                 if(!_password.getText().toString().equals(passwordCheck.getText().toString())){
-                    Toast.makeText(EditMyInfoActivity.this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_LONG);
+                    Toast.makeText(EditMyInfoActivity.this, "비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                    Log.d("","비밀번호 불일치");
                     return;
                 }
-                */
+
+                if(!Pattern.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,12}$", _password.getText().toString())){
+                    Toast.makeText(EditMyInfoActivity.this, "비밀번호는 8-12 자리의 영문자와 소문자의 조합이어야 합니다.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 
                 // 이미지 수정
                 editor.remove("profileImage");
@@ -139,6 +150,10 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 // 지역구 수정
                 editor.remove(residence);
                 editor.putString("residence", areaSpinner.getSelectedItem().toString());
+
+                //핸드폰 번호 수정
+                editor.remove("phone_number");
+                editor.putString("phone_number", _phonenumber.getText().toString());
 
 
                 editor.commit();
@@ -181,7 +196,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
             ImageProcessing imageProcessing = new ImageProcessing(EditMyInfoActivity.this);
             Uri imgUri = data.getData();
             imageProcessing.SetImage(imageView, imgUri);
-
+            _userImage = imageProcessing.ConvertUriToBitmap(imgUri);
 
         }
     }

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
@@ -291,7 +292,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                        Log.d("ㅜㅜ", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, favorite,flag_dongnae);
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, false,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
                                        Log.d("ㅜㅅㅜ", chatViewItem.getTitle());
                                    }
@@ -317,8 +318,12 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    recyclerView.setLayoutManager(layoutManager);
                                }
                                else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                   instructor_Adapter.setChatViewItemList(chatViewItems);
-                                   Log.d("살려줘", chatViewItems.get(0).getTitle());
+//                                   SwipeMenuListView instructorClassList = ((Activity) context).findViewById(R.id.instructor_class_listview);
+                                   ListView instructorClassList = ((Activity) context).findViewById(R.id.instructor_class_listview);
+//                                   instructor_Adapter.setChatViewItemList(chatViewItems);
+//                                   instructorClassList.setAdapter(instructor_Adapter);
+                                   instructorClassList.setAdapter(new ChatViewAdapter(chatViewItems));
+                                   Log.d("살려줘", instructor_Adapter.getChatViewItemList().get(0).getTitle());
                                }
                                else if(selection == Constants.SERVER_GET_MY_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
@@ -550,7 +555,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
-
+                case Constants.SERVER_DELETE_CLASS:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "클래스 삭제 성공", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "클래스 삭제 실패", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case Constants.IMPORT_MESSAGELIST:
                     try {
                         JSONObject jsonObject = new JSONObject(result);

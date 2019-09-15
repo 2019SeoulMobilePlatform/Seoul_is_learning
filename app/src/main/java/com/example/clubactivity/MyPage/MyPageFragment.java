@@ -1,5 +1,6 @@
 package com.example.clubactivity.MyPage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
@@ -191,5 +193,19 @@ public class MyPageFragment extends Fragment {
             networkTask.execute();
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //찜 해결되고 다시해보기
+        String url = "http://106.10.35.170/ImportFavoriteClass.php";
+        String dataStr = "email=" + preferences.getString("email", "");
+        networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
+        networkTask.execute();
+
+        url = "http://106.10.35.170/ImportMyClass.php";
+        networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
+        networkTask.execute();
     }
 }
