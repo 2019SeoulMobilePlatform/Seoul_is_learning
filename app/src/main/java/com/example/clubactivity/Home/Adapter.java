@@ -83,6 +83,7 @@ public class Adapter extends PagerAdapter {
                 intent.putExtra("number_now",models.get(position).getPeopleNumberNow()); //현재 인원수
                 intent.putExtra("number",models.get(position).getPeopleNumber()); //클래스 인원수
                 intent.putExtra("price",models.get(position).getPrice()); //가격
+                intent.putExtra("favorite", models.get(position).getFavorite());
 
                 intent.putExtra("class_index",models.get(position).getClass_index()); //클래스 인덱스
 
