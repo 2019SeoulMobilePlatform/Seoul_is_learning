@@ -1,6 +1,7 @@
 package com.example.clubactivity.Login;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -59,9 +60,17 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(inputEmail.getText().toString().isEmpty())
                     return;
-                String url = "http://106.10.35.170/CheckId.php";
-                String data = "email=" + inputEmail.getText().toString();
 
+
+                String url =null;
+                String getMode = getIntent().getStringExtra("Mode");
+                if(getMode.equals("User")) {
+                    url = "http://106.10.35.170/CheckId.php";
+                }else{
+                    url = "http://106.10.35.170/CheckIstructId.php";
+                }
+                String data = "email=" + inputEmail.getText().toString();
+                Log.d("으아아아",url);
                 NetworkTask networkTask = new NetworkTask(SignUpActivity.this, url, data, Constants.SERVER_CHECK_DUPLICATE_EMAIL, checkEmailbtn);
                 networkTask.execute();
             }
@@ -100,11 +109,15 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "비밀번호와 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(phone_number.isEmpty() || !Pattern.matches("^01(?:0|1|[6-9]) \\\\d{4} \\\\d{4}$", phone_number)){
+                if(phone_number.isEmpty() || !Pattern.matches("^\\d{3}\\d{4}\\d{4}$", phone_number)){
                     Toast.makeText(SignUpActivity.this, "휴대폰 번호를 형식에 맞게 입력하세요", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(nickname.isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "닉네임을 입력해 주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!Pattern.matches("^\\d{6}$", birth)){
                     Toast.makeText(SignUpActivity.this, "닉네임을 입력해 주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
