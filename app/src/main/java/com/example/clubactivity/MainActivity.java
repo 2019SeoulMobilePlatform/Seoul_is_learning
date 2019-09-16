@@ -19,7 +19,9 @@ import com.example.clubactivity.Login.LoginActivity;
 import com.example.clubactivity.MyPage.MyPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity{
 
     private BottomNavigationView bottomNavigationView; //하단 네비 바
     private FragmentManager fragmentManager;

@@ -1,6 +1,7 @@
 package com.example.clubactivity.Club;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -29,20 +30,23 @@ import androidx.core.app.ActivityCompat;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.Network.ImageConverter;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ChatRoomActivity extends AppCompatActivity {
+public class ChatRoomActivity extends AppCompatActivity{
 
     Button sendButton ;
     MessageListAdapter adapter;
     TextView messageTextView;
     ListView listview;
-    SharedPreferences sharedPreferences;
+    int room_index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,11 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         TextView title = findViewById(R.id.club_chatting_title);
-        title.setText(intent.getExtras().get("clubName").toString());
-        adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
+        title.setText(intent.getExtras().getString("clubName").toString());
+        room_index = intent.getExtras().getInt("clubIndex");
+
+        //adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().getSerializable("chatList"));
+        adapter = new MessageListAdapter(this);
         messageTextView = findViewById(R.id.editText);
 
         listview = (ListView) findViewById(R.id.chatmessage_listView);
@@ -68,6 +75,10 @@ public class ChatRoomActivity extends AppCompatActivity {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
                 if(!messageTextView.getText().toString().isEmpty()){
+                    String url = "http://106.10.35.170/StoreMessage.php";
+                    String data = getData(messageTextView.getText().toString(),AppManager.getInstance().getEmail(), room_index);
+                    NetworkTask networkTask = new NetworkTask(view.getContext(), url, data, Constants.SEND_MESSAGE);
+                    networkTask.execute();
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
@@ -94,6 +105,22 @@ public class ChatRoomActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public String getData(String message, String email, int room_index){
+
+        String data = "room_index=" + room_index + "&user_email=" +email + "&message=" + message;
+
+        return data;
+    }
+
+    public String getData(Bitmap image, String email, int room_index){
+
+        String message_image = ImageConverter.getImageToString(image);
+
+        String data = "room_index=" + room_index + "&user_email=" +email + "&message_image=" + message_image ;
+
+        return data;
     }
 
 
@@ -154,7 +181,12 @@ public class ChatRoomActivity extends AppCompatActivity {
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
 */
-            adapter.addItem(1, image, "id");
+            String url = "http://106.10.35.170/StoreMessage.php";
+            String data_image = getData(image, AppManager.getInstance().getEmail(), room_index);
+            NetworkTask networkTask = new NetworkTask(this, url, data_image, Constants.SEND_MESSAGE);
+            networkTask.execute();
+
+            adapter.addItem(0, image, "id");
             adapter.notifyDataSetChanged();
 
         }

@@ -555,10 +555,10 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             }
                         }
 
-                        Intent intent = new Intent(activity, ChatRoomActivity.class);
+                        Intent intent = new Intent(context, ChatRoomActivity.class);
                         intent.putExtra("clubName", title);
                         intent.putExtra("chatList", chatList.getMessages());
-                        activity.startActivity(intent);
+                        ((Activity)context).startActivity(intent);
 
                     } catch (Exception e) {
                         e.printStackTrace();
