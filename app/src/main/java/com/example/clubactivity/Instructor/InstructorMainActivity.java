@@ -32,6 +32,7 @@ import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.MyPage.EditMyInfoActivity;
+import com.example.clubactivity.MyPage.EnterEditInfoActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -177,8 +178,9 @@ public class InstructorMainActivity extends AppCompatActivity {
     }
 
     public void EditInfo(View view) {
-        Intent intent = new Intent(InstructorMainActivity.this, EditMyInfoActivity.class);
+        Intent intent = new Intent(InstructorMainActivity.this, EnterEditInfoActivity .class);
         intent.putExtra("isInstructor", true);
+
         startActivityForResult(intent, Constants.REQUEST_EDIT_INFO_INS);
     }
 

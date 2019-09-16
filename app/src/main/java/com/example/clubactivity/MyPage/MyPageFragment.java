@@ -64,7 +64,7 @@ public class MyPageFragment extends Fragment {
         EditInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
+                Intent intent = new Intent(getActivity(), EnterEditInfoActivity.class);
                 intent.putExtra("isInstructor", false );
                 startActivityForResult(intent, Constants.REQUEST_EDIT_INFO); // 요청한 곳을 구분하기 위한 숫자, 의미없음
             }
@@ -97,7 +97,7 @@ public class MyPageFragment extends Fragment {
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
         ts1.setContent(R.id.content1_myclass) ;
-        ts1.setIndicator("나의 클래스") ;
+        ts1.setIndicator("예약한 클래스") ;
         tabHost1.addTab(ts1)  ;
 
 
@@ -198,7 +198,6 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //찜 해결되고 다시해보기
         String url = "http://106.10.35.170/ImportFavoriteClass.php";
         String dataStr = "email=" + preferences.getString("email", "");
         networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);

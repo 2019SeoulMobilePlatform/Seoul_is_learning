@@ -118,7 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
                 if(!Pattern.matches("^\\d{6}$", birth)){
-                    Toast.makeText(SignUpActivity.this, "닉네임을 입력해 주세요.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "주민등록번호를 알맞게 입력해 주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(checkEmailbtn.isEnabled()){
