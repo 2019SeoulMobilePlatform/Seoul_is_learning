@@ -159,14 +159,14 @@ public class MyPageFragment extends Fragment {
 //        RecyclerViewAdapter adapter_favorite = new RecyclerViewAdapter(getActivity());
 //        recyclerView_favorite.setAdapter(adapter_favorite);
 
-        String url = "http://106.10.35.170/ImportFavoriteClass.php";
-        String data = "email=" + preferences.getString("email", "");
-        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_FAVORITE_CLASS);
-        networkTask.execute();
-
-        url = "http://106.10.35.170/ImportMyClass.php";
-        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_MY_CLASS);
-        networkTask.execute();
+//        String url = "http://106.10.35.170/ImportFavoriteClass.php";
+//        String data = "email=" + preferences.getString("email", "");
+//        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_FAVORITE_CLASS);
+//        networkTask.execute();
+//
+//        url = "http://106.10.35.170/ImportMyClass.php";
+//        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_MY_CLASS);
+//        networkTask.execute();
 
     }
 
@@ -180,17 +180,6 @@ public class MyPageFragment extends Fragment {
             }
             user_nickname.setText(preferences.getString("nickname", ""));
             user_residence.setText(preferences.getString("residence",""));
-        }
-
-        if(requestCode == Constants.REQUEST_ENTER_CLASS_DETAIL) {
-            String url = "http://106.10.35.170/ImportFavoriteClass.php";
-            String dataStr = "email=" + preferences.getString("email", "");
-            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
-            networkTask.execute();
-
-            url = "http://106.10.35.170/ImportMyClass.php";
-            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
-            networkTask.execute();
         }
 
     }
