@@ -1,6 +1,7 @@
 package com.example.clubactivity.Network;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -52,6 +53,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String title;
     private Activity activity;
     ViewPager viewPager;
+    ProgressDialog asyncDialog;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
@@ -69,6 +71,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.data = data;
         this.selection = action;
         this.myClass_Adapter = recyclerViewAdapter;
+        if(_context != null)
+            this.asyncDialog = new ProgressDialog(_context);
     }
 
     public NetworkTask(Context _context, String url, String data, int action, ChatViewAdapter chatViewAdapter){
@@ -77,6 +81,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.data = data;
         this.selection = action;
         this.instructor_Adapter = chatViewAdapter;
+        if(_context != null)
+            this.asyncDialog = new ProgressDialog(_context);
     }
 
     public NetworkTask(Context _context, String url, String data, int action, Button btn){
@@ -85,6 +91,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.data = data;
         this.selection = action;
         this.btn = btn;
+        if(_context != null)
+            this.asyncDialog = new ProgressDialog(_context);
     }
 
     public NetworkTask(Context _context, String url, String data, int action, String title, Activity activity){
@@ -94,6 +102,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.selection = action;
         this.title = title;
         this.activity = activity;
+        if(_context != null)
+            this.asyncDialog = new ProgressDialog(_context);
     }
 
     public NetworkTask(Context _context, String url, String data, int action){
@@ -101,6 +111,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.url = url;
         this.data = data;
         this.selection = action;
+        if(_context != null)
+            this.asyncDialog = new ProgressDialog(_context);
     }
 
     public NetworkTask(Context _context, String url, int action){
@@ -108,6 +120,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.url = url;
         this.selection = action;
         this.data = " ";
+        if(_context != null)
+        this.asyncDialog = new ProgressDialog(_context);
     }
 
     @Override
@@ -127,8 +141,14 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPreExecute(){
-        // 상태에 맞는 안내문 넣어주는 부분
-        // 메인스레드에서는 응답을 기다리는 안내 메세지를 띄워주면 될 것같음
+        //로딩
+        if(asyncDialog != null) {
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("취미 불러오는중!");
+            asyncDialog.show();
+            asyncDialog.setCanceledOnTouchOutside(false);
+        }
+        super.onPreExecute();
     }
 
     @Override
@@ -610,9 +630,19 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     break;
 
             }
+            //로딩 종료
+            if(asyncDialog!=null) {
+                asyncDialog.setCanceledOnTouchOutside(true);
+                asyncDialog.dismiss();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
+            //로딩 종료
+            if(asyncDialog!=null) {
+                asyncDialog.setCanceledOnTouchOutside(true);
+                asyncDialog.dismiss();
+            }
         }
 
     }

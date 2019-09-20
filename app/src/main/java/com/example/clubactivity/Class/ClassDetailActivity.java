@@ -199,7 +199,10 @@ public class ClassDetailActivity extends AppCompatActivity {
         return data;
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
+    }
 }
