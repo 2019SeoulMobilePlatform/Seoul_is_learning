@@ -29,6 +29,7 @@ import com.example.clubactivity.Class.ReviewListViewAdapter;
 import com.example.clubactivity.Club.ChatRoomActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Club.MessageContents;
 import com.example.clubactivity.Club.MessageListAdapter;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Home.Adapter;
@@ -40,6 +41,7 @@ import com.example.clubactivity.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +97,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
             this.asyncDialog = new ProgressDialog(_context);
     }
 
-    public NetworkTask(Context _context, String url, String data, int action, String title, Activity activity){
+    /*public NetworkTask(Context _context, String url, String data, int action, String title, Activity activity){
         this.context = _context;
         this.url = url;
         this.data = data;
@@ -104,7 +106,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.activity = activity;
         if(_context != null)
             this.asyncDialog = new ProgressDialog(_context);
-    }
+    }*/
+//    public NetworkTask(Context _context, String url, String data, int action, String title, Context activity){
+//        this.context = _context;
+//        this.url = url;
+//        this.data = data;
+//        this.selection = action;
+//        this.title = title;
+////        this.activity = activity;
+//        this.context = activity;
+//    }
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
@@ -591,7 +602,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
-                        chatList = new MessageListAdapter(context);
+                        ArrayList<MessageContents> messageContents = new ArrayList<>();
 
                         if(real_result.equals("empty")){
                             Toast.makeText(this.context, "대화 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
@@ -610,19 +621,23 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     String user_id = resultObject.getString("email");
                                     if (resultObject.isNull("image")) {
                                         String message = resultObject.getString("message");
-                                        chatList.addItem(message, flag, user_id, nickname, profile);
+                                        MessageContents messageContents1 = new MessageContents(message, flag, user_id, nickname, profile);
+//                                        chatList.addItem(message, flag, user_id, nickname, profile);
+                                        messageContents.add(messageContents1);
                                     } else {
                                         Bitmap messageImage = ImageConverter.getImageToBitmap(resultObject.getString("image"));
-                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
+                                        MessageContents messageContents1 = new MessageContents(flag, user_id, nickname, profile, messageImage);
+                                        messageContents.add(messageContents1);
+//                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
                                     }
                                 }
                             }
                         }
 
-                        Intent intent = new Intent(activity, ChatRoomActivity.class);
-                        intent.putExtra("clubName", title);
-                        intent.putExtra("chatList", chatList.getMessages());
-                        activity.startActivity(intent);
+                        chatList = new MessageListAdapter(context, messageContents);
+
+                        ListView chatMessageListView = ((Activity) context).findViewById(R.id.chatmessage_listView);
+                        chatMessageListView.setAdapter(chatList);
 
                     } catch (Exception e) {
                         e.printStackTrace();

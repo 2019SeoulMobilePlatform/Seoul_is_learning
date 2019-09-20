@@ -29,6 +29,7 @@ import androidx.core.app.ActivityCompat;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
@@ -53,12 +54,19 @@ public class ChatRoomActivity extends AppCompatActivity {
         Intent intent = getIntent();
         TextView title = findViewById(R.id.club_chatting_title);
         title.setText(intent.getExtras().get("clubName").toString());
-        adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
+        //adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
         messageTextView = findViewById(R.id.editText);
 
         listview = (ListView) findViewById(R.id.chatmessage_listView);
-        listview.setAdapter(adapter);
+        //listview.setAdapter(adapter);
 
+
+        String url = "http://106.10.35.170/ImportMessageList.php";
+        String data = getData(AppManager.getInstance().getEmail(), intent.getIntExtra("chatIndex", 0));
+        NetworkTask networkTask = new NetworkTask(ChatRoomActivity.this, url, data, Constants.IMPORT_MESSAGELIST);
+        networkTask.execute();
+
+        adapter = (MessageListAdapter)listview.getAdapter();
 
         sendButton = findViewById(R.id.send_text_btn);
 
@@ -172,5 +180,12 @@ public class ChatRoomActivity extends AppCompatActivity {
         return realPath;
     }
 
+
+    public String getData(String email, int room_index){
+
+        String data = "email=" + email + "&room_index=" + room_index;
+
+        return data;
+    }
 
 }

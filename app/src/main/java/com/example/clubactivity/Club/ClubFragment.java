@@ -57,7 +57,6 @@ public class  ClubFragment extends Fragment {
     SharedPreferences preferences;
 
     public ClubFragment(){
-
         
         String url = "http://106.10.35.170/ImportClubList.php";
         networkTask = new NetworkTask(this.getContext(), url, 7);
@@ -155,16 +154,16 @@ public class  ClubFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
 
-                String url = "http://106.10.35.170/ImportMessageList.php";
-                String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
-                NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle(), getActivity());
-                networkTask.execute();
+//                String url = "http://106.10.35.170/ImportMessageList.php";
+//                String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
+//                NetworkTask networkTask = new NetworkTask(getActivity(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle(), getActivity());
+//                networkTask.execute();
 
-                /*
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
                 intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
+                intent.putExtra("chatIndex", ((ChatViewItem)myClub_adapter.getItem(i)).getItemIndex());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
-                */
+
             }
         });
 

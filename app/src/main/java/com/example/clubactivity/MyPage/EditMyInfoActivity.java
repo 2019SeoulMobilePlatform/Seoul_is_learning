@@ -84,8 +84,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
         _nickname.setText(preferences.getString("nickname", ""));
         _phonenumber.setText(preferences.getString("phone_number", ""));
         _email.setText(preferences.getString("email",""));
-       // _password.setText(preferences.getString("password",""));
-        //_password_check.setText(preferences.getString("password", ""));
+        _password.setText(preferences.getString("password",""));
+        _password_check.setText(preferences.getString("password", ""));
 
         //기본스피너 지정
         residence = preferences.getString("residence","");
