@@ -1,6 +1,7 @@
 package com.example.clubactivity.Login;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -58,9 +60,17 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(inputEmail.getText().toString().isEmpty())
                     return;
-                String url = "http://106.10.35.170/CheckId.php";
-                String data = "email=" + inputEmail.getText().toString();
 
+
+                String url =null;
+                String getMode = getIntent().getStringExtra("Mode");
+                if(getMode.equals("User")) {
+                    url = "http://106.10.35.170/CheckId.php";
+                }else{
+                    url = "http://106.10.35.170/CheckIstructId.php";
+                }
+                String data = "email=" + inputEmail.getText().toString();
+                Log.d("으아아아",url);
                 NetworkTask networkTask = new NetworkTask(SignUpActivity.this, url, data, Constants.SERVER_CHECK_DUPLICATE_EMAIL, checkEmailbtn);
                 networkTask.execute();
             }
@@ -87,20 +97,28 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "이메일이 형식에 맞지 않습니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(inputName.getText().toString().isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputName.getText().toString()).matches()){
-                    Toast.makeText(SignUpActivity.this, "이메일이 형식에 맞지 않습니다.", Toast.LENGTH_LONG).show();
+                if(inputName.getText().toString().isEmpty()){
+                    Toast.makeText(SignUpActivity.this, "이름을 입력해 주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!Pattern.matches("^(?=.*\\d)(?=.*[a-zA-Z]).{8,12}$", password)){
+                    Toast.makeText(SignUpActivity.this, "비밀번호는 8-12자의 대소문자의 조합으로만 설정 가능합니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!password.equals(checkingPassword)){
-                    Toast.makeText(SignUpActivity.this, "비밀번호를 같게 입력하세요", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "비밀번호와 비밀번호 확인이 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(phone_number.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputName.getText().toString()).matches()){
-                    Toast.makeText(SignUpActivity.this, "휴대폰 번호를 입력하세요", Toast.LENGTH_LONG).show();
+                if(phone_number.isEmpty() || !Pattern.matches("^\\d{3}\\d{4}\\d{4}$", phone_number)){
+                    Toast.makeText(SignUpActivity.this, "휴대폰 번호를 형식에 맞게 입력하세요", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(nickname.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputName.getText().toString()).matches()){
+                if(nickname.isEmpty()){
                     Toast.makeText(SignUpActivity.this, "닉네임을 입력해 주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!Pattern.matches("^\\d{6}$", birth)){
+                    Toast.makeText(SignUpActivity.this, "주민등록번호를 알맞게 입력해 주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(checkEmailbtn.isEnabled()){

@@ -10,15 +10,16 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
+import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
@@ -27,8 +28,10 @@ import com.example.clubactivity.Class.ReviewListViewAdapter;
 import com.example.clubactivity.Club.ChatRoomActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Club.MessageContents;
 import com.example.clubactivity.Club.MessageListAdapter;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Home.Adapter;
 import com.example.clubactivity.Instructor.InstructorMainActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.MyPage.RecyclerViewAdapter;
@@ -37,6 +40,7 @@ import com.example.clubactivity.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,8 +51,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private String data;
     private int selection;
     private Button btn;
-    private String title;
-    private Activity activity;
+//    private String title;
+//    private Activity activity;
+    ViewPager viewPager;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
@@ -84,14 +89,15 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.btn = btn;
     }
 
-    public NetworkTask(Context _context, String url, String data, int action, String title, Activity activity){
-        this.context = _context;
-        this.url = url;
-        this.data = data;
-        this.selection = action;
-        this.title = title;
-        this.activity = activity;
-    }
+//    public NetworkTask(Context _context, String url, String data, int action, String title, Context activity){
+//        this.context = _context;
+//        this.url = url;
+//        this.data = data;
+//        this.selection = action;
+//        this.title = title;
+////        this.activity = activity;
+//        this.context = activity;
+//    }
 
     public NetworkTask(Context _context, String url, String data, int action){
         this.context = _context;
@@ -255,6 +261,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 case Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR:
                 case Constants.SERVER_GET_MY_CLASS:
                 case Constants.SERVER_GET_FAVORITE_CLASS:
+                case 960113:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -262,7 +269,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         if (!real_result.equals("fail")) {
                             JSONObject resultObject;
                            if(resultObjectArray.length() != 0) {
-
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
@@ -273,23 +279,36 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    String information = resultObject.getString("information");
                                    String time = resultObject.getString("time");
                                    String local = resultObject.getString("local");
-                                   int count_max = resultObject.getInt("count_max");
-                                   String count = String.valueOf(resultObject.getInt("count")); //바꾸자
+                                   String count_max = String.valueOf(resultObject.getInt("count_max"));
+                                   String count = String.valueOf(resultObject.getInt("count"));
                                    float star = (float)resultObject.getDouble("star");
                                    String price = String.valueOf(resultObject.getInt("price"));
                                    int class_index = resultObject.getInt("class_index");
                                    boolean favorite = resultObject.getBoolean("favorite");
                                    int flag_dongnae = resultObject.getInt("flag"); //0 은 그냥 1이 동네배움터
 
-                                   if(selection == Constants.SERVER_CLASS_LIST_GET || selection == Constants.SERVER_GET_MY_CLASS || selection == Constants.SERVER_GET_FAVORITE_CLASS){
-                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                   if(this.selection == Constants.SERVER_CLASS_LIST_GET || this.selection == Constants.SERVER_GET_MY_CLASS || this.selection == Constants.SERVER_GET_FAVORITE_CLASS || this.selection == 960113){
+                                       Item item = new Item(class_index ,decodedByte, star,name,information,local,target_user,address,time,count, count_max, price, favorite,flag_dongnae);
                                        items.add(item);
-                                       //Log.d(items.size()+"", item.getTitle());
                                    }
                                    if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,price, favorite,flag_dongnae);
+                                       ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, false,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
                                    }
+                               }
+                               if(selection == 960113){
+                                   //3개만 홈화면에 뜨게 하기
+                                   items = items.subList(0,3);
+                                   Adapter adapter = new Adapter(items, (Activity)context);
+
+                                   int dpValue = 55;
+                                   float displaySize = ((Activity) context).getResources().getDisplayMetrics().density;
+                                   int margin = (int) (dpValue * displaySize);
+
+                                   viewPager = ((Activity) context).findViewById(R.id.viewPager);
+                                   viewPager.setAdapter(adapter);
+                                   viewPager.setPadding(margin, 0, margin, 0); // 미리보기정도
+                                   viewPager.setCurrentItem(1);
                                }
                                if(selection == Constants.SERVER_CLASS_LIST_GET){
                                //클래스 리스트 설정 Recyclerview
@@ -300,24 +319,40 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    recyclerView.setLayoutManager(layoutManager);
                                }
                                else if(selection == Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR){
-                                   instructor_Adapter.setChatViewItemList(chatViewItems);
+//                                   SwipeMenuListView instructorClassList = ((Activity) context).findViewById(R.id.instructor_class_listview);
+                                   ListView instructorClassList = ((Activity) context).findViewById(R.id.instructor_class_listview);
+//                                   instructor_Adapter.setChatViewItemList(chatViewItems);
+//                                   instructorClassList.setAdapter(instructor_Adapter);
+                                   instructorClassList.setAdapter(new ChatViewAdapter(chatViewItems));
+                                   Log.d("살려줘", instructor_Adapter.getChatViewItemList().get(0).getTitle());
                                }
                                else if(selection == Constants.SERVER_GET_MY_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
                                    recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                                    recyclerView.setLayoutManager(layoutManager);
+                                   TextView noClass;
+                                   if(items.size() != 0) {
+                                       noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_my_class));
+                                       noClass.setVisibility(View.GONE);
+                                   }
                                }
                                else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
                                    recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
                                    recyclerView.setLayoutManager(layoutManager);
+                                   TextView noClass;
+                                   if(items.size() != 0) {
+                                       noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_favorite_class));
+                                       noClass.setVisibility(View.GONE);
+                                   }
                                }
                            }
                            else
                            {
                                Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
+
                            }
                         }
                         /*
@@ -521,13 +556,25 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
-
+                case Constants.SERVER_DELETE_CLASS:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "클래스 삭제 성공", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this.context, "클래스 삭제 실패", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
                 case Constants.IMPORT_MESSAGELIST:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
-                        chatList = new MessageListAdapter(context);
+                        ArrayList<MessageContents> messageContents = new ArrayList<>();
 
                         if(real_result.equals("empty")){
                             Toast.makeText(this.context, "대화 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
@@ -546,20 +593,23 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     String user_id = resultObject.getString("email");
                                     if (resultObject.isNull("image")) {
                                         String message = resultObject.getString("message");
-                                        chatList.addItem(message, flag, user_id, nickname, profile);
+                                        MessageContents messageContents1 = new MessageContents(message, flag, user_id, nickname, profile);
+//                                        chatList.addItem(message, flag, user_id, nickname, profile);
+                                        messageContents.add(messageContents1);
                                     } else {
                                         Bitmap messageImage = ImageConverter.getImageToBitmap(resultObject.getString("image"));
-                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
+                                        MessageContents messageContents1 = new MessageContents(flag, user_id, nickname, profile, messageImage);
+                                        messageContents.add(messageContents1);
+//                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
                                     }
                                 }
                             }
                         }
 
-                        Intent intent = new Intent(context, ChatRoomActivity.class);
-                        intent.putExtra("clubName", title);
-                        intent.putExtra("chatList", chatList.getMessages());
-                        ((Activity)context).startActivity(intent);
+                        chatList = new MessageListAdapter(context, messageContents);
 
+                        ListView chatMessageListView = ((Activity) context).findViewById(R.id.chatmessage_listView);
+                        chatMessageListView.setAdapter(chatList);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

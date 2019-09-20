@@ -16,8 +16,11 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Club.FullScreenImageActivity"
+        <activity android:name=".MyPage.EnterEditInfoActivity"
             android:theme="@style/NoTitleAppcompat"></activity>
+        <activity
+            android:name=".Club.FullScreenImageActivity"
+            android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Instructor.AddClassActivity"
             android:theme="@style/NoTitleAppcompat" />
@@ -41,14 +44,14 @@
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Login.LoginActivity"
-            android:theme="@style/NoTitleAppcompat"></activity>
+            android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.ChatRoomActivity"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.AddClubActivity"
-            android:theme="@style/NoTitleAppcompat"
-            android:hardwareAccelerated="false" />
+            android:hardwareAccelerated="false"
+            android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />

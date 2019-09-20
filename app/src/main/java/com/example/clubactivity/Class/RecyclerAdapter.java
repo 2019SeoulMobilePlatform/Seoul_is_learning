@@ -79,7 +79,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("people",item.getPeople()); //클래스 대상
                 intent.putExtra("location",item.getLocation()); //클래스 정확한 장소
                 intent.putExtra("date",item.getDate()); //클래스 시간
-                intent.putExtra("number_now",item.getPeopelNumberNow()); //현재 인원수
+                intent.putExtra("number_now",item.getPeopleNumberNow()); //현재 인원수
                 intent.putExtra("number",item.getPeopleNumber()); //클래스 인원수
                 intent.putExtra("price",item.getPrice()); //가격
                 intent.putExtra("favorite", item.getFavorite());

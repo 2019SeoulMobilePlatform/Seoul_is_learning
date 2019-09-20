@@ -30,74 +30,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessageListAdapter extends BaseAdapter {
 
     Context context;
-
-    public class MessageContents{
-        String msg;
-        int type;
-        private String from_id;
-        //private String path;
-        private Bitmap profileImage;
-        Bitmap image;
-        private String nickName;
-
-        public MessageContents(String _msg,int _type, String _from_id){
-            this.msg = _msg;
-            this.type = _type;
-            this.from_id = _from_id;
-            //this.path = null;
-            this.image = null;
-            this.profileImage = null;
-        }
-
-        public MessageContents(String _msg, int _type, String _from_id, String nickName, Bitmap profileImage){
-            this.msg = _msg;
-            this.type = _type;
-            this.from_id = _from_id;
-            //this.path = null;
-            this.image = null;
-            this.nickName = nickName;
-            this.profileImage = profileImage;
-        }
-
-        public MessageContents(int _type, String _from_id, Bitmap image){
-            this.msg = "";
-            this.type = _type;
-            this.from_id = _from_id;
-            //this.path = null;
-            this.profileImage = null;
-            this.image = image;
-        }
-
-        public MessageContents(int _type, String _from_id, String nickName, Bitmap profileImage, Bitmap image){
-            this.msg = "";
-            this.type = _type;
-            this.from_id = _from_id;
-            //this.path = null;
-            this.nickName = nickName;
-            this.profileImage = profileImage;
-            this.image = image;
-        }
-
-        /*
-        public MessageContents(int type, String _from_id, String imagePath, Bitmap image){
-            this.type = type;
-            this.from_id = _from_id;
-            //this.path = imagePath;
-            this.image = image;
-        }*/
-    }
-
     ArrayList<MessageContents> messages;
+
+
 
     public MessageListAdapter(Context context, ArrayList<MessageContents> messages){
         this.messages = messages;
         this.context = context;
     }
 
-    public MessageListAdapter(Context context){
-        this.messages = new ArrayList<>();
-        this.context = context;
-    }
+//    public MessageListAdapter(Context context){
+//        this.messages = new ArrayList<>();
+//        this.context = context;
+//    }
 
     @Override
     public int getCount() {
@@ -220,8 +165,8 @@ public class MessageListAdapter extends BaseAdapter {
             text.setTextColor(Color.BLACK);
             layout.setGravity(Gravity.LEFT);
             //from_id(보낸 사람 식별번호)에 따라 닉네임과 프로필 이미지를 서버에서 가져와 넣어줘야함
-            nickTextView.setText(messages.get(i).nickName);
-            circleImageView.setImageBitmap(messages.get(i).profileImage);
+            nickTextView.setText(messages.get(i).getNickName());
+            circleImageView.setImageBitmap(messages.get(i).getProfileImage());
         }
 
         //이미지뷰 크기 설정

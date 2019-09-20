@@ -17,6 +17,7 @@ public class ChatViewItem implements Parcelable {
     private byte[] image;
     private String area;
     private float star;
+    private String peopleNumberNow;
     private String targetUser;
     private String location;
     private String maxNum;
@@ -27,7 +28,7 @@ public class ChatViewItem implements Parcelable {
     private int flag_dongnae;
 
 
-    public ChatViewItem(int class_index ,byte[] image,float star, String title, String desc ,String area, String targetUser, String location, String date, String peopleNumber, String price, boolean favorite, int flag_dongnae) {
+    public ChatViewItem(int class_index ,byte[] image,float star, String title, String desc ,String area, String targetUser, String location, String date, String peopleNumberNow, String peopleNumber, String price, boolean favorite, int flag_dongnae) {
 
         this.itemIndex = class_index;
         this.image = image;
@@ -39,6 +40,7 @@ public class ChatViewItem implements Parcelable {
         this.targetUser = targetUser;
         this.location = location;
         this.date = date;
+        this.peopleNumberNow = peopleNumberNow;
         this.maxNum = peopleNumber;
         this.price = price;
         this.flag_dongnae = flag_dongnae;
@@ -105,6 +107,7 @@ public class ChatViewItem implements Parcelable {
     public String getPeople() {
         return targetUser;
     }
+    public String getPeopleNumberNow() {return peopleNumberNow;}
     public String getLocation() {
         return location;
     }
