@@ -3,7 +3,6 @@ package com.example.clubactivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -34,6 +33,7 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity{
         myPageFragment = new MyPageFragment();
         nonLoginFragment = new NonLoginFragment();
         setFragment(0); //홈화면으로 지정
-
     }
 
     //프래크먼트 교체가 일어나는 곳

@@ -1,5 +1,6 @@
 package com.example.clubactivity.Class;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -86,7 +87,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("class_index",item.getClass_index()); //클래스 인덱스
 
 
-                context.startActivity(intent);
+                ((Activity)context).startActivityForResult(intent, 96);
             }
         });
     }
