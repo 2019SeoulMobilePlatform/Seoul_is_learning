@@ -119,9 +119,6 @@ public class ChatRoomActivity extends AppCompatActivity{
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    adapter = (MessageListAdapter)listview.getAdapter();
-
                     adapter = (MessageListAdapter)listview.getAdapter();
                     if(adapter == null)
                         Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
@@ -242,7 +239,6 @@ public class ChatRoomActivity extends AppCompatActivity{
                 Log.e("message", data_img);
                 send.start();
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -310,6 +306,7 @@ public class ChatRoomActivity extends AppCompatActivity{
 
             try{
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
+                Log.e("receive", "스레드 들어옴");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -322,7 +319,7 @@ public class ChatRoomActivity extends AppCompatActivity{
                     Log.e("receive_message", msg);
                     if(msg != null){
                         JSONObject resultObject = new JSONObject(msg);
-                        Bitmap profile = ImageConverter.getImageToBitmap(resultObject.getString("profile"));
+                        Bitmap profile = ImageConverter.getReplaceRegexToBitmap(resultObject.getString("profile"));
                         String nickname = resultObject.getString("nickname");
                         String user_id = resultObject.getString("email");
                         if (resultObject.isNull("image")) {
@@ -332,7 +329,7 @@ public class ChatRoomActivity extends AppCompatActivity{
                             adapter.addItem(message, 1, user_id, nickname, profile);
 
                         } else {
-                            Bitmap messageImage = ImageConverter.getImageToBitmap(resultObject.getString("image"));
+                            Bitmap messageImage = ImageConverter.getReplaceRegexToBitmap(resultObject.getString("image"));
 
                             adapter = (MessageListAdapter)listview.getAdapter();
                             adapter.addItem(1, user_id, nickname, messageImage, profile);
@@ -347,7 +344,6 @@ public class ChatRoomActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
         }
-
     }
 
     class SendMSGThread extends Thread{

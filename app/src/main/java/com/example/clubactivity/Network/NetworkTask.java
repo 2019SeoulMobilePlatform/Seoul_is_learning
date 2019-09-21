@@ -630,6 +630,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                         messageContents.add(messageContents1);
 //                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
                                     }
+                                    Log.e("추가", "add");
                                 }
                             }
                         }
