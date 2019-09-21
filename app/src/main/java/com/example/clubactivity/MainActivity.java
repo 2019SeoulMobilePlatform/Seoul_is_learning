@@ -46,26 +46,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.action_home:
-                        setFragment(0);
-                        break;
-                    case R.id.action_class:
-                        setFragment(1);
-                        break;
-                    case R.id.action_people:
-                        if(Constants.isLogined)
-                            setFragment(2);
-                        else
-                            setFragment(4);
-                        break;
-                    case R.id.action_my:
-                        if(Constants.isLogined)
-                            setFragment(3);
-                        else
-                            setFragment(4);
-                        break;
-                }
+                changeFragment(menuItem.getItemId());
                 return true;
             }
         });
@@ -76,6 +57,29 @@ public class MainActivity extends AppCompatActivity {
         myPageFragment = new MyPageFragment();
         nonLoginFragment = new NonLoginFragment();
         setFragment(0); //홈화면으로 지정
+    }
+
+    public void changeFragment(int menu){
+        switch (menu){
+            case R.id.action_home:
+                setFragment(0);
+                break;
+            case R.id.action_class:
+                setFragment(1);
+                break;
+            case R.id.action_people:
+                if(Constants.isLogined)
+                    setFragment(2);
+                else
+                    setFragment(4);
+                break;
+            case R.id.action_my:
+                if(Constants.isLogined)
+                    setFragment(3);
+                else
+                    setFragment(4);
+                break;
+        }
     }
 
     //프래크먼트 교체가 일어나는 곳

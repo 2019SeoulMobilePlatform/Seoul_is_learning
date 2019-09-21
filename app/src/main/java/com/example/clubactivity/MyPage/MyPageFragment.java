@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -173,6 +174,8 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Constants.REQUEST_EDIT_INFO){
+            ((MainActivity)getActivity()).changeFragment(R.id.action_my);
+            Log.d("a","ㅁ");
             if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
                 user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
             else{

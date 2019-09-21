@@ -3,9 +3,13 @@ package com.example.clubactivity.MyPage;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +39,19 @@ public class EnterEditInfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(EnterEditInfoActivity.this, EditMyInfoActivity.class);
                 intent.putExtra("isInstructor", getIntent().getBooleanExtra("isInstructor", false) );
                 startActivityForResult(intent, Constants.REQUEST_EDIT_INFO);
+                finish();
+            }
+        });
+
+        TextView logout = findViewById(R.id.logout);
+        SpannableString content = new SpannableString("로그아웃");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        logout.setText(content);
+
+        logout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Constants.isLogined = false;
                 finish();
             }
         });
