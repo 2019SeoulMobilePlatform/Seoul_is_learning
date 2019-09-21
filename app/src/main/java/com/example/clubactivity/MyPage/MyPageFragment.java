@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -108,7 +109,7 @@ public class MyPageFragment extends Fragment {
         tabHost1.addTab(ts2) ;
 
         //getImages();
-        initRecyclerView();
+        //initRecyclerView();
         return view;
     }
 
@@ -142,7 +143,7 @@ public class MyPageFragment extends Fragment {
     }
 
 
-    private void initRecyclerView(){
+   // private void initRecyclerView(){
 //        Log.d(TAG, "initRecyclerView: init recyclerview");
 
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -168,11 +169,13 @@ public class MyPageFragment extends Fragment {
 //        networkTask = new NetworkTask(this.getContext(), url, data, Constants.SERVER_GET_MY_CLASS);
 //        networkTask.execute();
 
-    }
+   // }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Constants.REQUEST_EDIT_INFO){
+            ((MainActivity)getActivity()).changeFragment(R.id.action_my);
+            Log.d("a","ㅁ");
             if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
                 user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
             else{
@@ -180,6 +183,17 @@ public class MyPageFragment extends Fragment {
             }
             user_nickname.setText(preferences.getString("nickname", ""));
             user_residence.setText(preferences.getString("residence",""));
+        }
+
+        if(requestCode == Constants.REQUEST_ENTER_CLASS_DETAIL) {
+            String url = "http://106.10.35.170/ImportFavoriteClass.php";
+            String dataStr = "email=" + preferences.getString("email", "");
+            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
+            networkTask.execute();
+
+            url = "http://106.10.35.170/ImportMyClass.php";
+            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
+            networkTask.execute();
         }
 
     }

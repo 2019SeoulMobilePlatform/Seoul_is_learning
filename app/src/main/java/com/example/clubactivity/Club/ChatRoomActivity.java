@@ -93,7 +93,6 @@ public class ChatRoomActivity extends AppCompatActivity{
         NetworkTask networkTask = new NetworkTask(ChatRoomActivity.this, url, data, Constants.IMPORT_MESSAGELIST);
         networkTask.execute();
 
-
         adapter = (MessageListAdapter)listview.getAdapter();
 
         sendButton = findViewById(R.id.send_text_btn);
@@ -105,6 +104,7 @@ public class ChatRoomActivity extends AppCompatActivity{
                 //attemptSend();
                 JSONObject jsonObject = new JSONObject();
                 if(!messageTextView.getText().toString().isEmpty()){
+
                     try {
                         jsonObject.put("room_index", room_index);
                         jsonObject.put("email", AppManager.getInstance().getEmail());
@@ -121,6 +121,11 @@ public class ChatRoomActivity extends AppCompatActivity{
                     }
 
                     adapter = (MessageListAdapter)listview.getAdapter();
+
+                    adapter = (MessageListAdapter)listview.getAdapter();
+                    if(adapter == null)
+                        Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
+
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
@@ -194,7 +199,7 @@ public class ChatRoomActivity extends AppCompatActivity{
             Uri imgUri = data.getData() ;
             ImageProcessing imageProcessing = new ImageProcessing(ChatRoomActivity.this);
             Bitmap image = imageProcessing.ConvertRareUriToBitmap(imgUri);
-
+            adapter = (MessageListAdapter)listview.getAdapter();
 /*
             Bitmap image = null;
             Bitmap originalImage = null;
@@ -221,6 +226,7 @@ public class ChatRoomActivity extends AppCompatActivity{
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
 */
+
             //이미지 보내는 부분
             JSONObject jsonObject = new JSONObject();
 
@@ -231,6 +237,10 @@ public class ChatRoomActivity extends AppCompatActivity{
                 jsonObject.put("message_image", ImageConverter.getImageToString(image));
 
                 String data_img = jsonObject.toString();
+
+                send = new SendMSGThread(data_img, socket);
+                Log.e("message", data_img);
+                send.start();
 
 
             } catch (JSONException e) {
@@ -243,6 +253,7 @@ public class ChatRoomActivity extends AppCompatActivity{
              networkTask.execute();
 */
             adapter = (MessageListAdapter)listview.getAdapter();
+
             adapter.addItem(0, image, "id");
             adapter.notifyDataSetChanged();
 
