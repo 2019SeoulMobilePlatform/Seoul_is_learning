@@ -21,6 +21,7 @@ import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Login.LoginActivity;
 import com.example.clubactivity.MyPage.EditMyInfoActivity;
 import com.example.clubactivity.MyPage.EnterEditInfoActivity;
 import com.example.clubactivity.Network.ImageConverter;
@@ -225,6 +226,10 @@ public class InstructorMainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Constants.REQUEST_EDIT_INFO_INS){
+            if(!Constants.isLogined) {
+                startActivity(new Intent(InstructorMainActivity.this, LoginActivity.class));
+                finish();
+            }
             if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
                 user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
             else{
@@ -243,6 +248,7 @@ public class InstructorMainActivity extends AppCompatActivity {
         NetworkTask networkTask = new NetworkTask(InstructorMainActivity.this, url, data, Constants.SERVER_CLASS_LIST_GET_INSTRUCTOR, instructorClassAdapter);
         networkTask.execute();
     }
+
     // 뒤로가기 버튼을 눌렀을 때의 오버라이드 메소드
     @Override
     public void onBackPressed() {

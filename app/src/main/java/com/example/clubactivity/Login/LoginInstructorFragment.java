@@ -104,6 +104,7 @@ public class LoginInstructorFragment extends Fragment {
 
         NetworkTask networkTask = new NetworkTask(this.context, url, data, 3);
         networkTask.execute();
+        Constants.isLogined = true;
         //서버와 로그인 정보 비교
 
         /*
