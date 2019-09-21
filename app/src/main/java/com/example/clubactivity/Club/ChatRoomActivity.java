@@ -66,8 +66,6 @@ public class ChatRoomActivity extends AppCompatActivity {
         NetworkTask networkTask = new NetworkTask(ChatRoomActivity.this, url, data, Constants.IMPORT_MESSAGELIST);
         networkTask.execute();
 
-        adapter = (MessageListAdapter)listview.getAdapter();
-
         sendButton = findViewById(R.id.send_text_btn);
 
         sendButton.setOnClickListener(new View.OnClickListener(){
@@ -76,6 +74,9 @@ public class ChatRoomActivity extends AppCompatActivity {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
                 if(!messageTextView.getText().toString().isEmpty()){
+                    adapter = (MessageListAdapter)listview.getAdapter();
+                    if(adapter == null)
+                        Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
@@ -135,7 +136,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             Uri imgUri = data.getData() ;
             ImageProcessing imageProcessing = new ImageProcessing(ChatRoomActivity.this);
             Bitmap image = imageProcessing.ConvertRareUriToBitmap(imgUri);
-
+            adapter = (MessageListAdapter)listview.getAdapter();
 /*
             Bitmap image = null;
             Bitmap originalImage = null;
@@ -162,7 +163,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
 */
-            adapter.addItem(1, image, "id");
+            adapter.addItem(0, image, "id");
             adapter.notifyDataSetChanged();
 
         }
