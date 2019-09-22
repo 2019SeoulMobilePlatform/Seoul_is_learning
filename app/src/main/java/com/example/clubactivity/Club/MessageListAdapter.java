@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -84,7 +85,7 @@ public class MessageListAdapter extends BaseAdapter {
     //public void addItem(int type, String imagePath, String from_id) { messages.add(new MessageContents(type, from_id, imagePath, null));}
 
     //이미지 Bitmap으로 받을 경우
-    public void addItem(int type, Bitmap image, String from_id, String nickname, Bitmap profileImage) {
+    public void addItem(int type, String nickname, String from_id,  Bitmap image, Bitmap profileImage) {
         if(type == 0) {
             messages.add(new MessageContents(type, from_id, image));
         }

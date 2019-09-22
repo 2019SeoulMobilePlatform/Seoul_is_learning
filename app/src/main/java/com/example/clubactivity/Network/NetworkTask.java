@@ -630,6 +630,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                         messageContents.add(messageContents1);
 //                                        chatList.addItem(flag, messageImage, user_id, nickname, profile);
                                     }
+                                    Log.e("추가", "add");
                                 }
                             }
                         }
@@ -638,7 +639,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                         ListView chatMessageListView = ((Activity) context).findViewById(R.id.chatmessage_listView);
                         chatMessageListView.setAdapter(chatList);
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="개인 정보 접근 시\n 비밀번호를 입력이 필요합니다."
+            android:text="개인 정보 접근 시\n 비밀번호 입력이 필요합니다."
             android:textAlignment="center"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/grey"/>
@@ -39,5 +39,16 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:id="@+id/input_password_btn"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/grey"
+            android:id="@+id/logout"/>
     </LinearLayout>
+
 </RelativeLayout>

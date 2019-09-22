@@ -154,6 +154,7 @@ public class  ClubFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
 
+
 //                String url = "http://106.10.35.170/ImportMessageList.php";
 //                String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
 //                NetworkTask networkTask = new NetworkTask(getActivity(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle(), getActivity());

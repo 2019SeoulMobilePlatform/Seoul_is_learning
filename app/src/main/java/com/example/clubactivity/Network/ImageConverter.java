@@ -35,4 +35,15 @@ public class ImageConverter {
 
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
+
+    public static Bitmap getReplaceRegexToBitmap(String encodedImage){
+
+        String replaceSlash = encodedImage.replaceAll("\\\\", "");
+        String replaceImage = replaceSlash.replaceAll("\\\\n","\n");
+        Log.e("replaceImage", replaceImage);
+
+        byte[] decodedByte = Base64.decode(replaceImage, Base64.DEFAULT);
+
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
 }
