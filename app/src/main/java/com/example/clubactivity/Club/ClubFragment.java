@@ -57,7 +57,7 @@ public class  ClubFragment extends Fragment {
     SharedPreferences preferences;
 
     public ClubFragment(){
-        
+        Log.d("dd", "생성");
         String url = "http://106.10.35.170/ImportClubList.php";
         networkTask = new NetworkTask(this.getContext(), url, 7);
         networkTask.execute();
@@ -68,7 +68,6 @@ public class  ClubFragment extends Fragment {
         String data = "email=" + email;
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
         networkTask.execute();
-
     }
 
     @Nullable
@@ -78,17 +77,6 @@ public class  ClubFragment extends Fragment {
 
         final TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
         tabHost1.setup() ;
-
-        String url = "http://106.10.35.170/ImportClubList.php";
-        networkTask = new NetworkTask(this.getContext(), url, 7);
-        networkTask.execute();
-
-        String email = AppManager.getInstance().getEmail();
-        Log.e("email", email);
-        url = "http://106.10.35.170/ImportMyClubList.php";
-        String data = "email=" + email;
-        networkTask = new NetworkTask(this.getContext(), url, data, 8);
-        networkTask.execute();
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
@@ -301,6 +289,22 @@ public class  ClubFragment extends Fragment {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("dd", "리쥼");
+        String url = "http://106.10.35.170/ImportClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask.execute();
+
+        String email = AppManager.getInstance().getEmail();
+        Log.e("email", email);
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data, 8);
+        networkTask.execute();
     }
 
     public String getData(String email, int room_index){

@@ -131,6 +131,7 @@ public class ChatRoomActivity extends AppCompatActivity{
                 }
             }
         });
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -257,6 +258,7 @@ public class ChatRoomActivity extends AppCompatActivity{
 
         }
     }
+
     //URI 실제 경로 얻는 함수
     private String getRealPathFromURI(Uri contentUri) {
         int column_index = 0;
