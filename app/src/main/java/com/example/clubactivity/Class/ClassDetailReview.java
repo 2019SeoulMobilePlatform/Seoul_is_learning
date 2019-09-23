@@ -1,5 +1,6 @@
 package com.example.clubactivity.Class;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,10 @@ public class ClassDetailReview extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"클래스를 들은 회원만 작성 가능합니다", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getActivity(),ReviewAddActivity.class);
+
+                startActivity(intent);
             }
         });
 

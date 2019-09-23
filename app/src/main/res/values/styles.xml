@@ -74,11 +74,9 @@
 
     <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>                                <!-- 배경 -->
-
-        <item name="android:textColorPrimary">@android:color/white</item>       <!-- 탭바 선택된 텍스트 -->
-        <item name="android:textColorSecondary">@android:color/black</item>     <!-- 탭바 텍스트 -->
-
-        <item name="colorAccent">@android:color/white</item>                    <!-- 하단 움직이는 바 색-->
+        <item name="android:textColorPrimary">@color/colorPrimary</item>       <!-- 탭바 선택된 텍스트 -->
+        <item name="android:textColorSecondary">#5A4D44</item>     <!-- 탭바 텍스트 -->
+        <item name="colorAccent">@color/colorPrimary</item>                    <!-- 하단 움직이는 바 색-->
     </style>
 
     <style name="EditInfo" parent="Widget.AppCompat.EditText">
