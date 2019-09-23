@@ -169,6 +169,18 @@ public class ChatRoomActivity extends AppCompatActivity{
         return data;
     }
     */
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        try {
+            client.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void SendImage(View view) {
         try {
             if (ActivityCompat.checkSelfPermission(ChatRoomActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -180,7 +192,6 @@ public class ChatRoomActivity extends AppCompatActivity{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         /*
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -226,7 +237,6 @@ public class ChatRoomActivity extends AppCompatActivity{
             //Toast.makeText(this, imagePath, Toast.LENGTH_LONG).show();
             //adapter.addItem(1, imagePath);
 */
-
             //이미지 보내는 부분
             JSONObject jsonObject = new JSONObject();
 
@@ -299,6 +309,11 @@ public class ChatRoomActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
         }
+
+        public void close() throws IOException {
+            socket.close();
+        }
+
     }
 
     class ReceiveMSGThread extends Thread{
