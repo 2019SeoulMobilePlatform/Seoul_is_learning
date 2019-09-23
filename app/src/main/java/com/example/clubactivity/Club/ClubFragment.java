@@ -57,6 +57,7 @@ public class  ClubFragment extends Fragment {
     SharedPreferences preferences;
 
     public ClubFragment(){
+
         Log.d("dd", "생성");
 
         String email = AppManager.getInstance().getEmail();
@@ -153,6 +154,7 @@ public class  ClubFragment extends Fragment {
                 intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
                 intent.putExtra("chatIndex", ((ChatViewItem)myClub_adapter.getItem(i)).getItemIndex());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
+
 
             }
         });
