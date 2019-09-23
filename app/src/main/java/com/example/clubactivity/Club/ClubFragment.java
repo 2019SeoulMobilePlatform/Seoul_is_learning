@@ -58,14 +58,15 @@ public class  ClubFragment extends Fragment {
 
     public ClubFragment(){
         Log.d("dd", "생성");
-        String url = "http://106.10.35.170/ImportClubList.php";
-        networkTask = new NetworkTask(this.getContext(), url, 7);
-        networkTask.execute();
 
         String email = AppManager.getInstance().getEmail();
+        String url = "http://106.10.35.170/ImportClubList.php";
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data,7);
+        networkTask.execute();
+
         //Log.e("email", email);
         url = "http://106.10.35.170/ImportMyClubList.php";
-        String data = "email=" + email;
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
         networkTask.execute();
     }
@@ -294,15 +295,15 @@ public class  ClubFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        String email = AppManager.getInstance().getEmail();
+        String data = "email=" + email;
         Log.d("dd", "리쥼");
         String url = "http://106.10.35.170/ImportClubList.php";
-        networkTask = new NetworkTask(this.getContext(), url, 7);
+        networkTask = new NetworkTask(this.getContext(), url, data, 7);
         networkTask.execute();
 
-        String email = AppManager.getInstance().getEmail();
         Log.e("email", email);
         url = "http://106.10.35.170/ImportMyClubList.php";
-        String data = "email=" + email;
         networkTask = new NetworkTask(this.getContext(), url, data, 8);
         networkTask.execute();
     }
