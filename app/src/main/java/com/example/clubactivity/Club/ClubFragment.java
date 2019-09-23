@@ -174,7 +174,7 @@ public class  ClubFragment extends Fragment {
                 myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
                 intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
-                intent.putExtra("chatIndex", ((ChatViewItem)myClub_adapter.getItem(i)).getItemIndex());
+                intent.putExtra("clubIndex", ((ChatViewItem)myClub_adapter.getItem(i)).getItemIndex());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
             }
         });

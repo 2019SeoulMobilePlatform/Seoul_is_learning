@@ -77,7 +77,7 @@ public class ChatRoomActivity extends AppCompatActivity{
         TextView title = findViewById(R.id.club_chatting_title);
 
         title.setText(intent.getExtras().get("clubName").toString());
-        room_index = intent.getIntExtra("chatIndex", 0);
+        room_index = intent.getIntExtra("clubIndex", 0);
         //adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
 
         messageTextView = findViewById(R.id.editText);
@@ -104,7 +104,13 @@ public class ChatRoomActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
+
+                adapter = (MessageListAdapter)listview.getAdapter();
+                if(adapter == null)
+                    Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
+
                 JSONObject jsonObject = new JSONObject();
+
                 if(!messageTextView.getText().toString().isEmpty()){
 
                     try {
@@ -121,11 +127,6 @@ public class ChatRoomActivity extends AppCompatActivity{
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    adapter = (MessageListAdapter)listview.getAdapter();
-                    if(adapter == null)
-                        Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
-
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();

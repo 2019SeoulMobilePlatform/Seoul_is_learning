@@ -640,7 +640,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             Toast.makeText(this.context, "연결 실패", Toast.LENGTH_LONG).show();
                         } else {
                             JSONObject resultObject;
-
                             if (resultObjectArray.length() != 0) {
                                 for (int i = 0; i < resultObjectArray.length(); i++) {
                                     resultObject = resultObjectArray.getJSONObject(i);
