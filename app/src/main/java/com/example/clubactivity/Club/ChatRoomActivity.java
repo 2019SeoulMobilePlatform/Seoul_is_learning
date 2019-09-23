@@ -90,7 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity{
 
         //mesage 리스트 받기위해 서버연결
         String url = "http://106.10.35.170/ImportMessageList.php";
-        String data = getData(AppManager.getInstance().getEmail(), intent.getIntExtra("chatIndex", 0));
+        String data = getData(AppManager.getInstance().getEmail(), intent.getIntExtra("clubIndex", 0));
         Log.e("room_data", data);
         NetworkTask networkTask = new NetworkTask(ChatRoomActivity.this, url, data, Constants.IMPORT_MESSAGELIST);
         networkTask.execute();

@@ -59,6 +59,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     private Activity activity;
     ViewPager viewPager;
     ProgressDialog asyncDialog;
+    private int room_index;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
@@ -125,6 +126,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         this.url = url;
         this.data = data;
         this.selection = action;
+        if(_context != null)
+            this.asyncDialog = new ProgressDialog(_context);
+    }
+
+    public NetworkTask(Context _context, String url, String data, int room_index, int action){
+        this.context = _context;
+        this.url = url;
+        this.data = data;
+        this.selection = action;
+        this.room_index = room_index;
         if(_context != null)
             this.asyncDialog = new ProgressDialog(_context);
     }
@@ -576,6 +587,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             TextView title = ((Activity)context).findViewById(R.id.club_name);
                             Intent intent = new Intent(context, ChatRoomActivity.class);
                             intent.putExtra("clubName", title.getText());
+                            intent.putExtra("clubIndex", room_index);
+                            Log.e("클럽 들어가기", ""+room_index);
                             this.context.startActivity(intent);
                             ((Activity) this.context).finish();
                             Toast.makeText(this.context, "동호회방 입장에 성공하였습니다.", Toast.LENGTH_LONG).show();

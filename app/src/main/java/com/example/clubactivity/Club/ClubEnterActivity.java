@@ -69,7 +69,6 @@ public class ClubEnterActivity extends AppCompatActivity {
         //clubImage.setImageBitmap(((BitmapDrawable)item.getIcon()).getBitmap());
         //clubImage.setImageBitmap(bitmap);
         title.setText(intent.getExtras().getString("clubName"));
-
         room_index = intent.getExtras().getInt("clubIndex");
         Log.d("방번호", room_index+"");
 
@@ -83,7 +82,7 @@ public class ClubEnterActivity extends AppCompatActivity {
         //서버업데이트는 하는데 자체적으로 리스트에 추가해주어야함
         String url = "http://106.10.35.170/JoinClub.php";
         String data = getData(AppManager.getInstance().getEmail(), room_index);
-        NetworkTask networkTask = new NetworkTask(this,url,data,9);
+        NetworkTask networkTask = new NetworkTask(this,url,data, room_index,9);
         networkTask.execute();
 
         /*
