@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,6 +70,7 @@ public class ClubEnterActivity extends AppCompatActivity {
         //clubImage.setImageBitmap(bitmap);
         title.setText(intent.getExtras().getString("clubName"));
         room_index = intent.getExtras().getInt("clubIndex");
+        Log.d("방번호", room_index+"");
         description.setText(intent.getExtras().getString("clubDescription"));
         memberNumber.setText(intent.getExtras().get("clubNowMember").toString() + "/" + intent.getExtras().get("clubMaxMember").toString() + "명");
     }
@@ -86,6 +88,7 @@ public class ClubEnterActivity extends AppCompatActivity {
 
         Intent intent = new Intent(ClubEnterActivity.this, ChatRoomActivity.class);
         intent.putExtra("clubName", title.getText());
+        intent.putExtra("chatIndex", room_index);
         startActivityForResult(intent, Constants.REQUEST_CLUB_ENTER);
         this.finish();
     }
