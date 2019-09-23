@@ -29,6 +29,7 @@ import com.example.clubactivity.Class.ReviewListViewAdapter;
 import com.example.clubactivity.Club.ChatRoomActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
+import com.example.clubactivity.Club.ClubEnterActivity;
 import com.example.clubactivity.Club.MessageContents;
 import com.example.clubactivity.Club.MessageListAdapter;
 import com.example.clubactivity.Constants;
@@ -40,6 +41,7 @@ import com.example.clubactivity.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -562,9 +564,14 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
                         if (real_result.equals("success")) {
+                            TextView title = ((Activity)context).findViewById(R.id.club_name);
+                            Intent intent = new Intent(context, ChatRoomActivity.class);
+                            intent.putExtra("clubName", title.getText());
+                            this.context.startActivity(intent);
+                            ((Activity) this.context).finish();
                             Toast.makeText(this.context, "동호회방 입장에 성공하였습니다.", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(this.context, "동호회방 입장에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this.context, "이미 동호회에 들어가 계십니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

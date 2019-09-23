@@ -121,6 +121,7 @@ public class ChatRoomActivity extends AppCompatActivity{
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                     adapter = (MessageListAdapter)listview.getAdapter();
                     if(adapter == null)
                         Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
@@ -178,8 +179,8 @@ public class ChatRoomActivity extends AppCompatActivity{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     public void SendImage(View view) {
         try {
             if (ActivityCompat.checkSelfPermission(ChatRoomActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -261,7 +262,6 @@ public class ChatRoomActivity extends AppCompatActivity{
              networkTask.execute();
 */
             adapter = (MessageListAdapter)listview.getAdapter();
-
             adapter.addItem(0, image, "id");
             adapter.notifyDataSetChanged();
 
@@ -344,7 +344,6 @@ public class ChatRoomActivity extends AppCompatActivity{
 
                             adapter = (MessageListAdapter)listview.getAdapter();
                             adapter.addItem(message, 1, user_id, nickname, profile);
-
                         } else {
                             Bitmap messageImage = ImageConverter.getReplaceRegexToBitmap(resultObject.getString("image"));
 
@@ -355,7 +354,6 @@ public class ChatRoomActivity extends AppCompatActivity{
                         Message message = handler.obtainMessage();
                         handler.sendMessage(message);
 
-//                        adapter.notifyDataSetChanged();
                     }
                 }
             } catch (IOException e) {
