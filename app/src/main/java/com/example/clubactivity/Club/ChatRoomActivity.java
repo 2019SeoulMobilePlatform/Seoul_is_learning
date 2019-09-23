@@ -77,7 +77,7 @@ public class ChatRoomActivity extends AppCompatActivity{
         TextView title = findViewById(R.id.club_chatting_title);
 
         title.setText(intent.getExtras().get("clubName").toString());
-        room_index = intent.getIntExtra("chatIndex", 0);
+        room_index = intent.getIntExtra("clubIndex", 0);
         //adapter = new MessageListAdapter(this, (ArrayList<MessageListAdapter.MessageContents>) intent.getExtras().get("chatList"));
 
         messageTextView = findViewById(R.id.editText);
@@ -90,7 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity{
 
         //mesage 리스트 받기위해 서버연결
         String url = "http://106.10.35.170/ImportMessageList.php";
-        String data = getData(AppManager.getInstance().getEmail(), intent.getIntExtra("chatIndex", 0));
+        String data = getData(AppManager.getInstance().getEmail(), intent.getIntExtra("clubIndex", 0));
         Log.e("room_data", data);
         NetworkTask networkTask = new NetworkTask(ChatRoomActivity.this, url, data, Constants.IMPORT_MESSAGELIST);
         networkTask.execute();
@@ -104,7 +104,13 @@ public class ChatRoomActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //adapter.addItem(messageTextView.getText().toString());
                 //attemptSend();
+
+                adapter = (MessageListAdapter)listview.getAdapter();
+                if(adapter == null)
+                    Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
+
                 JSONObject jsonObject = new JSONObject();
+
                 if(!messageTextView.getText().toString().isEmpty()){
 
                     try {
@@ -121,19 +127,18 @@ public class ChatRoomActivity extends AppCompatActivity{
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    adapter = (MessageListAdapter)listview.getAdapter();
-                    if(adapter == null)
-                        Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
-
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
                 }
             }
         });
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                adapter = (MessageListAdapter) listview.getAdapter();
                 Bitmap image = adapter.getImage(i);
                 if(image != null){
                     Intent intent = new Intent(ChatRoomActivity.this, FullScreenImageActivity.class);
@@ -172,14 +177,13 @@ public class ChatRoomActivity extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
-
         try {
             client.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     public void SendImage(View view) {
         try {
             if (ActivityCompat.checkSelfPermission(ChatRoomActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -261,12 +265,12 @@ public class ChatRoomActivity extends AppCompatActivity{
              networkTask.execute();
 */
             adapter = (MessageListAdapter)listview.getAdapter();
-
             adapter.addItem(0, image, "id");
             adapter.notifyDataSetChanged();
 
         }
     }
+
     //URI 실제 경로 얻는 함수
     private String getRealPathFromURI(Uri contentUri) {
         int column_index = 0;
@@ -344,7 +348,6 @@ public class ChatRoomActivity extends AppCompatActivity{
 
                             adapter = (MessageListAdapter)listview.getAdapter();
                             adapter.addItem(message, 1, user_id, nickname, profile);
-
                         } else {
                             Bitmap messageImage = ImageConverter.getReplaceRegexToBitmap(resultObject.getString("image"));
 
@@ -355,7 +358,6 @@ public class ChatRoomActivity extends AppCompatActivity{
                         Message message = handler.obtainMessage();
                         handler.sendMessage(message);
 
-//                        adapter.notifyDataSetChanged();
                     }
                 }
             } catch (IOException e) {

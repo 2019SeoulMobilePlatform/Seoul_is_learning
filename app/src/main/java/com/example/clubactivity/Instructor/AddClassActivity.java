@@ -34,8 +34,13 @@ import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.stream.IntStream;
 
 public class AddClassActivity extends AppCompatActivity {
 
@@ -80,10 +85,59 @@ public class AddClassActivity extends AppCompatActivity {
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year,month,day);
+
+
+                Date currentTime = Calendar.getInstance().getTime();
+                SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
+                SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+                SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+
+                int curYear = Integer.parseInt(yearFormat.format(currentTime));
+                int curMonth = Integer.parseInt(monthFormat.format(currentTime));
+                int curDay = Integer.parseInt(dayFormat.format(currentTime));
+
+//                int curYear = 2019;
+//                int curMonth = 2;
+//                int curDay = 28;
+
+
+                Log.d("A", curMonth+"/"+curDay);
+                ArrayList<Integer> longMonths = new ArrayList<>();
+                longMonths.addAll(Arrays.asList(1,3,5,7,8,10,12));
+
+                if( longMonths.contains(curMonth) && curDay == 31){
+                    curDay = 1;
+                    if(curMonth == 12) {
+                        curMonth = 1;
+                        curYear++;
+                    }
+                    else
+                        curMonth++;
+                }
+                else if( !longMonths.contains(curMonth) && curDay == 30){
+                    curDay = 1;
+                    curMonth++;
+                }
+                else if( curMonth == 2 && curDay == 28){
+                    curDay = 1;
+                    curMonth++;
+                }
+                else{
+                    curDay++;
+                }
+
+                Log.d("a", curMonth+"/"+curDay);
+
+                Calendar minDate = Calendar.getInstance();
+                minDate.set(curYear, curMonth-1, curDay);
+                dialog.getDatePicker().setMinDate(minDate.getTime().getTime());
+
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
+
+
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override

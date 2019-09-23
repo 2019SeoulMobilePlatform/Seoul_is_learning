@@ -47,7 +47,7 @@ import java.util.Locale;
 public class  ClubFragment extends Fragment {
     private View view;
     FloatingActionButton fab;
-    SwipeMenuListView myClub_Listview;
+    ListView myClub_Listview;
     ListView wholeClub_ListView;
     ChatViewAdapter myClub_adapter;
     ChatViewAdapter searchClub_adapter;
@@ -57,18 +57,25 @@ public class  ClubFragment extends Fragment {
     SharedPreferences preferences;
 
     public ClubFragment(){
-        
-        String url = "http://106.10.35.170/ImportClubList.php";
-        networkTask = new NetworkTask(this.getContext(), url, 7);
-        networkTask.execute();
+
+        /*
+        Log.d("dd", "생성");
 
         String email = AppManager.getInstance().getEmail();
-        //Log.e("email", email);
-        url = "http://106.10.35.170/ImportMyClubList.php";
+<<<<<<< HEAD
         String data = "email=" + email;
-        networkTask = new NetworkTask(this.getContext(), url, data, 8);
+=======
+>>>>>>> origin/develop
+        String url = "http://106.10.35.170/ImportClubList.php";
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data,7);
         networkTask.execute();
 
+        //Log.e("email", email);
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, data, 8);
+        networkTask.execute();
+        */
     }
 
     @Nullable
@@ -78,17 +85,6 @@ public class  ClubFragment extends Fragment {
 
         final TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
         tabHost1.setup() ;
-
-        String url = "http://106.10.35.170/ImportClubList.php";
-        networkTask = new NetworkTask(this.getContext(), url, 7);
-        networkTask.execute();
-
-        String email = AppManager.getInstance().getEmail();
-        Log.e("email", email);
-        url = "http://106.10.35.170/ImportMyClubList.php";
-        String data = "email=" + email;
-        networkTask = new NetworkTask(this.getContext(), url, data, 8);
-        networkTask.execute();
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
         TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
@@ -108,22 +104,37 @@ public class  ClubFragment extends Fragment {
         wholeClub_adapter = new ChatViewAdapter();
 
         // 리스트뷰 참조 및 Adapter달기
-        myClub_Listview = (SwipeMenuListView) view.findViewById(R.id.myclub_listview);
-        myClub_Listview.setAdapter(myClub_adapter);
+        myClub_Listview = (ListView) view.findViewById(R.id.myclub_listview);
+        //myClub_Listview.setAdapter(myClub_adapter);
         wholeClub_ListView = (ListView) view.findViewById(R.id.wholeclub_listview);
-        wholeClub_ListView.setAdapter(wholeClub_adapter);
+        //wholeClub_ListView.setAdapter(wholeClub_adapter);
 
+        /*
+        String email = AppManager.getInstance().getEmail();
+        String data = "email=" + email;
+        String url = "http://106.10.35.170/ImportClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, data, Constants.GET_WHOLECLUBLIST);
+        networkTask.execute();
+        wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
+        //Log.e("email", email);
 
-        wholeClub_adapter.setChatViewItemList(AppManager.getInstance().getWholeClub_Adapter());
-        myClub_adapter.setChatViewItemList(AppManager.getInstance().getMyClub_Adapter());
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, data, Constants.GET_MYCLUBLIST);
+        networkTask.execute();
+        myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
+        //wholeClub_adapter.setChatViewItemList(AppManager.getInstance().getWholeClub_Adapter());
+        //myClub_adapter.setChatViewItemList(AppManager.getInstance().getMyClub_Adapter());
         Log.e("ClubFragment", "업뎃");
-
+        */
         //리스트뷰 스와이프로 지우기
-        SetListViewCreator(myClub_Listview);
+        //SetListViewCreator(myClub_Listview);
 
         wholeClub_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
+
+
                 Intent intent = new Intent(getActivity(), ClubEnterActivity.class);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -150,21 +161,21 @@ public class  ClubFragment extends Fragment {
 
         //아이템 클릭시 채팅방 들어가기
         myClub_Listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(getActivity() , ((ChatViewItem)myClub_adapter.getItem(i)).getTitle(),Toast.LENGTH_LONG).show();
-
 
 //                String url = "http://106.10.35.170/ImportMessageList.php";
 //                String data = getData(AppManager.getInstance().getEmail(), ((ChatViewItem) myClub_adapter.getItem(i)).getItemIndex());
 //                NetworkTask networkTask = new NetworkTask(getActivity(), url, data, Constants.IMPORT_MESSAGELIST, ((ChatViewItem) myClub_adapter.getItem(i)).getTitle(), getActivity());
 //                networkTask.execute();
 
+                myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
                 Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
                 intent.putExtra("clubName", ((ChatViewItem)myClub_adapter.getItem(i)).getTitle());
-                intent.putExtra("chatIndex", ((ChatViewItem)myClub_adapter.getItem(i)).getItemIndex());
+                intent.putExtra("clubIndex", ((ChatViewItem)myClub_adapter.getItem(i)).getItemIndex());
                 startActivityForResult(intent, Constants.REQUEST_MY_CLUB_ENTER);
-
             }
         });
 
@@ -242,16 +253,37 @@ public class  ClubFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
-                        myClub_adapter.removeItem(position);
+                        //wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
+                        myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
 
+                        String url = "http://106.10.35.170/RemoveClub.php";
+                        String data = getData(AppManager.getInstance().getEmail(), myClub_adapter.getItemRoomIndex(position));
+                        NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.REMOVE_CLUB );
+                        networkTask.execute();
+
+                        String email = AppManager.getInstance().getEmail();
+                        String data_email = "email=" + email;
+                        url = "http://106.10.35.170/ImportClubList.php";
+                        networkTask = new NetworkTask(getContext(), url, data_email, Constants.GET_WHOLECLUBLIST);
+                        networkTask.execute();
+                        wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
+
+                        url = "http://106.10.35.170/ImportMyClubList.php";
+                        networkTask = new NetworkTask(getContext(), url, data_email, Constants.GET_MYCLUBLIST);
+                        networkTask.execute();
+                        myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
+
+                        //ChatViewItem wholeClubItem = ((ChatViewItem)wholeClub_adapter.getItem(position));
+                        //myClub_adapter.removeItem(position);
+
+                        /*
                         if( wholeClubItem.getNowMemberNum() <= 1 )
                             wholeClub_adapter.removeItem(position);
                         else
                             wholeClubItem.setNowMemberNum(wholeClubItem.getNowMemberNum()-1);
-
+                        */
                         myClub_adapter.notifyDataSetChanged();
-                        wholeClub_adapter.notifyDataSetChanged();
+                        //wholeClub_adapter.notifyDataSetChanged();
                     }
                 };
                 DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
@@ -278,11 +310,15 @@ public class  ClubFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == getActivity().RESULT_OK) {
-            Toast.makeText(getActivity() , "액티비티종료",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity() , "액티비티종료",Toast.LENGTH_LONG).show();
+
+            myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
+            wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
 
             byte[] bytes = data.getByteArrayExtra("BMP");
             Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             Drawable drawable = new BitmapDrawable(bmp);
+
             myClub_adapter.addItem(drawable,
                     (String)data.getExtras().get("clubName"), (String)data.getExtras().get("clubDescription"), (int)data.getExtras().get("clubMaxMember"), 1, 0);
 
@@ -303,6 +339,32 @@ public class  ClubFragment extends Fragment {
         return Uri.parse(path);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        String email = AppManager.getInstance().getEmail();
+        String data = "email=" + email;
+        Log.d("dd", "리쥼");
+
+        String url = "http://106.10.35.170/ImportClubList.php";
+
+        networkTask = new NetworkTask(this.getContext(), url, data, Constants.GET_WHOLECLUBLIST);
+        networkTask.execute();
+        Log.e("email", email);
+        url = "http://106.10.35.170/ImportMyClubList.php";
+        networkTask = new NetworkTask(this.getContext(), url, data, Constants.GET_MYCLUBLIST);
+
+        networkTask.execute();
+
+        wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
+        myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
     public String getData(String email, int room_index){
 
         String data = "email=" + email + "&room_index=" + room_index;
@@ -310,6 +372,7 @@ public class  ClubFragment extends Fragment {
         return data;
     }
 
+    /*
     public void SetListViewCreator(SwipeMenuListView listView){
         //슬라이드로 삭제
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -361,7 +424,7 @@ public class  ClubFragment extends Fragment {
             }
         });
     }
-
+    */
 
 
 }

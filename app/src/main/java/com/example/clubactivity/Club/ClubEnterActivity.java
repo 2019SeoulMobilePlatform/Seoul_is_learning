@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,6 +70,8 @@ public class ClubEnterActivity extends AppCompatActivity {
         //clubImage.setImageBitmap(bitmap);
         title.setText(intent.getExtras().getString("clubName"));
         room_index = intent.getExtras().getInt("clubIndex");
+        Log.d("방번호", room_index+"");
+
         description.setText(intent.getExtras().getString("clubDescription"));
         memberNumber.setText(intent.getExtras().get("clubNowMember").toString() + "/" + intent.getExtras().get("clubMaxMember").toString() + "명");
     }
@@ -79,15 +82,16 @@ public class ClubEnterActivity extends AppCompatActivity {
         //서버업데이트는 하는데 자체적으로 리스트에 추가해주어야함
         String url = "http://106.10.35.170/JoinClub.php";
         String data = getData(AppManager.getInstance().getEmail(), room_index);
-        NetworkTask networkTask = new NetworkTask(this,url,data,9);
+        NetworkTask networkTask = new NetworkTask(this,url,data, room_index,9);
         networkTask.execute();
 
-        //서버안통하고 자체적으로 리스트에 추가하는 메소드
-
+        /*
         Intent intent = new Intent(ClubEnterActivity.this, ChatRoomActivity.class);
         intent.putExtra("clubName", title.getText());
+        intent.putExtra("chatIndex", room_index);
         startActivityForResult(intent, Constants.REQUEST_CLUB_ENTER);
         this.finish();
+        */
     }
 
     public String getData(String email, int room_index){
@@ -97,6 +101,7 @@ public class ClubEnterActivity extends AppCompatActivity {
     }
 
     public void setMyClubList(){
+
         ArrayList<ChatViewItem> myClubList = new ArrayList<ChatViewItem>();
         myClubList = AppManager.getInstance().getMyClub_Adapter();
         myClubList.add(item);
