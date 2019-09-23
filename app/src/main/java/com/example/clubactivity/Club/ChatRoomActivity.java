@@ -136,6 +136,8 @@ public class ChatRoomActivity extends AppCompatActivity{
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                adapter = (MessageListAdapter) listview.getAdapter();
                 Bitmap image = adapter.getImage(i);
                 if(image != null){
                     Intent intent = new Intent(ChatRoomActivity.this, FullScreenImageActivity.class);
@@ -174,7 +176,6 @@ public class ChatRoomActivity extends AppCompatActivity{
     @Override
     protected void onStop() {
         super.onStop();
-
         try {
             client.close();
         } catch (IOException e) {

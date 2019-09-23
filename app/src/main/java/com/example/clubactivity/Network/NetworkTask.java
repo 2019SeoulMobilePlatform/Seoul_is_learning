@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
@@ -354,7 +355,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 //                                   instructor_Adapter.setChatViewItemList(chatViewItems);
 //                                   instructorClassList.setAdapter(instructor_Adapter);
                                    instructorClassList.setAdapter(new ChatViewAdapter(chatViewItems));
-                                   Log.d("살려줘", instructor_Adapter.getChatViewItemList().get(0).getTitle());
+                                  // Log.d("살려줘", instructor_Adapter.getChatViewItemList().get(0).getTitle());
                                }
                                else if(selection == Constants.SERVER_GET_MY_CLASS){
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.myclass_recyclerView);
@@ -469,7 +470,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     wholeClub_Adapter.addItem(drawable, name, information, count_max, count, room_index);
                                 }
                             }
-                            AppManager.getInstance().setWholeClub_Adapter(wholeClub_Adapter.getChatViewItemList());
+                            ListView wholeClub_ListView = ((Activity) context).findViewById(R.id.wholeclub_listview);
+                            wholeClub_ListView.setAdapter(wholeClub_Adapter);
                         } else {
                             Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }
@@ -483,7 +485,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         String real_result = jsonObject.getString("result");
                         JSONArray resultObjectArray = new JSONArray(real_result);
                         myClub_Adapter = new ChatViewAdapter();
-                        if (!real_result.equals("fail")) {
+                        if (!real_result.equals("fail") && !real_result.equals("empty")) {
                             JSONObject resultObject;
                             if (resultObjectArray.length() != 0) {
                                 for (int i = 0; i < resultObjectArray.length(); i++) {
@@ -498,9 +500,16 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                     myClub_Adapter.addItem(drawable, name, information, count_max, count, room_index);
                                 }
                             }
-                            AppManager.getInstance().setMyClub_Adapter(myClub_Adapter.getChatViewItemList());
-                        } else {
+                            ListView myClub_ListView = ((Activity) context).findViewById(R.id.myclub_listview);
+                            myClub_ListView.setAdapter(myClub_Adapter);
+
+                        } else if(real_result.equals("empty")){
                             Toast.makeText(this.context, "동호회 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
+
+                            ListView myClub_ListView = ((Activity) context).findViewById(R.id.wholeclub_listview);
+                            myClub_ListView.setAdapter(myClub_Adapter);
+                        } else {
+                            Toast.makeText(this.context, "연결에 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
