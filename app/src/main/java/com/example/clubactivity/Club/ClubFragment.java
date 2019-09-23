@@ -62,9 +62,13 @@ public class  ClubFragment extends Fragment {
         Log.d("dd", "생성");
 
         String email = AppManager.getInstance().getEmail();
+<<<<<<< HEAD
         String data = "email=" + email;
+=======
+>>>>>>> origin/develop
         String url = "http://106.10.35.170/ImportClubList.php";
-        networkTask = new NetworkTask(this.getContext(), url, 7);
+        String data = "email=" + email;
+        networkTask = new NetworkTask(this.getContext(), url, data,7);
         networkTask.execute();
 
         //Log.e("email", email);
@@ -324,17 +328,18 @@ public class  ClubFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("dd", "리쥼");
         String email = AppManager.getInstance().getEmail();
         String data = "email=" + email;
+        Log.d("dd", "리쥼");
+
         String url = "http://106.10.35.170/ImportClubList.php";
+
         networkTask = new NetworkTask(this.getContext(), url, data, Constants.GET_WHOLECLUBLIST);
         networkTask.execute();
-
-
         Log.e("email", email);
         url = "http://106.10.35.170/ImportMyClubList.php";
         networkTask = new NetworkTask(this.getContext(), url, data, Constants.GET_MYCLUBLIST);
+
         networkTask.execute();
 
         wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
