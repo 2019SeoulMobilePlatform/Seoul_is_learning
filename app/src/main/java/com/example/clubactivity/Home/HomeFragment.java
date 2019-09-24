@@ -69,6 +69,7 @@ public class HomeFragment extends Fragment implements DatePickerListener {
         picker
                 .setListener(this)
                 .init();
+        //picker.setTextAlignment(HorizontalPicker.TEXT_ALIGNMENT_VIEW_START);
         picker.setBackgroundColor(Color.WHITE);
         picker.setDate(new DateTime());
 

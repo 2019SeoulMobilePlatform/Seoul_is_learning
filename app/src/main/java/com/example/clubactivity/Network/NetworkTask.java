@@ -169,7 +169,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         //로딩
         if(asyncDialog != null) {
             asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            asyncDialog.setMessage("취미 불러오는중!");
+            asyncDialog.setMessage("Loading");
             asyncDialog.show();
             asyncDialog.setCanceledOnTouchOutside(false);
         }
@@ -630,8 +630,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        JSONArray resultObjectArray = new JSONArray(real_result);
                         ArrayList<MessageContents> messageContents = new ArrayList<>();
+                        Log.d("??", "try 들어옴");
 
                         if(real_result.equals("empty")){
                             Toast.makeText(this.context, "대화 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
@@ -640,6 +640,8 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             Toast.makeText(this.context, "연결 실패", Toast.LENGTH_LONG).show();
                         } else {
                             JSONObject resultObject;
+                            JSONArray resultObjectArray = new JSONArray(real_result);
+
                             if (resultObjectArray.length() != 0) {
                                 for (int i = 0; i < resultObjectArray.length(); i++) {
                                     resultObject = resultObjectArray.getJSONObject(i);
@@ -664,7 +666,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         }
 
                         chatList = new MessageListAdapter(context, messageContents);
-
+                        Log.d("ㅁㄴㅇ", "채팅메세지어뎁터생성및추가");
                         ListView chatMessageListView = ((Activity) context).findViewById(R.id.chatmessage_listView);
                         chatMessageListView.setAdapter(chatList);
                     } catch (Exception e) {
@@ -687,6 +689,5 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 asyncDialog.dismiss();
             }
         }
-
     }
 }
