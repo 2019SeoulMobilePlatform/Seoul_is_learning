@@ -20,8 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.Constants;
 import com.example.clubactivity.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -100,7 +102,7 @@ public class MessageListAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         final int pos = i;
         final Context context = viewGroup.getContext();
 
@@ -173,6 +175,24 @@ public class MessageListAdapter extends BaseAdapter {
         if(messages.get(i).image != null){
             imageView.getLayoutParams().height = 500;
             imageView.getLayoutParams().width = 500;
+            final Bitmap image = messages.get(i).image;
+
+            imageView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, FullScreenImageActivity.class);
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    Bitmap dstBitmap = Bitmap.createScaledBitmap(image, Constants.IMAGE_SIZE, image.getHeight()/(image.getWidth()/Constants.IMAGE_SIZE), true);
+
+                    dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] bytes = stream.toByteArray();
+                    intent.putExtra("chatImage",bytes);
+
+                    context.startActivity(intent);
+                }
+            });
+
             frameLayout.setBackgroundResource(0);
         }
         else{

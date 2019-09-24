@@ -136,26 +136,26 @@ public class ChatRoomActivity extends AppCompatActivity{
             }
         });
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                adapter = (MessageListAdapter) listview.getAdapter();
-                Bitmap image = adapter.getImage(i);
-                if(image != null){
-                    Intent intent = new Intent(ChatRoomActivity.this, FullScreenImageActivity.class);
-
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    Bitmap dstBitmap = Bitmap.createScaledBitmap(image, Constants.IMAGE_SIZE, image.getHeight()/(image.getWidth()/Constants.IMAGE_SIZE), true);
-
-                    dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] bytes = stream.toByteArray();
-                    intent.putExtra("chatImage",bytes);
-
-                    startActivity(intent);
-                }
-            }
-        });
+//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                adapter = (MessageListAdapter) listview.getAdapter();
+//                Bitmap image = adapter.getImage(i);
+//                if(image != null){
+//                    Intent intent = new Intent(ChatRoomActivity.this, FullScreenImageActivity.class);
+//
+//                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                    Bitmap dstBitmap = Bitmap.createScaledBitmap(image, Constants.IMAGE_SIZE, image.getHeight()/(image.getWidth()/Constants.IMAGE_SIZE), true);
+//
+//                    dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                    byte[] bytes = stream.toByteArray();
+//                    intent.putExtra("chatImage",bytes);
+//
+//                    startActivity(intent);
+//                }
+//            }
+//        });
     }
     /*
     public String getData(String message, String email, int room_index){

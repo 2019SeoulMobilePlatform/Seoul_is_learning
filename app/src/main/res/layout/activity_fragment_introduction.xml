@@ -53,7 +53,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:gravity="left"
-            android:textColor="@color/grey"
+            android:textColor="@color/colorDarkerGrey"
+            android:textSize="17dp"
             android:text="수업소개를 써보자" />
 
 
@@ -61,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_marginBottom="5dp"
@@ -96,14 +98,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:textColor="@color/grey"
+            android:textColor="@color/colorDarkerGrey"
+            android:textSize="17dp"
             android:text="수강대상을 소개해보자" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_marginBottom="5dp"
@@ -138,14 +142,16 @@
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:gravity="left"
-            android:textColor="@color/grey"
-            android:text="수강장소에 대해 써보자" />
+            android:textColor="@color/colorDarkerGrey"
+            android:text="수강장소에 대해 써보자"
+            android:textSize="17dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_marginBottom="5dp"
@@ -180,14 +186,16 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:gravity="left"
-            android:textColor="@color/grey"
-            android:text="시간에 대해 써보자" />
+            android:textColor="@color/colorDarkerGrey"
+            android:text="시간에 대해 써보자"
+            android:textSize="17dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_marginBottom="5dp"
@@ -221,9 +229,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_marginBottom="5dp"
             android:gravity="left"
-            android:textColor="@color/grey"
-            android:text="현재 인원 : " />
+            android:textColor="@color/colorDarkerGrey"
+            android:text="현재 인원 : "
+            android:textSize="17dp"/>
+
         <TextView
             android:layout_marginTop="3dp"
             android:id="@+id/class_people_number_intent"
@@ -233,8 +244,9 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="45dp"
             android:gravity="left"
-            android:textColor="@color/grey"
-            android:text="모집 인원 : " />
+            android:textColor="@color/colorDarkerGrey"
+            android:text="모집 인원 : "
+            android:textSize="17dp" />
 
     </LinearLayout>
 
