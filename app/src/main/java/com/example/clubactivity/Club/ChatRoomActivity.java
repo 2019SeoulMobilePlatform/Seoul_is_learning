@@ -289,6 +289,11 @@ public class ChatRoomActivity extends AppCompatActivity{
         return data;
     }
 
+
+
+
+
+
     class SocketClient extends Thread{
 
         PrintWriter out = null;
