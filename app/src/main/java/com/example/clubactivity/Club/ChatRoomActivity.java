@@ -106,6 +106,7 @@ public class ChatRoomActivity extends AppCompatActivity{
                 //attemptSend();
 
                 adapter = (MessageListAdapter)listview.getAdapter();
+
                 if(adapter == null)
                     Log.d("ㅇㅁㄹ안,ㅓㄻ나ㅣㄹ","ㅇㄴㅁ러나");
 
@@ -121,12 +122,13 @@ public class ChatRoomActivity extends AppCompatActivity{
                         String data = jsonObject.toString();
 
                         send = new SendMSGThread(data, socket);
-                        Log.e("message", data);
+                        //Log.e("message", data);
                         send.start();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                     adapter.addItem(messageTextView.getText().toString(), 0, "id");
                     messageTextView.setText("");
                     adapter.notifyDataSetChanged();
@@ -175,10 +177,12 @@ public class ChatRoomActivity extends AppCompatActivity{
     */
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    public void onBackPressed() {
+        super.onBackPressed();
+
         try {
             client.close();
+            Log.e("망했으", "닫힘");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -213,7 +217,6 @@ public class ChatRoomActivity extends AppCompatActivity{
             Uri imgUri = data.getData() ;
             ImageProcessing imageProcessing = new ImageProcessing(ChatRoomActivity.this);
             Bitmap image = imageProcessing.ConvertRareUriToBitmap(imgUri);
-            adapter = (MessageListAdapter)listview.getAdapter();
 /*
             Bitmap image = null;
             Bitmap originalImage = null;
@@ -251,15 +254,16 @@ public class ChatRoomActivity extends AppCompatActivity{
 
                 String data_img = jsonObject.toString();
 
+                //이부분에서 터짐(?)
                 send = new SendMSGThread(data_img, socket);
-                Log.e("message", data_img);
+                //Log.e("message", data_img);
                 send.start();
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 /*
-              String url = "http://106.10.35.170/StoreMessage.php";
+             String url = "http://106.10.35.170/StoreMessage.php";
              String data_image = getData(image, AppManager.getInstance().getEmail(), room_index);
              NetworkTask networkTask = new NetworkTask(this, url, data_image, Constants.SEND_MESSAGE);
              networkTask.execute();
@@ -352,12 +356,11 @@ public class ChatRoomActivity extends AppCompatActivity{
                             Bitmap messageImage = ImageConverter.getReplaceRegexToBitmap(resultObject.getString("image"));
 
                             adapter = (MessageListAdapter)listview.getAdapter();
-                            adapter.addItem(1, user_id, nickname, messageImage, profile);
+                            adapter.addItem(1, nickname, user_id, messageImage, profile);
                         }
 
                         Message message = handler.obtainMessage();
                         handler.sendMessage(message);
-
                     }
                 }
             } catch (IOException e) {
@@ -381,20 +384,21 @@ public class ChatRoomActivity extends AppCompatActivity{
 
         private Socket socket;
         String msg;
-
         PrintWriter out = null;
 
         public SendMSGThread(String msg, Socket socket){
             this.socket = socket;
             this.msg = msg;
             try{
-                out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8"), true);
+                Log.e("SendMsgThread", "enter");
+                out = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream(), "utf-8"), true);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
         public void run(){
             if(out != null){
+                Log.e("메세지 보냄", "enter");
                 out.println(msg);
             }
         }
