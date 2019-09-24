@@ -35,6 +35,9 @@
             android:name=".Club.ClubEnterActivity"
             android:theme="@style/NoTitleAppcompat" />
         <activity
+            android:name=".Class.ReviewAddActivity"
+            android:theme="@style/NoTitleAppcompat" />
+        <activity
             android:name=".MyPage.EditMyInfoActivity"
             android:theme="@style/NoTitleAppcompat" />
         <activity
