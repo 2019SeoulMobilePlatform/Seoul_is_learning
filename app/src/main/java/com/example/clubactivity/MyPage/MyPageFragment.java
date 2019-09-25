@@ -1,35 +1,30 @@
 package com.example.clubactivity.MyPage;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Home.WebViewActivity;
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
-
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -108,6 +103,17 @@ public class MyPageFragment extends Fragment {
         ts2.setIndicator("찜한 클래스") ;
         tabHost1.addTab(ts2) ;
 
+        LinearLayout zeropay = (LinearLayout)view.findViewById(R.id.zero_web);
+        zeropay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "네트워크 연결 후 봐주세요!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra("web", "http://www.zeropayevent.com/howtouse.php");
+                getActivity().startActivity(intent);
+            }
+        });
+
         //getImages();
         //initRecyclerView();
         return view;
@@ -175,7 +181,6 @@ public class MyPageFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Constants.REQUEST_EDIT_INFO){
             ((MainActivity)getActivity()).changeFragment(R.id.action_my);
-            Log.d("a","ㅁ");
             if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
                 user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
             else{

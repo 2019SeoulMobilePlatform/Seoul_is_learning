@@ -56,6 +56,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 {
                     Toast.makeText(context, "네트워크 연결 후 축소해 봐주세요!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, WebViewActivity.class);
+                    intent.putExtra("web", "http://smile.seoul.kr/wp-content/themes/smile/html/learn.html");
                     context.startActivity(intent);
                 }
                 if (position==1){

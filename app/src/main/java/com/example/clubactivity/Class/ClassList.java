@@ -2,7 +2,6 @@ package com.example.clubactivity.Class;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +79,6 @@ public class ClassList extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //액티비티 꺼졌을때..!
-        Log.d("헤헿","ㅇㅇ");
     }
 
 

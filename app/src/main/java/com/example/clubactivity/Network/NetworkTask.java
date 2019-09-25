@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,16 +22,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.clubactivity.AppManager;
+import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.Class.RecyclerAdapter;
+import com.example.clubactivity.Class.ReviewAddActivity;
 import com.example.clubactivity.Class.ReviewListItem;
 import com.example.clubactivity.Class.ReviewListViewAdapter;
 import com.example.clubactivity.Club.ChatRoomActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
-import com.example.clubactivity.Club.ClubEnterActivity;
 import com.example.clubactivity.Club.MessageContents;
 import com.example.clubactivity.Club.MessageListAdapter;
 import com.example.clubactivity.Constants;
@@ -42,9 +43,7 @@ import com.example.clubactivity.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +59,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
     ViewPager viewPager;
     ProgressDialog asyncDialog;
     private int room_index;
+    RatingBar totalReviewStar;
 
     public List<Item> items = new ArrayList<>();
     public ArrayList<ChatViewItem> chatViewItems = new ArrayList<>();
@@ -176,6 +176,20 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
         super.onPreExecute();
     }
 
+    // 총 별점 평균 구해서 ratingBar 설정하는 메소드
+    public void setTotalStarScore(ArrayList<ReviewListItem> reviewData) {
+        float totalStar = 0;
+
+        totalReviewStar = ((Activity) context).findViewById(R.id.review_total_star);
+        //totalReviewStarScore = ((Activity) context).findViewById(R.id.review_star);
+
+        for (ReviewListItem review : reviewData) {
+            totalStar += review.getStar();
+        }
+        totalReviewStar.setRating((float) totalStar / reviewData.size());
+        //totalReviewStarScore.setText("" + totalReviewStar.getRating());
+    }
+
     @Override
     protected void onPostExecute(String result) {
 
@@ -187,7 +201,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         JSONObject jsonObject = new JSONObject(result);
                         String user_info = jsonObject.getString("result");
                         if (user_info.equals("fail")) {
-                            Toast.makeText(this.context, "아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(this.context, "아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
                         } else {
                             String user_email = jsonObject.getString("email");
                             String user_name = jsonObject.getString("name");
@@ -304,6 +318,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 case Constants.SERVER_GET_MY_CLASS:
                 case Constants.SERVER_GET_FAVORITE_CLASS:
                 case 960113:
+                case 7777:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -337,6 +352,23 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                        ChatViewItem chatViewItem = new ChatViewItem(class_index ,decodedByte, star,name,information,local,target_user,address,time,count,count_max,price, false,flag_dongnae);
                                        chatViewItems.add(chatViewItem);
                                    }
+
+                                   //후기 버튼 눌렀을시 회원 예약한 클래스가 맞는지 확인
+                                   if(selection == 7777){
+                                       if(ClassDetailActivity.class_index.equals(String.valueOf(class_index)))
+                                       {
+                                           Intent intent = new Intent((Activity) context, ReviewAddActivity.class);
+                                           ((Activity) context).startActivity(intent);
+                                           if(asyncDialog!=null) {
+                                               asyncDialog.setCanceledOnTouchOutside(true);
+                                               asyncDialog.dismiss();
+                                           }
+                                           return;
+                                       }
+                                   }
+                               }
+                               if(selection == 7777){
+                                   Toast.makeText(context, "후기는 클래스 예약 후 작성 가능합니다.", Toast.LENGTH_SHORT).show();
                                }
                                if(selection == 960113){
                                    //3개만 홈화면에 뜨게 하기
@@ -539,6 +571,22 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         e.printStackTrace();
                     }
                     break;
+
+                    //후기작성
+                case Constants.SERVER_CLASS_ADD_REVIEW:
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        String real_result = jsonObject.getString("result");
+                        if (real_result.equals("success")) {
+                            Toast.makeText(this.context, "후기 작성 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this.context, "후기 작성 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
                 case Constants.SERVER_CLASS_ADD_FAVORITE:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
