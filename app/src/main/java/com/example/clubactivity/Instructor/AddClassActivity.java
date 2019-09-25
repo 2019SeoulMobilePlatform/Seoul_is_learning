@@ -175,8 +175,14 @@ public class AddClassActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
+                String stringMonth = String.valueOf(month);
+                String stringDay = String.valueOf(day);
+                if(month<=9)
+                    stringMonth = "0" + stringMonth;
+                if(day<=9)
+                    stringDay = "0" + stringDay;
 
-                String date = year + "/" + month + "/" + day;
+                String date = year + "/" + stringMonth + "/" + stringDay;
                 mDisplayDate.setText(date);
             }
         };
@@ -200,7 +206,15 @@ public class AddClassActivity extends AppCompatActivity {
         mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String time = String.valueOf(hour) + ":" + String.valueOf(minute);
+                String stringHour = String.valueOf(hour);
+                String stringMinute = String.valueOf(minute);
+                if(hour<=9)
+                    stringHour = "0" + stringHour;
+                if(minute<=9)
+                    stringMinute = "0" + stringMinute;
+
+
+                String time = stringHour + ":" + stringMinute;
                 mDisplayTime.setText(time);
             }
         };
