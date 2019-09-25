@@ -19,6 +19,7 @@ public class Constants {
     public static final int SERVER_CLASS_LIST_GET = 5;
     public static final int SERVER_CLASS_REVIEW_GET = 55;
     public static final int SERVER_CLASS_ADD_CLASS = 18;
+    public static final int SERVER_CLASS_ADD_REVIEW = 555;
     public static final int SERVER_CLASS_RESERVATION = 20;
     public static final int SERVER_CLASS_ADD_FAVORITE = 21;
     public static final int SERVER_CLASS_DELETE_FAVORITE = 22;

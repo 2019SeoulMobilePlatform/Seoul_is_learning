@@ -1,6 +1,6 @@
 package com.example.clubactivity.Class;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -25,6 +26,8 @@ public class ClassDetailReview extends Fragment {
     private ListView reviewList;         // 후기 리스트
     private ArrayList<ReviewListItem> reviewData;   // 후기 데이터
     private View view;
+    private NetworkTask networkTask;
+    SharedPreferences preferences;
 
     @Nullable
     @Override
@@ -35,11 +38,20 @@ public class ClassDetailReview extends Fragment {
         reviewButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"클래스를 들은 회원만 작성 가능합니다", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(getActivity(),ReviewAddActivity.class);
 
-                startActivity(intent);
+                //비로그인시
+                if(!Constants.isLogined){
+                    Toast.makeText(getContext(), "로그인 후 작성 가능합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //후기 작성판단
+                String url = "http://106.10.35.170/ImportMyClass.php";
+                String data = "email=" + AppManager.getInstance().getEmail();
+                networkTask = new NetworkTask(getContext(), url, data, 7777);
+                networkTask.execute();
+
             }
         });
 

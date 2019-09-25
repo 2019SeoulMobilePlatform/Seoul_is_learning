@@ -152,11 +152,12 @@
 
 
         <LinearLayout
+            android:id="@+id/zero_web"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/chimi_image"
+            android:background="@drawable/zeropay"
             android:layout_weight="2">
-
         </LinearLayout>
 
     </LinearLayout>
