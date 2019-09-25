@@ -1,11 +1,9 @@
 package com.example.clubactivity.Class;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -14,9 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.clubactivity.AppManager;
 import com.example.clubactivity.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 
 /**
  * 후기 작성 페이지
@@ -24,14 +19,10 @@ import org.json.JSONObject;
 public class ReviewAddActivity extends AppCompatActivity implements View.OnClickListener {
 
     RatingBar ratingBar;    // 별점 바
-    ImageView reviewImageView;  // 후기사진 이미지뷰
     EditText reviewEditText;    // 후기 내용
     Button completingReviewButton;  // 작성완료 버튼
-    //float starNum;  // 별점
+    Double starNum;  // 별점
     String reviewContent;   // 후기 내용
-
-    SharedPreferences preferences;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +30,7 @@ public class ReviewAddActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_review_add);
 
         ratingBar = findViewById(R.id.star_ratingbar);
-        reviewEditText = findViewById(R.id.review_content);
+        reviewEditText = findViewById(R.id.review_content2);
         completingReviewButton = findViewById(R.id.completing_review_button);
         completingReviewButton.setOnClickListener(this);
     }
@@ -51,14 +42,13 @@ public class ReviewAddActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.completing_review_button:
                 //서버 연동
-                if(reviewEditText.getText().toString().equals("")){
-                    Toast.makeText(this,"후기 글을 작성해주세요", Toast.LENGTH_LONG);
+                if(reviewEditText.getText().toString().trim().equals("")){
+                    Toast.makeText(getApplicationContext(),"후기 글을 작성해주세요", Toast.LENGTH_SHORT).show();
                 } else{
 
                     /*네트워크 연결
                     String url = "";
-                    JSONObject data = null;
-                    data = sendJSonData();
+                    data = getData();
                     NetworkTask networkTask = new NetworkTask(ReviewAddActivity.this, url, data, Constant.SERVER_CLASS_ADD_REVIEW);
                     networkTask.execute();*/
 
@@ -67,25 +57,13 @@ public class ReviewAddActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-
-    //후기 데이터 서버에 보내기 위한 JSON 형식 데이터
-    private JSONObject sendJSonData() {
-
-        JSONObject jsonObject = new JSONObject();
-        Double starNum = Double.valueOf(ratingBar.getRating());
-
-        try {
-            jsonObject.accumulate("class_index", "1");
-            jsonObject.accumulate("review",reviewEditText.getText().toString());
-            jsonObject.accumulate("user_name", AppManager.getInstance().getEmail());
-            jsonObject.accumulate("star", String.valueOf(starNum));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return jsonObject;
+    //후기 데이터 서버로 보내기
+    public String getData(){
+        starNum = Double.valueOf(ratingBar.getRating());
+        String data = "class_index=" + ClassDetailActivity.class_index + "&review=" + reviewEditText.getText().toString().trim() + "&user_name=" + AppManager.getInstance().getEmail() + "&star=" +  String.valueOf(starNum);
+        return data;
     }
+
 
     @Override
     public void onBackPressed() {

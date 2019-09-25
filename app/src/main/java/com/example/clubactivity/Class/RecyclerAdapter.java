@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.clubactivity.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -58,10 +60,34 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             holder.dongnae.setText(" 개인 클래스 ");
             holder.dongnae.setBackgroundColor(Color.parseColor("#8013B9A5"));
         }
-        else {
+        else{
             holder.dongnae.setText(" 동네 배움터 ");
             holder.dongnae.setBackgroundColor(Color.parseColor("#80F78181"));
         }
+
+        //인원 다참
+        if(Integer.parseInt(item.getPeopleNumberNow()) >= Integer.parseInt(item.getPeopleNumber())){
+            holder.dongnae.setText(" 인원 마감 ");
+            holder.dongnae.setBackgroundColor(Color.parseColor("#80808080"));
+        }
+        //지난날짜
+        if(!(item.getDate().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*"))) {
+            //현재날짜가져오기
+            long now = System.currentTimeMillis();
+            Date dateNow = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+            String getTime = sdf.format(dateNow);
+            //클래스시간
+            String classTime = item.getDate().replace("/", "");
+            classTime = classTime.replace(" ", "");
+            classTime = classTime.replace(":", "");
+            //수강시간이 지났다면
+            if (Long.parseLong(getTime) >= Long.parseLong(classTime)) {
+                holder.dongnae.setText(" 접수 마감 ");
+                holder.dongnae.setBackgroundColor(Color.parseColor("#80808080"));
+            }
+        }
+
         holder.title.setText(item.getTitle());
         holder.desc.setText(item.getDesc());
         holder.ratingBar.setRating(item.getStar());

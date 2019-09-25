@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 import com.google.android.material.tabs.TabLayout;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ClassDetailActivity extends AppCompatActivity {
 
@@ -139,6 +143,26 @@ public class ClassDetailActivity extends AppCompatActivity {
         {
             Toast.makeText(ClassDetailActivity.this, "모집 인원이 마갑되었습니다.", Toast.LENGTH_SHORT).show();
             return;
+        }
+
+        if(!(date.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*"))) {
+            //현재날짜가져오기
+            long now = System.currentTimeMillis();
+            Date dateNow = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+            String getTime = sdf.format(dateNow);
+            //클래스시간
+            String classTime = date.replace("/", "");
+            classTime = classTime.replace(" ", "");
+            classTime = classTime.replace(":", "");
+
+            Log.d("지금", getTime);
+            Log.d("클래스", classTime);
+            //수강시간이 지났다면
+            if (Long.parseLong(getTime) >= Long.parseLong(classTime)) {
+                Toast.makeText(ClassDetailActivity.this, "수강날이 지난 클래스입니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
 
