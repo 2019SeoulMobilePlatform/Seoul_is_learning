@@ -112,27 +112,28 @@ public class ChatRoomActivity extends AppCompatActivity{
 
                 JSONObject jsonObject = new JSONObject();
 
-                if(!messageTextView.getText().toString().isEmpty()){
-
-                    try {
-                        jsonObject.put("room_index", room_index);
-                        jsonObject.put("email", AppManager.getInstance().getEmail());
-                        jsonObject.put("message", messageTextView.getText().toString());
-                        jsonObject.put("message_image", null);
-                        String data = jsonObject.toString();
-
-                        send = new SendMSGThread(data, socket);
-                        //Log.e("message", data);
-                        send.start();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    adapter.addItem(messageTextView.getText().toString(), 0, "id");
-                    messageTextView.setText("");
-                    adapter.notifyDataSetChanged();
+                if(messageTextView.getText().toString().trim().isEmpty()){
+                    return;
                 }
+
+                try {
+                    jsonObject.put("room_index", room_index);
+                    jsonObject.put("email", AppManager.getInstance().getEmail());
+                    jsonObject.put("message", messageTextView.getText().toString());
+                    jsonObject.put("message_image", null);
+                    String data = jsonObject.toString();
+
+                    send = new SendMSGThread(data, socket);
+                    //Log.e("message", data);
+                    send.start();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                adapter.addItem(messageTextView.getText().toString(), 0, "id");
+                messageTextView.setText("");
+                adapter.notifyDataSetChanged();
             }
         });
 

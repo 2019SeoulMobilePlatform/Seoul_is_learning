@@ -4,7 +4,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/chat_message_layout">
+    android:id="@+id/chat_message_layout"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView

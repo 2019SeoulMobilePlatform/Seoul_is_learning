@@ -39,7 +39,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.stream.IntStream;
 
 public class AddClassActivity extends AppCompatActivity {
@@ -87,44 +89,74 @@ public class AddClassActivity extends AppCompatActivity {
                         year,month,day);
 
 
-                Date currentTime = Calendar.getInstance().getTime();
-                SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
-                SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
-                SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+//                Date currentTime = Calendar.getInstance().getTime();
+                Locale locale = new Locale("ko", "KR");
+////                SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
+////                SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
+////                SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
+//
+                SimpleDateFormat dayFormat = new SimpleDateFormat("dd", locale);
+                dayFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                SimpleDateFormat monthFormat = new SimpleDateFormat("MM", locale);
+                monthFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", locale);
+                yearFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 
-                int curYear = Integer.parseInt(yearFormat.format(currentTime));
-                int curMonth = Integer.parseInt(monthFormat.format(currentTime));
-                int curDay = Integer.parseInt(dayFormat.format(currentTime));
+
+                Calendar calendar = new GregorianCalendar(Locale.KOREA);
+                calendar.setTime(new Date());
+                calendar.add(Calendar.DAY_OF_YEAR, 1); // 하루를 더한다.
+                Date date = calendar.getTime();
+
+                int curYear = Integer.parseInt(yearFormat.format(date));
+                int curMonth = Integer.parseInt(monthFormat.format(date));
+                int curDay = Integer.parseInt(dayFormat.format(date));
 
 //                int curYear = 2019;
 //                int curMonth = 2;
 //                int curDay = 28;
 
+//                Calendar calendar = new GregorianCalendar(Locale.KOREA);
+//                calendar.setTime(new Date());
+//                calendar.add(Calendar.YEAR, 1); // 1년을 더한다.
+//                calendar.add(Calendar.MONTH, 1); // 한달을 더한다.
+//                calendar.add(Calendar.DAY_OF_YEAR, 1); // 하루를 더한다.
+//                calendar.add(Calendar.HOUR, 1); // 시간을 더한다
+//
+//                Locale locale = new Locale("ko", "KR");
+
+//
+//
+//                SimpleDateFormat fm = new SimpleDateFormat(
+//                        "yyyy-MM-dd HH시mm분ss초");
+//                String strDate = fm.format(calendar.getTime());
+//                System.out.println(strDate);
+
 
                 Log.d("A", curMonth+"/"+curDay);
-                ArrayList<Integer> longMonths = new ArrayList<>();
-                longMonths.addAll(Arrays.asList(1,3,5,7,8,10,12));
-
-                if( longMonths.contains(curMonth) && curDay == 31){
-                    curDay = 1;
-                    if(curMonth == 12) {
-                        curMonth = 1;
-                        curYear++;
-                    }
-                    else
-                        curMonth++;
-                }
-                else if( !longMonths.contains(curMonth) && curDay == 30){
-                    curDay = 1;
-                    curMonth++;
-                }
-                else if( curMonth == 2 && curDay == 28){
-                    curDay = 1;
-                    curMonth++;
-                }
-                else{
-                    curDay++;
-                }
+//                ArrayList<Integer> longMonths = new ArrayList<>();
+//                longMonths.addAll(Arrays.asList(1,3,5,7,8,10,12));
+//
+//                if( longMonths.contains(curMonth) && curDay == 31){
+//                    curDay = 1;
+//                    if(curMonth == 12) {
+//                        curMonth = 1;
+//                        curYear++;
+//                    }
+//                    else
+//                        curMonth++;
+//                }
+//                else if( !longMonths.contains(curMonth) && curDay == 30){
+//                    curDay = 1;
+//                    curMonth++;
+//                }
+//                else if( curMonth == 2 && curDay == 28){
+//                    curDay = 1;
+//                    curMonth++;
+//                }
+//                else{
+//                    curDay++;
+//                }
 
                 Log.d("a", curMonth+"/"+curDay);
 
@@ -143,8 +175,14 @@ public class AddClassActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
+                String stringMonth = String.valueOf(month);
+                String stringDay = String.valueOf(day);
+                if(month<=9)
+                    stringMonth = "0" + stringMonth;
+                if(day<=9)
+                    stringDay = "0" + stringDay;
 
-                String date = year + "/" + month + "/" + day;
+                String date = year + "/" + stringMonth + "/" + stringDay;
                 mDisplayDate.setText(date);
             }
         };
@@ -168,7 +206,15 @@ public class AddClassActivity extends AppCompatActivity {
         mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String time = String.valueOf(hour) + ":" + String.valueOf(minute);
+                String stringHour = String.valueOf(hour);
+                String stringMinute = String.valueOf(minute);
+                if(hour<=9)
+                    stringHour = "0" + stringHour;
+                if(minute<=9)
+                    stringMinute = "0" + stringMinute;
+
+
+                String time = stringHour + ":" + stringMinute;
                 mDisplayTime.setText(time);
             }
         };

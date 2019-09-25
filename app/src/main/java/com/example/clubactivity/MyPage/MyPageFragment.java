@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.clubactivity.Constants;
+import com.example.clubactivity.Login.LoginActivity;
 import com.example.clubactivity.Home.WebViewActivity;
+
 import com.example.clubactivity.MainActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
@@ -180,7 +183,12 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == Constants.REQUEST_EDIT_INFO){
-            ((MainActivity)getActivity()).changeFragment(R.id.action_my);
+            //((MainActivity)getActivity()).changeFragment(R.id.action_my);
+            if(!Constants.isLogined) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                ((MainActivity) getActivity()).finish();
+            }
+            Log.d("a","ㅁ");
             if(ImageConverter.getImageToBitmap(preferences.getString("profileImage", "")) != null)
                 user_image.setImageBitmap(getImageToBitmap(preferences.getString("profileImage", "")));
             else{
@@ -190,16 +198,16 @@ public class MyPageFragment extends Fragment {
             user_residence.setText(preferences.getString("residence",""));
         }
 
-        if(requestCode == Constants.REQUEST_ENTER_CLASS_DETAIL) {
-            String url = "http://106.10.35.170/ImportFavoriteClass.php";
-            String dataStr = "email=" + preferences.getString("email", "");
-            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
-            networkTask.execute();
-
-            url = "http://106.10.35.170/ImportMyClass.php";
-            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
-            networkTask.execute();
-        }
+//        if(requestCode == Constants.REQUEST_ENTER_CLASS_DETAIL) {
+//            String url = "http://106.10.35.170/ImportFavoriteClass.php";
+//            String dataStr = "email=" + preferences.getString("email", "");
+//            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_FAVORITE_CLASS);
+//            networkTask.execute();
+//
+//            url = "http://106.10.35.170/ImportMyClass.php";
+//            networkTask = new NetworkTask(this.getContext(), url, dataStr, Constants.SERVER_GET_MY_CLASS);
+//            networkTask.execute();
+//        }
 
     }
 
