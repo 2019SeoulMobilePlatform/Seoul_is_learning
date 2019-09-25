@@ -62,7 +62,7 @@ public class EnterEditInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Constants.isLogined = false;
-                        finish(); // 현재 액티비티를 종료한다. (MainActivity에서 작동하기 때문에 애플리케이션을 종료한다.)
+                        finish(); // 현재 액티비티를 종료한다.
                     }
                 });
                 // "아니오" 버튼을 누르면 실행되는 리스너
