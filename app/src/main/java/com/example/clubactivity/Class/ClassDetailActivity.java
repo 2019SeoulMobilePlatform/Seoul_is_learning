@@ -237,5 +237,6 @@ public class ClassDetailActivity extends AppCompatActivity {
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);
         super.onBackPressed();
+        finish();
     }
 }

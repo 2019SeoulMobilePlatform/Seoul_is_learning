@@ -1,6 +1,5 @@
 package com.example.clubactivity.Class;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.clubactivity.AppManager;
+import com.example.clubactivity.Constants;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
@@ -76,11 +77,19 @@ public class ClassList extends Fragment {
         return view;
     }
 
-
     @Override
+    public void onStart() {
+        super.onStart();
+        String data = "local=" + ClassFragment.classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
+        String url = "http://106.10.35.170/ImportClassList.php";
+        NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
+        networkTask.execute();
+    }
+
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //액티비티 꺼졌을때..!
-    }
+    }*/
 
 
 }

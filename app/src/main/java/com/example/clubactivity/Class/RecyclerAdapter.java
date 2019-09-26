@@ -109,7 +109,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 intent.putExtra("number_now",item.getPeopleNumberNow()); //현재 인원수
                 intent.putExtra("number",item.getPeopleNumber()); //클래스 인원수
                 intent.putExtra("price",item.getPrice()); //가격
-                intent.putExtra("favorite", item.getFavorite());
+                intent.putExtra("favorite", item.getFavorite()); //찜
                 intent.putExtra("class_index",item.getClass_index()); //클래스 인덱스
 
 
