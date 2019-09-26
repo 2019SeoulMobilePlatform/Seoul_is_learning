@@ -76,6 +76,7 @@ public class ClassList extends Fragment {
         return view;
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //액티비티 꺼졌을때..!

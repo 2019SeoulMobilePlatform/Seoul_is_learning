@@ -130,6 +130,7 @@ public class ClassDetailActivity extends AppCompatActivity {
             heartImage.setImageResource(R.drawable.heart_empty);
     }
 
+
     //클래스 예약 버튼 클릭
     public void ClassReservationButtonClicked(View view){
 

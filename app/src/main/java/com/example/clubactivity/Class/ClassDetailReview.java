@@ -39,7 +39,6 @@ public class ClassDetailReview extends Fragment {
             @Override
             public void onClick(View view) {
 
-
                 //비로그인시
                 if(!Constants.isLogined){
                     Toast.makeText(getContext(), "로그인 후 작성 가능합니다.", Toast.LENGTH_SHORT).show();
@@ -64,6 +63,38 @@ public class ClassDetailReview extends Fragment {
         return view;
     }
 
+
+    //다시 시작했을때
+    @Override
+    public void onStart() {
+        super.onStart();
+        Button reviewButton = (Button)view.findViewById(R.id.class_review_button);
+        reviewButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //비로그인시
+                if(!Constants.isLogined){
+                    Toast.makeText(getContext(), "로그인 후 작성 가능합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //후기 작성판단
+                String url = "http://106.10.35.170/ImportMyClass.php";
+                String data = "email=" + AppManager.getInstance().getEmail();
+                networkTask = new NetworkTask(getContext(), url, data, 7777);
+                networkTask.execute();
+
+            }
+        });
+
+        //리뷰 서버에서 가져오기
+        String data = "class_index=" + ClassDetailActivity.class_index;
+        String url = "http://106.10.35.170/ImportReviewList.php";
+        NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_REVIEW_GET);
+        networkTask.execute();
+
+    }
 
     // 리뷰페이지 설정하는 메소드
     public void setReviewPage() {

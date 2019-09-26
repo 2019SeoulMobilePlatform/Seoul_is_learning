@@ -242,6 +242,8 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
         ShowClassList();
     }
 
+
+
     public void ShowClassList(){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -122,6 +122,7 @@ public class MyPageFragment extends Fragment {
         return view;
     }
 
+
 //    private void getImages(){
 //        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 //
@@ -210,6 +211,7 @@ public class MyPageFragment extends Fragment {
 //        }
 
     }
+
 
     @Override
     public void onResume() {

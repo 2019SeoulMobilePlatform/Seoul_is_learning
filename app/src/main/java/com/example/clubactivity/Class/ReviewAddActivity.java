@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clubactivity.AppManager;
+import com.example.clubactivity.Constants;
+import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
 
 
@@ -46,11 +48,11 @@ public class ReviewAddActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(getApplicationContext(),"후기 글을 작성해주세요", Toast.LENGTH_SHORT).show();
                 } else{
 
-                    /*네트워크 연결
-                    String url = "";
-                    data = getData();
-                    NetworkTask networkTask = new NetworkTask(ReviewAddActivity.this, url, data, Constant.SERVER_CLASS_ADD_REVIEW);
-                    networkTask.execute();*/
+                    //네트워크 연결
+                    String url = "http://106.10.35.170/AddReview.php";
+                    String data = getData();
+                    NetworkTask networkTask = new NetworkTask(ReviewAddActivity.this, url, data, Constants.SERVER_CLASS_ADD_REVIEW);
+                    networkTask.execute();
 
                     finish();
                 }
