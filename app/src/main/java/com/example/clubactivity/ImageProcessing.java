@@ -24,7 +24,7 @@ public class ImageProcessing {
         this.context = context;
     }
 
-    public void SetImage(ImageView imageView, Uri imgUri){
+    public Bitmap SetImage(ImageView imageView, Uri imgUri){
         String[] filePath = { MediaStore.Images.Media.DATA };
         Cursor cursor = context.getContentResolver().query(imgUri, filePath, null, null, null);
         cursor.moveToFirst();
@@ -43,6 +43,7 @@ public class ImageProcessing {
         matrix.postRotate(exifDegree);
         image = Bitmap.createBitmap(image, 0, 0, image.getWidth(), image.getHeight(), matrix, true);
         imageView.setImageBitmap(image);
+        return image;
     }
 
 

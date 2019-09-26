@@ -353,8 +353,8 @@ public class AddClassActivity extends AppCompatActivity {
 
             ImageProcessing imageProcessing = new ImageProcessing(AddClassActivity.this);
             Uri imgUri = data.getData();
-            imageProcessing.SetImage(imageView, imgUri);
-            classImage = imageProcessing.ConvertUriToBitmap(imgUri);
+            classImage = imageProcessing.SetImage(imageView, imgUri);
+            //classImage = imageProcessing.ConvertUriToBitmap(imgUri);
         }
     }
 
