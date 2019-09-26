@@ -34,6 +34,7 @@ public class AddClubActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     Bitmap userImage;
+    Bitmap image_;
     EditText clubName;
     EditText clubDescription;
     Uri imgUri;
@@ -120,17 +121,17 @@ public class AddClubActivity extends AppCompatActivity {
                 Intent intent = new Intent();
 
                 //바이트 어레이로 이미지 전송
-                userImage = imageProcessing.ConvertUriToBitmap(imgUri);
+                //userImage = imageProcessing.ConvertUriToBitmap(imgUri);
 
                 String url = "http://106.10.35.170/StoreClub.php";
-                String data = getData(userImage, clubName.getText().toString(), clubDescription.getText().toString(), limitSpinner.getSelectedItem().toString(),
+                String data = getData(image_, clubName.getText().toString(), clubDescription.getText().toString(), limitSpinner.getSelectedItem().toString(),
                                         AppManager.getInstance().getEmail());
 
                 NetworkTask networkTask = new NetworkTask(AddClubActivity.this, url, data, 6);
                 networkTask.execute();
 
 
-                byte[] bytes = imageProcessing.ConvertBitmapToByteArray(userImage);
+                byte[] bytes = imageProcessing.ConvertBitmapToByteArray(image_);
 
                 intent.putExtra("BMP",bytes);
                 intent.putExtra("clubName", clubName.getText().toString());
@@ -171,7 +172,7 @@ public class AddClubActivity extends AppCompatActivity {
             */
 
             imgUri = data.getData();
-            imageProcessing.SetImage(imageView, imgUri);
+            image_ = imageProcessing.SetImage(imageView, imgUri);
         }
     }
 

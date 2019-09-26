@@ -195,8 +195,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
             CircleImageView imageView = findViewById(R.id.user_image);
             ImageProcessing imageProcessing = new ImageProcessing(EditMyInfoActivity.this);
             Uri imgUri = data.getData();
-            imageProcessing.SetImage(imageView, imgUri);
-            _userImage = imageProcessing.ConvertUriToBitmap(imgUri);
+            _userImage = imageProcessing.SetImage(imageView, imgUri);
+            //_userImage = imageProcessing.ConvertUriToBitmap(imgUri);
 
         }
     }
