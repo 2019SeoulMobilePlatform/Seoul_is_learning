@@ -322,10 +322,14 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
-                        JSONArray resultObjectArray = new JSONArray(real_result);
-                        if (!real_result.equals("fail")) {
+                        Log.d("a", "하나");
+                        Log.d("a",real_result);
+                        if (!real_result.equals("fail") && !real_result.equals("empty")) {
+                            Log.d("a", "둘");
                             JSONObject resultObject;
-                           if(resultObjectArray.length() != 0) {
+                            JSONArray resultObjectArray = new JSONArray(real_result);
+                            if(resultObjectArray.length() != 0) {
+                                Log.d("a", "셋");
                                for(int i = 0 ; i < resultObjectArray.length(); i++){
                                    resultObject = resultObjectArray.getJSONObject(i);
                                    //Bitmap image = ImageConverter.getImageToBitmap(resultObject.getString("image")) ;
@@ -412,6 +416,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                    }
                                }
                                else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                                   Log.d("a", "들어왔다");
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
                                    recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
                                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -429,11 +434,22 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
 
                            }
                         }
+                        else if(real_result.equals("empty") && selection == Constants.SERVER_GET_FAVORITE_CLASS){
+                            Log.d("a", "else if 들어왔다");
+                            RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
+                            recyclerView.setAdapter(new RecyclerViewAdapter(context, (ArrayList)items));
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+                            recyclerView.setLayoutManager(layoutManager);
+                            TextView noClass;
+                            noClass = (TextView) (((Activity) context).findViewById(R.id.text_no_favorite_class));
+                            noClass.setVisibility(View.VISIBLE);
+                        }
                         /*
                         else{
                             Toast.makeText(this.context, "클래스 내용이 존재하지 않습니다.", Toast.LENGTH_LONG).show();
                         }*/
                     } catch (Exception e) {
+                        Log.d("a", "캐치");
                         e.printStackTrace();
                     }
                     break;
