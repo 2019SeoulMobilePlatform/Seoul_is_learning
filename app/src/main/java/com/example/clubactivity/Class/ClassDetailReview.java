@@ -3,6 +3,7 @@ package com.example.clubactivity.Class;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,18 +34,17 @@ public class ClassDetailReview extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_fragment_review, container, false);
+        reviewList = (ListView) view.findViewById(R.id.class_review_listView);
 
         Button reviewButton = (Button)view.findViewById(R.id.class_review_button);
         reviewButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //비로그인시
                 if(!Constants.isLogined){
                     Toast.makeText(getContext(), "로그인 후 작성 가능합니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 //후기 작성판단
                 String url = "http://106.10.35.170/ImportMyClass.php";
                 String data = "email=" + AppManager.getInstance().getEmail();
@@ -59,6 +59,14 @@ public class ClassDetailReview extends Fragment {
         String url = "http://106.10.35.170/ImportReviewList.php";
         NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_REVIEW_GET);
         networkTask.execute();
+
+        reviewList.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                reviewList.requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+
+        });
 
         return view;
     }
