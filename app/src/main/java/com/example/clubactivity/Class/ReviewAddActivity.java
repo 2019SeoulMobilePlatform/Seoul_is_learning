@@ -54,6 +54,8 @@ public class ReviewAddActivity extends AppCompatActivity implements View.OnClick
                     NetworkTask networkTask = new NetworkTask(ReviewAddActivity.this, url, data, Constants.SERVER_CLASS_ADD_REVIEW);
                     networkTask.execute();
 
+
+
                     finish();
                 }
         }

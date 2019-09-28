@@ -76,7 +76,7 @@ public class ClassDetailReview extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Button reviewButton = (Button)view.findViewById(R.id.class_review_button);
+        /*Button reviewButton = (Button)view.findViewById(R.id.class_review_button);
         reviewButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,7 @@ public class ClassDetailReview extends Fragment {
                 networkTask = new NetworkTask(getContext(), url, data, 7777);
                 networkTask.execute();
             }
-        });
+        });*/
         //리뷰 서버에서 가져오기
         String data = "class_index=" + ClassDetailActivity.class_index;
         String url = "http://106.10.35.170/ImportReviewList.php";

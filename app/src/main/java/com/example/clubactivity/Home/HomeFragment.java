@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment implements DatePickerListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home, container, false);
         classList = new ClassList();
-
         //데이트영역
         // find the picker
         HorizontalPicker picker = (HorizontalPicker) view.findViewById(R.id.datePicker);

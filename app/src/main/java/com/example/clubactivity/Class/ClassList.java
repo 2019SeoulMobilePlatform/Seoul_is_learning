@@ -80,8 +80,31 @@ public class ClassList extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        String data = "local=" + ClassFragment.classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
-        String url = "http://106.10.35.170/ImportClassList.php";
+        String data=null;
+        String url=null;
+
+        if(ClassFragment.classmenuTitle == "추천 클래스") {
+            data = "email=" + AppManager.getInstance().getEmail();
+            url = "http://106.10.35.170/ImportRecommandClassList.php";
+        }
+        else if(ClassFragment.classmenuTitle == "원데이 클래스" ){
+            data = "email=" + AppManager.getInstance().getEmail();
+            url = "http://106.10.35.170/ImportOneDayClassList.php";
+        }
+        else if(ClassFragment.classmenuTitle == "개발 클래스"){
+            data = "email=" + AppManager.getInstance().getEmail();
+            url = "http://106.10.35.170/ImportDevelopmentClassList.php";
+        }
+        else if(ClassFragment.updateFlag==2){
+            data = "local=" + ClassFragment.classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
+            url = "http://106.10.35.170/ImportClassList.php";
+        }
+        else if(ClassFragment.updateFlag==1){
+            data = "word=" + ClassFragment.classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
+            url = "http://106.10.35.170/SearchClassList.php";
+        }
+        else
+            return;
         NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
         networkTask.execute();
     }
