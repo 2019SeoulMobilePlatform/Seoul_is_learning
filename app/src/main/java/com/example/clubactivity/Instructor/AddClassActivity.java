@@ -309,16 +309,21 @@ public class AddClassActivity extends AppCompatActivity {
 
                 //바이트 어레이로 이미지 전송
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                classImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] bytes = stream.toByteArray();
-                intent.putExtra("BMP",bytes);
 
-                //intent.putExtra("clubImage", userImage);
-                intent.putExtra("className", className.getText().toString());
-                intent.putExtra("classDescription", classDescription.getText().toString());
-                intent.putExtra("classMaxMember", Integer.parseInt(classLimit.getSelectedItem().toString()));
+                classImage = Bitmap.createScaledBitmap(classImage, Constants.IMAGE_SIZE, classImage.getHeight()/(classImage.getWidth()/Constants.IMAGE_SIZE), true);
 
-                setResult(RESULT_OK, intent);
+                classImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+
+//                byte[] bytes = stream.toByteArray();
+//                intent.putExtra("BMP",bytes);
+//
+//                //intent.putExtra("clubImage", userImage);
+//                intent.putExtra("className", className.getText().toString());
+//                intent.putExtra("classDescription", classDescription.getText().toString());
+//                intent.putExtra("classMaxMember", Integer.parseInt(classLimit.getSelectedItem().toString()));
+//
+//                setResult(RESULT_OK, intent);
 
                 String url = "http://106.10.35.170/StoreClass.php";
                 String data = getData(classImage, className.getText().toString(), classDescription.getText().toString(), classPrice.getText().toString(),
@@ -327,6 +332,7 @@ public class AddClassActivity extends AppCompatActivity {
 
                 NetworkTask networkTask = new NetworkTask(AddClassActivity.this, url, data, Constants.SERVER_CLASS_ADD_CLASS);
                 networkTask.execute();
+
 
                 AddClassActivity.this.finish();
             }
