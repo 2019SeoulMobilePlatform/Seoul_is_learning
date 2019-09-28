@@ -1,6 +1,8 @@
 package com.example.clubactivity.Login;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -61,7 +63,6 @@ public class SignUpActivity extends AppCompatActivity {
                 if(inputEmail.getText().toString().isEmpty())
                     return;
 
-
                 String url =null;
                 String getMode = getIntent().getStringExtra("Mode");
                 if(getMode.equals("User")) {
@@ -73,6 +74,20 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.d("으아아아",url);
                 NetworkTask networkTask = new NetworkTask(SignUpActivity.this, url, data, Constants.SERVER_CHECK_DUPLICATE_EMAIL, checkEmailbtn);
                 networkTask.execute();
+            }
+        });
+
+        inputEmail.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {            }
+
+            @Override
+            public void afterTextChanged(Editable edit) {
+                checkEmailbtn.setEnabled(true);
             }
         });
 
