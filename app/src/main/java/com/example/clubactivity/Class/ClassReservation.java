@@ -65,6 +65,7 @@ public class ClassReservation extends Activity {
         NetworkTask networkTask = new NetworkTask(ClassReservation.this, url, data, Constants.SERVER_CLASS_RESERVATION);
         networkTask.execute();
 
+
         finish();
     }
 

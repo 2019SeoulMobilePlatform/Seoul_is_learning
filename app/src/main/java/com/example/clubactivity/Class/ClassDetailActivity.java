@@ -46,6 +46,8 @@ public class ClassDetailActivity extends AppCompatActivity {
     static public String price;
     static public String class_index;
     static public boolean favorite;
+    static public float star;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         //별점
         RatingBar ratingBar = findViewById(R.id.review_total_star);
+        star = getIntent().getFloatExtra("star", 5);
         ratingBar.setRating(getIntent().getFloatExtra("star", 5));
 
 
@@ -95,8 +98,6 @@ public class ClassDetailActivity extends AppCompatActivity {
         //탭
 
         tabLayout = findViewById(R.id.class_tabs);
-       // tabLayout.addTab(tabLayout.newTab().setText("Tab one"));
-       // tabLayout.addTab(tabLayout.newTab().setText("Tab two"));
 
         viewPager = findViewById(R.id.container_class);
 
@@ -179,9 +180,9 @@ public class ClassDetailActivity extends AppCompatActivity {
 
         intent.putExtra("class_index", getIntent().getIntExtra("class_index",0)); //클래스인덱스뿌리기
 
-
         startActivity(intent);
     }
+
 
     //클래스 찜 버튼 클릭
     public void ClassHeartButtonClicked(View view){
@@ -225,10 +226,19 @@ public class ClassDetailActivity extends AppCompatActivity {
 
     }
 
+    //후기 작성후 별점 바로 반영
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //별점 바로 반영
+        String url = "http://106.10.35.170/ImportMyClass.php";
+        String data = "email=" + AppManager.getInstance().getEmail();
+        NetworkTask networkTask = new NetworkTask(ClassDetailActivity.this, url, data, 7778);
+        networkTask.execute();
+    }
+
     public String getData(int class_index, String email){
-
         String data = "class_index=" + class_index + "&email=" + email;
-
         return data;
     }
 

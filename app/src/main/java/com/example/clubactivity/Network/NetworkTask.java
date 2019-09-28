@@ -319,6 +319,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                 case Constants.SERVER_GET_FAVORITE_CLASS:
                 case 960113:
                 case 7777:
+                case 7778:
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         String real_result = jsonObject.getString("result");
@@ -368,6 +369,17 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                                asyncDialog.dismiss();
                                            }
                                            return;
+                                       }
+                                   }
+                                   //별점짱
+                                   if(selection == 7778){
+                                       if(ClassDetailActivity.class_index.equals(String.valueOf(class_index)))
+                                       {
+                                           ClassDetailActivity.star = star;
+                                           Log.d("별점", String.valueOf(star));
+                                           Log.d("별점2", String.valueOf(ClassDetailActivity.star));
+                                           RatingBar ratingBar =  ((Activity) context).findViewById(R.id.review_total_star);
+                                           ratingBar.setRating(star);
                                        }
                                    }
                                }
@@ -580,6 +592,10 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                         String real_result = jsonObject.getString("result");
                         if (real_result.equals("success")) {
                             Toast.makeText(this.context, "예약되었습니다.", Toast.LENGTH_LONG).show();
+                            int numberClass = Integer.parseInt(ClassDetailActivity.number_now) +1;
+                            ClassDetailActivity.number_now = String.valueOf(numberClass);
+                            Log.d("인원", String.valueOf(numberClass));
+                            Log.d("인원2",ClassDetailActivity.number_now);
                         } else {
                             Toast.makeText(this.context, "예약 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }

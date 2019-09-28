@@ -30,6 +30,7 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
 
     private View view;
     public static String classmenuTitle;
+    public static int updateFlag=0;
     private ClassList classList;
     EditText searchBar;
     TextView area;
@@ -119,6 +120,7 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                 }
                 else {
                     classmenuTitle = searchText;
+                    updateFlag = 1;
 
                     String data = "word=" + classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
                     String url = "http://106.10.35.170/SearchClassList.php";
@@ -232,7 +234,7 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                 break;
         }
 
-
+        updateFlag=2;
         String data = "local=" + classmenuTitle + "&email=" + AppManager.getInstance().getEmail();
 
         String url = "http://106.10.35.170/ImportClassList.php";

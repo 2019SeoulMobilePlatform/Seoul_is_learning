@@ -1,6 +1,7 @@
 package com.example.clubactivity.Class;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,5 +50,13 @@ public class ClassDetailIntroduction extends Fragment {
         }*/
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        TextView textView7 = view.findViewById(R.id.class_people_number_intent_now); //현재 인원
+        textView7.setText("현재 인원 : "+ClassDetailActivity.number_now+"명");
+        Log.d("리얼인원", (String) textView7.getText());
     }
 }
