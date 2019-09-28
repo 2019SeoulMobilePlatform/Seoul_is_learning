@@ -11,13 +11,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.example.clubactivity.Class.Item;
 import com.example.clubactivity.R;
 
 import java.util.ArrayList;
 
-public class ChatViewAdapter extends BaseAdapter {
+public class ChatViewAdapter extends BaseAdapter implements Cloneable{
     public ArrayList<ChatViewItem> chatViewItemList;
+
+    @NonNull
+    @Override
+    public  Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     // ChatViewAdapter의 생성자
     public ChatViewAdapter() {
