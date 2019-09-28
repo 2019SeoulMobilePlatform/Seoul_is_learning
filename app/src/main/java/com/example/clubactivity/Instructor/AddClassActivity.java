@@ -91,10 +91,6 @@ public class AddClassActivity extends AppCompatActivity {
 
 //                Date currentTime = Calendar.getInstance().getTime();
                 Locale locale = new Locale("ko", "KR");
-////                SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
-////                SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
-////                SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
-//
                 SimpleDateFormat dayFormat = new SimpleDateFormat("dd", locale);
                 dayFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
                 SimpleDateFormat monthFormat = new SimpleDateFormat("MM", locale);
@@ -137,26 +133,6 @@ public class AddClassActivity extends AppCompatActivity {
 //                ArrayList<Integer> longMonths = new ArrayList<>();
 //                longMonths.addAll(Arrays.asList(1,3,5,7,8,10,12));
 //
-//                if( longMonths.contains(curMonth) && curDay == 31){
-//                    curDay = 1;
-//                    if(curMonth == 12) {
-//                        curMonth = 1;
-//                        curYear++;
-//                    }
-//                    else
-//                        curMonth++;
-//                }
-//                else if( !longMonths.contains(curMonth) && curDay == 30){
-//                    curDay = 1;
-//                    curMonth++;
-//                }
-//                else if( curMonth == 2 && curDay == 28){
-//                    curDay = 1;
-//                    curMonth++;
-//                }
-//                else{
-//                    curDay++;
-//                }
 
                 Log.d("a", curMonth+"/"+curDay);
 
