@@ -18,7 +18,7 @@
         <!-- 별점 -->
         <RatingBar
             android:id="@+id/star_ratingbar"
-            android:progressTint="@color/colorPrimary"
+            android:progressTint="#F5D750"
             android:progressBackgroundTint="@color/grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

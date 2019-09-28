@@ -109,7 +109,7 @@
                         android:id="@+id/review_total_star"
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_marginRight="10dp"
-                        android:progressTint="@color/colorPrimary"
+                        android:progressTint="#F5D750"
                         android:progressBackgroundTint="@color/grey"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
