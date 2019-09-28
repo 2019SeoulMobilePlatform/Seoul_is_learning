@@ -34,7 +34,7 @@
 
             <RatingBar
                 android:id="@+id/review_star"
-                android:progressTint="@color/colorPrimary"
+                android:progressTint="#F5D750"
                 android:progressBackgroundTint="@color/grey"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
