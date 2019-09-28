@@ -111,7 +111,7 @@
             <EditText android:id="@+id/input_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPhonetic"
+                android:inputType="number"
                 android:hint="핸드폰 번호 (- 제외)" />
         </com.google.android.material.textfield.TextInputLayout>
 

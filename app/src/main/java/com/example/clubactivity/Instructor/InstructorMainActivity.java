@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,6 +31,12 @@ import com.example.clubactivity.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -136,20 +143,31 @@ public class InstructorMainActivity extends AppCompatActivity {
                         ChatViewItem item = ((ChatViewItem)instructorClassAdapter.getItem(position));
                         //instructorClassAdapter.removeItem(position);
 
-                        if( item.getNowMemberNum() == 0 ) {
+                        long now = System.currentTimeMillis();
+                        Date dateNow = new Date(now);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+                        String getTime = sdf.format(dateNow);
+                        String classTime = item.getDate().replace("/", "");
+                        classTime = classTime.replace(" ", "");
+                        classTime = classTime.replace(":", "");
+
+                        Log.d(getTime.toString(), classTime.toString() + "     미아ㅓㅇㅁ런이말");
+                        Log.d("밍나러", item.getPeopleNumberNow());
+                        //예약자가 없고 수강 날짜가 지나지 않았다면
+                        if( Integer.parseInt(item.getPeopleNumberNow()) != 0 && Long.parseLong(getTime) < Long.parseLong(classTime)) {
+                            Toast.makeText(InstructorMainActivity.this, "예약자가 있는 클래스는 삭제할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
                             String url = "http://106.10.35.170/DeleteClass.php";
                             String dataStr = "email=" + preferences.getString("email", "") + "&class_index=" + item.getClass_index();
                             NetworkTask networkTask = new NetworkTask(InstructorMainActivity.this, url, dataStr, Constants.SERVER_DELETE_CLASS);
                             networkTask.execute();
                             instructorClassAdapter.removeItem(position);
-
-                        }
-                        else {
-                            Toast.makeText(InstructorMainActivity.this, "예약자가 있는 클래스는 삭제할 수 없습니다.", Toast.LENGTH_SHORT);
                         }
                         instructorClassAdapter.notifyDataSetChanged();
                     }
                 };
+
                 DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

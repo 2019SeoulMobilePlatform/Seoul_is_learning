@@ -162,7 +162,7 @@ public class ClassDetailActivity extends AppCompatActivity {
             Log.d("클래스", classTime);
             //수강시간이 지났다면
             if (Long.parseLong(getTime) >= Long.parseLong(classTime)) {
-                Toast.makeText(ClassDetailActivity.this, "수강날이 지난 클래스입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClassDetailActivity.this, "수강일이 지난 클래스입니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
         }

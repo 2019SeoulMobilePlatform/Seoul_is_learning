@@ -91,10 +91,6 @@ public class AddClassActivity extends AppCompatActivity {
 
 //                Date currentTime = Calendar.getInstance().getTime();
                 Locale locale = new Locale("ko", "KR");
-////                SimpleDateFormat dayFormat = new SimpleDateFormat("dd", Locale.getDefault());
-////                SimpleDateFormat monthFormat = new SimpleDateFormat("MM", Locale.getDefault());
-////                SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy", Locale.getDefault());
-//
                 SimpleDateFormat dayFormat = new SimpleDateFormat("dd", locale);
                 dayFormat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
                 SimpleDateFormat monthFormat = new SimpleDateFormat("MM", locale);
@@ -137,26 +133,6 @@ public class AddClassActivity extends AppCompatActivity {
 //                ArrayList<Integer> longMonths = new ArrayList<>();
 //                longMonths.addAll(Arrays.asList(1,3,5,7,8,10,12));
 //
-//                if( longMonths.contains(curMonth) && curDay == 31){
-//                    curDay = 1;
-//                    if(curMonth == 12) {
-//                        curMonth = 1;
-//                        curYear++;
-//                    }
-//                    else
-//                        curMonth++;
-//                }
-//                else if( !longMonths.contains(curMonth) && curDay == 30){
-//                    curDay = 1;
-//                    curMonth++;
-//                }
-//                else if( curMonth == 2 && curDay == 28){
-//                    curDay = 1;
-//                    curMonth++;
-//                }
-//                else{
-//                    curDay++;
-//                }
 
                 Log.d("a", curMonth+"/"+curDay);
 
@@ -309,16 +285,21 @@ public class AddClassActivity extends AppCompatActivity {
 
                 //바이트 어레이로 이미지 전송
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                classImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] bytes = stream.toByteArray();
-                intent.putExtra("BMP",bytes);
 
-                //intent.putExtra("clubImage", userImage);
-                intent.putExtra("className", className.getText().toString());
-                intent.putExtra("classDescription", classDescription.getText().toString());
-                intent.putExtra("classMaxMember", Integer.parseInt(classLimit.getSelectedItem().toString()));
+                classImage = Bitmap.createScaledBitmap(classImage, Constants.IMAGE_SIZE, classImage.getHeight()/(classImage.getWidth()/Constants.IMAGE_SIZE), true);
 
-                setResult(RESULT_OK, intent);
+                classImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+
+//                byte[] bytes = stream.toByteArray();
+//                intent.putExtra("BMP",bytes);
+//
+//                //intent.putExtra("clubImage", userImage);
+//                intent.putExtra("className", className.getText().toString());
+//                intent.putExtra("classDescription", classDescription.getText().toString());
+//                intent.putExtra("classMaxMember", Integer.parseInt(classLimit.getSelectedItem().toString()));
+//
+//                setResult(RESULT_OK, intent);
 
                 String url = "http://106.10.35.170/StoreClass.php";
                 String data = getData(classImage, className.getText().toString(), classDescription.getText().toString(), classPrice.getText().toString(),
@@ -327,6 +308,7 @@ public class AddClassActivity extends AppCompatActivity {
 
                 NetworkTask networkTask = new NetworkTask(AddClassActivity.this, url, data, Constants.SERVER_CLASS_ADD_CLASS);
                 networkTask.execute();
+
 
                 AddClassActivity.this.finish();
             }

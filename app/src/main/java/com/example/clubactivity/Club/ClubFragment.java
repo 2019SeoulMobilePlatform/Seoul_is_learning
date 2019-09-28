@@ -44,6 +44,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.ByteArrayOutputStream;
 import java.util.Locale;
 
+import cz.msebera.android.httpclient.client.utils.CloneUtils;
+
 public class  ClubFragment extends Fragment {
     private View view;
     FloatingActionButton fab;
@@ -55,9 +57,11 @@ public class  ClubFragment extends Fragment {
     private EditText searchBar;
     NetworkTask networkTask;
     SharedPreferences preferences;
+    ChatViewAdapter tempAdapter;
+    ListView tempListView;
+    static int searchCount;
 
     public ClubFragment(){
-
         /*
         Log.d("dd", "생성");
 
@@ -82,7 +86,7 @@ public class  ClubFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.club, null);
-
+        searchCount = 0;
         final TabHost tabHost1 = (TabHost) view.findViewById(R.id.tapHost_chatlist) ;
         tabHost1.setup() ;
 
@@ -101,13 +105,15 @@ public class  ClubFragment extends Fragment {
         // Adapter 생성
         myClub_adapter = new ChatViewAdapter() ;
         searchClub_adapter = new ChatViewAdapter();
-        wholeClub_adapter = new ChatViewAdapter();
+        //wholeClub_adapter = new ChatViewAdapter();
 
         // 리스트뷰 참조 및 Adapter달기
         myClub_Listview = (ListView) view.findViewById(R.id.myclub_listview);
         //myClub_Listview.setAdapter(myClub_adapter);
         wholeClub_ListView = (ListView) view.findViewById(R.id.wholeclub_listview);
         //wholeClub_ListView.setAdapter(wholeClub_adapter);
+        tempListView = (ListView) view.findViewById(R.id.tempListView);
+        tempListView.setVisibility(View.GONE);
 
         /*
         String email = AppManager.getInstance().getEmail();
@@ -197,11 +203,17 @@ public class  ClubFragment extends Fragment {
             public void afterTextChanged(Editable edit) {
                 String text = searchBar.getText().toString().toLowerCase(Locale.getDefault());
                 //내가 소속되지 않은 동호회 리스트 검색
+                wholeClub_adapter = (ChatViewAdapter)wholeClub_ListView.getAdapter();
+                if(searchCount == 0)
+                    tempListView.setAdapter(wholeClub_adapter);
+                searchCount++;
                 wholeClub_ListView.setAdapter(searchClub_adapter);
                 searchClub_adapter.removeAllItem();
+                Log.d("a", "들어가기전");
 
                 if (searchBar.length() == 0) {
-                    wholeClub_ListView.setAdapter(wholeClub_adapter);
+                    Log.d("a", "텍스트없음");
+                    wholeClub_ListView.setAdapter(tempListView.getAdapter());
                     // 문자 입력이 없을때는 모든 데이터를 보여준다.
                     //for (ChatViewItem mItem : wholeClub_adapter.chatViewItemList) {
                     //    searchClub_adapter.addItem(mItem);
@@ -210,12 +222,14 @@ public class  ClubFragment extends Fragment {
                 // 문자 입력을 할때..
                 else {
                     // 리스트의 모든 데이터를 검색한다.
-                    for (int i = 0; i < wholeClub_adapter.chatViewItemList.size(); i++) {
+                    tempAdapter = (ChatViewAdapter)tempListView.getAdapter();
+                    Log.d("a", tempAdapter.getChatViewItemList().size()+"");
+                    for (int i = 0; i < tempAdapter.chatViewItemList.size(); i++) {
                         // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                        if (((ChatViewItem)wholeClub_adapter.getItem(i)).getTitle().toLowerCase().contains(text) ||
-                                ((ChatViewItem)wholeClub_adapter.getItem(i)).getDesc().toLowerCase().contains(text)) {
+                        if (((ChatViewItem)tempAdapter.getItem(i)).getTitle().toLowerCase().contains(text) ||
+                                ((ChatViewItem)tempAdapter.getItem(i)).getDesc().toLowerCase().contains(text)) {
                             // 검색된 데이터를 리스트에 추가한다.
-                            searchClub_adapter.addItem((ChatViewItem)wholeClub_adapter.getItem(i));
+                            searchClub_adapter.addItem((ChatViewItem)tempAdapter.getItem(i));
                         }
                     }
                 }
@@ -266,6 +280,7 @@ public class  ClubFragment extends Fragment {
                         url = "http://106.10.35.170/ImportClubList.php";
                         networkTask = new NetworkTask(getContext(), url, data_email, Constants.GET_WHOLECLUBLIST);
                         networkTask.execute();
+
                         wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
 
                         url = "http://106.10.35.170/ImportMyClubList.php";
@@ -313,6 +328,7 @@ public class  ClubFragment extends Fragment {
             //Toast.makeText(getActivity() , "액티비티종료",Toast.LENGTH_LONG).show();
 
             myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
+
             wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
 
             byte[] bytes = data.getByteArrayExtra("BMP");
@@ -342,6 +358,7 @@ public class  ClubFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        searchCount = 0;
         String email = AppManager.getInstance().getEmail();
         String data = "email=" + email;
         Log.d("dd", "리쥼");
@@ -357,6 +374,11 @@ public class  ClubFragment extends Fragment {
         networkTask.execute();
 
         wholeClub_adapter = (ChatViewAdapter) wholeClub_ListView.getAdapter();
+//        if(wholeClub_adapter == null)
+//            Log.d("adfa","어뎁터널");
+//        for(int i=0; i< ((ChatViewAdapter) wholeClub_ListView.getAdapter()).getChatViewItemList().size(); i++){
+//            wholeClub_adapter.addItem((ChatViewItem)((ChatViewAdapter) wholeClub_ListView.getAdapter()).getItem(i));
+//        }
         myClub_adapter = (ChatViewAdapter) myClub_Listview.getAdapter();
     }
     @Override
