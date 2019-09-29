@@ -141,8 +141,8 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "이메일 중복 검사를 진행해 주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (!AppManager.getInstance().isVailStr(password) || AppManager.getInstance().isVailStr(nickname) ||
-                        !AppManager.getInstance().isVailStr(inputName.getText().toString()) || AppManager.getInstance().isVailStr(email)){
+                if (!AppManager.getInstance().isVailStr(password) || !AppManager.getInstance().isVailStr(nickname) ||
+                        !AppManager.getInstance().isVailStr(inputName.getText().toString()) || !AppManager.getInstance().isVailStr(email)){
                     Toast.makeText(SignUpActivity.this, "일부 특수문자는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }
