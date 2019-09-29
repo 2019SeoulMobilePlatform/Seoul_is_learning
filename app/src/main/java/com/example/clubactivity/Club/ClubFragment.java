@@ -206,6 +206,11 @@ public class  ClubFragment extends Fragment {
                 wholeClub_adapter = (ChatViewAdapter)wholeClub_ListView.getAdapter();
                 if(searchCount == 0)
                     tempListView.setAdapter(wholeClub_adapter);
+                if(wholeClub_adapter == null)
+                    Log.d("ㅁ","홀클럽어뎁터 널");
+                if(tempListView.getAdapter() == null)
+                    Log.d("ㅁ", "템프리스트어뎁터 널");
+
                 searchCount++;
                 wholeClub_ListView.setAdapter(searchClub_adapter);
                 searchClub_adapter.removeAllItem();
@@ -448,5 +453,9 @@ public class  ClubFragment extends Fragment {
     }
     */
 
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        searchBar.setText("");
+    }
 }

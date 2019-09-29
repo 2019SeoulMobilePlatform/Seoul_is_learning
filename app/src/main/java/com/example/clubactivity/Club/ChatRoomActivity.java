@@ -119,7 +119,11 @@ public class ChatRoomActivity extends AppCompatActivity{
                 try {
                     jsonObject.put("room_index", room_index);
                     jsonObject.put("email", AppManager.getInstance().getEmail());
-                    jsonObject.put("message", messageTextView.getText().toString());
+                    String message = messageTextView.getText().toString();
+                    message = message.replace("'","\\'");
+
+                    Log.d("제이슨 메세지", message);
+                    jsonObject.put("message", message);
                     jsonObject.put("message_image", null);
                     String data = jsonObject.toString();
 
@@ -353,9 +357,10 @@ public class ChatRoomActivity extends AppCompatActivity{
                         Bitmap profile = ImageConverter.getReplaceRegexToBitmap(resultObject.getString("profile"));
                         String nickname = resultObject.getString("nickname");
                         String user_id = resultObject.getString("email");
+
                         if (resultObject.isNull("image")) {
                             String message = resultObject.getString("message");
-
+                            message = message.replace("\'","'");
                             adapter = (MessageListAdapter)listview.getAdapter();
                             adapter.addItem(message, 1, user_id, nickname, profile);
                         } else {
@@ -395,6 +400,7 @@ public class ChatRoomActivity extends AppCompatActivity{
         public SendMSGThread(String msg, Socket socket){
             this.socket = socket;
             this.msg = msg;
+            Log.d("메세지", msg);
             try{
                 Log.e("SendMsgThread", "enter");
                 out = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream(), "utf-8"), true);

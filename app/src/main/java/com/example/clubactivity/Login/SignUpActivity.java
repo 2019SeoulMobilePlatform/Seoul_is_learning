@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.Instructor.AddClassActivity;
 import com.example.clubactivity.Network.NetworkTask;
@@ -108,7 +109,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(email.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputName.getText().toString()).matches()){
+                if(email.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Toast.makeText(SignUpActivity.this, "이메일이 형식에 맞지 않습니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -138,6 +139,11 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if(checkEmailbtn.isEnabled()){
                     Toast.makeText(SignUpActivity.this, "이메일 중복 검사를 진행해 주세요.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (!AppManager.getInstance().isVailStr(password) || AppManager.getInstance().isVailStr(nickname) ||
+                        !AppManager.getInstance().isVailStr(inputName.getText().toString()) || AppManager.getInstance().isVailStr(email)){
+                    Toast.makeText(SignUpActivity.this, "일부 특수문자는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -600,7 +600,11 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             ClassDetailActivity.number_now = String.valueOf(numberClass);
                             Log.d("인원", String.valueOf(numberClass));
                             Log.d("인원2",ClassDetailActivity.number_now);
-                        } else {
+                        }
+                        else if(real_result.equals("already")){
+                            Toast.makeText(this.context, "이미 예약한 클래스입니다.", Toast.LENGTH_LONG).show();
+                        }
+                        else {
                             Toast.makeText(this.context, "예약 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     } catch (Exception e) {
