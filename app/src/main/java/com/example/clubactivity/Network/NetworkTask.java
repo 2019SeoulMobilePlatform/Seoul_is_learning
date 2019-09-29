@@ -376,8 +376,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                        if(ClassDetailActivity.class_index.equals(String.valueOf(class_index)))
                                        {
                                            ClassDetailActivity.star = star;
-                                           Log.d("별점", String.valueOf(star));
-                                           Log.d("별점2", String.valueOf(ClassDetailActivity.star));
                                            RatingBar ratingBar =  ((Activity) context).findViewById(R.id.review_total_star);
                                            ratingBar.setRating(star);
                                        }
@@ -598,8 +596,6 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             Toast.makeText(this.context, "예약되었습니다.", Toast.LENGTH_LONG).show();
                             int numberClass = Integer.parseInt(ClassDetailActivity.number_now) +1;
                             ClassDetailActivity.number_now = String.valueOf(numberClass);
-                            Log.d("인원", String.valueOf(numberClass));
-                            Log.d("인원2",ClassDetailActivity.number_now);
                         }
                         else if(real_result.equals("already")){
                             Toast.makeText(this.context, "이미 예약한 클래스입니다.", Toast.LENGTH_LONG).show();

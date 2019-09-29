@@ -77,7 +77,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("area",item.getArea());
                 intent.putExtra("star",item.getStar()); //평점 뿌리기
 
-
                 ((Activity) mContext).startActivityForResult(intent, Constants.REQUEST_ENTER_CLASS_DETAIL);
             }
         });

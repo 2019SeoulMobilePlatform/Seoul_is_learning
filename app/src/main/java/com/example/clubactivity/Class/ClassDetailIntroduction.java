@@ -1,7 +1,6 @@
 package com.example.clubactivity.Class;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,28 +34,13 @@ public class ClassDetailIntroduction extends Fragment {
         TextView textView6 = view.findViewById(R.id.class_people_number_intent);//인원
         textView6.setText("모집 인원 : "+ClassDetailActivity.number +"명");
 
-
-        /*if(getArguments() != null) {
-            TextView textView2 = view.findViewById(R.id.class_sogae_intent);//소개
-            textView2.setText("");
-            TextView textView3 = view.findViewById(R.id.class_member_intent);//대상
-            textView3.setText(getArguments().getString("people"));
-            TextView textView4 = view.findViewById(R.id.class_location_intent);//장소
-            textView4.setText(getArguments().getString("location"));
-            TextView textView5 = view.findViewById(R.id.class_time_intent);//시간
-            textView5.setText(getArguments().getString("date"));
-            TextView textView6 = view.findViewById(R.id.class_people_number_intent);//인원
-            textView6.setText(getArguments().getString("number"));
-        }*/
-
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        TextView textView7 = view.findViewById(R.id.class_people_number_intent_now); //현재 인원
-        textView7.setText("현재 인원 : "+ClassDetailActivity.number_now+"명");
-        Log.d("리얼인원", (String) textView7.getText());
+            TextView textView7 = view.findViewById(R.id.class_people_number_intent_now); //현재 인원
+            textView7.setText("현재 인원 : " + ClassDetailActivity.number_now + "명");
     }
 }

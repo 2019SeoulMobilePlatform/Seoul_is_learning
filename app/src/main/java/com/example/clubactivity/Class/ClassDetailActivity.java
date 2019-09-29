@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +82,6 @@ public class ClassDetailActivity extends AppCompatActivity {
         star = getIntent().getFloatExtra("star", 5);
         ratingBar.setRating(getIntent().getFloatExtra("star", 5));
 
-
         desc = getIntent().getStringExtra("desc");
         people = getIntent().getStringExtra("people");
         location = getIntent().getStringExtra("location");
@@ -92,13 +90,10 @@ public class ClassDetailActivity extends AppCompatActivity {
         number = getIntent().getStringExtra("number");
         price = getIntent().getStringExtra("price");
         favorite = getIntent().getBooleanExtra("favorite", false);
-
         class_index = String.valueOf(getIntent().getIntExtra("class_index",0));
 
         //탭
-
         tabLayout = findViewById(R.id.class_tabs);
-
         viewPager = findViewById(R.id.container_class);
 
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -158,15 +153,12 @@ public class ClassDetailActivity extends AppCompatActivity {
             classTime = classTime.replace(" ", "");
             classTime = classTime.replace(":", "");
 
-            Log.d("지금", getTime);
-            Log.d("클래스", classTime);
             //수강시간이 지났다면
             if (Long.parseLong(getTime) >= Long.parseLong(classTime)) {
                 Toast.makeText(ClassDetailActivity.this, "수강일이 지난 클래스입니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-
 
         Intent intent = new Intent(getApplicationContext(), ClassReservation.class);
 
