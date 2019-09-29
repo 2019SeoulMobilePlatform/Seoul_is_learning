@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         final EditText inputName = (EditText)findViewById(R.id.input_name);
         final EditText inputEmail = (EditText)findViewById(R.id.input_email);
-        final EditText inputPassword = (EditText)findViewById(R.id.input_password_check);
+        final EditText inputPassword = (EditText)findViewById(R.id.input_password);
         final EditText inputPasswordCheck = (EditText)findViewById(R.id.input_password_check);
         final EditText inputNickName = (EditText)findViewById(R.id.input_nickname);
         final EditText inputPhone = (EditText)findViewById(R.id.input_phone);
@@ -109,7 +109,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(email.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                if(email.isEmpty()){
                     Toast.makeText(SignUpActivity.this, "이메일이 형식에 맞지 않습니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
