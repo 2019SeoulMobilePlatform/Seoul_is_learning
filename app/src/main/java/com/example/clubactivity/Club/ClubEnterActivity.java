@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -80,6 +81,12 @@ public class ClubEnterActivity extends AppCompatActivity {
         //서버 유저 동호회 목록에 추가, 내 동호회 목록은 서버에서 받아서 업데이트 해야할듯
         //TODO: 인텐트에서 넘어온 clubIndex 사용해서 서버 업데이트 할 것
         //서버업데이트는 하는데 자체적으로 리스트에 추가해주어야함
+        if(getIntent().getStringExtra("clubMaxMember") == null)
+            Log.d("널", "널");
+        if(Integer.parseInt(getIntent().getExtras().get("clubMaxMember").toString()) <= Integer.parseInt(getIntent().getExtras().get("clubNowMember").toString()) ) {
+            Toast.makeText(ClubEnterActivity.this, "동호회 제한 인원수를 초과하였습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String url = "http://106.10.35.170/JoinClub.php";
         String data = getData(AppManager.getInstance().getEmail(), room_index);
         NetworkTask networkTask = new NetworkTask(this,url,data, room_index,9);
