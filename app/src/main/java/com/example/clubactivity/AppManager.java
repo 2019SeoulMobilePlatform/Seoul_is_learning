@@ -1,9 +1,12 @@
 package com.example.clubactivity;
 
+import android.util.Log;
+
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
 import com.example.clubactivity.Club.MessageListAdapter;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class AppManager {
@@ -38,4 +41,15 @@ public class AppManager {
 //    public void setMessages(ArrayList<MessageListAdapter.MessageContents> messages) {this.messages = messages;}
 //    public ArrayList<MessageListAdapter.MessageContents> getMessages(){return messages;}
 
+    public String encodeString(String str){
+        Log.d("스트링", str);
+        if(str.contains("'"))
+            str.replace("'", "");
+
+        if(str.contains("&"))
+            str = URLEncoder.encode(str);
+
+        Log.d("스트링2", str);
+        return str;
+    }
 }

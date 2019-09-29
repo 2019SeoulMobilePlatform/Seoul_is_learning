@@ -18,11 +18,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.R;
-
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,7 +31,6 @@ public class MessageListAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<MessageContents> messages;
-
 
 
     public MessageListAdapter(Context context, ArrayList<MessageContents> messages){
