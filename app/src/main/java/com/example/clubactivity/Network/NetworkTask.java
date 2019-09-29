@@ -427,6 +427,7 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                        noClass.setVisibility(View.GONE);
                                    }
                                }
+
                                else if(selection == Constants.SERVER_GET_FAVORITE_CLASS){
                                    Log.d("a", "들어왔다");
                                    RecyclerView recyclerView = ((Activity) context).findViewById(R.id.favorite_recyclerView);
@@ -445,6 +446,9 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                                Toast.makeText(this.context, "해당 클래스가 아직 없습니다.", Toast.LENGTH_LONG).show();
 
                            }
+                        }
+                        if(selection == 7777){
+                            Toast.makeText(context, "후기는 클래스 예약 후 작성 가능합니다.", Toast.LENGTH_SHORT).show();
                         }
                         else if(real_result.equals("empty") && selection == Constants.SERVER_GET_FAVORITE_CLASS){
                             Log.d("a", "else if 들어왔다");
