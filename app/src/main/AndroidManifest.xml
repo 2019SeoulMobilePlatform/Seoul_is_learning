@@ -18,33 +18,43 @@
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".MyPage.EnterEditInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat"></activity>
         <activity
             android:name=".Club.FullScreenImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Instructor.AddClassActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".EditClassActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Instructor.InstructorMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.ClubEnterActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Class.ReviewAddActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".MyPage.EditMyInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Login.FindPasswordAcitvity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Login.SignUpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Login.LoginActivity"
@@ -52,10 +62,12 @@
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.ChatRoomActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".Club.AddClubActivity"
             android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
         <activity
             android:name=".MainActivity"
@@ -64,10 +76,14 @@
         <activity android:name=".Home.DetailActivity" />
         <activity
             android:name=".Class.ClassDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/NoTitleAppcompat" />
-        <activity android:name=".Class.ClassReservation" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".Class.ClassReservation" />
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,7 +91,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home.WebViewActivity" />
+        <activity
+            android:name=".Home.WebViewActivity" />
     </application>
 
 </manifest>
