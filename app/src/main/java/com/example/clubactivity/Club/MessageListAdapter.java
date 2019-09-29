@@ -168,7 +168,10 @@ public class MessageListAdapter extends BaseAdapter {
             layout.setGravity(Gravity.LEFT);
             //from_id(보낸 사람 식별번호)에 따라 닉네임과 프로필 이미지를 서버에서 가져와 넣어줘야함
             nickTextView.setText(messages.get(i).getNickName());
-            circleImageView.setImageBitmap(messages.get(i).getProfileImage());
+            if(messages.get(i).getProfileImage() == null)
+                circleImageView.setImageResource(R.drawable.ic_person_24dp);
+            else
+                circleImageView.setImageBitmap(messages.get(i).getProfileImage());
         }
 
         //이미지뷰 크기 설정
