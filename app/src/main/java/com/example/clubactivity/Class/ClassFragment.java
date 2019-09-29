@@ -2,6 +2,7 @@ package com.example.clubactivity.Class;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,11 +123,12 @@ public class ClassFragment extends Fragment implements View.OnClickListener{
                     classmenuTitle = searchText;
                     updateFlag = 1;
 
-                    String data = "word=" + AppManager.getInstance().encodeString(classmenuTitle) + "&email=" + AppManager.getInstance().getEmail();
+                    String data = "word=" + AppManager.getInstance().encodeStr(classmenuTitle) + "&email=" + AppManager.getInstance().getEmail();
                     String url = "http://106.10.35.170/SearchClassList.php";
                     NetworkTask networkTask = new NetworkTask(getContext(), url, data, Constants.SERVER_CLASS_LIST_GET);
                     networkTask.execute();
                     ShowClassList();
+                    Log.d("검색", url+data);
                 }
                 searchBar.setText("");
             }

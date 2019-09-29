@@ -106,15 +106,19 @@ public class AddClubActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(imgUri == null ){
-                    Toast.makeText(AddClubActivity.this, "이미지를 선택해 주세요", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddClubActivity.this, "이미지를 선택해 주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (clubName.length() == 0) {
-                    Toast.makeText(AddClubActivity.this, "동호회 이름을 작성해 주세요", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddClubActivity.this, "동호회 이름을 작성해 주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (clubDescription.length() == 0) {
-                    Toast.makeText(AddClubActivity.this, "동호회 설명을 작성해 주세요", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddClubActivity.this, "동호회 설명을 작성해 주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!AppManager.getInstance().isVailStr(clubName.getText().toString()) || AppManager.getInstance().isVailStr(clubDescription.getText().toString())){
+                    Toast.makeText(AddClubActivity.this, "일부 특수문자는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -145,6 +149,7 @@ public class AddClubActivity extends AppCompatActivity {
         });
 
     }
+
 
     public String getData(Bitmap _image, String name, String description, String maxCount, String email){
 

@@ -24,9 +24,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Club.AddClubActivity;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.ImageProcessing;
+import com.example.clubactivity.Instructor.AddClassActivity;
 import com.example.clubactivity.Network.ImageConverter;
 import com.example.clubactivity.Network.NetworkTask;
 import com.example.clubactivity.R;
@@ -131,6 +133,11 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (!AppManager.getInstance().isVailStr(_password.getText().toString()) || AppManager.getInstance().isVailStr(nickname) ||
+                        !AppManager.getInstance().isVailStr(residence)){
+                    Toast.makeText(EditMyInfoActivity.this, "&와 '는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // 이미지 수정
                 editor.remove("profileImage");

@@ -41,7 +41,7 @@ public class AppManager {
 //    public void setMessages(ArrayList<MessageListAdapter.MessageContents> messages) {this.messages = messages;}
 //    public ArrayList<MessageListAdapter.MessageContents> getMessages(){return messages;}
 
-    public String encodeString(String str){
+    public String encodeStr(String str){
         Log.d("스트링", str);
         if(str.contains("'"))
             str.replace("'", "");
@@ -51,5 +51,13 @@ public class AppManager {
 
         Log.d("스트링2", str);
         return str;
+    }
+
+    public Boolean isVailStr(String str){
+        if(str.contains("&") || str.contains("'")){
+            return false;
+        }
+
+        return true;
     }
 }
