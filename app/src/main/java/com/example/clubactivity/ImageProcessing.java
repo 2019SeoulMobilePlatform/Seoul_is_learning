@@ -63,7 +63,8 @@ public class ImageProcessing {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
+
+            dstBitmap = AppManager.getInstance().resize(bitmap);
 
             dstBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 

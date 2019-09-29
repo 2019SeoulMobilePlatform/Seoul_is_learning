@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Constants;
 import com.example.clubactivity.R;
 import java.io.ByteArrayOutputStream;
@@ -183,7 +184,7 @@ public class MessageListAdapter extends BaseAdapter {
                     Intent intent = new Intent(context, FullScreenImageActivity.class);
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    Bitmap dstBitmap = Bitmap.createScaledBitmap(image, Constants.IMAGE_SIZE, image.getHeight()/(image.getWidth()/Constants.IMAGE_SIZE), true);
+                    Bitmap dstBitmap = AppManager.getInstance().resize(image);
 
                     dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] bytes = stream.toByteArray();

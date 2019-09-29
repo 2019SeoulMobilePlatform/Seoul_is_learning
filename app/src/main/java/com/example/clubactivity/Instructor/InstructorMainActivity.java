@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clubactivity.AppManager;
 import com.example.clubactivity.Class.ClassDetailActivity;
 import com.example.clubactivity.Club.ChatViewAdapter;
 import com.example.clubactivity.Club.ChatViewItem;
@@ -95,7 +96,7 @@ public class InstructorMainActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 Bitmap bitmap = ((BitmapDrawable)item.getIcon()).getBitmap();
 
-                Bitmap dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
+                Bitmap dstBitmap = AppManager.getInstance().resize(bitmap);
 
                 dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] bytes = stream.toByteArray();

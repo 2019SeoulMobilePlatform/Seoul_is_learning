@@ -187,7 +187,7 @@ public class HomeFragment extends Fragment implements DatePickerListener {
     {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), image);
-        Bitmap dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, bitmap.getHeight()/(bitmap.getWidth()/Constants.IMAGE_SIZE), true);
+        Bitmap dstBitmap = AppManager.getInstance().resize(bitmap);
 
         dstBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] bytes = stream.toByteArray();

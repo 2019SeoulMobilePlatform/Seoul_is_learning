@@ -294,7 +294,7 @@ public class AddClassActivity extends AppCompatActivity {
                 //바이트 어레이로 이미지 전송
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-                classImage = Bitmap.createScaledBitmap(classImage, Constants.IMAGE_SIZE, classImage.getHeight()/(classImage.getWidth()/Constants.IMAGE_SIZE), true);
+                classImage = AppManager.getInstance().resize(classImage);
 
                 classImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
