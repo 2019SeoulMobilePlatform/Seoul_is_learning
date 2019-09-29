@@ -117,7 +117,7 @@ public class AddClubActivity extends AppCompatActivity {
                     Toast.makeText(AddClubActivity.this, "동호회 설명을 작성해 주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!AppManager.getInstance().isVailStr(clubName.getText().toString()) || AppManager.getInstance().isVailStr(clubDescription.getText().toString())){
+                if (!AppManager.getInstance().isVailStr(clubName.getText().toString()) || !AppManager.getInstance().isVailStr(clubDescription.getText().toString())){
                     Toast.makeText(AddClubActivity.this, "일부 특수문자는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }

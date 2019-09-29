@@ -133,7 +133,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (!AppManager.getInstance().isVailStr(_password.getText().toString()) || AppManager.getInstance().isVailStr(nickname) ||
+                if (!AppManager.getInstance().isVailStr(_password.getText().toString()) || !AppManager.getInstance().isVailStr(nickname) ||
                         !AppManager.getInstance().isVailStr(residence)){
                     Toast.makeText(EditMyInfoActivity.this, "&와 '는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
                     return;

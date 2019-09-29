@@ -1,5 +1,6 @@
 package com.example.clubactivity;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.clubactivity.Club.ChatViewAdapter;
@@ -57,7 +58,16 @@ public class AppManager {
         if(str.contains("&") || str.contains("'")){
             return false;
         }
-
         return true;
+    }
+
+
+    public Bitmap resize(Bitmap bitmap){
+        Bitmap dstBitmap;
+        if(bitmap.getWidth() > bitmap.getHeight())
+            dstBitmap = Bitmap.createScaledBitmap(bitmap, Constants.IMAGE_SIZE, (bitmap.getHeight()*Constants.IMAGE_SIZE)/bitmap.getWidth(), true);
+        else
+            dstBitmap = Bitmap.createScaledBitmap(bitmap, (Constants.IMAGE_SIZE*bitmap.getWidth())/bitmap.getHeight(), Constants.IMAGE_SIZE, true);
+        return dstBitmap;
     }
 }

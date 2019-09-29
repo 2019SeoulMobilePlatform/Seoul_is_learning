@@ -283,8 +283,8 @@ public class AddClassActivity extends AppCompatActivity {
                     Toast.makeText(AddClassActivity.this, "클래스 일정을 설정해 주세요", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (!AppManager.getInstance().isVailStr(className.getText().toString()) || AppManager.getInstance().isVailStr(classDescription.getText().toString()) ||
-                !AppManager.getInstance().isVailStr(classAddress.getText().toString()) || AppManager.getInstance().isVailStr(classTarget.getText().toString())){
+                if (!AppManager.getInstance().isVailStr(className.getText().toString()) || !AppManager.getInstance().isVailStr(classDescription.getText().toString()) ||
+                !AppManager.getInstance().isVailStr(classAddress.getText().toString()) || !AppManager.getInstance().isVailStr(classTarget.getText().toString())){
                     Toast.makeText(AddClassActivity.this, "일부 특수문자는 입력이 불가능합니다.",Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -294,7 +294,7 @@ public class AddClassActivity extends AppCompatActivity {
                 //바이트 어레이로 이미지 전송
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-                classImage = Bitmap.createScaledBitmap(classImage, Constants.IMAGE_SIZE, classImage.getHeight()/(classImage.getWidth()/Constants.IMAGE_SIZE), true);
+                classImage = AppManager.getInstance().resize(classImage);
 
                 classImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
