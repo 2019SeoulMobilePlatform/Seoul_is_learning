@@ -14,13 +14,13 @@
         android:paddingRight="24dp">
 
         <Button
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="35dp"
             android:layout_gravity="right"
             android:padding="12dp"
             android:background="@android:color/transparent"
-            android:text="강사로 로그인하기"
+            android:text="강사로 로그인하기 ▷"
             android:id="@+id/login_instructor"
             android:textColor="@color/colorPrimary"
             android:gravity="center"/>

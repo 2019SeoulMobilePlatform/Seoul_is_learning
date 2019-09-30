@@ -479,12 +479,15 @@ public class NetworkTask extends AsyncTask<Void, Void, String> {
                             if (resultObjectArray.length() != 0) {
                                 for (int i = 0; i < resultObjectArray.length(); i++) {
                                     resultObject = resultObjectArray.getJSONObject(i);
+                                    Log.d("이미지", resultObject.getString("image"));
+                                    byte[] decodedByte = null;
+                                    if(!resultObject.getString("image").equals("null"))
+                                        decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
 
-                                    byte[] decodedByte = Base64.decode(resultObject.getString("image"), Base64.DEFAULT);
                                     String nickname = resultObject.getString("nickname");
                                     String review = resultObject.getString("review");
                                     float star = (float) resultObject.getDouble("star");
-
+//                                    Log.d("디코드바이트", decodedByte.toString());
                                     ReviewListItem item = new ReviewListItem(decodedByte, nickname, star, review);
                                     reviewListItems.add(item);
                                 }
