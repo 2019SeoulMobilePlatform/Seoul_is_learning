@@ -1,5 +1,7 @@
 package com.example.clubactivity.Class;
 
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,9 +63,15 @@ public class ReviewListViewAdapter extends BaseAdapter {
         profileImage= (CircleImageView)convertView.findViewById(R.id.review_profile_image);
         //profileImage.setImageResource(reviewListItem.getProfile_image());
        /* GlideApp.with(convertView).load(reviewListItem.getProfile_image()).into(profileImage);*/
-        Glide.with(convertView)
+        if(reviewListItem.getProfile_image() != null)
+            Glide.with(convertView)
                 .load(reviewListItem.getProfile_image())
                 .into(profileImage);
+//            profileImage.setImageResource(R.drawable.heart_empty);
+        else
+            profileImage.setImageResource(R.drawable.ic_person_24dp);
+
+//        Log.d("이미지 " + position, reviewListItem.getProfile_image().toString());
 
         nickName=(TextView)convertView.findViewById(R.id.review_nickname);
         nickName.setText(reviewListItem.getNickName());

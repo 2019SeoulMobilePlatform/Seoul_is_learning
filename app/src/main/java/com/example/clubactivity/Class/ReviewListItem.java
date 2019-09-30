@@ -1,5 +1,7 @@
 package com.example.clubactivity.Class;
 
+import android.util.Log;
+
 /**
  * 리뷰 리스트 아이템 클래스
  */
@@ -13,6 +15,7 @@ public class ReviewListItem {
 
     // 생성자
     public ReviewListItem(byte[] profile_image, String nickName, float star, String reviewContent) {
+//        Log.d("리뷰아이템", profile_image.toString());
         this.profile_image = profile_image;
         this.nickName = nickName;
         this.star = star;
