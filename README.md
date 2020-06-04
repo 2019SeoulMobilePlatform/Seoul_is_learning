@@ -1,6 +1,6 @@
 ## #EnGenius
 
-### 2019년 스마트서울 모바일 앱 공모전 '서울은 배우는 중' 으뜸상 수상
+### 2019년 스마트서울 모바일 앱 공모전 '서울은 배우는 중' 발전상 수상
 https://www.seoulappcontest.org/web/info/currentWinner.do
 
 
