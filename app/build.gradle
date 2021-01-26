@@ -5,11 +5,12 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.example.clubactivity"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -24,7 +25,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.android.support:design:29.*'
     implementation 'com.android.support:appcompat-v7:29.*'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-annotations:29.+'
@@ -38,7 +38,14 @@ dependencies {
     implementation 'com.github.nikhil-sachdeva:SliderViewLibrary:1.0'
 
     implementation 'com.github.smarteist:autoimageslider:1.3.2'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+
+    implementation('com.github.bumptech.glide:glide:4.9.0') {
+        transitive = true
+
+        exclude group: "com.android.support"
+    }
+
 
     implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.3'
 
@@ -48,9 +55,41 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:29.0.1'
 
     implementation 'com.android.support:cardview-v7:29.0.2'
+    //implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:glide:4.4.0'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.android.support:recyclerview-v7:29.+'
+
+
+/*
+    implementation(name: 'culturalevents-release', ext: 'aar'){
+        transitive = true
+        exclude group: 'com.bumptech.glide.Glide', module: 'classes.jar'
+
+        //exclude group: 'glide-3.7.0.jar'
+    }
+
+    /*implementation(name: 'mail', ext: 'jar')
+    implementation(name: 'activation', ext: 'jar')
+
+    implementation(name: 'additionnal', ext: 'jar')*/
+
+
+    implementation 'com.vivekkaushik.datepicker:datePickerTimeline:0.0.3'
+
+    implementation 'com.github.jhonnyx2012:horizontal-picker:1.0.6'
+
+    implementation 'com.android.support:appcompat-v7:29.0.1'
+
+    implementation 'com.android.support:cardview-v7:29.0.2'
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:glide:4.4.0'
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:recyclerview-v7:29.+'
+    implementation 'com.android.support:design:29.*'
+
+    implementation group: 'cz.msebera.android', name: 'httpclient', version: '4.4.1.2'
+    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
 }

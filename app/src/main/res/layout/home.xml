@@ -6,101 +6,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <!-- 툴바 -->
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff7e9d"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/AppTheme.PopupOverlay">
-       <!-- <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="서울은 배우는중"
-            android:textColor="#FFFFFF"
-            android:gravity = "center"
-            android:id="@+id/toolbar_title"
-            android:textSize="21dp"
-            android:textStyle="bold"/>-->
         <ImageView
             android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="fill_parent"
             android:foregroundGravity="center"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/seoul_banner_white"
             />
     </androidx.appcompat.widget.Toolbar>
+
+
 
 
     <!--일주일 표시-->
     <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
 
 
     <!--카드뷰-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_height="0dp"
+        android:layout_weight="6">
         <!--android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"-->
+        app:cardCornerRadius="8dp"
+        app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderScrollTimeInSec="3"
+            app:sliderStartAutoCycle="true"
+        -->
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="match_parent"
             app:sliderAnimationDuration="700"
-            app:sliderAutoCycleDirection="back_and_forth"
-            app:sliderAutoCycleEnabled="true"
+
             app:sliderCircularHandlerEnabled="true"
             app:sliderIndicatorAnimationDuration="700"
             app:sliderIndicatorGravity="center_horizontal|bottom"
             app:sliderIndicatorMargin="15dp"
             app:sliderIndicatorOrientation="horizontal"
             app:sliderIndicatorPadding="3dp"
-            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorRadius="1.5dp"
             app:sliderIndicatorSelectedColor="#5A5A5A"
             app:sliderIndicatorUnselectedColor="#FFF"
-            app:sliderScrollTimeInSec="3"
-            app:sliderStartAutoCycle="true" />
+             />
     </androidx.cardview.widget.CardView>
 
 
-   <!-- <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="나의 일주일 일정"
-        android:textSize="17dp"
-        android:textColor="#ff7e9d"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="11dp"
-        android:weightSum="7"
-        android:gravity="center">
-          <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#d8d8d8"
-        android:layout_alignParentBottom="true"/>-->
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="인기 클래스"
+            android:text="추천 클래스"
             android:textColor="@color/primaryTextColor"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
@@ -120,24 +94,16 @@
             android:textSize="15sp"
             android:background="@null"
             />
-
     </LinearLayout>
-
-
-
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:clipToPadding="false"
         android:foregroundGravity="center"
-        android:overScrollMode="never"/>
-
-
-
-
-
+        android:overScrollMode="never">
+    </androidx.viewpager.widget.ViewPager>
 
 
 

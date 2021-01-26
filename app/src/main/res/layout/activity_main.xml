@@ -16,9 +16,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
-
             <!-- 프래그먼트 영역-->
     <FrameLayout
         android:id="@+id/main_frame"
@@ -37,11 +34,14 @@
             android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:itemIconTint="#ff7e9d"
-            app:itemTextColor="#ff7e9d"
+            app:itemIconTint="@color/bottom_bar_item_selector"
+            app:itemTextColor="@color/bottom_bar_item_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_menu"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            app:labelVisibilityMode="labeled"
+
+            />
         </LinearLayout>
     </RelativeLayout>
 

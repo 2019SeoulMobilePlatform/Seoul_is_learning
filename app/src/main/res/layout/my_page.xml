@@ -17,32 +17,34 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="1"
-            android:gravity="center_vertical"
-            >
+            android:gravity="center_vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="40dp"
-                android:adjustViewBounds="true"
                 android:src="@drawable/ic_person_24dp"
                 android:foregroundGravity="center_vertical"/>
 
             <LinearLayout
                 android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical"
                 android:id="@+id/info_layout"
+                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/user_image">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/user_nickname"
                     android:layout_width="100dp"
                     android:layout_height="25dp"
                     android:text="nickname"
                     android:gravity="center_vertical"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/user_residence"
                     android:layout_width="100dp"
                     android:layout_height="20dp"
                     android:text="양천구"
@@ -59,7 +61,7 @@
                 android:layout_gravity=""
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFF"
-                android:src="@drawable/ic_mode_edit_20dp"
+                android:src="@drawable/ic_settings_pink_24dp"
                 android:text="이미지 선택"
                 android:textSize="15dp"/>
 
@@ -67,8 +69,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_height="wrap_content">
 
             <TabHost
                 android:id="@+id/tapHost_myclasslist"
@@ -97,15 +98,23 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             >
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/myclass_recyclerView"
-                                android:orientation="horizontal">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
+                            <FrameLayout
+                                android:layout_height="210dp"
+                                android:layout_width="match_parent">
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/myclass_recyclerView"
+                                    android:orientation="horizontal">
+                                </androidx.recyclerview.widget.RecyclerView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="예약한 클래스가 없습니다."
+                                    android:textColor="@color/grey"
+                                    android:id="@+id/text_no_my_class" />
+                            </FrameLayout>
                         </LinearLayout>
 
 
@@ -114,15 +123,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/favorite_recyclerView"
-                                android:orientation="horizontal">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
+                            <FrameLayout
+                                android:layout_height="210dp"
+                                android:layout_width="match_parent">
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/favorite_recyclerView"
+                                    android:orientation="horizontal">
+                                </androidx.recyclerview.widget.RecyclerView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="찜한 클래스가 없습니다."
+                                    android:textColor="@color/grey"
+                                    android:id="@+id/text_no_favorite_class" />
+                            </FrameLayout>
                         </LinearLayout>
 
                     </FrameLayout>
@@ -135,16 +152,14 @@
 
 
         <LinearLayout
+            android:id="@+id/zero_web"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#f2f2f2"
+            android:layout_height="100dp"
+            android:background="@drawable/zeropay"
             android:layout_weight="2">
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="문화 API"
-                android:layout_gravity="center"/>
         </LinearLayout>
+
     </LinearLayout>
 
 

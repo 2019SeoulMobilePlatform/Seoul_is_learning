@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: :culturalevents-release:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/libs/glide-3.7.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e810bb50dd7afd01451b61f1a62b0edc/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
